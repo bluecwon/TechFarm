@@ -1,8 +1,8 @@
-package com.itbank.blog.dao;
+package com.itbank.TechFarm.blog.dao;
 
 import java.util.List;
 
-import com.itbank.blog.dto.Blog_OptionDTO;
+import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
 
 public interface Blog_BoardDAO {
 

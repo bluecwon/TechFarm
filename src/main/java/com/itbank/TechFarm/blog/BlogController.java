@@ -20,15 +20,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.itbank.blog.dto.Blog_OptionDTO;
+import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController {
+public class BlogController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(BlogController.class);
 	
 	/**
 	 * Simply selects the home view to render by returning its name.

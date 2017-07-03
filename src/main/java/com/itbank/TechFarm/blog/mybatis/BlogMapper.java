@@ -1,4 +1,4 @@
-package com.itbank.blog.mybatis;
+package com.itbank.TechFarm.blog.mybatis;
 import java.io.IOException;
 import java.io.Reader;
 
@@ -12,7 +12,7 @@ public class BlogMapper {
 
   static {
     try {
-    	String resource = "com/itbank/blog/SqlMapConfig.xml";
+    	String resource = "com/itbank/TechFarm/blog/SqlMapConfig.xml";
     	Reader reader = Resources.getResourceAsReader(resource);
     	sqlMapper = new SqlSessionFactoryBuilder().build(reader); 
     } catch (IOException e) {

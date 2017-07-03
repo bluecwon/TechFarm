@@ -1,4 +1,4 @@
-package com.itbank.blog.dto;
+package com.itbank.TechFarm.blog.dto;
 
 public class Blog_OptionDTO {
 private String id;

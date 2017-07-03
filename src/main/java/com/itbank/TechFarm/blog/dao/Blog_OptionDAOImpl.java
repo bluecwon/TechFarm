@@ -1,6 +1,6 @@
-package com.itbank.blog.dao;
+package com.itbank.TechFarm.blog.dao;
 
-import com.itbank.blog.dto.Blog_OptionDTO;
+import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
 
 public class Blog_OptionDAOImpl implements Blog_OptionDAO {
 
