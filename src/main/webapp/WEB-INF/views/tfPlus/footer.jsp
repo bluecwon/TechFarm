@@ -58,9 +58,9 @@
 					<div class="left">최 하단<a href="#" >우리 홈페이지 메인주소</a></div>
 					<div class="right">
 						<ul id="social-bar">
-							<li><a href="#"  title="Become a fan" class="poshytip"><img src="resources/googlePlus/img/social/facebook.png"  alt="Facebook" /></a></li>
-							<li><a href="#" title="Follow my tweets" class="poshytip"><img src="resources/googlePlus/img/social/twitter.png"  alt="twitter" /></a></li>
-							<li><a href="#"  title="Add to the circle" class="poshytip"><img src="resources/googlePlus/img/social/plus.png" alt="Google plus" /></a></li>
+							<li><a href="#"  title="Become a fan" class="poshytip"><img src="resources/tfPlus/img/social/facebook.png"  alt="Facebook" /></a></li>
+							<li><a href="#" title="Follow my tweets" class="poshytip"><img src="resources/tfPlus/img/social/twitter.png"  alt="twitter" /></a></li>
+							<li><a href="#"  title="Add to the circle" class="poshytip"><img src="resources/tfPlus/img/social/plus.png" alt="Google plus" /></a></li>
 						</ul>
 					</div>
 				</div>

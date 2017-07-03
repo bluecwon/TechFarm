@@ -15,9 +15,9 @@
       <transactionManager type="JDBC"/> 
       <dataSource type="POOLED"> 
         <property name="driver" value="${driver}"/> 
-        <property name="url" value="${url}"/> 
-        <property name="username" value="${username}"/> 
-        <property name="password" value="${password}"/> 
+        <property name="url" value="${url.tfplus}"/> 
+        <property name="username" value="${username.tfplus}"/> 
+        <property name="password" value="${password.tfplus}"/> 
       </dataSource> 
     </environment> 
   </environments> 
