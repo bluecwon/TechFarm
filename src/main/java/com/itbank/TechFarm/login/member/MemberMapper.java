@@ -13,7 +13,7 @@ public class MemberMapper {
 
 	  static {
 	    try {
-	    	String resource="com/itbank/TechFarm/SqlMapConfig.xml";
+	    	String resource="com/itbank/TechFarm/SqlMapConfig_tfmember.xml";
 	    	Reader reader = Resources.getResourceAsReader(resource); 
 			sqlMapper = new SqlSessionFactoryBuilder().build(reader); 
 	    } catch (IOException e) {

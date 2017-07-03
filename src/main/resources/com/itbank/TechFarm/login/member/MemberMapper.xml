@@ -5,15 +5,15 @@
 
 <mapper namespace="com.itbank.techfarm.login.member.MemberMapper">
 	<select id="getLogin" resultType="MemberDTO">
-    	select id,passwd from member where id=#{id} or email=#{id};
+    	select id,passwd from tfmember where id=#{id} or email=#{id};
   	</select>
   	
   	<select id="getMember" resultType="MemberDTO">
-    	select * from member where id=#{id};
+    	select * from tfmember where id=#{id};
   	</select>
   
   <insert id="insertMember" parameterType="MemberDTO">
-	    insert into member values(
+	    insert into tfmember values(
 	    	(select * from (select max(no)+1 from member)next),
 	   		#{id},
 	   		#{passwd},
