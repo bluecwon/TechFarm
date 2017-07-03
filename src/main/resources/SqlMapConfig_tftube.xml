@@ -6,7 +6,8 @@
 <configuration> 
   <properties resource="db.properties"/>
   <typeAliases>
-  	<typeAlias alias = "categoryDTO" type="shop.CategoryDTO"/>
+  	<typeAlias alias = "videoDTO" type="com.itbank.TechFarm.tftube.dto.VideoDTO"/>
+  	<typeAlias alias = "replyDTO" type="com.itbank.TechFarm.tftube.dto.ReplyDTO"/>
   </typeAliases>
   <environments default="development"> 
       <environment id="development"> 
@@ -20,6 +21,7 @@
     </environment> 
   </environments> 
   <mappers> 
-    <mapper resource="shop/mybatis/CategoryMapper.xml"/> 
+    <mapper resource="com/itbank/TechFarm/tftube/mybatis/VideoMapper.xml"/>
+    <mapper resource="com/itbank/TechFarm/tftube/mybatis/ReplyMapper.xml"/> 
   </mappers> 
 </configuration> 

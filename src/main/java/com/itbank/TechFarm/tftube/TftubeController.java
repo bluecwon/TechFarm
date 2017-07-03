@@ -62,11 +62,12 @@ public class TftubeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	/*@RequestMapping(value = "/", method = RequestMethod.GET)
+	public ModelAndView listBoard(HttpServletRequest arg0, 
+			HttpServletResponse arg1) throws Exception {
 		
 		return "index";
-	}
+	}*/
 	
 	@RequestMapping(value = "/tftube_main", method = RequestMethod.GET)
 	public ModelAndView listBoard(HttpServletRequest arg0, 
@@ -76,8 +77,8 @@ public class TftubeController {
 		List<VideoDTO> list=videoDAO.listVideo();
 		mav.addObject("list",list);
 		session=arg0.getSession();		
-		String upPath_file2=session.getServletContext().getRealPath("/uploadVideo");
-		String upPath_img2=session.getServletContext().getRealPath("/uploadImage");
+		/*String upPath_file2=session.getServletContext().getRealPath("/uploadVideo");
+		String upPath_img2=session.getServletContext().getRealPath("/uploadImage");*/
 
 		upPath_img="D:\\workspace_tftube\\tftube\\src\\main\\webapp\\resources\\tftube\\uploadImage";
 		upPath_file="D:\\workspace_tftube\\tftube\\src\\main\\webapp\\resources\\tftube\\uploadVideo";

@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<form name="f" method="post" enctype="multipart/form-data" action="otube_video_insert">
+<form name="f" method="post" enctype="multipart/form-data" action="tftube_video_insert">
 <table>
 <tr><td>파일: <input type="file" name="filename" accept="video/*" ></td></tr> 
 <c:choose>
@@ -20,7 +20,7 @@
 <c:otherwise>
 <script type="text/javascript">
 alert("확장자가 mp4인 동영상 파일만 업로드 가능합니다.")
-location.href="otube_insert"
+location.href="tftube_insert"
 </script>
 </c:otherwise>
 </c:when>

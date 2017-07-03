@@ -11,7 +11,7 @@
 <body>
 <div align="center">
 <%@ include file="main_top.jsp"%> 
-<video src="resources/otube/advertise/soccer.mp4" autoplay
+<video src="resources/tftube/advertise/soccer.mp4" autoplay
 controls poster="C:\Users\Public\Pictures\Sample Pictures\Chrysanthemum.jpg"
 width="600" height="450"></video>
 <c:out value="${webappRoot}"/>
@@ -23,7 +23,7 @@ width="600" height="450"></video>
 
 <c:forEach var="dto" items="${list}"> 
 <td><!-- &image=${dto.image}&upPath_img=${upPath_img} -->
-<a href="otube_videoView?ind=${dto.ind}">
+<a href="tftube_videoView?ind=${dto.ind}">
 <img src="${upPath_img}/${dto.image}" width="196" height="100"><br>
 ${dto.title}</a></td>
 

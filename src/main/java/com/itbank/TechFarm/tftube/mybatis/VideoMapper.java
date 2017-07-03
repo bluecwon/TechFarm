@@ -20,7 +20,7 @@ public class VideoMapper {
 	private static SqlSessionFactory sqlMapper;
 	static {
 		try {
-			String resource = "com/itbank/TechFarm/tftube/SqlMapConfig.xml"; 
+			String resource = "SqlMapConfig_tftube.xml"; 
 			Reader reader = Resources.getResourceAsReader(resource); 
 			sqlMapper = new SqlSessionFactoryBuilder().build(reader);
 		} catch (IOException e) {

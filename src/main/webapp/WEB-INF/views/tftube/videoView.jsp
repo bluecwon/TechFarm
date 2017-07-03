@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <script type="text/javascript">
 function goReply(){
-	document.f.action="otube_reply_insert";
+	document.f.action="tftube_reply_insert";
 	document.f.submit();	
 }
 </script>

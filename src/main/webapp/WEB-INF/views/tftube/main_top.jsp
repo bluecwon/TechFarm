@@ -11,12 +11,12 @@
 <table colspan="2" border="3">
 <tr>
 <td>
-<a href="otube_main">오튜브 </a>
+<a href="tftube_main">오튜브 </a>
 </td> 
-<td>검색						 <a href="otube_video_insert">업로드</a>	
+<td>검색						 <a href="tftube_video_insert">업로드</a>	
 <c:choose>
 <c:when test="${tube_id==null}">
-		<a href="otube_login">로그인</a>
+		<a href="tftube_login">로그인</a>
 </c:when>
 <c:otherwise>
 		
@@ -26,7 +26,7 @@
 </tr>
 <tr>
 <td>
-<a href="otube_main">홈</a><br>
+<a href="tftube_main">홈</a><br>
 인기<br>
 최근 본 동영상<br>
 -----------------------------<br>
