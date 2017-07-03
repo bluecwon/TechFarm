@@ -9,7 +9,7 @@
 		<typeAlias alias="NewsFollowIdDTO" type="com.itbank.TechFarm.tfPlusDTO.NewsFollowIdDTO"/>
 		<typeAlias alias="NewsProfileBoardDTO" type="com.itbank.TechFarm.tfPlusDTO.NewsProfileBoardDTO"/>
 		<typeAlias alias="NewsProfileAddCommentDTO" type="com.itbank.TechFarm.tfPlusDTO.NewsProfileAddCommentDTO"/>
-	</typeAliases>
+	</typeAliases> 
   	<environments default="development"> 
       <environment id="development"> 
       <transactionManager type="JDBC"/> 
