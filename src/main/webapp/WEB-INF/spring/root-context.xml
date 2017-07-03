@@ -7,7 +7,8 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:annotation-config/>
-	
+
 	<!-- tfPlus DAO -->
 	<bean class="com.itbank.TechFarm.tfPlusDAO.NewsProfileDAOImpl" id="newsProfileDAO"/>
+	<bean class="com.itbank.TechFarm.login.member.MemberDAOImpl" id="memberDAO"/>	
 </beans>
