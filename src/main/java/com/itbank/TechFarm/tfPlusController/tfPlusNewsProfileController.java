@@ -190,7 +190,7 @@ public class tfPlusNewsProfileController {
 			mav.setViewName("redirect:tfPlusNewsProfileWriting?id="+profileId);
 		} else {
 			
-			msg = "중복이 되는 소식통 입니다.";
+			msg = "This is a duplicate content";
 			url = "tfPlusNewsProfileWriting?id="+profileId;
 			mav.setViewName("tfPlus/message");
 			mav.addObject("msg",msg);
@@ -207,7 +207,7 @@ public class tfPlusNewsProfileController {
 		int profileNum = Integer.parseInt(request.getParameter("profileNum"));
 		int res = newsProfileDAO.newsProfileDelete(profileNum);
 		if(res>0) {
-			msg = "소식을 삭제하셨습니다.";
+			msg = "You deleted it";
 			url = "tfPlusNewsProfileList";
 		}
 		mav.setViewName("tfPlus/message");

@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
     "http://mybatis.org/dtd/mybatis-3-config.dtd">  
 <configuration>
-	<properties resource="com/itbank/techfarm/db.properties"/>
+	<properties resource="com/itbank/TechFarm/db.properties"/>
 	<typeAliases>
 		<typeAlias alias="NewsProfileDTO" type="com.itbank.TechFarm.tfPlusDTO.NewsProfileDTO"/>
 		<typeAlias alias="NewsFollowIdDTO" type="com.itbank.TechFarm.tfPlusDTO.NewsFollowIdDTO"/>
