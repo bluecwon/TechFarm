@@ -17,7 +17,7 @@ public class NewsProfileMapper {
 	private static SqlSessionFactory sqlMapper;
 	static {
 	    try {
-	    	String resource = "com/itbank/techfarm/SqlMapConfig.xml"; 
+	    	String resource = "com/itbank/techfarm/SqlMapConfig_tfplus.xml"; 
 	    	Reader reader = Resources.getResourceAsReader(resource);
 	    	sqlMapper = new SqlSessionFactoryBuilder().build(reader);
 	    } catch (IOException e) {
