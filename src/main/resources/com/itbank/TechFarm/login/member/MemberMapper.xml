@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com.itbank.techfarm.login.member.MemberMapper">
+	<select id="getLogin" resultType="MemberDTO">
+    	select id,passwd from member where id=#{id} or email=#{id};
+  	</select>
+  	
+  	<select id="getMember" resultType="MemberDTO">
+    	select * from member where id=#{id};
+  	</select>
+  
+  <insert id="insertMember" parameterType="MemberDTO">
+	    insert into member values(
+	    	(select * from (select max(no)+1 from member)next),
+	   		#{id},
+	   		#{passwd},
+	   		#{name},
+	   		#{email},
+	   		#{birthday_year},
+	   		#{birthday_month},
+	   		#{birthday_day},
+	   		#{sex},
+	   		sysdate(),
+	   		default);
+	</insert>
+  
+</mapper>
