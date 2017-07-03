@@ -1,0 +1,146 @@
+package com.itbank.TechFarm.tfPlusDAO;
+
+import java.io.IOException;
+import java.io.Reader;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import com.itbank.TechFarm.tfPlusDTO.NewsProfileDTO;
+
+public class NewsProfileMapper {
+
+	private static SqlSessionFactory sqlMapper;
+	static {
+	    try {
+	    	String resource = "com/itbank/techfarm/SqlMapConfig.xml"; 
+	    	Reader reader = Resources.getResourceAsReader(resource);
+	    	sqlMapper = new SqlSessionFactoryBuilder().build(reader);
+	    } catch (IOException e) {
+	    	// Fail fast.
+	    	throw new RuntimeException("Something bad happened while building the SqlMapClient instance." + e, e);
+	    }
+	}
+	
+	public static List newsGoodList(Map mapParameter) {
+		SqlSession session = sqlMapper.openSession();
+		List list = session.selectList("newsGoodList",mapParameter);
+		session.close();
+		return list;
+	}
+	
+	public static List newsMyList(Map mapParameter) {
+		SqlSession session = sqlMapper.openSession();
+		List list = session.selectList("newsMyList",mapParameter);
+		session.close();
+		return list;
+	} 
+	
+	public static int newsProfileInsert(NewsProfileDTO dto) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.insert("newsProfileInsert",dto);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
+	public static boolean newsFollowIdSearch(int num) {
+		boolean bool;
+		SqlSession session = sqlMapper.openSession();
+		List list = session.selectList("newsFollowIdSearch",num);
+		session.close();
+		if(list.size() == 0) {
+			bool = false;
+		} else {
+			bool = true;
+		}
+		return bool;
+	} 
+	
+	public static NewsProfileDTO newsProfileCheck(Map mapParameter) {
+		SqlSession session = sqlMapper.openSession();
+		NewsProfileDTO dto = session.selectOne("newsProfileCheck",mapParameter);
+		session.close();
+		return dto;
+	}
+	
+	public static List newsFollowMyList(String id) {
+		SqlSession session = sqlMapper.openSession();
+		List list = session.selectList("newsFollowMyList",id);
+		session.close();
+		return list;
+	}
+	
+	public static NewsProfileDTO newsNumList(int num) {
+		SqlSession session = sqlMapper.openSession();
+		NewsProfileDTO dto = session.selectOne("newsNumList",num);
+		session.close();
+		return dto;
+	} 
+	
+	public static int newsFollowInsert(Map mapParameter) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.insert("newsFollowInsert",mapParameter);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
+	public static List followList() {
+		SqlSession session = sqlMapper.openSession();
+		List list = session.selectList("followList");
+		session.close();
+		return list;
+	}
+	
+	public static int newsFollowDelete(int newsfollowPK) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.delete("newsFollowDelete",newsfollowPK);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
+	public static int newsProfileCount() {
+		SqlSession session = sqlMapper.openSession();
+		int count = session.selectOne("newsProfileCount");
+		session.close();
+		return count;
+	} 
+	
+	public static int newsProfileDelete(int profilwNum) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.delete("newsProfileDelete",profilwNum);
+		session.commit();
+		session.close();
+		return res;
+	} 
+	
+	public static int newsProfileFollow(int profileNum) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.update("newsProfileFollow",profileNum);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
+	public static int newsProfileUnFollow(int profileNum) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.update("newsProfileUnFollow",profileNum);
+		session.commit();
+		session.close();
+		return res;
+	} 
+	
+	public static List newsProfileBoardList(Map mapParameter) {
+		SqlSession session = sqlMapper.openSession();
+		List list = session.selectList("newsProfileBoardList",mapParameter);
+		session.close();
+		return list;
+	}
+	
+}

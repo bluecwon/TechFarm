@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.itbank.techfarm.tfPlus.NewsProfileMapper">
+
+	<select id="newsGoodList" resultType="newsProfileDTO" parameterType="java.util.HashMap">
+		SELECT * FROM (
+			SELECT @NO:=@NO+1 AS ROWNUM, a.* FROM (
+				SELECT * FROM newsprofile )a,(SELECT @NO:=0)b)c 
+					WHERE c.ROWNUM BETWEEN #{startRow} AND #{endRow} ORDER BY good DESC
+	</select>
+	
+	<select id="followList" resultType="newsFollowIdDTO">
+		SELECT * FROM newsfollowid
+	</select>
+	
+	<select id="newsMyList" resultType="newsProfileDTO" parameterType="java.util.HashMap">
+		SELECT * FROM (
+			SELECT @NO:=@NO+1 AS ROWNUM, a.* FROM (
+				SELECT * FROM newsprofile WHERE profileId = #{id})a,(SELECT @NO:=0)b)c 
+					WHERE c.ROWNUM BETWEEN #{startRow} AND #{endRow} ORDER BY profileDate DESC
+	</select>
+	
+	<select id="newsFollowIdSearch" resultType="newsFollowIdDTO" parameterType="int">
+		SELECT * FROM newsfollowid 
+			WHERE newsfollowNum = #{num}
+	</select>
+	
+	<select id="newsProfileCheck" resultType="newsProfileDTO" parameterType="java.util.HashMap">
+		SELECT * FROM newsprofile 
+			WHERE profileName = #{profileName} AND profileId = #{profileId}
+	</select>
+	
+	<select id="newsFollowMyList" resultType="newsFollowIdDTO" parameterType="String">
+		SELECT * FROM newsfollowid 
+			WHERE newsfollowId = #{id}
+	</select>
+	
+	<select id="newsNumList" resultType="newsProfileDTO" parameterType="int">
+		SELECT * FROM newsprofile 
+			WHERE profileNum = #{num}
+	</select>
+	
+	<select id="newsProfileCount" resultType="int">
+		SELECT count(*) FROM newsprofile
+	</select>
+	
+	<select id="newsProfileBoardList" resultType="newsProfileBoardDTO" parameterType="java.util.HashMap">
+		SELECT * FROM newsprofileboard
+			WHERE profileBoardName = #{profileName} AND profileBoardId = #{profileId}
+	</select>
+	
+	<insert id="newsProfileInsert" parameterType="newsProfileDTO" useGeneratedKeys="true">
+		INSERT INTO newsprofile(profileName,checkOption,photo,profileContents,profileId) VALUES
+		(	
+			#{profileName},
+			#{checkOption},
+			#{photo},
+			#{profileContents},
+			#{profileId}
+		)
+	</insert>
+	
+	<insert id="newsFollowInsert" parameterType="java.util.HashMap" useGeneratedKeys="true">
+		INSERT INTO newsfollowid(newsfollowNum,newsfollowId) VALUES
+		(
+			#{profileNum},
+			#{id},
+		)
+	</insert>
+	
+	<update id="newsProfileFollow" parameterType="int">
+		UPDATE newsprofile SET good = good + 1
+			WHERE profileNum = #{profileNum}
+	</update>
+	
+	<update id="newsProfileUnFollow" parameterType="int">
+		UPDATE newsprofile SET good = good - 1
+			WHERE profileNum = #{profileNum}
+	</update>
+	
+	<delete id="newsFollowDelete" parameterType="int">
+		DELETE FROM newsfollowid 
+			WHERE newsfollowPK = #{newsfollowPK}
+	</delete>
+	
+	<delete id="newsProfileDelete" parameterType="int">
+		DELETE FROM newsprofile
+			WHERE profileNum = #{profileNum}
+	</delete>
+	
+</mapper>
