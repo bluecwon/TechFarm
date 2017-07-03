@@ -19,6 +19,8 @@
     </environment> 
   </environments> 
   <mappers> 
-    <mapper resource="com/itbank/TechFarm/login/member/MemberMapper.xml"/> 
+    <mapper resource="com/itbank/TechFarm/login/member/MemberMapper.xml"/>
+    <mapper resource="com/itbank/TechFarm/tftube/mybatis/VideoMapper.xml"/>
+    <mapper resource="com/itbank/TechFarm/tftube/mybatis/ReplyMapper.xml"/> 
   </mappers> 
 </configuration> 

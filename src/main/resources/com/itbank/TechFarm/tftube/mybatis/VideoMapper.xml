@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper 
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com.itbank.TechFarm.tftube.mybatis.VideoMapper"><!-- 아마 자바 파일을 지칭하는거겠지? -->		
+	
+<insert id="insertVideo" parameterType="videoDTO" useGeneratedKeys="true">
+insert into tftube_video
+(id,title,description,open,filename,filesize,readcount,image,likep,unlikep) values
+(#{id}, #{title},#{description},#{open},#{filename},#{filesize},0,#{image},0,0) 
+</insert>
+
+<update id="readCount" parameterType="java.util.HashMap">
+		${sql}
+</update>	
+
+<select id="listVideo" resultType="videoDTO">
+select * from tftube_video
+</select>
+
+<select id="getVideo" resultType="videoDTO" parameterType="int">
+select * from tftube_video where ind=#{ind}
+</select>
+
+</mapper>	
