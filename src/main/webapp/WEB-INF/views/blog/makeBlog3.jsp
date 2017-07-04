@@ -13,7 +13,7 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 	<article>
 		<h1>블로그 만들기<img src="resources/images/2step.jpg" align="right" width="150" height="50"></h1>
 		<h2>3단계:블로그 꾸미기</h2>
-		<form action="blogMakepro.blog" method="post" enctype="multipart/form-data">
+		<form action="blogMakePro.blog" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="blogname" value="${blogname}">
 		<input type="hidden" name="nickname" value="${nickname}">
 		<input type="hidden" name="introduce" value="${introduce}">
@@ -92,18 +92,18 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 					<td>배경<br> 이미지</td>
 					<td></td>
 					<td>
-					<input type="file" id="bg" name="background">
+					<!-- <input type="file" id="bg" name="background" value="ssd">
 					<input type="button" value="등록" onclick="document.getElementById('bg').click();">
-					<input type="button" value="삭제">
+					<input type="button" value="삭제"> -->
 					</td>
 				</tr>
 				<tr>
 					<td>타이틀<br> 이미지</td>
 					<td></td>
 					<td>
-					<input type="file" id="hd" name="header">
+					<!-- <input type="file" id="hd" name="header">
 					<input type="button" value="등록" onclick="document.getElementById('hd').click();">
-					<input type="button" value="삭제">
+					<input type="button" value="삭제"> -->
 					</td>
 				</tr>
 				<tr>

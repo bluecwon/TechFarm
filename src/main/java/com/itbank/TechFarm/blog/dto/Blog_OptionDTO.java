@@ -4,11 +4,12 @@ public class Blog_OptionDTO {
 private String id;
 private String blogname;
 private int layout;
+private String headerword;
+private String nickname;
+private String introduce;
 private String profile;
 private String background;
 private String header;
-private String nickname;
-private String introduce;
 
 public String getId() {
 	return id;
@@ -27,6 +28,12 @@ public int getLayout() {
 }
 public void setLayout(int layout) {
 	this.layout = layout;
+}
+public String getHeaderword() {
+	return headerword;
+}
+public void setHeaderword(String headerword) {
+	this.headerword = headerword;
 }
 public String getProfile() {
 	return profile;

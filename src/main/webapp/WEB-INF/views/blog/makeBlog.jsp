@@ -34,7 +34,7 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 					<td><textarea rows="10" cols="20" maxlength="200" name="introduce"></textarea></td>
 					<td>블로그 프로필 영역의<br>프로필사진 아래에 반영됩니다.<br>(200자 이내)</td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<td>블로그 프로필 사진</td>
 					<td><img src="resources/images/noprofile.jpg" border="1" width="150" height="150" id="pfimg"></td>
 					<td>
@@ -43,6 +43,11 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 					<input type="button" value="삭제"><br>
 					이미지 파일은<br>jpg,png,gif 파일만 등록 가능합니다.
 					</td>
+				</tr> -->
+				<tr>
+					<td>타이틀 글</td>
+					<td><textarea rows="10" cols="3" maxlength="30" name="headerword"></textarea></td>
+					<td>블로그 타이틀 글<br>(30자 이내)</td>
 				</tr>
 				<tr>
 					<td colspan="3" align="center"><hr size="1">

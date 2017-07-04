@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestUtils;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itbank.TechFarm.blog.dao.Blog_OptionDAO;
 import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
 
 /**
@@ -33,6 +35,12 @@ public class BlogController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	
+	@Autowired 
+	private Blog_OptionDAO optionDAO;
+	
+	
+	
 	@RequestMapping(value = "/blogmain.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
@@ -109,6 +117,7 @@ public class BlogController {
 		String profile = request.getParameter("profile");
 		int layout = ServletRequestUtils.getIntParameter(request, "layout");
 		
+		
 		System.out.println("id : "+id);
 		System.out.println("blogname : "+blogname);
 		System.out.println("nickname : "+nickname);
@@ -130,17 +139,31 @@ public class BlogController {
 	public ModelAndView blogMakePro(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
 		Blog_OptionDTO dto = getBlogOption(request);
-		
-		//int res = boardDAO.insertBoard(dto,num2,re_step,re_level);
-	
-		
-		return new ModelAndView("redirect:board_list.do");
+		int res = optionDAO.makeBlog(dto);
+		return new ModelAndView("redirect:blogMake4.blog");
 	}
 	
 	private Blog_OptionDTO getBlogOption(HttpServletRequest arg0) throws Exception{
 		
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)arg0;
-		MultipartFile mf = mr.getFile("background");
+		
+		/*String id = mr.getParameter("id");
+		String blogname = mr.getParameter("blogname");
+		String nickname = mr.getParameter("nickname");
+		String introduce = mr.getParameter("introduce");
+		String profile = mr.getParameter("profile");
+		int layout = Integer.parseInt(mr.getParameter("layout"));
+		String headerword = id+"님의 블로그에 오신걸 환영합니다";*/
+		String skin = mr.getParameter("skin");
+		int skinnum = Integer.parseInt(skin.substring(4));
+		System.out.println(skinnum);
+		
+		String header="hd_skin"+skinnum+".jpg";
+		String background = "bg_skin.jpg";
+		if(skinnum>28){
+			background = "bg_skin"+skinnum+".jpg";
+		}
+		/*MultipartFile mf = mr.getFile("background");
 		MultipartFile mf2 = mr.getFile("header");
 		String background = mf.getOriginalFilename();
 		String header = mf2.getOriginalFilename();
@@ -157,19 +180,27 @@ public class BlogController {
 		else{
 			mf.transferTo(file);
 			mf.transferTo(file2);
-		}
+		}*/
 		Blog_OptionDTO dto = new Blog_OptionDTO();
-	
-			dto.setId(arg0.getParameter("id"));
+			
+			String id = arg0.getParameter("id");
+			dto.setId(id);
 			dto.setBlogname(arg0.getParameter("blogname"));
 			dto.setLayout(Integer.parseInt(arg0.getParameter("layout")));
+			String headerword = id+"님의 블로그에 오신걸 환영합니다";
+			dto.setHeaderword(arg0.getParameter("headerword"));
+			dto.setNickname(arg0.getParameter("nickname"));
+			dto.setIntroduce(arg0.getParameter("introduce"));
 			dto.setProfile(arg0.getParameter("profile"));
 			dto.setBackground(background);
 			dto.setHeader(header);
-			dto.setNickname(arg0.getParameter("nickname"));
-			dto.setIntroduce(arg0.getParameter("introduce"));
 			
 		return dto;
+	}
+	
+	@RequestMapping(value="/blogMake4.blog")
+	public ModelAndView blogMakeSuccess(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		return new ModelAndView("blog/makeBlogSuccess");
 	}
 	
 }
