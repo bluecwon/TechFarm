@@ -29,7 +29,7 @@
 인기<br>
 <c:choose>
 <c:when test="${tube_id!=null}">
-		<a href="mychannel">내 채널</a><br>
+		<a href="tftube_mychannel">내 채널</a><br>
 </c:when><c:otherwise></c:otherwise></c:choose>
 최근 본 동영상<br>
 -----------------------------<br>

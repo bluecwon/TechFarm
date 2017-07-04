@@ -42,16 +42,14 @@ public class VideoMapper {
 	
 	public static List<VideoDTO> listVideo() {
 		SqlSession session=sqlMapper.openSession();
-		List<VideoDTO> list=session.selectList("listVideo");
-		session.commit();
+		List<VideoDTO> list=session.selectList("listVideo");		
 		session.close();
 		return list;
 	}
 	
 	public static VideoDTO getVideo(int ind){
 		SqlSession session=sqlMapper.openSession();
-		VideoDTO dto=(VideoDTO)session.selectOne("getVideo",ind);
-		session.commit();
+		VideoDTO dto=(VideoDTO)session.selectOne("getVideo",ind);		
 		session.close();
 		return dto;
 		

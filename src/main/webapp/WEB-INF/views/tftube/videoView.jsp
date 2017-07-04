@@ -15,14 +15,16 @@ function goReply(){
 <title>Insert title here</title>
 </head>
 <body>
-<video src="/resources/tftube/uploadVideo/${vdto.filename}" autoplay  
-poster="${upPath_img}/${vdto.image}" controls="controls" width="600" height="450"/>
+<!-- /resources/tftube -->
+<video src="${upPath_video}/${vdto.filename}" autoplay  
+poster="${upPath_img}/${vdto.image}" controls="controls" width="600" height="450"></video>
 <table>
 <tr><td>
-<c:if test="${vdto.id} ${tube_id}">
-<a href="video_edit">정보수정</a>								<a href="video_delete?${vdto.ind}">삭제</a>
-</td></tr>
+
+<c:if test="${vdto.id eq tube_id}">
+<a href="tftube_video_edit">정보수정</a>								<a href="tftube_video_delete?ind=${vdto.ind}">삭제</a>
 </c:if>
+</td></tr>
  <tr><td> 
  <font size="18">${vdto.title}</font><br>
  <c:choose>
