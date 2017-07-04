@@ -29,23 +29,18 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
-
-<filter>
-<filter-name>encodingFilter</filter-name>
-<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-
-<init-param>
-<param-name>encoding</param-name>
-<param-value>UTF-8</param-value>
-</init-param>
-</filter>
-
-
-<filter-mapping>
-<filter-name>encodingFilter</filter-name>
-<url-pattern>/*</url-pattern>
-<!-- 모든 파일을 한글설정 하겠다 설정하는곳 -->
-</filter-mapping>
+	
+	<filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  	</filter>
+  	<filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  	</filter-mapping>
 
 </web-app>

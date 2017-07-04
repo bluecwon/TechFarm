@@ -47,7 +47,7 @@
 	  				<img id="myinfo" src="resources/home/imgs/profile.png" width="30" height="30">
 	  				</abbr>
 	  			</c:if>
-	  			&nbsp&nbsp&nbsp&nbsp&nbsp 
+	  			&nbsp&nbsp&nbsp&nbsp&nbsp
 			</div>
 			<div class="header_menu" align="center">
 			<table>
@@ -59,7 +59,7 @@
 				<tr>
 					<td align="center"><a href="#" onclick="check();"><img id="img_handle" src="resources/home/imgs/social.png" width="40%" height="35%"></a><br>SNS</td>
 					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/utube.png" width="40%" height="35%"></a><br>영상</td>
-					<td align="center"><a href="blogmain.do"><img id="img_handle" src="resources/home/imgs/drive.png" width="40%" height="35%"></a><br>클라우드</td>
+					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/drive.png" width="40%" height="35%"></a><br>클라우드</td>
 				</tr>
 				<tr>
 					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/memo.png" width="40%" height="35%"></a><br>메모</td>

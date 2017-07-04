@@ -33,7 +33,7 @@ public class BlogController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/blogmain.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -67,20 +67,29 @@ public class BlogController {
 	public ModelAndView blogMake2(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blog/makeBlog2");
-		String id = request.getParameter("id");
-		String blogname = request.getParameter("blogname");
-		String nickname = request.getParameter("nickname");
-		String introduce = request.getParameter("introduce");
-		
+			
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)request;
+		String id = mr.getParameter("id");
+		String blogname = mr.getParameter("blogname");
+		String nickname = mr.getParameter("nickname");
+		String introduce = mr.getParameter("introduce");
+		
+		System.out.println("id : "+id);
+		System.out.println("blogname : "+blogname);
+		System.out.println("nickname : "+nickname);
+		System.out.println("introduce : "+introduce);
+		
 		MultipartFile mf = mr.getFile("profile");
 		String profile = mf.getOriginalFilename();
 	
 		HttpSession session = request.getSession();
 		String upPath = session.getServletContext().getRealPath("/resources/upload/profile");
 		File file = new File(upPath,profile);
+		if(profile.trim().equals("")){}
+		else{
 		mf.transferTo(file);
-		
+		}
+		mav.addObject("id", id);
 		mav.addObject("blogname", blogname);
 		mav.addObject("nickname", nickname);
 		mav.addObject("introduce",introduce);
@@ -93,15 +102,21 @@ public class BlogController {
 	public ModelAndView blogMake3(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blog/makeBlog3");
-		
+		String id = request.getParameter("id");
 		String blogname = request.getParameter("blogname");
 		String nickname = request.getParameter("nickname");
 		String introduce = request.getParameter("introduce");
 		String profile = request.getParameter("profile");
 		int layout = ServletRequestUtils.getIntParameter(request, "layout");
 		
-		System.out.println(profile);
+		System.out.println("id : "+id);
+		System.out.println("blogname : "+blogname);
+		System.out.println("nickname : "+nickname);
+		System.out.println("introduce : "+introduce);
+		System.out.println("profile : "+profile);
+		System.out.println("layout : "+layout);
 		
+		mav.addObject("id",id);
 		mav.addObject("blogname", blogname);
 		mav.addObject("nickname", nickname);
 		mav.addObject("introduce",introduce);

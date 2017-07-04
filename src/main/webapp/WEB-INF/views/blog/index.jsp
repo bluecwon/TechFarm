@@ -4,12 +4,6 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
 <%@ include file="header.jsp"%>
-<%
-String bgPath = config.getServletContext().getRealPath("/WEB-INF/blog/background/"); //백그라운드 이미지 경로
-String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/"); //헤더 이미지 경로
-%>	
-<c:set var = "bg" value="<%=bgPath%>"/>
-<c:set var = "hd" value="<%=hdPath%>"/>
 
 <section>
 	<article>
