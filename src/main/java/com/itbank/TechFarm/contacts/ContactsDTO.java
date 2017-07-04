@@ -1,6 +1,7 @@
 package com.itbank.TechFarm.contacts;
 
 public class ContactsDTO {
+	
 	private String photo;
 	private String name;
 	private String company;
