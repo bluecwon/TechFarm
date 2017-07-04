@@ -12,12 +12,16 @@ insert into tftube_video
 (#{id}, #{title},#{description},#{open},#{filename},#{filesize},0,#{image},0,0) 
 </insert>
 
+<delete id="deleteVideo" parameterType="int">
+delete from tftube_video where ind=#{ind}
+</delete>
+
 <update id="readCount" parameterType="java.util.HashMap">
 		${sql}
 </update>	
 
 <select id="listVideo" resultType="videoDTO">
-select * from tftube_video
+select * from tftube_video order by ind
 </select>
 
 <select id="getVideo" resultType="videoDTO" parameterType="int">

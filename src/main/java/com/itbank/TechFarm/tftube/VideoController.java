@@ -35,7 +35,7 @@ public class VideoController {
 	String msg=null, url=null;	
 	
 	@RequestMapping(value="/tftube_video_insert", method=RequestMethod.GET)
-	public ModelAndView insertFormBoard(HttpServletRequest arg0, 
+	public ModelAndView tftube_video_insertForm(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("tftube/insertForm");
@@ -43,25 +43,26 @@ public class VideoController {
 	}
 	
 	@RequestMapping(value="/tftube_video_insert", method=RequestMethod.POST)
-	public ModelAndView insertProBoard (HttpServletRequest arg0, 
+	public ModelAndView tftube_video_insertPro(HttpServletRequest arg0, 
 								HttpServletResponse arg1)  throws Exception  {
 		VideoDTO dto = new VideoDTO();
-		ModelAndView mv=new ModelAndView();		
-		String dir=this.getClass().getResource("").getPath();
+		ModelAndView mv=new ModelAndView();	
+		session=arg0.getSession();
+		String upPath_file=(String)session.getAttribute("upPath_file");
+		
+		/*
 		File video_dir = new File(dir,"uploadVideo");
 		File image_dir = new File(dir,"uploadImage");			
 
 		if(!video_dir.mkdirs()){	   
-			video_dir.mkdirs();	//상위 디렉토리까지 생성		
+			video_dir.mkdirs();	//create directory with upper directory.		
 		}   		
 		if(!image_dir.mkdirs()){
 			image_dir.mkdirs();
 		}
 		mv.setViewName("redirect:tftube_main");
 		
-		System.out.println("업로드경로:"+this.getClass().getResource("").getPath());
-		
-        
+		System.out.println("업로드경로:"+this.getClass().getResource("").getPath());*/    
 
 
 
@@ -76,7 +77,7 @@ public class VideoController {
 		HttpSession session=arg0.getSession();		
 			
 		
-		File file = new File(video_dir,filename);
+		File file = new File(upPath_file,filename);
 		//String md5_video=md5(file);
 		//System.out.println(md5_video);
 		
@@ -90,7 +91,7 @@ public class VideoController {
 		MultipartFile mf2 = mr.getFile("image");
 		String image = mf2.getOriginalFilename(); 		
 						
-		File file2 = new File(image_dir,image);
+		File file2 = new File((String)session.getAttribute(upPath_img),image);
 		//String md5_image=md5(file2);
 		//System.out.println(md5_image);
 		if(image.trim().equals("")){}
@@ -139,7 +140,7 @@ public class VideoController {
 	}*/
 	
 	@RequestMapping(value="/tftube_videoView", method=RequestMethod.GET)
-	public ModelAndView videoView(HttpServletRequest arg0, 
+	public ModelAndView tftube_videoView(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
 		int ind=ServletRequestUtils.getIntParameter(arg0, "ind");
 		
@@ -190,6 +191,33 @@ public class VideoController {
 		mv.addObject("number",number);*/	
 		return mv;
 		
+	}
+	
+	@RequestMapping(value="/tftube_video_delete", method=RequestMethod.GET)
+	public ModelAndView tftube_video_delete(HttpServletRequest arg0, 
+								HttpServletResponse arg1) throws Exception {
+		ModelAndView mv=new ModelAndView();
+		int ind=ServletRequestUtils.getIntParameter(arg0, "ind");
+		VideoDTO vdto=videoDAO.getVideo(ind);
+		
+		//delete from tftube_video
+		int res=videoDAO.deleteVideo(ind);
+		if(res>0){
+			mv.setViewName("redirect:tftube_main");	
+			//delete file
+			File deletefile=new File((String)session.getAttribute("upPath_file"),vdto.getFilename());
+			try{
+			deletefile.delete();
+			}catch(Exception e){}
+		}
+		else{
+			msg="file delete failed.";
+			url="tftube_videoView";
+			mv.setViewName("message.jsp");
+			mv.addObject("msg",msg);
+			mv.addObject("url",url);				
+		}		
+		return mv;		
 	}
 
 }

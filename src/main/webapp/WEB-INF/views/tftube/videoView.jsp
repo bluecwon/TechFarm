@@ -15,26 +15,15 @@ function goReply(){
 <title>Insert title here</title>
 </head>
 <body>
-<%-- <%
-String filename=(String)session.getAttribute("filename");
-/* String image=request.getParameter("image");
-String upPath_img=request.getParameter("upPath_img");
-
-System.out.println(image); */
-System.out.println(filename);
-%> --%>
-<%-- <%
-String file[]=new String[];
-for(int i=0;;i++){
-file[i]=(String)session.getAttribute(filename[i]);
-}		
-%> --%>
-
-<video src="/resources/folername/filename/${vdto.filename}" autoplay  
-poster="${upPath_img}/${vdto.image}" controls="controls" width="600" height="450">
- 브라우저 지원안함</video>  
- 
- <p>
+<video src="/resources/tftube/uploadVideo/${vdto.filename}" autoplay  
+poster="${upPath_img}/${vdto.image}" controls="controls" width="600" height="450"/>
+<table>
+<tr><td>
+<c:if test="${vdto.id} ${tube_id}">
+<a href="video_edit">정보수정</a>								<a href="video_delete?${vdto.ind}">삭제</a>
+</td></tr>
+</c:if>
+ <tr><td> 
  <font size="18">${vdto.title}</font><br>
  <c:choose>
  <c:when test="${vdto.uploaddate.length()>=10}">
@@ -46,7 +35,8 @@ poster="${upPath_img}/${vdto.image}" controls="controls" width="600" height="450
  </c:otherwise>
  </c:choose>
  ${vdto.description}<!-- 간략히 버튼 추가 --><br> 
- 
+ </td></tr>
+ </table>
 댓글 <!-- 댓글갯수 --><br>
 <form name="f">
 <textArea name="content">

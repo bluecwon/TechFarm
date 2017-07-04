@@ -25,5 +25,13 @@ public class VideoDAOImpl implements VideoDAO {
 	public VideoDTO getVideo(int ind) {
 		return VideoMapper.getVideo(ind);
 	}
+
+
+	@Override
+	public int deleteVideo(int ind) {
+		return VideoMapper.deleteVideo(ind);
+	}
+	
+	
 	
 }

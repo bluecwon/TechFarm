@@ -11,23 +11,26 @@
 <table colspan="2" border="3">
 <tr>
 <td>
-<a href="tftube_main">오튜브 </a>
+<a href="tftube_main">TFtube </a>
 </td> 
-<td>검색						 <a href="tftube_video_insert">업로드</a>	
-<c:choose>
-<c:when test="${tube_id==null}">
-		<a href="tftube_login">로그인</a>
+<td>검색						 <c:choose>
+<c:when test="${tube_id==null}"><a href="login">업로드</a>	
+
+		<a href="login">로그인</a>
 </c:when>
 <c:otherwise>
-		
-</c:otherwise>
-</c:choose>		
+<a href="tftube_video_insert">업로드</a>
+</c:otherwise></c:choose>		
 </td>                            
 </tr>
 <tr>
 <td>
 <a href="tftube_main">홈</a><br>
 인기<br>
+<c:choose>
+<c:when test="${tube_id!=null}">
+		<a href="mychannel">내 채널</a><br>
+</c:when><c:otherwise></c:otherwise></c:choose>
 최근 본 동영상<br>
 -----------------------------<br>
 음악<br>

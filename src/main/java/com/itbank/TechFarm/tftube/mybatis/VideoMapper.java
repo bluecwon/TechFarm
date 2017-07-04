@@ -11,11 +11,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
 
-
-
-
-
-
 public class VideoMapper {
 	private static SqlSessionFactory sqlMapper;
 	static {
@@ -60,6 +55,14 @@ public class VideoMapper {
 		session.close();
 		return dto;
 		
+	}
+	
+	public static int deleteVideo(int ind){
+		SqlSession session=sqlMapper.openSession();		
+		int res=session.delete("deleteVideo",ind);
+		session.commit();
+		session.close();
+		return res;
 	}
 	
 	

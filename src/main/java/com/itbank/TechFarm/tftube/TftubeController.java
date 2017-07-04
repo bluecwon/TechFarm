@@ -1,6 +1,6 @@
 package com.itbank.TechFarm.tftube;
 
-import java.io.BufferedInputStream;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -70,7 +70,7 @@ public class TftubeController {
 	}*/
 	
 	@RequestMapping(value = "/tftube_main", method = RequestMethod.GET)
-	public ModelAndView listBoard(HttpServletRequest arg0, 
+	public ModelAndView tftube_main(HttpServletRequest arg0, 
 			HttpServletResponse arg1) throws Exception {
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("tftube/main");
@@ -81,9 +81,7 @@ public class TftubeController {
 		String upPath_img2=session.getServletContext().getRealPath("/uploadImage");*/
 
 		upPath_img="D:\\workspace_tftube\\tftube\\src\\main\\webapp\\resources\\tftube\\uploadImage";
-		upPath_file="D:\\workspace_tftube\\tftube\\src\\main\\webapp\\resources\\tftube\\uploadVideo";
-		
-		
+		upPath_file="D:\\workspace_tftube\\tftube\\src\\main\\webapp\\resources\\tftube\\uploadVideo";	
 		
 		/*upPath_file=session.getServletContext().getContextPath()+"/uploadVideo";				
 		upPath_img=session.getServletContext().getRealPath("uploadImage");*/
