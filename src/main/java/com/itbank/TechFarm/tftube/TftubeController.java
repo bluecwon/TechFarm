@@ -28,18 +28,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itbank.TechFarm.login.member.MemberDTO;
 import com.itbank.TechFarm.tftube.dao.ReplyDAO;
 import com.itbank.TechFarm.tftube.dao.VideoDAO;
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
-
-
-
-
-
-
-/**
- * Handles requests for the application home page.
- */
+ 
 @Controller
 public class TftubeController {
 	
@@ -47,8 +40,6 @@ public class TftubeController {
 	private VideoDAO videoDAO;
 	@Autowired
 	private ReplyDAO replyDAO;
-
-
 	
 	private String upPath_video=null;
 	private String upPath_img=null;
@@ -73,7 +64,7 @@ public class TftubeController {
 		upPath_video="D:\\workspace_tftube\\techfarm\\src\\main\\webapp\\resources\\tftube\\uploadVideo";*/
 		upPath_img=session.getServletContext().getRealPath("/resources/tftube/uploadImage");
 		upPath_video=session.getServletContext().getRealPath("/resources/tftube/uploadVideo");
-		System.out.println(upPath_img);
+		
 		
 		/*upPath_video=session.getServletContext().getContextPath()+"/uploadVideo";				
 		upPath_img=session.getServletContext().getRealPath("uploadImage");*/
@@ -160,11 +151,11 @@ public class TftubeController {
 		}
 		
 		dto.setDescription(ServletRequestUtils.getStringParameter(arg0, "description"));
-		dto.setId("pkrngd");
-		dto.setFilename(filename);
+		dto.setMember_no(((MemberDTO)session.getAttribute("memberDTO")).getNo());
+		dto.setVideo_name(filename);
 		dto.setOpen(ServletRequestUtils.getStringParameter(arg0, "open"));
 		dto.setTitle(ServletRequestUtils.getStringParameter(arg0, "title"));
-		dto.setFilesize((int)mf.getSize());	
+		dto.setVideo_size((int)mf.getSize());	
 		dto.setImage(image);		
 		
 		int res =videoDAO.insertVideo(dto);	
@@ -207,7 +198,7 @@ public class TftubeController {
 		ModelAndView mv=new ModelAndView();	
 		
 		VideoDTO vdto=videoDAO.getVideo(ind);
-		System.out.println(vdto.getId());
+		
 		mv.addObject("vdto",vdto);
 		
 		List r_list=replyDAO.replyList();
@@ -265,7 +256,7 @@ public class TftubeController {
 		if(res>0){
 			mv.setViewName("redirect:tftube_main");	
 			//delete file
-			File deletefile=new File(upPath_video,vdto.getFilename());
+			File deletefile=new File(upPath_video,vdto.getVideo_name());
 			File deleteimage=new File(upPath_img,vdto.getImage());
 			try{
 			deletefile.delete();

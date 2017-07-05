@@ -27,7 +27,7 @@ public class MyChannelController {
 		dto.setId(id);		
 		int res=replyDAO.insertReply(dto);*/
 		
-	mv.setViewName("mychannel");	
+	mv.setViewName("tftube/mychannel");	
 	return mv;		
 	}
 

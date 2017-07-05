@@ -6,7 +6,7 @@
 <configuration> 
   <properties resource="db.properties"/>
   <typeAliases>
-  	<typeAlias alias = "categoryDTO" type="shop.CategoryDTO"/>
+  	<typeAlias alias = "memberDTO" type="com.itbank.TechFarm.login.member.MemberDTO"/>
   </typeAliases>
   <environments default="development"> 
       <environment id="development"> 
@@ -20,6 +20,6 @@
     </environment> 
   </environments> 
   <mappers> 
-    <mapper resource="shop/mybatis/CategoryMapper.xml"/> 
+    <mapper resource="com/itbank/TechFarm/login/member/MemberMapper.xml"/> 
   </mappers> 
 </configuration> 

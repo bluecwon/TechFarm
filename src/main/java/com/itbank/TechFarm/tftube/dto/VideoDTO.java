@@ -1,13 +1,13 @@
 package com.itbank.TechFarm.tftube.dto;
 
 public class VideoDTO {
-	private int ind;
-	private String id;
+	private int no;
+	private int member_no;
 	private String title;
 	private String description;
 	private String open;
-	private String filename;
-	private int filesize;
+	private String video_name;
+	private int video_size;
 	private int readcount;
 	private String image;
 	private int likep;//default 0
@@ -15,17 +15,17 @@ public class VideoDTO {
 	private String uploaddate;//sysdate
 	
 	
-	public int getInd() {
-		return ind;
+	public int getNo() {
+		return no;
 	}
-	public void setInd(int ind) {
-		this.ind = ind;
+	public void setNo(int no) {
+		this.no = no;
 	}
-	public String getId() {
-		return id;
+	public int getMember_no() {
+		return member_no;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setMember_no(int member_no) {
+		this.member_no = member_no;
 	}
 	public String getTitle() {
 		return title;
@@ -45,17 +45,18 @@ public class VideoDTO {
 	public void setOpen(String open) {
 		this.open = open;
 	}
-	public String getFilename() {
-		return filename;
+	
+	public String getVideo_name() {
+		return video_name;
 	}
-	public void setFilename(String filename) {
-		this.filename = filename;
+	public void setVideo_name(String video_name) {
+		this.video_name = video_name;
 	}
-	public int getFilesize() {
-		return filesize;
+	public int getVideo_size() {
+		return video_size;
 	}
-	public void setFilesize(int filesize) {
-		this.filesize = filesize;
+	public void setVideo_size(int video_size) {
+		this.video_size = video_size;
 	}
 	public int getReadcount() {
 		return readcount;
@@ -69,7 +70,6 @@ public class VideoDTO {
 	public void setImage(String image) {
 		this.image = image;
 	}
-
 	public int getLikep() {
 		return likep;
 	}
@@ -91,6 +91,8 @@ public class VideoDTO {
 	
 	
 	
-
-
+	
+	
+	
+	
 }

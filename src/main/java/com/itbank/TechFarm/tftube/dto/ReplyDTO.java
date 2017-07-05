@@ -2,9 +2,12 @@ package com.itbank.TechFarm.tftube.dto;
 
 public class ReplyDTO {
 	private int no;
-	private String id;
+	private int member_no;	
 	private String reg_date;
 	private String content;
+	private String video_name;
+	
+	
 	
 	public int getNo() {
 		return no;
@@ -12,11 +15,11 @@ public class ReplyDTO {
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public String getId() {
-		return id;
+	public int getMember_no() {
+		return member_no;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setMember_no(int member_no) {
+		this.member_no = member_no;
 	}
 	public String getReg_date() {
 		return reg_date;
@@ -30,6 +33,17 @@ public class ReplyDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public String getVideo_name() {
+		return video_name;
+	}
+	public void setVideo_name(String video_name) {
+		this.video_name = video_name;
+	}
+	
+	
+	
+	
+	
 	
 	
 }

@@ -13,13 +13,13 @@
 <td>
 <a href="tftube_main">TFtube </a>
 </td> 
-<td>검색						 <c:choose>
-<c:when test="${tube_id==null}"><a href="login">업로드</a>	
-
+<td>검색						 
+<c:choose>
+<c:when test="${memberDTO==null}"><a href="login">업로드</a>	
 		<a href="login">로그인</a>
 </c:when>
 <c:otherwise>
-<a href="tftube_video_insert">업로드</a>
+<a href="tftube_video_insert">업로드</a> 
 </c:otherwise></c:choose>		
 </td>                            
 </tr>

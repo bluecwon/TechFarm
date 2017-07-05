@@ -14,21 +14,16 @@
 <video src="resources/tftube/advertise/soccer.mp4" autoplay
 controls poster="C:\Users\Public\Pictures\Sample Pictures\Chrysanthemum.jpg"
 width="600" height="450"></video>
-<%-- <c:out value="${webappRoot}"/> --%>
 </div>
 <%int count=0;%>
-
 <table border="3">
 <tr>
-
 <c:forEach var="dto" items="${list}"> 
-<td><!-- &image=${dto.image}&upPath_img=${upPath_img} -->
+<td>
 <a href="tftube_videoView?ind=${dto.ind}">
 <img src="${upPath_img}/${dto.image}" width="196" height="100"><br>
 ${dto.title}</a></td>
-<c:out value="${upPath_img}/${dto.image}"/>
 <c:set var="count" value="<%=++count%>"/>
-
 <c:if test="${count%6==0}">
 </tr><tr>
 </c:if>

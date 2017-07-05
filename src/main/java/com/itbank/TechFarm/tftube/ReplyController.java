@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itbank.TechFarm.login.member.MemberDTO;
 import com.itbank.TechFarm.tftube.dao.ReplyDAO;
 import com.itbank.TechFarm.tftube.dto.ReplyDTO;
 @Controller
@@ -39,7 +40,7 @@ public class ReplyController {
 		String id=(String)session.getAttribute("tube_id");
 		ReplyDTO dto=new ReplyDTO();		
 		dto.setContent(arg0.getParameter("content").trim());
-		dto.setId(id);		
+		dto.setMember_no(((MemberDTO)session.getAttribute("memberDTO")).getNo());	
 		int res=replyDAO.insertReply(dto);
 		
 		if(res>0){
