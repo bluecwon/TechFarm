@@ -58,7 +58,7 @@
 				</tr>
 				<tr>
 					<td align="center"><a href="#" onclick="check();"><img id="img_handle" src="resources/home/imgs/social.png" width="40%" height="35%"></a><br>SNS</td>
-					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/utube.png" width="40%" height="35%"></a><br>영상</td>
+					<td align="center"><a href="#" onclick="check();"><img id="img_handle" src="resources/home/imgs/utube.png" width="40%" height="35%"></a><br>영상</td>
 					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/drive.png" width="40%" height="35%"></a><br>클라우드</td>
 				</tr>
 				<tr>
