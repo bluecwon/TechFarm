@@ -63,7 +63,7 @@
 				</tr>
 				<tr>
 					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/memo.png" width="40%" height="35%"></a><br>메모</td>
-					<td align="center"><a href="chatting"><img id="img_handle" src="resources/home/imgs/chatting.png" width="40%" height="35%"></a><br>채팅</td>
+					<td align="center"><a href="tchat"><img id="img_handle" src="resources/home/imgs/chatting.png" width="40%" height="35%"></a><br>채팅</td>
 					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/document.png" width="40%" height="35%"></a><br>문서</td>
 				</tr>
 				<tr>

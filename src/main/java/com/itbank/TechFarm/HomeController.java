@@ -25,4 +25,9 @@ public class HomeController {
 		return "login/login";
 	}
 	
+	@RequestMapping(value = "/tchat", method = RequestMethod.GET)
+	public String tchat(Locale locale, Model model) {
+		return "tchat/tchatmain";
+	}
+	
 }
