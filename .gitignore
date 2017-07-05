@@ -7,3 +7,4 @@ src/main/resources/com/itbank/techfarm/db.properties
 *.mp4
 *.jpg
 *.png
+*.jar

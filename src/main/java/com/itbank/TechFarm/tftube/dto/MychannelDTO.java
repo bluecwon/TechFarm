@@ -4,7 +4,7 @@ public class MychannelDTO {
 	
 	private int member_no;
 	private String nickname;
-	private String channel_name;
+	
 	private String subing_channel;//배열 형태
 	private String subed_channel;	
 	public int getMember_no() {
