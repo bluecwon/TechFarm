@@ -52,7 +52,7 @@ public class TftubeController {
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("tftube/main");
 		List<VideoDTO> list=videoDAO.listVideo();
-		mav.addObject("list",list);
+		
 		session=arg0.getSession();		
 		/*upPath_img="D:\\workspace_tftube\\techfarm\\src\\main\\webapp\\resources\\tftube\\uploadImage";
 		upPath_video="D:\\workspace_tftube\\techfarm\\src\\main\\webapp\\resources\\tftube\\uploadVideo";*/
@@ -64,7 +64,7 @@ public class TftubeController {
 		session.setAttribute
 		("upPath_video", upPath_video);	
 		session.setAttribute
-		("listing",list);		
+		("list",list);		
 		
 		return mav;
 	}	

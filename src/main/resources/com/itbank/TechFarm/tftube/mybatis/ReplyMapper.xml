@@ -19,7 +19,7 @@
 	</delete>
 	
 	<insert id="insertReply" parameterType="replyDTO" useGeneratedKeys="true">	
-		insert into tftube_reply values(#{member_no},#{content})		
+		insert into tftube_reply values(#{member_no},#{content},#{video_name})		
 	</insert>
 	
 	<update id="insertreply2_1">	

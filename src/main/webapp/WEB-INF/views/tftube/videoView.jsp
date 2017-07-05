@@ -41,9 +41,8 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
  </table>
 댓글 <!-- 댓글갯수 --><br>
 <form name="f">
-<textArea name="content">
-
-</textArea><!--클릭시 로그인창 열리는 방법찾기 -->
+<textArea name="content"></textArea><!--클릭시 로그인창 열리는 방법찾기 -->
+<input type="hidden" name="video_name" value="${vdto.video_name}">
 <c:if test="${memberDTO!=null}">
 <input type="button" value="입력" onClick="javascript:goReply()">
 </c:if>

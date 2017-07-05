@@ -7,8 +7,6 @@ public class ReplyDTO {
 	private String content;
 	private String video_name;
 	
-	
-	
 	public int getNo() {
 		return no;
 	}
@@ -39,11 +37,5 @@ public class ReplyDTO {
 	public void setVideo_name(String video_name) {
 		this.video_name = video_name;
 	}
-	
-	
-	
-	
-	
-	
 	
 }

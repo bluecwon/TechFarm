@@ -32,15 +32,19 @@ public class ReplyController {
 	private HttpSession session=null;
 	String msg=null, url=null;	
 	
-	@RequestMapping(value="/tftube_reply_insert.do", method=RequestMethod.GET)
+	@RequestMapping(value="/tftube_reply_insert", method=RequestMethod.GET)
 	public ModelAndView tftube_reply_insert(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
+		
 		session=arg0.getSession();
-		String id=(String)session.getAttribute("tube_id");
+		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
+		
 		ReplyDTO dto=new ReplyDTO();		
+		
 		dto.setContent(arg0.getParameter("content").trim());
-		dto.setMember_no(((MemberDTO)session.getAttribute("memberDTO")).getNo());	
+		dto.setMember_no(member.getNo());
+		dto.setVideo_name(arg0.getParameter("video_name"));
 		int res=replyDAO.insertReply(dto);
 		
 		if(res>0){
