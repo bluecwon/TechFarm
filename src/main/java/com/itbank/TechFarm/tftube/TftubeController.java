@@ -46,9 +46,6 @@ public class TftubeController {
 	private HttpSession session=null;
 	String msg=null, url=null;	
 	
-	
-	private String id;	
-	
 	@RequestMapping(value = "/tftube_main", method = RequestMethod.GET)
 	public ModelAndView tftube_main(HttpServletRequest arg0, 
 			HttpServletResponse arg1) throws Exception {
@@ -67,10 +64,7 @@ public class TftubeController {
 		session.setAttribute
 		("upPath_video", upPath_video);	
 		session.setAttribute
-		("listing",list);
-		
-		
-		
+		("listing",list);		
 		
 		return mav;
 	}	
@@ -121,9 +115,7 @@ public class TftubeController {
 		
 		File file = new File(upPath_video,filename);
 		//String md5_video=md5(file);
-		//System.out.println(md5_video);
-		
-		
+		//System.out.println(md5_video);		
 		
 		if(filename.trim().equals("")){}
 		else{

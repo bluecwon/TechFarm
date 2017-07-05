@@ -27,10 +27,10 @@
 <td>
 <a href="tftube_main">홈</a><br>
 인기<br>
-<c:choose>
-<c:when test="${tube_id!=null}">
+
+<c:if test="${memberDTO!=null}">
 		<a href="tftube_mychannel">내 채널</a><br>
-</c:when><c:otherwise></c:otherwise></c:choose>
+</c:if>
 최근 본 동영상<br>
 -----------------------------<br>
 음악<br>
