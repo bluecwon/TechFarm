@@ -20,8 +20,8 @@ width="600" height="450"></video>
 <tr>
 <c:forEach var="dto" items="${list}"> 
 <td>
-<a href="tftube_videoView?ind=${dto.ind}">
-<img src="${upPath_img}/${dto.image}" width="196" height="100"><br>
+<a href="tftube_videoView?no=${dto.no}">
+<img src="resources/tftube/uploadImage/${dto.image}" width="196" height="100"><br>
 ${dto.title}</a></td>
 <c:set var="count" value="<%=++count%>"/>
 <c:if test="${count%6==0}">

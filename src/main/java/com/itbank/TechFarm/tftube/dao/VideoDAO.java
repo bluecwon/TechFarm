@@ -12,7 +12,7 @@ public interface VideoDAO {
 	
 	public int insertVideo(VideoDTO dto);
 	public List<VideoDTO> listVideo();
-	public VideoDTO getVideo(int ind);
-	public int deleteVideo(int ind);
+	public VideoDTO getVideo(int no);
+	public int deleteVideo(int no);
 
 }

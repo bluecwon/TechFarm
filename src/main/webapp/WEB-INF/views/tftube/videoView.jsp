@@ -16,13 +16,13 @@ function goReply(){
 </head>
 <body>
 <!-- /resources/tftube -->
-<video src="resources/tftube/uploadVideo/${vdto.filename}" autoplay  
+<video src="resources/tftube/uploadVideo/${vdto.video_name}" autoplay  
 poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="600" height="450"></video>
 
 <table>
 <tr><td>
-<c:if test="${vdto.id eq tube_id}">
-<a href="tftube_video_edit">정보수정</a>								<a href="tftube_video_delete?ind=${vdto.ind}">삭제</a>
+<c:if test="${vdto.member_no eq memberDTO.no}">
+<a href="tftube_video_edit">정보수정</a>								<a href="tftube_video_delete?no=${vdto.no}">삭제</a>
 </c:if>
 </td></tr>
  <tr><td> 
@@ -44,7 +44,7 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
 <textArea name="content">
 
 </textArea><!--클릭시 로그인창 열리는 방법찾기 -->
-<c:if test="${tube_id!=null}">
+<c:if test="${memberDTO!=null}">
 <input type="button" value="입력" onClick="javascript:goReply()">
 </c:if>
 </form>

@@ -6,7 +6,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!-- <meta name="viewport" content="width=300 height=300"> -->
 <title>Insert title here</title>
 </head>
 <body>
@@ -14,23 +13,13 @@
 <form name="f" method="post" enctype="multipart/form-data" action="tftube_video_insert">
 <table>
 <tr><td>파일: <input type="file" name="filename" accept="video/*" ></td></tr> 
-<c:choose>
-<c:when test="${filename!=null}">
-<c:when test="${filename.substring(filename.length()-3,filename.length()).equals('mp4')}"/>
-<c:otherwise>
-<script type="text/javascript">
-alert("확장자가 mp4인 동영상 파일만 업로드 가능합니다.")
-location.href="tftube_insert"
-</script>
-</c:otherwise>
-</c:when>
-</c:choose>
+
 <tr><td>제목: <input type="text" name="title"></td></tr>
 <tr><td>설명: <input type="text" name="description"></td></tr>
 <tr><td>공개범위 
 <select name="open">
-<option value="T" selected>공개</option>
-<option value="F">비공개</option>
+<option value="t" selected>공개</option>
+<option value="f">비공개</option>
 </select>
 <tr><td>미리보기 이미지:<input type="file" name="image">
 

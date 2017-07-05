@@ -8,12 +8,12 @@
 	
 <insert id="insertVideo" parameterType="videoDTO" useGeneratedKeys="true">
 insert into tftube_video
-(id,title,description,open,filename,filesize,readcount,image,likep,unlikep) values
-(#{member_no}, #{title},#{description},#{open},#{filename},#{filesize},0,#{image},0,0) 
+(member_no,title,description,open,video_name,video_size,readcount,image,likep,unlikep) values
+(#{member_no}, #{title},#{description},#{open},#{video_name},#{video_size},0,#{image},0,0) 
 </insert>
 
 <delete id="deleteVideo" parameterType="int">
-delete from tftube_video where ind=#{ind}
+delete from tftube_video where no=#{no}
 </delete>
 
 <update id="readCount" parameterType="java.util.HashMap">
@@ -21,11 +21,11 @@ delete from tftube_video where ind=#{ind}
 </update>	
 
 <select id="listVideo" resultType="videoDTO">
-select * from tftube_video order by ind
+select * from tftube_video order by no
 </select>
 
 <select id="getVideo" resultType="videoDTO" parameterType="int">
-select * from tftube_video where ind=#{ind}
+select * from tftube_video where no=#{no}
 </select>
 
 </mapper>	

@@ -57,27 +57,18 @@ public class TftubeController {
 		List<VideoDTO> list=videoDAO.listVideo();
 		mav.addObject("list",list);
 		session=arg0.getSession();		
-		/*String upPath_video2=session.getServletContext().getRealPath("/uploadVideo");
-		String upPath_img2=session.getServletContext().getRealPath("/uploadImage");*/
-
 		/*upPath_img="D:\\workspace_tftube\\techfarm\\src\\main\\webapp\\resources\\tftube\\uploadImage";
 		upPath_video="D:\\workspace_tftube\\techfarm\\src\\main\\webapp\\resources\\tftube\\uploadVideo";*/
 		upPath_img=session.getServletContext().getRealPath("/resources/tftube/uploadImage");
-		upPath_video=session.getServletContext().getRealPath("/resources/tftube/uploadVideo");
-		
-		
-		/*upPath_video=session.getServletContext().getContextPath()+"/uploadVideo";				
-		upPath_img=session.getServletContext().getRealPath("uploadImage");*/
-		
-		id="pkrngd";
-		
+		upPath_video=session.getServletContext().getRealPath("/resources/tftube/uploadVideo");		
+		System.out.println(upPath_video);		
 		session.setAttribute
 		("upPath_img",upPath_img);		
 		session.setAttribute
 		("upPath_video", upPath_video);	
 		session.setAttribute
 		("listing",list);
-		session.setAttribute("tube_id", id);
+		
 		
 		
 		
@@ -193,11 +184,11 @@ public class TftubeController {
 	@RequestMapping(value="/tftube_videoView", method=RequestMethod.GET)
 	public ModelAndView tftube_videoView(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
-		int ind=ServletRequestUtils.getIntParameter(arg0, "ind");
+		int no=ServletRequestUtils.getIntParameter(arg0, "no");
 		
 		ModelAndView mv=new ModelAndView();	
 		
-		VideoDTO vdto=videoDAO.getVideo(ind);
+		VideoDTO vdto=videoDAO.getVideo(no);
 		
 		mv.addObject("vdto",vdto);
 		
@@ -247,21 +238,20 @@ public class TftubeController {
 	public ModelAndView tftube_video_delete(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
-		int ind=Integer.parseInt(arg0.getParameter("ind"));		
+		int no=Integer.parseInt(arg0.getParameter("no"));		
 		
-		VideoDTO vdto=videoDAO.getVideo(ind);		
+		VideoDTO vdto=videoDAO.getVideo(no);		
 		//delete from tftube_video
-		int res=videoDAO.deleteVideo(ind);
+		int res=videoDAO.deleteVideo(no);
 		
 		if(res>0){
 			mv.setViewName("redirect:tftube_main");	
 			//delete file
 			File deletefile=new File(upPath_video,vdto.getVideo_name());
 			File deleteimage=new File(upPath_img,vdto.getImage());
-			try{
+			//resources/tftube/uploadVideo/
 			deletefile.delete();
 			deleteimage.delete();
-			}catch(Exception e){}
 		}
 		else{
 			msg="file delete failed.";

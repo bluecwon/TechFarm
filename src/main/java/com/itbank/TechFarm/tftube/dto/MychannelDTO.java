@@ -3,8 +3,7 @@ package com.itbank.TechFarm.tftube.dto;
 public class MychannelDTO {
 	
 	private int member_no;
-	private String nickname;
-	
+	private String nickname;	
 	private String subing_channel;//배열 형태
 	private String subed_channel;	
 	public int getMember_no() {
@@ -18,13 +17,7 @@ public class MychannelDTO {
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
-	}
-	public String getChannel_name() {
-		return channel_name;
-	}
-	public void setChannel_name(String channel_name) {
-		this.channel_name = channel_name;
-	}
+	}	
 	public String getSubing_channel() {
 		return subing_channel;
 	}
