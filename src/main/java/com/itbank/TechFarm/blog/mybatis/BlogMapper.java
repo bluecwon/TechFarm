@@ -32,4 +32,12 @@ public class BlogMapper {
 	  return res;
   }
   
+  public static Blog_OptionDTO getBlog(String id){
+	  SqlSession session = sqlMapper.openSession();
+	  Blog_OptionDTO dto = session.selectOne("getBlog",id);
+	  session.close();
+	  return dto;
+	  
+  }
+  
 }

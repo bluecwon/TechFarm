@@ -14,4 +14,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   insert into blog_option values(#{id},#{blogname},#{layout},#{headerword},#{nickname},#{introduce},#{profile},#{background},#{header})
   </insert>
   
+  <select resultType="BlogOptionDTO" id="getBlog" parameterType="String">
+  select * from blog_option where id=#{id}
+  </select>
+  
 </mapper>

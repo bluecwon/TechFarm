@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">  
 	<title>Insert title here</title>
-	<link rel="stylesheet" type="text/css" href="resources/css/html5style.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/blogmain.css">
 	<script src="resources/js/jquery-1.9.0.js" type="text/javascript"></script>
 	<script src="resources///code.jquery.com/jquery-1.11.3.min.js"></script>	
 <script>

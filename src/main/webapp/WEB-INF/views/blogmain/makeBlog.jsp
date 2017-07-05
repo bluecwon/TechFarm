@@ -46,8 +46,8 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 				</tr> -->
 				<tr>
 					<td>타이틀 글</td>
-					<td><textarea rows="10" cols="3" maxlength="30" name="headerword"></textarea></td>
-					<td>블로그 타이틀 글<br>(30자 이내)</td>
+					<td><textarea rows="3" cols="20" maxlength="30" name="headerword"></textarea></td>
+					<td>  블로그 타이틀에 반영됩니다<br>(30자 이내)</td>
 				</tr>
 				<tr>
 					<td colspan="3" align="center"><hr size="1">

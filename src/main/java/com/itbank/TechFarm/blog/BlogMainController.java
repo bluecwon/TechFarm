@@ -28,9 +28,9 @@ import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
  * Handles requests for the application home page.
  */
 @Controller
-public class BlogController {
+public class BlogMainController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(BlogController.class);
+	private static final Logger logger = LoggerFactory.getLogger(BlogMainController.class);
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -40,12 +40,11 @@ public class BlogController {
 	private Blog_OptionDAO optionDAO;
 	
 	
-	
 	@RequestMapping(value = "/blogmain.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		return "blogmain";
+		return "bloghome";
 	}
 	
 	@RequestMapping(value="/login.do")
@@ -56,16 +55,16 @@ public class BlogController {
 	@RequestMapping(value="/blogStart.blog")
 	public ModelAndView blogStart(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("blog/index");
+		mav.setViewName("blogmain/index");
 		String id = "admin";
 		mav.addObject("id", id);
 		return mav;
 	}
 		
-	@RequestMapping(value="/blogMake.blog")
+	@RequestMapping(value="/blogMake")
 	public ModelAndView blogMake(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("blog/makeBlog");
+		mav.setViewName("blogmain/makeBlog");
 		String id = request.getParameter("id");
 		mav.addObject("id", id);
 		return mav;
@@ -74,7 +73,7 @@ public class BlogController {
 	@RequestMapping(value="/blogMake2.blog")
 	public ModelAndView blogMake2(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("blog/makeBlog2");
+		mav.setViewName("blogmain/makeBlog2");
 			
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)request;
 		String id = mr.getParameter("id");
@@ -87,7 +86,7 @@ public class BlogController {
 		System.out.println("nickname : "+nickname);
 		System.out.println("introduce : "+introduce);
 		
-		MultipartFile mf = mr.getFile("profile");
+	/*	MultipartFile mf = mr.getFile("profile");
 		String profile = mf.getOriginalFilename();
 	
 		HttpSession session = request.getSession();
@@ -96,12 +95,12 @@ public class BlogController {
 		if(profile.trim().equals("")){}
 		else{
 		mf.transferTo(file);
-		}
+		}*/
 		mav.addObject("id", id);
 		mav.addObject("blogname", blogname);
 		mav.addObject("nickname", nickname);
 		mav.addObject("introduce",introduce);
-		mav.addObject("profile",profile);
+		//mav.addObject("profile",profile);
 		
 		return mav;
 	}
@@ -109,12 +108,12 @@ public class BlogController {
 	@RequestMapping(value="/blogMake3.blog")
 	public ModelAndView blogMake3(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("blog/makeBlog3");
+		mav.setViewName("blogmain/makeBlog3");
 		String id = request.getParameter("id");
 		String blogname = request.getParameter("blogname");
 		String nickname = request.getParameter("nickname");
 		String introduce = request.getParameter("introduce");
-		String profile = request.getParameter("profile");
+		//String profile = request.getParameter("profile");
 		int layout = ServletRequestUtils.getIntParameter(request, "layout");
 		
 		
@@ -122,14 +121,12 @@ public class BlogController {
 		System.out.println("blogname : "+blogname);
 		System.out.println("nickname : "+nickname);
 		System.out.println("introduce : "+introduce);
-		System.out.println("profile : "+profile);
 		System.out.println("layout : "+layout);
 		
 		mav.addObject("id",id);
 		mav.addObject("blogname", blogname);
 		mav.addObject("nickname", nickname);
 		mav.addObject("introduce",introduce);
-		mav.addObject("profile",profile);
 		mav.addObject("layout",layout);
 		
 		return mav;
@@ -159,6 +156,7 @@ public class BlogController {
 		System.out.println(skinnum);
 		
 		String header="hd_skin"+skinnum+".jpg";
+		String profile="pf_skin"+skinnum+".jpg";
 		String background = "bg_skin.jpg";
 		if(skinnum>28){
 			background = "bg_skin"+skinnum+".jpg";
@@ -191,7 +189,7 @@ public class BlogController {
 			dto.setHeaderword(arg0.getParameter("headerword"));
 			dto.setNickname(arg0.getParameter("nickname"));
 			dto.setIntroduce(arg0.getParameter("introduce"));
-			dto.setProfile(arg0.getParameter("profile"));
+			dto.setProfile(profile);
 			dto.setBackground(background);
 			dto.setHeader(header);
 			
@@ -200,7 +198,7 @@ public class BlogController {
 	
 	@RequestMapping(value="/blogMake4.blog")
 	public ModelAndView blogMakeSuccess(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		return new ModelAndView("blog/makeBlogSuccess");
+		return new ModelAndView("blogmain/makeBlogSuccess");
 	}
 	
 }

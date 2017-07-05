@@ -6,9 +6,9 @@ import com.itbank.TechFarm.blog.mybatis.BlogMapper;
 public class Blog_OptionDAOImpl implements Blog_OptionDAO {
 
 	@Override
-	public Blog_OptionDTO getOption(String id) {
+	public Blog_OptionDTO getBlog(String id) {
 		// TODO Auto-generated method stub
-		return null;
+		return BlogMapper.getBlog(id);
 	}
 
 	@Override

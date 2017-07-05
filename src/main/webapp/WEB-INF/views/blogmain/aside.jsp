@@ -9,13 +9,11 @@ String pfPath = config.getServletContext().getRealPath("/WEB-INF/blog/profile/")
 <c:set var = "pf" value="<%=pfPath%>"/>
 <aside>
 	<div align="center" class="ad">
-	<img src="resources/images/guest.png" onclick="location.href='login.do'" style="cursor:pointer;" width="100" height="100" 
-
-class="homemenu"/><br>
+	<img src="resources/images/guest.png" onclick="location.href='login.do'" style="cursor:pointer;" width="100" height="100" class="homemenu"/><br>
 	<b>${id}</b>님 &nbsp;&nbsp;<input type="button" value="로그아웃" style="width:70px;height:25px;"><br>
 	<!-- 블로그가 있으면 -->
-	<input type="button" value="내 블로그">
+	<input type="button" value="내 블로그" onclick="location.href='myBlog?id=${id}'">
 	<!-- 블로그가 없으면 -->
-	<input type="button" value="블로그 시작!" onclick="location.href='blogMake.blog?id=${id}'">
+	<input type="button" value="블로그 시작!" onclick="location.href='blogMake?id=${id}'">
 	</div>
 </aside> 

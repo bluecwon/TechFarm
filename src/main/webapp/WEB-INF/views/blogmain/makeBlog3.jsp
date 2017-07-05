@@ -17,7 +17,6 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 		<input type="hidden" name="blogname" value="${blogname}">
 		<input type="hidden" name="nickname" value="${nickname}">
 		<input type="hidden" name="introduce" value="${introduce}">
-		<input type="hidden" name="profile" value="${profile}">
 		<input type="hidden" name="layout" value="${layout}">
 		<input type="hidden" name="id" value="${id}">
 			<table>
