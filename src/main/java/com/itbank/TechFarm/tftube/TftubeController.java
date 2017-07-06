@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
@@ -16,6 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.bouncycastle.jcajce.provider.digest.Keccak.DigestKeccak;
+import org.bouncycastle.jcajce.provider.digest.SHA3;
+import org.bouncycastle.util.encoders.Hex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -253,5 +257,31 @@ public class TftubeController {
 			mv.addObject("url",url);				
 		}		
 		return mv;		
+	}
+	
+	public String CryptoSHA3(String key, int hash) {
+	 	
+ 		// 1.x 버전
+         //DigestSHA3 md = new DigestSHA3(hash);
+         // 2.x 이상 부터 
+         DigestKeccak  md = new DigestKeccak(hash);
+         try {
+             md.update(key.getBytes("UTF-8"));
+        }
+         catch (UnsupportedEncodingException e){
+             e.printStackTrace();
+         }
+         byte[] digest = md.digest();
+  
+         return org.bouncycastle.util.encoders.Hex.toHexString(digest);
+     }
+	
+	/*@Test*/
+	public void testSha3() throws Exception {
+	    String input = "Hello world !";
+	    SHA3.DigestSHA3 digestSHA3 = new SHA3.Digest512();//output size of bit
+	    byte[] digest = digestSHA3.digest(input.getBytes());//computing
+	    
+	    System.out.println("SHA3-512 = " + Hex.toHexString(digest));
 	}
 }

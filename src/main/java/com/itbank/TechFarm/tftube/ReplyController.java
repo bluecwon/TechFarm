@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.bouncycastle.jcajce.provider.digest.SHA3;
+import org.bouncycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +45,7 @@ public class ReplyController {
 		ReplyDTO dto=new ReplyDTO();		
 		
 		dto.setContent(arg0.getParameter("content").trim());
-		dto.setMember_no(member.getNo());
+		dto.setMember_no(member.getNo());//null
 		dto.setVideo_name(arg0.getParameter("video_name"));
 		int res=replyDAO.insertReply(dto);
 		
@@ -60,30 +62,10 @@ public class ReplyController {
 		return mv;		
 	}
 	
-	public static String md5(File file) throws IOException, NoSuchAlgorithmException { 
+	
+	
+	
+	 
 
-
-	     BufferedInputStream bis = null; 
-
-	     try { 
-	         bis = new BufferedInputStream(new FileInputStream(file)); 
-	         MessageDigest md = MessageDigest.getInstance("MD5"); 
-	         int read = -1; 
-	         byte[] buffer = new byte[1024]; 
-	         while ((read = bis.read(buffer)) != -1) { 
-	             md.update(buffer, 0, read); 
-	             
-	         } 
-	         return String.valueOf(md.digest()); 
-
-
-	     } finally { 
-	        if (bis != null) try { bis.close(); } catch(IOException e) {e.printStackTrace();} 
-
-
-	     } //end of finally
-
-
-	 } 
 
 }
