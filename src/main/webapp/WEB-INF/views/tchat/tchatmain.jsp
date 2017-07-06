@@ -13,7 +13,7 @@
 	
 	function connect() {
 		wsocket = new SockJS(
-				"http://localhost:8081/TechFarm/chat.sockjs");
+				"http://192.168.52.35:8081/TechFarm/chat.sockjs");
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;
