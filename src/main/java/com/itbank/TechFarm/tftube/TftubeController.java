@@ -136,9 +136,9 @@ public class TftubeController {
 		mf.transferTo(file);
 		}
 		
-		Sha3 sha3=new Sha3();
+		/*Sha3 sha3=new Sha3();
 		String hashValue_video=sha3.Digest_Sha3(file);
-		System.out.println(hashValue_video);
+		System.out.println(hashValue_video);*/
 		
 		MultipartFile mf2 = mr.getFile("image");
 		String image = mf2.getOriginalFilename(); 		
