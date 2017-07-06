@@ -25,8 +25,22 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				/WEB-INF/spring/appServlet/servlet-context.xml
+				/WEB-INF/ws-config.xml
 			</param-value>
 		</init-param>
+		<!-- <init-param>
+		   <param-name>contextConfigLocation</param-name>
+		   <param-value>
+		    com.itbank.TechFarm.tchat.websocket.config.MvcConfig
+		    com.itbank.TechFarm.tchat.websocket.config.WsConfig
+		   </param-value>
+		  </init-param>
+		  <init-param>
+		   <param-name>contextClass</param-name>
+		   <param-value>
+		  	 org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+		   </param-value>
+		  </init-param> -->
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 		
