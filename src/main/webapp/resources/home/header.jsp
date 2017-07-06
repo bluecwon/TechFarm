@@ -24,11 +24,11 @@
 					$("#header").find(".header_info").slideUp('fast').show();  
 				});
 			});
-			function check(){
-				if(${sessionScope.memberDTO==null}){
+			function check(href){
+				if(${sessionScope.memberDTO == null}){
 					alert("먼저 로그인해주세요");
 				} else {
-					location.href="googlePlusIndex";
+					location.href=href;
 				}
 			};
 		</script>
@@ -52,13 +52,13 @@
 			<div class="header_menu" align="center">
 			<table>
 				<tr>
-					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/account.png" width="40%" height="35%"></a><br>내계정</td>
+					<td align="center"><a href="#" onclick="check('myAccount');"><img id="img_handle" src="resources/home/imgs/account.png" width="40%" height="35%"></a><br>내계정</td>
 					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/search.png" width="40%" height="35%"></a><br>검색</td>
 					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/mail.png" width="40%" height="35%"></a><br>메일</td>
 				</tr>
 				<tr>
-					<td align="center"><a href="#" onclick="check();"><img id="img_handle" src="resources/home/imgs/social.png" width="40%" height="35%"></a><br>SNS</td>
-					<td align="center"><a href="#" onclick="check();"><img id="img_handle" src="resources/home/imgs/utube.png" width="40%" height="35%"></a><br>영상</td>
+					<td align="center"><a href="#" onclick="check('googlePlusIndex');"><img id="img_handle" src="resources/home/imgs/social.png" width="40%" height="35%"></a><br>SNS</td>
+					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/utube.png" width="40%" height="35%"></a><br>영상</td>
 					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/drive.png" width="40%" height="35%"></a><br>클라우드</td>
 				</tr>
 				<tr>
@@ -83,26 +83,3 @@
 			</div>
 			
 		</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
