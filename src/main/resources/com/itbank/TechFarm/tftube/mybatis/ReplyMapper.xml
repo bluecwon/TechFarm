@@ -9,6 +9,10 @@
 	<select id="replyList" resultType="replyDTO">
 		select * from tftube_reply order by no desc
 	</select>
+	
+	<select id="replyList_by_video" parameterType="String" resultType="replyDTO">
+		select * from tftube_reply where video_name=#{video_name} order by no desc
+	</select>
 
 	<select id="getreply" resultType="replyDTO" parameterType="int">
 		select * from tftube_reply where num = #{num}
@@ -19,7 +23,9 @@
 	</delete>
 	
 	<insert id="insertReply" parameterType="replyDTO" useGeneratedKeys="true">	
-		insert into tftube_reply values(#{member_no},#{content},#{video_name})		
+		insert into tftube_reply 
+		(member_no,content,video_name)
+		values(#{member_no},#{content},#{video_name})		
 	</insert>
 	
 	<update id="insertreply2_1">	
@@ -42,7 +48,7 @@
 	</update>
 	
 	<select id="isPassword" resultType="String" parameterType="int">
-		select passwd from tftube_reply where num = #{num}
+	select passwd from tftube_reply where num = #{num}
 	</select>
 	
 	<select id="getCount" resultType="int">

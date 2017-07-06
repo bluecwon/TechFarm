@@ -25,11 +25,13 @@ select * from tftube_video order by no
 </select>
 
 <select id="getVideo" resultType="videoDTO" parameterType="int">
-select * from tftube_video where no=#{no}
+select * from tftube_video where no=#{no} order by no desc
 </select>
 
 <select id="getVideo_member_no" resultType="videoDTO" parameterType="int">
-select * from tftube_video where member_no=#{member_no}
-</select>
+select * from tftube_video where member_no=#{member_no} order by no desc
+</select> 
+
+
 
 </mapper>	

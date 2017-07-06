@@ -69,8 +69,4 @@ public class VideoMapper {
 		session.close();
 		return list;
 	}
-	
-	
-	
-
 }

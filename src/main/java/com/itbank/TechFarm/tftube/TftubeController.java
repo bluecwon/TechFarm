@@ -5,10 +5,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -19,6 +22,7 @@ import javax.servlet.http.HttpSession;
 
 import org.bouncycastle.jcajce.provider.digest.Keccak.DigestKeccak;
 import org.bouncycastle.jcajce.provider.digest.SHA3;
+import org.bouncycastle.jcajce.provider.digest.SHA3.DigestSHA3;
 import org.bouncycastle.util.encoders.Hex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,10 +36,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itbank.TechFarm.login.member.MemberDAO;
 import com.itbank.TechFarm.login.member.MemberDTO;
 import com.itbank.TechFarm.tftube.dao.ReplyDAO;
 import com.itbank.TechFarm.tftube.dao.VideoDAO;
+import com.itbank.TechFarm.tftube.dto.ReplyDTO;
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
+import com.itbank.TechFarm.tftube.java.Sha3;
  
 @Controller
 public class TftubeController {
@@ -44,6 +51,8 @@ public class TftubeController {
 	private VideoDAO videoDAO;
 	@Autowired
 	private ReplyDAO replyDAO;
+	@Autowired
+	private MemberDAO memberDAO;
 	
 	private String upPath_video=null;
 	private String upPath_img=null;
@@ -62,7 +71,7 @@ public class TftubeController {
 		upPath_video="D:\\workspace_tftube\\techfarm\\src\\main\\webapp\\resources\\tftube\\uploadVideo";*/
 		upPath_img=session.getServletContext().getRealPath("/resources/tftube/uploadImage");
 		upPath_video=session.getServletContext().getRealPath("/resources/tftube/uploadVideo");		
-		System.out.println(upPath_video);		
+				
 		session.setAttribute
 		("upPath_img",upPath_img);		
 		session.setAttribute
@@ -118,18 +127,24 @@ public class TftubeController {
 			
 		
 		File file = new File(upPath_video,filename);
-		//String md5_video=md5(file);
-		//System.out.println(md5_video);		
+		
+	
+		
 		
 		if(filename.trim().equals("")){}
 		else{
 		mf.transferTo(file);
 		}
 		
+		Sha3 sha3=new Sha3();
+		String hashValue_video=sha3.Digest_Sha3(file);
+		System.out.println(hashValue_video);
+		
 		MultipartFile mf2 = mr.getFile("image");
 		String image = mf2.getOriginalFilename(); 		
 						
 		File file2 = new File(upPath_img,image);
+		/*sha3.Digest_Sha3(file2);*/
 		//String md5_image=md5(file2);
 		//System.out.println(md5_image);
 		if(image.trim().equals("")){}
@@ -180,15 +195,29 @@ public class TftubeController {
 	@RequestMapping(value="/tftube_videoView", method=RequestMethod.GET)
 	public ModelAndView tftube_videoView(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
-		int no=ServletRequestUtils.getIntParameter(arg0, "no");
+		
+		int no=ServletRequestUtils.getIntParameter(arg0, "no");//no tftube_video
 		
 		ModelAndView mv=new ModelAndView();	
 		
 		VideoDTO vdto=videoDAO.getVideo(no);
 		
-		mv.addObject("vdto",vdto);
+		/*MemberDTO mdto=memberDAO.getMember_by_no(no);//no member
+*/		
+		List<ReplyDTO> r_list=replyDAO.replyList_by_video(vdto.getVideo_name());
 		
-		List r_list=replyDAO.replyList();
+		
+		/*List name_list=new ArrayList();
+		for(ReplyDTO dto:r_list){			
+			MemberDTO mdto=memberDAO.getMember_by_no(dto.getMember_no());			
+			name_list.add(mdto.getName());			
+		}*/
+		
+		
+		
+//		mv.addObject("name_list",name_list);
+		mv.addObject("vdto",vdto);		
+		/*List r_list=replyDAO.replyList();*/
 		mv.addObject("r_list",r_list);		
 		/*BoardDTO bdto=new BoardDTO();
 		bdto.setContent(arg0.getParameter("content"));
@@ -259,7 +288,7 @@ public class TftubeController {
 		return mv;		
 	}
 	
-	public String CryptoSHA3(String key, int hash) {
+	/*public String CryptoSHA3(String key, int hash) {
 	 	
  		// 1.x 버전
          //DigestSHA3 md = new DigestSHA3(hash);
@@ -274,14 +303,29 @@ public class TftubeController {
          byte[] digest = md.digest();
   
          return org.bouncycastle.util.encoders.Hex.toHexString(digest);
-     }
+     }*/
 	
-	/*@Test*/
-	public void testSha3() throws Exception {
-	    String input = "Hello world !";
-	    SHA3.DigestSHA3 digestSHA3 = new SHA3.Digest512();//output size of bit
-	    byte[] digest = digestSHA3.digest(input.getBytes());//computing
+	//digest hashvalue
+	public String Digest_Sha3(File file) throws Exception {	    
+	    DigestSHA3 digestSHA3 = new SHA3.Digest256();
+	    InputStream fis=new FileInputStream(file);
+	    int n=0;
+	    byte[] space=new byte[8192];//size?	    
 	    
-	    System.out.println("SHA3-512 = " + Hex.toHexString(digest));
+	    while (n != -1) {//up to finalizing
+	        n = fis.read(space);//return num of byte
+	        if (n > 0) {
+	            digestSHA3.update(space, 0, n);
+	            			//space,startpoint,num of byte for updating	            
+	        }
+	    }	    
+	    String a=Hex.toHexString(digestSHA3.digest());
+	    System.out.println(a);
+	    System.out.println("a length:"+a);
+	    
+	    //System.out.println("SHA3-512 = " + Hex.toHexString(digest));
+	    return Hex.toHexString(digestSHA3.digest());
 	}
+	
+	
 }

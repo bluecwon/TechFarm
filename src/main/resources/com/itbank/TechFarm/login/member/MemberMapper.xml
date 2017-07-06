@@ -26,5 +26,9 @@
 	   		sysdate(),
 	   		default);
 	</insert>
+	
+<select id="getMember_by_name" resultType="MemberDTO" parameterType="int">
+		select * from member where no=#{no}
+</select>
   
 </mapper>

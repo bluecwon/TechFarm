@@ -41,6 +41,13 @@ public class ReplyMapper {
   		return list;
   	}
   	
+  	public static List<ReplyDTO> replyList_by_video(String video_name){
+  		SqlSession session=sqlMapper.openSession();
+  		List<ReplyDTO> list=session.selectList("replyList_by_video",video_name);
+  		session.close();
+  		return list;
+  	}
+  	
   	
   	/*
   	public static BoardDBBean getBoard(int num){

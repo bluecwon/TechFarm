@@ -40,6 +40,11 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
  </td></tr>
  </table>
 댓글 <!-- 댓글갯수 --><br>
+<c:choose>
+<c:when test="${memberDTO==null}">
+로그인이 필요한 서비스 입니다. <a href="login">로그인</a>을 해주세요.
+</c:when>
+<c:otherwise>
 <form name="f">
 <textArea name="content"></textArea><!--클릭시 로그인창 열리는 방법찾기 -->
 <input type="hidden" name="video_name" value="${vdto.video_name}">
@@ -47,21 +52,18 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
 <input type="button" value="입력" onClick="javascript:goReply()">
 </c:if>
 </form>
+</c:otherwise></c:choose>
 
 <table>
 <c:forEach var="rdto" items="${r_list}">
-
 <tr>
 <td>
-<%-- ${rdto.nickname}<!-- 3일전 --><br>--%><!-- id sysdate-reg_date 아니면 java에서 변환 -->
+${rdto.member_no}   ${rdto.reg_date}<br><!-- id sysdate-reg_date 아니면 java에서 변환 -->
 ${rdto.content}<br> 
 <!--답글이 존재한다면 답글:답글갯수 -->
 </tr>
 </c:forEach>
 </table>
-
-
-
 	<%-- <a href="board_insert.do">글쓰기</a>
 	<table border="1">	
 		<tr>

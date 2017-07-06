@@ -4,6 +4,7 @@ public class SubscribingDTO {
 	private String channel; 
 	private int member_no;
 	private String subing_channel;
+	
 	public String getChannel() {
 		return channel;
 	}
