@@ -13,8 +13,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	private Map<String, WebSocketSession> users = new ConcurrentHashMap<String, WebSocketSession>();
 
 	@Override
-	public void afterConnectionEstablished(
-			WebSocketSession session) throws Exception {
+	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		log(session.getId() + " 연결 됨");
 		users.put(session.getId(), session);
 	}
