@@ -59,12 +59,12 @@
 				<tr>
 					<td align="center"><a href="#" onclick="check('tfPlusIndex');"><img id="img_handle" src="resources/home/imgs/social.png" width="40%" height="35%"></a><br>SNS</td>
 					<td align="center"><a href="tftube_main"><img id="img_handle" src="resources/home/imgs/utube.png" width="40%" height="35%"></a><br>영상</td>
-					<td align="center"><a href="blogmain.do"><img id="img_handle" src="resources/home/imgs/drive.png" width="40%" height="35%"></a><br>클라우드</td>
+					<td align="center"><a href="blogmain.do"><img id="img_handle" src="resources/home/imgs/document.png" width="40%" height="35%"></a><br>블로그</td>
 				</tr>
 				<tr>
 					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/memo.png" width="40%" height="35%"></a><br>메모</td>
 					<td align="center"><a href="chatting"><img id="img_handle" src="resources/home/imgs/chatting.png" width="40%" height="35%"></a><br>채팅</td>
-					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/document.png" width="40%" height="35%"></a><br>문서</td>
+					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/calendar.png" width="40%" height="35%"></a><br>달력</td>
 				</tr>
 				<tr>
 					<td>
