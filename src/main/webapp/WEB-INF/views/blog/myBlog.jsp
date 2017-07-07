@@ -44,6 +44,7 @@
 		</tr>
 		<tr>
 			<td height="500px" width="60%" align="center" class="header"background="resources/upload/${optionDTO.id}/${optionDTO.header}" >
+			
 			</td>
 		</tr>
 		<tr>
