@@ -8,8 +8,8 @@
 	
 <insert id="insertVideo" parameterType="videoDTO" useGeneratedKeys="true">
 insert into tftube_video
-(member_no,title,description,open,video_name,video_size,readcount,image,likep,unlikep) values
-(#{member_no}, #{title},#{description},#{open},#{video_name},#{video_size},0,#{image},0,0) 
+(member_no,title,description,open,video_name,video_size,readcount,image,likep,unlikep,video_hash,image_hash) values
+(#{member_no}, #{title},#{description},#{open},#{video_name},#{video_size},0,#{image},0,0,#{video_hash},#{image_hash}) 
 </insert>
 
 <delete id="deleteVideo" parameterType="int">

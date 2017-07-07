@@ -54,31 +54,39 @@ public class TftubeController {
 	@Autowired
 	private MemberDAO memberDAO;
 	
+	
 	private String upPath_video=null;
-	private String upPath_img=null;
+	private String upPath_image=null;
 	private HttpSession session=null;
 	String msg=null, url=null;	
 	
+	
+	//?Wrong (Constructor) Example 
 	@RequestMapping(value = "/tftube_main", method = RequestMethod.GET)
 	public ModelAndView tftube_main(HttpServletRequest arg0, 
 			HttpServletResponse arg1) throws Exception {
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("tftube/main");
-		List<VideoDTO> list=videoDAO.listVideo();
+		session=arg0.getSession(); 	
+		/*System.out.println("contextPath"+arg0.getContextPath());
+		System.out.println("servletPath"+arg0.getServletPath());*/
 		
-		session=arg0.getSession();		
-		/*upPath_img="D:\\workspace_tftube\\techfarm\\src\\main\\webapp\\resources\\tftube\\uploadImage";
+		List<VideoDTO> list=videoDAO.listVideo();		
+		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
+		/*upPath_image="D:\\workspace_tftube\\techfarm\\src\\main\\webapp\\resources\\tftube\\uploadImage";
 		upPath_video="D:\\workspace_tftube\\techfarm\\src\\main\\webapp\\resources\\tftube\\uploadVideo";*/
-		upPath_img=session.getServletContext().getRealPath("/resources/tftube/uploadImage");
-		upPath_video=session.getServletContext().getRealPath("/resources/tftube/uploadVideo");		
+		/*upPath_image=session.getServletContext().getRealPath("/resources/tftube/"+member.getId()+"Image");*/
+		/*upPath_video=session.getServletContext().getRealPath("/resources/tftube/"+member.getId()+"Video");*/
+		upPath_image=session.getServletContext().getRealPath("/resources/tftube/uploadImage");
+		upPath_video=session.getServletContext().getRealPath("/resources/tftube/uploadVideo");
+		
 				
 		session.setAttribute
-		("upPath_img",upPath_img);		
+		("upPath_image",upPath_image);		
 		session.setAttribute
 		("upPath_video", upPath_video);	
 		session.setAttribute
 		("list",list);		
-		
+		mav.setViewName("tftube/main");
 		return mav;
 	}	
 	
@@ -94,71 +102,65 @@ public class TftubeController {
 	public ModelAndView tftube_video_insertPro(HttpServletRequest arg0, 
 								HttpServletResponse arg1)  throws Exception  {
 		VideoDTO dto = new VideoDTO();
-		ModelAndView mv=new ModelAndView();	
-		/*session=arg0.getSession();
-		upPath_video=(String)session.getAttribute("upPath_video");
-		upPath_img=(String)session.getAttribute("upPath_img");
-		*/
-		/*
-		File video_dir = new File(dir,"uploadVideo");
-		File image_dir = new File(dir,"uploadImage");			
-
-		if(!video_dir.mkdirs()){	   
-			video_dir.mkdirs();	//create directory with upper directory.		
-		}   		
-		if(!image_dir.mkdirs()){
-			image_dir.mkdirs();
-		}
-		mv.setViewName("redirect:tftube_main");
+		ModelAndView mv=new ModelAndView();		
 		
-		System.out.println("업로드경로:"+this.getClass().getResource("").getPath());*/    
-
-
 
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)arg0;
 		MultipartFile mf = mr.getFile("filename");
 		String filename = mf.getOriginalFilename();
-		if(!(filename.substring(filename.length()-3, filename.length()).equals("mp4"))){			
+		
+		/*if(!(filename.substring(filename.length()-3, filename.length()).equals("mp4"))){			
 			msg="only mp4 available";
 			url="tftube_video_insert";
 			return new ModelAndView("tftube/message");
-		}
+		}*/
 		HttpSession session=arg0.getSession();		
-			
 		
+		
+		File upPath_video_file=new File(upPath_video);
 		File file = new File(upPath_video,filename);
 		
-	
-		
+		if(!upPath_video_file.isDirectory()){//해당경로가 존재하지 않는다면
+			upPath_video_file.mkdirs();			
+		}
 		
 		if(filename.trim().equals("")){}
 		else{
-		mf.transferTo(file);
+		mf.transferTo(file);		
 		}
 		
 		Sha3 sha3=new Sha3();
-		String hashValue_video=sha3.Digest_Sha3(file);
-		System.out.println(hashValue_video);
+		String video_hash=sha3.Digest_Sha3(file);
+		
 		
 		MultipartFile mf2 = mr.getFile("image");
 		String image = mf2.getOriginalFilename(); 		
-						
-		File file2 = new File(upPath_img,image);
-		/*sha3.Digest_Sha3(file2);*/
-		//String md5_image=md5(file2);
-		//System.out.println(md5_image);
+		
+		
+		File file2 = new File(upPath_image,image);
+		File upPath_image_file=new File(upPath_image);
+		if(!upPath_image_file.isDirectory()){//해당경로가 존재하지 않는다면
+			upPath_image_file.mkdirs();			
+		}
+		
+			
 		if(image.trim().equals("")){}
 		else{
 		mf2.transferTo(file2);
 		}
 		
+		String image_hash=sha3.Digest_Sha3(file2);
+		
 		dto.setDescription(ServletRequestUtils.getStringParameter(arg0, "description"));
 		dto.setMember_no(((MemberDTO)session.getAttribute("memberDTO")).getNo());
+		//when !login but insert
 		dto.setVideo_name(filename);
 		dto.setOpen(ServletRequestUtils.getStringParameter(arg0, "open"));
 		dto.setTitle(ServletRequestUtils.getStringParameter(arg0, "title"));
 		dto.setVideo_size((int)mf.getSize());	
-		dto.setImage(image);		
+		dto.setImage(image);
+		dto.setVideo_hash(video_hash);
+		dto.setImage_hash(image_hash);
 		
 		int res =videoDAO.insertVideo(dto);	
 		if(res>0){
@@ -170,9 +172,7 @@ public class TftubeController {
 			mv.setViewName("message");
 			mv.addObject("msg",msg);
 			mv.addObject("url",url);				
-		}
-		
-		
+		}		
 		return mv;
 	}	
 	
@@ -273,7 +273,7 @@ public class TftubeController {
 			mv.setViewName("redirect:tftube_main");	
 			//delete file
 			File deletefile=new File(upPath_video,vdto.getVideo_name());
-			File deleteimage=new File(upPath_img,vdto.getImage());
+			File deleteimage=new File(upPath_image,vdto.getImage());
 			//resources/tftube/uploadVideo/
 			deletefile.delete();
 			deleteimage.delete();
@@ -286,46 +286,5 @@ public class TftubeController {
 			mv.addObject("url",url);				
 		}		
 		return mv;		
-	}
-	
-	/*public String CryptoSHA3(String key, int hash) {
-	 	
- 		// 1.x 버전
-         //DigestSHA3 md = new DigestSHA3(hash);
-         // 2.x 이상 부터 
-         DigestKeccak  md = new DigestKeccak(hash);
-         try {
-             md.update(key.getBytes("UTF-8"));
-        }
-         catch (UnsupportedEncodingException e){
-             e.printStackTrace();
-         }
-         byte[] digest = md.digest();
-  
-         return org.bouncycastle.util.encoders.Hex.toHexString(digest);
-     }*/
-	
-	//digest hashvalue
-	public String Digest_Sha3(File file) throws Exception {	    
-	    DigestSHA3 digestSHA3 = new SHA3.Digest256();
-	    InputStream fis=new FileInputStream(file);
-	    int n=0;
-	    byte[] space=new byte[8192];//size?	    
-	    
-	    while (n != -1) {//up to finalizing
-	        n = fis.read(space);//return num of byte
-	        if (n > 0) {
-	            digestSHA3.update(space, 0, n);
-	            			//space,startpoint,num of byte for updating	            
-	        }
-	    }	    
-	    String a=Hex.toHexString(digestSHA3.digest());
-	    System.out.println(a);
-	    System.out.println("a length:"+a);
-	    
-	    //System.out.println("SHA3-512 = " + Hex.toHexString(digest));
-	    return Hex.toHexString(digestSHA3.digest());
-	}
-	
-	
+	}	
 }
