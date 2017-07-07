@@ -69,4 +69,12 @@ public class VideoMapper {
 		session.close();
 		return list;
 	}
+	
+	public static int hitUp(int no){
+  		SqlSession session=sqlMapper.openSession();
+  		int res=session.update("hitUp",no); 
+  		session.commit();
+  		session.close();
+  		return res;
+  	}
 }

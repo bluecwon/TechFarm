@@ -50,7 +50,7 @@ public class ReplyController {
 		int res=replyDAO.insertReply(dto);
 		
 		if(res>0){
-			mv.setViewName("redirect:tftube_main");			
+			mv.setViewName("redirect:tftube_videoView");			
 		}
 		else{
 			msg="fail to reply";

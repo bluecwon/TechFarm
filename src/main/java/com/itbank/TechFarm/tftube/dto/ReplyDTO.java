@@ -36,6 +36,5 @@ public class ReplyDTO {
 	}
 	public void setVideo_name(String video_name) {
 		this.video_name = video_name;
-	}
-	
+	}	
 }

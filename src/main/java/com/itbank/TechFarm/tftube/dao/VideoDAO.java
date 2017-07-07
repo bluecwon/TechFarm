@@ -14,5 +14,5 @@ public interface VideoDAO {
 	public List<VideoDTO> listVideo();
 	public VideoDTO getVideo(int no);
 	public int deleteVideo(int no);
-
+	public int hitUp(int no);
 }

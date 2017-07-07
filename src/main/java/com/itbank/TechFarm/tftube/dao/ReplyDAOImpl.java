@@ -24,6 +24,17 @@ public class ReplyDAOImpl implements ReplyDAO {
 	public List<ReplyDTO> replyList_by_video(String video_name) {
 		return ReplyMapper.replyList_by_video(video_name);
 	}
+
+	@Override
+	public String getName() {
+		return ReplyMapper.getName();
+	}
+
+	
+	
+	
+	
+	
 	
 	
 

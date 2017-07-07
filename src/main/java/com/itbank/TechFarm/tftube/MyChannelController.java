@@ -13,12 +13,12 @@ import com.itbank.TechFarm.tftube.dto.ReplyDTO;
 
 @Controller
 public class MyChannelController {
-	
-	
-	
+
+
+
 	@RequestMapping(value="/tftube_mychannel", method=RequestMethod.GET)
 	public ModelAndView tftube_mychannel(HttpServletRequest arg0, 
-								HttpServletResponse arg1) throws Exception {
+			HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
 		/*session=arg0.getSession();
 		String id=(String)session.getAttribute("tube_id");
@@ -26,9 +26,9 @@ public class MyChannelController {
 		dto.setContent(arg0.getParameter("content").trim());
 		dto.setId(id);		
 		int res=replyDAO.insertReply(dto);*/
-		
-	mv.setViewName("tftube/mychannel");	
-	return mv;		
+
+		mv.setViewName("tftube/mychannel");	
+		return mv;		
 	}
 
 }

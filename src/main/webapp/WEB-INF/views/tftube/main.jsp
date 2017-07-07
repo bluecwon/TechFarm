@@ -4,6 +4,7 @@
 
 <!DOCTYPE html>
 <html>
+<http-equiv='refresh' content='0';url=javascript:history.go(-2)'>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>

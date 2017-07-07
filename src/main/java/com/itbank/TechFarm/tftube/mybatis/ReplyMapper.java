@@ -48,6 +48,16 @@ public class ReplyMapper {
   		return list;
   	}
   	
+  	public static String getName(){
+  		SqlSession session=sqlMapper.openSession();
+  		List list=(List)session.selectList("getName");
+  		String name=(String)list.get(0);
+  		session.close();
+  		return name;
+  	}
+  	
+  	
+  	
   	
   	/*
   	public static BoardDBBean getBoard(int num){

@@ -6,13 +6,16 @@ public class VideoDTO {
 	private String title;
 	private String description;
 	private String open;
-	private String video_name;
-	private int video_size;
+	private String video_name;//tmp save
+	private int video_size;//tmp save
 	private int readcount;
 	private String image;
 	private int likep;//default 0
 	private int unlikep; //default 0
 	private String uploaddate;//sysdate
+	private String video_hash;
+	private String image_hash;
+	
 	
 	
 	public int getNo() {
@@ -88,6 +91,23 @@ public class VideoDTO {
 	public void setUploaddate(String uploaddate) {
 		this.uploaddate = uploaddate;
 	}
+	public String getVideo_hash() {
+		return video_hash;
+	}
+	public void setVideo_hash(String video_hash) {
+		this.video_hash = video_hash;
+	}
+	public String getImage_hash() {
+		return image_hash;
+	}
+	public void setImage_hash(String image_hash) {
+		this.image_hash = image_hash;
+	}
+	
+	
+	
+	
+	
 	
 	
 	

@@ -12,8 +12,44 @@
 	
 	<select id="replyList_by_video" parameterType="String" resultType="replyDTO">
 		select * from tftube_reply where video_name=#{video_name} order by no desc
-	</select>
+	</select>	
 
+	
+	
+	<select id="getName" resultType="String">
+	select a.name  from  tfmember.member a  join tftube.tftube_reply b  on a.no = b.member_no
+	</select>
+	
+	
+	
+	<!-- public BoardDBBean getBoard(int num, String mode) throws SQLException{
+		if (mode.equals("content")){
+			String sql = "";
+			con = ds.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, num);
+			ps.executeUpdate();
+		}
+		String sql = "select * from board where num = ?";
+		try{
+			con = ds.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, num);
+			rs = ps.executeQuery();
+			List<BoardDBBean> list = makeList(rs);
+			return list.get(0);
+		}finally{
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (con != null) con.close();
+		}
+	} -->
+	
+	
+	
+	
+	
+	
 	<select id="getreply" resultType="replyDTO" parameterType="int">
 		select * from tftube_reply where num = #{num}
 	</select>

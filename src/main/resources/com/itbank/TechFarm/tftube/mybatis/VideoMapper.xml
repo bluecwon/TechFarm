@@ -8,17 +8,17 @@
 	
 <insert id="insertVideo" parameterType="videoDTO" useGeneratedKeys="true">
 insert into tftube_video
-(member_no,title,description,open,video_name,video_size,readcount,image,likep,unlikep) values
-(#{member_no}, #{title},#{description},#{open},#{video_name},#{video_size},0,#{image},0,0) 
+(member_no,title,description,open,video_name,video_size,readcount,image,likep,unlikep,video_hash,image_hash) values
+(#{member_no}, #{title},#{description},#{open},#{video_name},#{video_size},0,#{image},0,0,#{video_hash},#{image_hash}) 
 </insert>
 
 <delete id="deleteVideo" parameterType="int">
 delete from tftube_video where no=#{no}
 </delete>
 
-<update id="readCount" parameterType="java.util.HashMap">
-		${sql}
-</update>	
+<update id="hitUp" parameterType="int">
+update tftube_video set readcount = readcount+1 where no = #{no}
+</update>
 
 <select id="listVideo" resultType="videoDTO">
 select * from tftube_video order by no
@@ -31,6 +31,12 @@ select * from tftube_video where no=#{no} order by no desc
 <select id="getVideo_member_no" resultType="videoDTO" parameterType="int">
 select * from tftube_video where member_no=#{member_no} order by no desc
 </select> 
+
+
+<update id="readCount" parameterType="java.util.HashMap">
+		${sql}
+</update>	
+	
 
 
 

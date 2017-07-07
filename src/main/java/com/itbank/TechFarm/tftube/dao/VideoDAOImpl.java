@@ -3,6 +3,7 @@ package com.itbank.TechFarm.tftube.dao;
 import java.util.List;
 
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
+import com.itbank.TechFarm.tftube.mybatis.ReplyMapper;
 import com.itbank.TechFarm.tftube.mybatis.VideoMapper;
 
 
@@ -33,5 +34,9 @@ public class VideoDAOImpl implements VideoDAO {
 	}
 	
 	
+	@Override
+	public int hitUp(int no) {
+		return VideoMapper.hitUp(no);
+	}
 	
 }

@@ -18,7 +18,7 @@ function goReply(){
 <!-- /resources/tftube -->
 <video src="resources/tftube/uploadVideo/${vdto.video_name}" autoplay  
 poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="600" height="450"></video>
-
+<br>
 <table>
 <tr><td>
 <c:if test="${vdto.member_no eq memberDTO.no}">
@@ -27,16 +27,8 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
 </td></tr>
  <tr><td> 
  <font size="18">${vdto.title}</font><br>
- <c:choose>
- <c:when test="${vdto.uploaddate.length()>=10}">
- 
- 게시일:${vdto.uploaddate.substring(0,10)}<!-- 게시일 --><br>
- </c:when>
- <c:otherwise>
- 게시일:${vdto.uploaddate}<br>
- </c:otherwise>
- </c:choose>
- ${vdto.description}<!-- 간략히 버튼 추가 --><br> 
+  게시일:${vdto.uploaddate.substring(0,10)}<!-- 게시일 -->				조회수 ${readcount}회 <br>	
+ ${vdto.description}<!-- 간략히 버튼 추가 --><p> 
  </td></tr>
  </table>
 댓글 <!-- 댓글갯수 --><br>
@@ -55,10 +47,10 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
 </c:otherwise></c:choose>
 
 <table>
-<c:forEach var="rdto" items="${r_list}">
+ <c:forEach var="rdto" items="${r_list}">
 <tr>
 <td>
-${rdto.member_no}   ${rdto.reg_date}<br><!-- id sysdate-reg_date 아니면 java에서 변환 -->
+<a href="mychannel?name=${r_name}">${r_name}</a>   ${rdto.reg_date}<br><!-- id sysdate-reg_date 아니면 java에서 변환 -->
 ${rdto.content}<br> 
 <!--답글이 존재한다면 답글:답글갯수 -->
 </tr>
