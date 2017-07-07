@@ -82,4 +82,7 @@ public class MyBlogController {
 		return new ModelAndView("redirect:blogStart.blog");
 	}
 	
+	
+	
+	
 }
