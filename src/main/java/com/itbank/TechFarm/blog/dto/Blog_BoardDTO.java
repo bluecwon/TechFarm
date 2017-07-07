@@ -4,7 +4,6 @@ public class Blog_BoardDTO {
 private int no;
 private String id;
 private String title;
-private String subtitle;
 private String subject;
 private String content;
 private String filename;
@@ -28,12 +27,6 @@ public String getTitle() {
 }
 public void setTitle(String title) {
 	this.title = title;
-}
-public String getSubtitle() {
-	return subtitle;
-}
-public void setSubtitle(String subtitle) {
-	this.subtitle = subtitle;
 }
 public String getSubject() {
 	return subject;

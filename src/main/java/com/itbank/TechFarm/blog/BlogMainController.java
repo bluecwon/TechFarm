@@ -1,6 +1,8 @@
 package com.itbank.TechFarm.blog;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -14,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,7 +59,7 @@ public class BlogMainController {
 	public ModelAndView blogStart(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blogmain/index");
-		String id = "admin";
+		String id = "asdf";
 		mav.addObject("id", id);
 		return mav;
 	}
@@ -80,11 +83,13 @@ public class BlogMainController {
 		String blogname = mr.getParameter("blogname");
 		String nickname = mr.getParameter("nickname");
 		String introduce = mr.getParameter("introduce");
+		String headerword = mr.getParameter("headerword");
 		
 		System.out.println("id : "+id);
 		System.out.println("blogname : "+blogname);
 		System.out.println("nickname : "+nickname);
 		System.out.println("introduce : "+introduce);
+		System.out.println("headerword : "+headerword);
 		
 	/*	MultipartFile mf = mr.getFile("profile");
 		String profile = mf.getOriginalFilename();
@@ -100,6 +105,7 @@ public class BlogMainController {
 		mav.addObject("blogname", blogname);
 		mav.addObject("nickname", nickname);
 		mav.addObject("introduce",introduce);
+		mav.addObject("headerword",headerword);
 		//mav.addObject("profile",profile);
 		
 		return mav;
@@ -113,9 +119,8 @@ public class BlogMainController {
 		String blogname = request.getParameter("blogname");
 		String nickname = request.getParameter("nickname");
 		String introduce = request.getParameter("introduce");
-		//String profile = request.getParameter("profile");
+		String headerword = request.getParameter("headerword");
 		int layout = ServletRequestUtils.getIntParameter(request, "layout");
-		
 		
 		System.out.println("id : "+id);
 		System.out.println("blogname : "+blogname);
@@ -128,15 +133,39 @@ public class BlogMainController {
 		mav.addObject("nickname", nickname);
 		mav.addObject("introduce",introduce);
 		mav.addObject("layout",layout);
+		mav.addObject("headerword",headerword);
 		
 		return mav;
 	}
 	
-	@RequestMapping(value="/blogMakePro.blog")
+	@RequestMapping(value="/blogMakePro")
 	public ModelAndView blogMakePro(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
 		Blog_OptionDTO dto = getBlogOption(request);
 		int res = optionDAO.makeBlog(dto);
+		HttpSession session = request.getSession();
+		String upPath = session.getServletContext().getRealPath("/resources/upload/"+dto.getId());
+		File mkfolder = new File(upPath);
+		if(!mkfolder.exists()){
+			mkfolder.mkdirs();
+		}
+		
+		String pfinFile = session.getServletContext().getRealPath("/resources/images/skin/"+dto.getProfile());
+		String pfoutFile = session.getServletContext().getRealPath("/resources/upload/"+dto.getId()+"/"+dto.getProfile());
+		String hdinFile =  session.getServletContext().getRealPath("/resources/images/skin/"+dto.getHeader());
+		String hdoutFile =  session.getServletContext().getRealPath("/resources/upload/"+dto.getId()+"/"+dto.getHeader());
+		
+		FileInputStream pforiginFile = new FileInputStream(pfinFile);
+		FileOutputStream pfcopyFile = new FileOutputStream(pfoutFile);
+		FileInputStream hdoriginFile = new FileInputStream(hdinFile);
+		FileOutputStream hdcopyFile = new FileOutputStream(hdoutFile);
+		FileCopyUtils.copy(pforiginFile, pfcopyFile);
+		FileCopyUtils.copy(hdoriginFile, hdcopyFile);
+		pfcopyFile.close();
+		pforiginFile.close();
+		hdcopyFile.close();
+		hdoriginFile.close();
+		
 		return new ModelAndView("redirect:blogMake4.blog");
 	}
 	
@@ -185,7 +214,10 @@ public class BlogMainController {
 			dto.setId(id);
 			dto.setBlogname(arg0.getParameter("blogname"));
 			dto.setLayout(Integer.parseInt(arg0.getParameter("layout")));
-			String headerword = id+"님의 블로그에 오신걸 환영합니다";
+			String headerword=arg0.getParameter("headerword");
+			if(headerword=="null" || headerword==""){
+				headerword = "Welcome To "+id+" BLOG";
+			}
 			dto.setHeaderword(arg0.getParameter("headerword"));
 			dto.setNickname(arg0.getParameter("nickname"));
 			dto.setIntroduce(arg0.getParameter("introduce"));

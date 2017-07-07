@@ -17,7 +17,8 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 		<input type="hidden" name="blogname" value="${blogname}">
 		<input type="hidden" name="nickname" value="${nickname}">
 		<input type="hidden" name="introduce" value="${introduce}">
-		<input type="hidden" name="id" value="${id}">	
+		<input type="hidden" name="id" value="${id}">
+		<input type="hidden" name="headerword" value="${headerword}">		
 			<table>
 				<tr>
 					<td width="8%">레이<br>아웃</td>
@@ -176,7 +177,7 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 							</tr>
 						</table>
 					</div>
-					<div class="layoutedit6 align="center" style="border: 5px double #ccc;display:none; ">
+					<div class="layoutedit6" align="center" style="border: 5px double #ccc;display:none; ">
 						레이아웃 설정
 						<table width="70%" height="100%" align="center">
 							<tr>

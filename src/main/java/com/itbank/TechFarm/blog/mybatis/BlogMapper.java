@@ -40,4 +40,13 @@ public class BlogMapper {
 	  
   }
   
+  public static int deleteBlog(String id){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.delete("deleteBlog",id);
+	  session.commit();
+	  session.close();
+	return res;
+	  
+  }
+  
 }

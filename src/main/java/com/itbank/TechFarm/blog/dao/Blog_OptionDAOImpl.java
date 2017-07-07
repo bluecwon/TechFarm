@@ -17,4 +17,10 @@ public class Blog_OptionDAOImpl implements Blog_OptionDAO {
 		return BlogMapper.makeBlog(dto);
 	}
 
+	@Override
+	public int deleteBlog(String id) {
+		// TODO Auto-generated method stub
+		return BlogMapper.deleteBlog(id);
+	}
+
 }
