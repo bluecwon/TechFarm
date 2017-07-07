@@ -63,6 +63,13 @@ public class tfPlusNewsProfileController {
 		mav.setViewName("tfPlus/index");
 		return mav;
 	}
+	
+	@RequestMapping(value="/tfPlusBoardWriting")
+	public ModelAndView tfPlusBoardWriting(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("tfPlus/newsProfile/newsProfileBoardWriting");
+		return mav;
+	}
 
 	@RequestMapping(value="/tfPlusNewsProfileList")
 	public ModelAndView googlePlusNewsProfileList(HttpServletRequest request, HttpServletResponse reponse) throws Exception {

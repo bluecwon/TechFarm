@@ -11,6 +11,7 @@
 		
 		<!-- jstl -->
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+		<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 		
 		<!-- 이미지 경로 부분 -->
 		<c:set var="newsProfileUpPath" value="resources/tfPlus/images/contents/profile"/>
