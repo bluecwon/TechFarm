@@ -1,5 +1,6 @@
 package com.itbank.TechFarm;
 
+
 import java.util.List;
 import java.util.Locale;
 
@@ -32,6 +33,7 @@ public class HomeController {
 		return "login/login";
 	}
 	
+
 	@RequestMapping(value = "/search.naver", method = RequestMethod.POST)
 	public ModelAndView home(HttpServletRequest request, HttpServletResponse response) {
 		String query=request.getParameter("search");
@@ -49,5 +51,5 @@ public class HomeController {
 		mav.addObject("search",query);
 		return mav;
 	}
-	
+
 }

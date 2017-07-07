@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itbank.TechFarm.blog.mybatis.BlogMapper">
+
+  <!-- mybatis에서는 프로퍼티와 컬럼명이 같은면 안써도 상관없다.(즉, ibatis에서 사용하던 rowmapper같은거 따로 안적어도 상관없음 그냥 DTO로 받으면된다. -->
+
+  <!-- Select with no parameters using the result map for Account class. -->
+  
+  <insert id="makeBlog" parameterType="BlogOptionDTO">
+  insert into blog_option values(#{id},#{blogname},#{layout},#{headerword},#{nickname},#{introduce},#{profile},#{background},#{header})
+  </insert>
+  
+  <select resultType="BlogOptionDTO" id="getBlog" parameterType="String">
+  select * from blog_option where id=#{id}
+  </select>
+  
+</mapper>

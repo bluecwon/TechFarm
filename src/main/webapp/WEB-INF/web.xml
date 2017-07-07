@@ -40,7 +40,7 @@
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
+		<!--모든 파일 utf-8 필터 설정 -->
 	</filter-mapping>
-
 
 </web-app>

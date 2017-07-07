@@ -13,4 +13,6 @@
 
 	<!-- tfPlus DAO -->
 	<bean class="com.itbank.TechFarm.tfPlusDAO.NewsProfileDAOImpl" id="newsProfileDAO"/>
+	<!-- tfblog DAO-->
+	<bean class="com.itbank.TechFarm.blog.dao.Blog_OptionDAOImpl" id="Blog_OptionDAO"/>
 </beans>
