@@ -10,7 +10,7 @@ public class MemberDTO {
 	private int birthday_month;
 	private int birthday_day;
 	private int sex;
-	private String joindate;
+	private String joindate;	
 	public int getNo() {
 		return no;
 	}

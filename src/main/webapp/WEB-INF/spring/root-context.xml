@@ -15,4 +15,8 @@
 	<bean class="com.itbank.TechFarm.tfPlusDAO.NewsProfileDAOImpl" id="newsProfileDAO"/>
 	<!-- tfblog DAO-->
 	<bean class="com.itbank.TechFarm.blog.dao.Blog_OptionDAOImpl" id="Blog_OptionDAO"/>
+	<!-- tftube -->
+	<bean id="replyDAO" class="com.itbank.TechFarm.tftube.dao.ReplyDAOImpl"/>
+	<bean id="videoDAO" class="com.itbank.TechFarm.tftube.dao.VideoDAOImpl"/>
+
 </beans>
