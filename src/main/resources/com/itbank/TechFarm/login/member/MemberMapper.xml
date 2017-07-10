@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 
-<mapper namespace="com.itbank.techfarm.login.member.MemberMapper">
+<mapper namespace="com.itbank.TechFarm.login.member.MemberMapper">
 	<select id="getLogin" resultType="MemberDTO">
     	select id,passwd from member where id=#{id} or email=#{id};
   	</select>
@@ -26,5 +26,9 @@
 	   		sysdate(),
 	   		default);
 	</insert>
+	
+	<select id="getMember_by_name" resultType="MemberDTO" parameterType="int">
+		select * from member where no=#{no}
+	</select>
   
 </mapper>

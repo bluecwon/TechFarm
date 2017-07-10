@@ -1,6 +1,10 @@
 package com.itbank.TechFarm.login;
 
+import java.io.IOException;
+
 import java.util.Locale;
+
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +40,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/login2", method = RequestMethod.POST)
-	public ModelAndView login2(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView login2(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ModelAndView mav=new ModelAndView();
 		String passwd=request.getParameter("passwd");
 		MemberDTO dto=(MemberDTO)request.getSession().getAttribute("loginDTO");
@@ -44,7 +48,7 @@ public class LoginController {
 			MemberDTO info=memberDAO.getMember(dto.getId());
 			request.getSession().invalidate();
 			request.getSession().setAttribute("memberDTO", info);
-			mav.setViewName("redirect:/");
+			mav.setViewName("redirect:/");				
 			return mav;
 		}else{
 			mav.addObject("cidd", 3);

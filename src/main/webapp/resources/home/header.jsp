@@ -24,11 +24,11 @@
 					$("#header").find(".header_info").slideUp('fast').show();  
 				});
 			});
-			function check(){
-				if(${sessionScope.memberDTO==null}){
+			function check(href){
+				if(${sessionScope.memberDTO == null}){
 					alert("먼저 로그인해주세요");
 				} else {
-					location.href="googlePlusIndex";
+					location.href=href;
 				}
 			};
 		</script>
@@ -47,24 +47,24 @@
 	  				<img id="myinfo" src="resources/home/imgs/profile.png" width="30" height="30">
 	  				</abbr>
 	  			</c:if>
-	  			&nbsp&nbsp&nbsp&nbsp&nbsp
+	  			&nbsp&nbsp&nbsp&nbsp&nbsp 
 			</div>
 			<div class="header_menu" align="center">
 			<table>
 				<tr>
-					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/account.png" width="40%" height="35%"></a><br>내계정</td>
+					<td align="center"><a href="#" onclick="check('myAccount');"><img id="img_handle" src="resources/home/imgs/account.png" width="40%" height="35%"></a><br>내계정</td>
 					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/search.png" width="40%" height="35%"></a><br>검색</td>
 					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/mail.png" width="40%" height="35%"></a><br>메일</td>
 				</tr>
 				<tr>
-					<td align="center"><a href="#" onclick="check();"><img id="img_handle" src="resources/home/imgs/social.png" width="40%" height="35%"></a><br>SNS</td>
-					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/utube.png" width="40%" height="35%"></a><br>영상</td>
-					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/drive.png" width="40%" height="35%"></a><br>클라우드</td>
+					<td align="center"><a href="#" onclick="check('tfPlusIndex');"><img id="img_handle" src="resources/home/imgs/social.png" width="40%" height="35%"></a><br>SNS</td>
+					<td align="center"><a href="tftube_main"><img id="img_handle" src="resources/home/imgs/utube.png" width="40%" height="35%"></a><br>영상</td>
+					<td align="center"><a href="blogmain.do"><img id="img_handle" src="resources/home/imgs/document.png" width="40%" height="35%"></a><br>블로그</td>
 				</tr>
 				<tr>
 					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/memo.png" width="40%" height="35%"></a><br>메모</td>
 					<td align="center"><a href="chatting"><img id="img_handle" src="resources/home/imgs/chatting.png" width="40%" height="35%"></a><br>채팅</td>
-					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/document.png" width="40%" height="35%"></a><br>문서</td>
+					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/calendar.png" width="40%" height="35%"></a><br>달력</td>
 				</tr>
 				<tr>
 					<td>
@@ -83,26 +83,3 @@
 			</div>
 			
 		</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

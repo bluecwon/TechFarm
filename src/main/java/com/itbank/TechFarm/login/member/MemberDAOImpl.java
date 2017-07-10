@@ -1,5 +1,7 @@
 package com.itbank.TechFarm.login.member;
 
+import java.util.List;
+
 public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public int insertMember(MemberDTO dto) {
@@ -20,4 +22,11 @@ public class MemberDAOImpl implements MemberDAO{
 		dto=MemberMapper.getMember(id);
 		return dto;
 	}
+
+	@Override
+	public MemberDTO getMember_by_no(int no) {
+		return MemberMapper.getMember_by_no(no);
+	}
+	
+	
 }
