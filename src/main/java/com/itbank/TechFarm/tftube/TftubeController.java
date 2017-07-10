@@ -265,8 +265,8 @@ public class TftubeController {
 		
 		//RecentVideo insert start		
 		RecentVideoDTO recent_dto=new RecentVideoDTO();
-		
-		if(member!=null){
+		System.out.println("ip:"+ip);
+		if(member_object!=null){
 		recent_dto.setMember_no(member.getNo());
 		recent_dto.setVideo_name(vdto.getVideo_name());
 		
@@ -342,9 +342,7 @@ public class TftubeController {
 	public ModelAndView tftube_video_delete(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
-		int no=Integer.parseInt(arg0.getParameter("no"));		
-		
-		
+		int no=Integer.parseInt(arg0.getParameter("no"));
 		
 		VideoDTO vdto=videoDAO.getVideo(no);		
 		//delete from tftube_video

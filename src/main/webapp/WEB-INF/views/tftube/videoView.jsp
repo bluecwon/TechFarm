@@ -51,7 +51,9 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
 <tr>
 <td>
 <a href="mychannel?name=${r_name}">${r_name}</a>   ${rdto.reg_date}<br><!-- id sysdate-reg_date 아니면 java에서 변환 -->
-${rdto.content}<br> 
+${rdto.content}<br>
+답글 
+<textArea></textArea>
 <!--답글이 존재한다면 답글:답글갯수 -->
 </tr>
 </c:forEach>
