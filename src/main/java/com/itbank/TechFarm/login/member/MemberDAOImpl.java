@@ -27,6 +27,12 @@ public class MemberDAOImpl implements MemberDAO{
 	public MemberDTO getMember_by_no(int no) {
 		return MemberMapper.getMember_by_no(no);
 	}
+
+	@Override
+	public int editMember(MemberDTO dto) {
+		int res=MemberMapper.editMember(dto);
+		return res;
+	}
 	
 	
 }

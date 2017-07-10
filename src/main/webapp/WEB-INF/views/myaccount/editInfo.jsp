@@ -9,34 +9,21 @@
 	<script type="text/javascript">
 		var goodColor = "#66cc66";
     	var badColor = "#ff6666";
-    	function checkId(){
-    		var id=document.getElementById('id');
-    	}
+    	var result=true;
 		function checkPasswd(){ // 비밀번호 형식 및 일치여부 확인 메소드
 			 var pass1 = document.getElementById('pwd1'); 
-		     var pass2 = document.getElementById('pwd2'); 
 		     var message = document.getElementById('sid');
 		     var goodColor = "#66cc66";
 		     var badColor = "#ff6666";
-		     if(!/^[a-zA-Z0-9]{6,20}$/.test(pass1.value)){
+		     if(pass1.value!=("${sessionScope.memberDTO.passwd}")){
 		    	 message.style.color = badColor;
-		    	 message.innerHTML = "비밀번호는 숫자와 영문자의 조합으로 6~12자리를 입력해야합니다."
-		    	 return false;
+		    	 message.innerHTML = "비밀번호를 확인해 주세요."
+		    	 result=true;
 		     }else{
 		    	 message.style.color = goodColor;
-		    	 message.innerHTML = "가능한 비밀번호입니다."
+		    	 message.innerHTML = "비밀번호가 일치 합니다. 정보수정 가능합니다."
+		    	 result=false;
 		     }
-		     
-		     var message = document.getElementById('sid2');
-		     if(pass1.value == pass2.value){ 
-		            message.style.color = goodColor; 
-		            message.innerHTML = "패스워드가 일치합니다!" 
-		        }else{ 
-		            message.style.color = badColor; 
-		            message.innerHTML = "패스워드가 일치하지 않습니다. 확인해주세요!";
-		            return false;
-		     }
-		     return true;
 		}
 		function checkBirthDay(){ // 생일의 신뢰성 향상 메소드
 			var year=document.getElementById('year');
@@ -77,11 +64,7 @@
 		}
 		
 		function checkForm(){
-			if(member.id.value==""){
-				alert("아이디를 입력하세요")
-				member.id.focus()
-				return false;
-			}else if(member.passwd.value==""){
+			if(member.passwd.value==""){
 				alert("비밀번호를 입력하세요")
 				member.passwd.focus()
 				return false;
@@ -97,26 +80,18 @@
 				alert("생일을 입력하세요")
 				member.birthday_year.focus()
 				return false;
-			}
-			var result=checkPasswd();
-			if(!result){
-				alert("비밀번호 값이 일치하지 않습니다.");
+			}else if(result){
+				alert("비밀번호를 확인하세요")
+				member.passwd.focus()
 				return false;
 			}
-			result=checkBirthDay();
-			if(!result){
-				alert("생일의 형식이 맞지 않습니다.");
-				return false;
-			}
-			
-			return true;
 		}
 	</script>
 </head>
 <body>
 	<div class="createmain">
 		<table>
-			<form name="member" action="inputmember" method="post" onsubmit="return checkForm()">
+			<form name="member" action="editMyInfo" method="post" onsubmit="return checkForm()">
 			<tr>
 				<td><img src="resources/home/imgs/name.png" width="200"></td>
 			</tr>
@@ -124,7 +99,10 @@
 				<td><font size=5>회원가입</font></td>
 			</tr>
 			<tr>
-				<td>아이디<br><input id="id" type="text" name="id"></td>
+				<td>아이디<br><input id="id" type="text" name="id" value="${sessionScope.memberDTO.id}" readonly="readonly"></td>
+			</tr>
+			<tr>
+				<td><span><font color="#ff6666">아이디는 변경 불가합니다.</font></span></td>
 			</tr>
 			<tr>
 				<td>비밀번호<br><input id="pwd1" type="password" name="passwd" onblur="checkPasswd()"></td>
@@ -133,23 +111,17 @@
 				<td><span id="sid"></span></td>
 			</tr>
 			<tr>
-				<td>비밀번호 확인<br><input id="pwd2" type="password" name="passwdcheck" onblur="checkPasswd()"></td>
+				<td>이름<br><input type="text" name="name" value="${sessionScope.memberDTO.name}"></td>
 			</tr>
 			<tr>
-				<td><span id="sid2"></span></td>
-			</tr>
-			<tr>
-				<td>이름<br><input type="text" name="name"></td>
-			</tr>
-			<tr>
-				<td>E-mail<br><input type="text" name="email1">@<input type="text" name="email2"></td>
+				<td>E-mail<br><input type="text" name="email" value="${sessionScope.memberDTO.email}" readonly="readonly"></td>
 			</tr>
 				<td><span>인증 및 비밀번호 찾기 서비스에 사용될 e-mail을 입력해주세요.</span></td>
 			<tr>
 				<td>생일<br>
-					<input id="year" type="text" name="birthday_year" size="4" maxlength="4" onblur="checkBirthDay()">년
-					<input id="month" type="text" name="birthday_month" size="2" maxlength="2" onblur="checkBirthDay()">월
-					<input id="day" type="text" name="birthday_day" size="2" maxlength="2" onblur="checkBirthDay()">일
+					<input id="year" type="text" name="birthday_year" size="4" maxlength="4" value="${sessionScope.memberDTO.birthday_year}" onblur="checkBirthDay()">년
+					<input id="month" type="text" name="birthday_month" size="2" maxlength="2" value="${sessionScope.memberDTO.birthday_month}" onblur="checkBirthDay()">월
+					<input id="day" type="text" name="birthday_day" size="2" maxlength="2" value="${sessionScope.memberDTO.birthday_day}" onblur="checkBirthDay()">일
 				</td>
 			</tr>
 			<tr>
@@ -157,13 +129,25 @@
 			</tr>
 			<tr>
 				<td>성별<br>
+				<c:if test="${sessionScope.memberDTO.sex==0}">
 					<input type="radio" id="male" name="sex" value="1"><label for="male">남자</label>
 					<input type="radio" id="female" name="sex" value="2"><label for="female">여자</label>
 					<input type="radio" id="other" name="sex" value="0" checked="checked"><label for="other">비공개</label>
+				</c:if>
+				<c:if test="${sessionScope.memberDTO.sex==1}">
+					<input type="radio" id="male" name="sex" value="1" checked="checked"><label for="male">남자</label>
+					<input type="radio" id="female" name="sex" value="2"><label for="female">여자</label>
+					<input type="radio" id="other" name="sex" value="0"><label for="other">비공개</label>
+				</c:if>
+				<c:if test="${sessionScope.memberDTO.sex==2}">
+					<input type="radio" id="male" name="sex" value="1"><label for="male">남자</label>
+					<input type="radio" id="female" name="sex" value="2" checked="checked"><label for="female">여자</label>
+					<input type="radio" id="other" name="sex" value="0"><label for="other">비공개</label>
+				</c:if>
 				</td>
 			</tr>
 			<tr>
-				<td align="center"><input type="submit" value="가입"><input type="reset" value="다시작성"></td>
+				<td align="center"><input type="submit" value="수정"><input type="reset" value="다시작성"></td>
 			</tr>
 			</form>
 		</table>

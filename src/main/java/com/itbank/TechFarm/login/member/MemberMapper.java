@@ -52,4 +52,12 @@ public class MemberMapper {
 		  session.close();
 		  return res;		  
 	  }
+	  
+	  public static int editMember(MemberDTO dto){
+		  SqlSession session = sqlMapper.openSession();
+			int res=session.update("editMember", dto);
+			session.commit();
+			session.close();
+			return res;
+	  }
 }
