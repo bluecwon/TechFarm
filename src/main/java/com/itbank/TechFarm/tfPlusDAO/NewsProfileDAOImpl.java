@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.itbank.TechFarm.tfPlusDTO.NewsProfileAddCommentDTO;
+import com.itbank.TechFarm.tfPlusDTO.NewsProfileBoardDTO;
 import com.itbank.TechFarm.tfPlusDTO.NewsProfileDTO;
 
 public class NewsProfileDAOImpl implements NewsProfileDAO {
@@ -97,6 +99,34 @@ public class NewsProfileDAOImpl implements NewsProfileDAO {
 		mapParameter.put("profileName", profileName);
 		mapParameter.put("profileId", profileId);
 		return NewsProfileMapper.newsProfileBoardList(mapParameter);
+	}
+
+	@Override
+	public int newsProfileBoardInsert(NewsProfileBoardDTO newsProfileBoardDTO) {
+		return NewsProfileMapper.newsProfileBoardInsert(newsProfileBoardDTO);
+	}
+
+	@Override
+	public boolean newsFollowIdCheck(int num, String id) {
+		Map mapParameter = new HashMap();
+		mapParameter.put("newsFollowNum", num);
+		mapParameter.put("newsFollowId", id);
+		return NewsProfileMapper.newsFollowIdCheck(mapParameter);
+	}
+
+	@Override
+	public List newsProfileTOP(int top) {
+		return NewsProfileMapper.newsProfileTOP(top);
+	}
+
+	@Override
+	public List newsAddList(int profileBoardPK) {
+		return NewsProfileMapper.newsAddList(profileBoardPK);
+	}
+
+	@Override
+	public int newsAddListInsert(NewsProfileAddCommentDTO newsProfileAddCommentDTO) {
+		return NewsProfileMapper.newsAddListInsert(newsProfileAddCommentDTO);
 	} 
 	
 }

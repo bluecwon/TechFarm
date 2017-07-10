@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.TechFarm.tfPlusDAO.NewsProfileDAO;
 import com.itbank.TechFarm.tfPlusDTO.NewsFollowIdDTO;
+import com.itbank.TechFarm.tfPlusDTO.NewsProfileAddCommentDTO;
+import com.itbank.TechFarm.tfPlusDTO.NewsProfileBoardDTO;
 import com.itbank.TechFarm.tfPlusDTO.NewsProfileDTO;
 
 @Controller
@@ -25,6 +27,7 @@ public class tfPlusNewsProfileController {
 	@Autowired
 	private NewsProfileDAO newsProfileDAO; 
 	
+	// ************************************** //
 	protected NewsProfileDTO makeNewsProfile(HttpServletRequest req) throws Exception {
 		MultipartFile mf= null;
 		String filename = null;
@@ -57,17 +60,59 @@ public class tfPlusNewsProfileController {
 		return dto;
 	}
 	
+	protected NewsProfileBoardDTO makeNewsProfileBoard(HttpServletRequest req) throws Exception {
+		MultipartFile mf= null;
+		String filename = null;
+		String photo = req.getParameter("photo");
+		if(photo != null){
+			filename = photo;
+		} else {
+			MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
+			mf = mr.getFile("photo");
+			filename = mf.getOriginalFilename();
+			HttpSession session = req.getSession();
+			String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/profileBoard");
+			File file = new File(upPath,filename);
+			if(file.exists()){
+				for(int k=0; true; k++){
+					file = new File(upPath,"("+k+")"+filename);
+					if(!file.exists()){
+						filename = "("+k+")"+filename; break;
+					}
+				}
+			}
+			mf.transferTo(file);
+		}
+		NewsProfileBoardDTO dto = new NewsProfileBoardDTO();
+		dto.setProfileBoardPhoto(filename);
+		dto.setProfileBoardTitle(req.getParameter("profileBoardTitle"));
+		dto.setProfileBoardContents(req.getParameter("profileBoardContents"));
+		dto.setProfileBoardName(req.getParameter("profileBoardName"));
+		dto.setProfileBoardId(req.getParameter("profileBoardId"));
+		return dto;
+	}
+	
+	protected NewsProfileAddCommentDTO makeNewsProfileAdd(HttpServletRequest req) throws Exception{
+		NewsProfileAddCommentDTO dto = new NewsProfileAddCommentDTO();
+		dto.setProfileAddContents(req.getParameter("profileAddContents"));
+		dto.setProfileAddId(req.getParameter("profileAddId"));
+		dto.setProfileBoardFK(Integer.parseInt(req.getParameter("profileBoardFK")));
+		dto.setProfileAddName(req.getParameter("profileBoardName"));
+		return dto;
+	}
+	// ************************************** //
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value="/tfPlusIndex")
 	public ModelAndView googlePlusIndex(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
+		List newsProfileList = newsProfileDAO.newsProfileTOP(6);
 		mav.setViewName("tfPlus/index");
-		return mav;
-	}
-	
-	@RequestMapping(value="/tfPlusBoardWriting")
-	public ModelAndView tfPlusBoardWriting(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("tfPlus/newsProfile/newsProfileBoardWriting");
+		mav.addObject("newsProfileList",newsProfileList);
 		return mav;
 	}
 
@@ -192,13 +237,11 @@ public class tfPlusNewsProfileController {
 		String profileId = newsProfileDTO.getProfileId();
 		dto = newsProfileDAO.newsProfileCheck(profileName, profileId);
 		if(dto == null) {
-			
 			int res = newsProfileDAO.newsProfileInsert(newsProfileDTO);
 			dto = newsProfileDAO.newsProfileCheck(profileName, profileId);
 			int proFileNum = dto.getProfileNum();
 			mav.setViewName("redirect:tfPlusNewsProfileWriting?id="+profileId);
 		} else {
-			
 			msg = "This is a duplicate content";
 			url = "tfPlusNewsProfileWriting?id="+profileId;
 			mav.setViewName("tfPlus/message");
@@ -207,6 +250,16 @@ public class tfPlusNewsProfileController {
 		}
 		return mav;
 	} 
+	
+	@RequestMapping(value="/tfPlusNewsProfileBoardWritingPro") 
+	public ModelAndView tfPlusNewsProfileBoardWritingPro(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		NewsProfileBoardDTO newsProfileBoardDTO = makeNewsProfileBoard(request);
+		String name = newsProfileBoardDTO.getProfileBoardName();
+		int res = newsProfileDAO.newsProfileBoardInsert(newsProfileBoardDTO);
+		mav.setViewName("redirect:tfPlusNewsProfileBoardWriting?name="+name);
+		return mav;
+	}
 	
 	@RequestMapping(value="/newsProfileDelete")
 	public ModelAndView googlePlusNewsProfileDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -228,12 +281,79 @@ public class tfPlusNewsProfileController {
 	@RequestMapping(value="/tfPlusNewsProfileBoardList")
 	public ModelAndView googlePlusNewsProfileBoardList(HttpServletRequest request, HttpServletResponse reponse) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		String msg=null,url=null;
 		String profileName = request.getParameter("profileName");
 		String id = request.getParameter("id");
-		List list = newsProfileDAO.newsProfileBoard(profileName, id);
-		mav.setViewName("tfPlus/newsProfile/newsProfileBoardList");
-		mav.addObject("newsBoardList",list);
+		String num = request.getParameter("num");
+		String my = request.getParameter("my");
+		List listAdd = newsProfileDAO.newsAddList(Integer.parseInt(num));
+		if(my.equals("true")){
+			List list = newsProfileDAO.newsProfileBoard(profileName, id);
+			mav.setViewName("tfPlus/newsProfile/newsProfileBoardList");
+			mav.addObject("newsBoardList",list);
+			mav.addObject("newsBoardName",profileName);
+			mav.addObject("newsprofileId",id);
+			mav.addObject("newsAddList",listAdd);
+			mav.addObject("num",num);
+			mav.addObject("my",my);
+		} else if(my.equals("false")){
+			String myId = request.getParameter("myId");
+			boolean bool = newsProfileDAO.newsFollowIdCheck(Integer.parseInt(num), myId);
+			if(bool == true){
+				List list = newsProfileDAO.newsProfileBoard(profileName, id);
+				mav.setViewName("tfPlus/newsProfile/newsProfileBoardList");
+				mav.addObject("newsBoardList",list);
+				mav.addObject("newsBoardName",profileName);
+				mav.addObject("newsprofileId",id);
+				mav.addObject("newsAddList",listAdd);
+				mav.addObject("num",num);
+				mav.addObject("my",my);
+			} else {
+				msg = "Please follow me.";
+				url = "tfPlusNewsProfileList";
+				mav.setViewName("tfPlus/message");
+				mav.addObject("msg",msg);
+				mav.addObject("url",url);
+			}
+		}
+		return mav;
+	}
+	
+	@RequestMapping(value="/tfPlusNewsProfileBoardWriting")
+	public ModelAndView tfPlusNewsProfileBoardWriting(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		String name = request.getParameter("name");
+		mav.setViewName("tfPlus/newsProfile/newsProfileBoardWriting");
+		mav.addObject("name",name);
+		return mav;
+	}
+	
+	@RequestMapping(value="/tfPlusNewsProfileAddPro")
+	public ModelAndView tfPlusNewsProfileAddPro(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		NewsProfileAddCommentDTO newsProfileAddCommentDTO = makeNewsProfileAdd(request);
+		int res = newsProfileDAO.newsAddListInsert(newsProfileAddCommentDTO);
+		String profileName = request.getParameter("profileName");
+		String id = request.getParameter("id");
+		String num = request.getParameter("num");
+		String my = request.getParameter("my");
+		String myId = request.getParameter("profileAddId");
+		mav.setViewName("redirect:tfPlusNewsProfileBoardList?profileName="+profileName+"&id="+id+"&num="+num+"&my="+my+"&myId="+myId);
 		return mav;
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

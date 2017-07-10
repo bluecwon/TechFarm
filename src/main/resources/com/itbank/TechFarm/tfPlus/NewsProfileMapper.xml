@@ -13,6 +13,11 @@
 					WHERE c.ROWNUM BETWEEN #{startRow} AND #{endRow} ORDER BY good DESC
 	</select>
 	
+	<select id="newsAddList" resultType="NewsProfileAddCommentDTO" parameterType="int">
+		SELECT * FROM newsprofileaddcomment
+			WHERE profileBoardFK = #{profileBoardPK}
+	</select>
+	
 	<select id="followList" resultType="newsFollowIdDTO">
 		SELECT * FROM newsfollowid
 	</select>
@@ -34,6 +39,11 @@
 			WHERE profileName = #{profileName} AND profileId = #{profileId}
 	</select>
 	
+	<select id="newsFollowIdCheck" resultType="newsFollowIdDTO" parameterType="java.util.HashMap">
+		SELECT * FROM newsfollowid
+			WHERE newsfollowNum = #{newsFollowNum} AND newsfollowId = #{newsFollowId}
+	</select>
+	
 	<select id="newsFollowMyList" resultType="newsFollowIdDTO" parameterType="String">
 		SELECT * FROM newsfollowid 
 			WHERE newsfollowId = #{id}
@@ -53,6 +63,11 @@
 			WHERE profileBoardName = #{profileName} AND profileBoardId = #{profileId}
 	</select>
 	
+	<select id="newsProfileTOP" resultType="newsProfileDTO" parameterType="int">
+		SELECT * FROM newsprofile
+			ORDER BY good DESC LIMIT #{top}
+	</select>
+	
 	<insert id="newsProfileInsert" parameterType="newsProfileDTO" useGeneratedKeys="true">
 		INSERT INTO newsprofile(profileName,checkOption,photo,profileContents,profileId) VALUES
 		(	
@@ -64,11 +79,32 @@
 		)
 	</insert>
 	
+	<insert id="newsAddListInsert" parameterType="newsProfileAddCommentDTO" useGeneratedKeys="true">
+		INSERT INTO newsprofileaddcomment(profileBoardFK,profileAddName,profileAddContents,profileAddId) VALUES
+		(
+			#{profileBoardFK},
+			#{profileAddName},
+			#{profileAddContents},
+			#{profileAddId}
+		)
+	</insert>
+	
+	<insert id="newsProfileBoardInsert" parameterType="newsProfileDTO" useGeneratedKeys="true">
+		INSERT INTO newsprofileboard(profileBoardPhoto,profileBoardTitle,profileBoardContents,profileBoardName,profileBoardId) VALUES
+		(
+			#{profileBoardPhoto},
+			#{profileBoardTitle},
+			#{profileBoardContents},
+			#{profileBoardName},
+			#{profileBoardId}
+		)
+	</insert>
+	
 	<insert id="newsFollowInsert" parameterType="java.util.HashMap" useGeneratedKeys="true">
 		INSERT INTO newsfollowid(newsfollowNum,newsfollowId) VALUES
 		(
 			#{profileNum},
-			#{id},
+			#{id}
 		)
 	</insert>
 	

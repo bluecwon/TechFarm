@@ -22,13 +22,16 @@
 			    					<span>${dto.profileContents}</span>
 			    					<em>${dto.profileDate}</em>
 				        		</figcaption>	
-		        				<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${sessionScope.memberDTO.id}" class="thumb">
-		        				
+				        		<c:if test="${dto.profileId == sessionScope.memberDTO.id}">
+				        			<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${dto.profileId}&num=${dto.profileNum}&my=true" class="thumb">
+				        		</c:if>
+				        		<c:if test="${dto.profileId != sessionScope.memberDTO.id}">
+				        			<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${dto.profileId}&num=${dto.profileNum}&my=false&myId=${sessionScope.memberDTO.id}" class="thumb">
+				        		</c:if>
 		        					<!-- 컨텍스트 메뉴 처리 시작 -->
-		        					<c:set var="follow" value="follow"/>
+	
 									<%@include file="newsContextMenu.jsp"%>
 		        					<!-- 컨텍스트 메뉴 처리 끝 -->
-		        					
 		        				</a>
 	        				</figure>
 						</c:when>

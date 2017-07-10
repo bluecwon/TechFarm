@@ -7,6 +7,7 @@
 		<meta charset="utf-8"/>
 		<title>GooglePlus</title>
 		<link rel="stylesheet" media="all" href="resources/tfPlus/css/style.css"/>
+		<link rel="stylesheet" href="resources/tfPlus/css/add.css"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		
 		<!-- jstl -->
@@ -15,6 +16,7 @@
 		
 		<!-- 이미지 경로 부분 -->
 		<c:set var="newsProfileUpPath" value="resources/tfPlus/images/contents/profile"/>
+		<c:set var="newsProfileBoardUpPath" value="resources/tfPlus/images/contents/profileBoard"/>
 		
 		<!-- JS -->
 		<script src="resources/tfPlus/js/jquery-1.9.0.js" type="text/javascript"></script>
@@ -79,6 +81,37 @@
 						subMenuCount = 0;
 					}
 				});
+				
+				var subMenuCount1 = 0;
+				$('div.div_add').mouseup(function(e){
+					if(subMenuCount1==0){
+						if(e.which=='3'){
+							$(this).find('table.jjm494_add').stop().slideDown(200);
+						}
+						subMenuCount1 = 1;
+					} else {
+						if(e.which=='3'){
+							$(this).find('table.jjm494_add').stop().slideUp(200);
+						}
+						subMenuCount1 = 0;
+					}
+				});
+				
+				var subMenuCount2 = 0;
+				$('div.subMenuDiv_add').mouseup(function(e){
+					if(subMenuCount2==0){
+						if(e.which=='1'){
+							$(this).find('table.jjm494_subAdd').stop().slideDown(200);
+						}
+						subMenuCount2 = 1;
+					} else {
+						if(e.which=='1'){
+							$(this).find('table.jjm494_subAdd').stop().slideUp(200);
+						}
+						subMenuCount2 = 0;
+					}
+				});
+				
 			});
 		</script>
 		
