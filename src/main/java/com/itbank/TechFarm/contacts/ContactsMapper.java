@@ -22,11 +22,37 @@ public class ContactsMapper {
 	    }
 	  }
 	  
-	  public static List<ContactsDTO> liseContacts(){
+	  public static List<ContactsDTO> liseContacts(String id){
 		  SqlSession session=sqlMapper.openSession();
+		  List<ContactsDTO> listContacts = session.selectList("listContacts", id);
 		  session.close();
-		  return null;
+		  return listContacts;
 	  }
-	  
-	  
+	  public static int addContacts(ContactsDTO dto){
+		  SqlSession session = sqlMapper.openSession();
+		  int res = session.insert("addContact", dto);
+		  session.commit();
+		  session.close();
+		  return res;
+	  }
+	  public static ContactsDTO getContact(int no){
+			SqlSession session = sqlMapper.openSession();
+			ContactsDTO dto = session.selectOne("getContact", no);
+			session.close();
+			return dto;
+		}
+	  public static int deleteContact(int no){
+		  SqlSession session = sqlMapper.openSession();
+		  int res = session.delete("deleteContact", no);
+		  session.commit();
+		  session.close();
+		  return res;
+	  }
+	  public static int editContact(ContactsDTO dto){
+		  SqlSession session = sqlMapper.openSession();
+		  int res = session.update("editContact", dto);
+		  session.commit();
+		  session.close();
+		  return res;
+	  }
 }

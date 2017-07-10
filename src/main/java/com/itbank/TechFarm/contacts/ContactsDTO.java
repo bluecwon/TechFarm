@@ -1,7 +1,8 @@
 package com.itbank.TechFarm.contacts;
 
 public class ContactsDTO {
-	
+	private int no;
+	private String id;
 	private String photo;
 	private String name;
 	private String company;
@@ -15,6 +16,18 @@ public class ContactsDTO {
 	private String website;
 	private String relationship;
 	
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getPhoto() {
 		return photo;
 	}

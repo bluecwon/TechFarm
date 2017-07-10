@@ -3,9 +3,9 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 
-<mapper namespace="com.itbank.techfarm.contacts.MemberMapper">
+<mapper namespace="com.itbank.techfarm.contacts.ContactsMapper">
 	<select id = "listContacts" resultType = "contactsDTO">
-		select * from contacts where= id=#{id}
+		select * from contacts where id=#{id}
 	</select>
   
   	<insert id="addContact" parameterType="contactsDTO" useGeneratedKeys="true">
