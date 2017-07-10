@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -41,8 +42,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.TechFarm.login.member.MemberDAO;
 import com.itbank.TechFarm.login.member.MemberDTO;
+import com.itbank.TechFarm.tftube.dao.RecentVideoDAO;
 import com.itbank.TechFarm.tftube.dao.ReplyDAO;
 import com.itbank.TechFarm.tftube.dao.VideoDAO;
+import com.itbank.TechFarm.tftube.dto.RecentVideoDTO;
 import com.itbank.TechFarm.tftube.dto.ReplyDTO;
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
 import com.itbank.TechFarm.tftube.java.Sha3;
@@ -56,12 +59,16 @@ public class TftubeController {
 	private ReplyDAO replyDAO;
 	@Autowired
 	private MemberDAO memberDAO;
+	@Autowired
+	private RecentVideoDAO recentvideoDAO;
 	
 	
 	private String upPath_video=null;
 	private String upPath_image=null;
 	private HttpSession session=null;
-	String msg=null, url=null;	
+	private String msg=null, url=null;
+	private ArrayList date=null;
+	private static HashMap<String, Date> map=new HashMap();
 	
 	
 	//?Wrong (Constructor) Example 
@@ -75,7 +82,8 @@ public class TftubeController {
 		
 		List<VideoDTO> list=videoDAO.listVideo();		
 		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
-		System.out.println(member);
+		System.out.println("member"+member);
+		
 		/*upPath_image="D:\\workspace_tftube\\techfarm\\src\\main\\webapp\\resources\\tftube\\uploadImage";
 		upPath_video="D:\\workspace_tftube\\techfarm\\src\\main\\webapp\\resources\\tftube\\uploadVideo";*/
 		/*upPath_image=session.getServletContext().getRealPath("/resources/tftube/"+member.getId()+"Image");*/
@@ -97,7 +105,7 @@ public class TftubeController {
 	@RequestMapping(value="/tftube_video_insert", method=RequestMethod.GET)
 	public ModelAndView tftube_video_insertForm(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
-		ModelAndView mv=new ModelAndView();
+		ModelAndView mv=new ModelAndView();		
 		mv.setViewName("tftube/insertForm");
 		return mv;		
 	}
@@ -174,6 +182,8 @@ public class TftubeController {
 		
 		int res =videoDAO.insertVideo(dto);	
 		if(res>0){
+			map=new HashMap();
+			
 			mv.setViewName("redirect:tftube_main");			
 		}
 		else{
@@ -205,56 +215,77 @@ public class TftubeController {
 	@RequestMapping(value="/tftube_videoView", method=RequestMethod.GET)
 	public ModelAndView tftube_videoView(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
-			
-		int no=ServletRequestUtils.getIntParameter(arg0, "no");//no tftube_video
+		ModelAndView mv=new ModelAndView();
 		
-		ModelAndView mv=new ModelAndView();	
+		int no=ServletRequestUtils.getIntParameter(arg0, "no");//tftube_video
 		
+		Date today=new Date();//today			
 		
-		//하루에 한번, ip당 한번.		
+		VideoDTO vdto=videoDAO.getVideo(no);//video's total information	
 		
-		//한 비디오에 적용
+		Date date=map.get(vdto.getVideo_hash());//video's date clicked information		
+
 		String ip=arg0.getRemoteAddr();
-		System.out.println(ip);
+		
+		MemberDTO member=new MemberDTO();
+		
+		//hits' validity start
 		HashSet<String> ipset=new HashSet();
 		Iterator it=ipset.iterator();
 		boolean p;
 		while(it.hasNext()){
 			if(it.next().equals(ip)){p=true; break;}
 			else{p=false;}
-		}
+		}		
 		
-		if(p=false){		
+		Long today_time=today.getTime()/1000/(3600*24);
+		
+		Long date_time=null;
+		
+		if(date!=null){
+		date_time=date.getTime()/1000/(3600*24);}				
+		
+		if(p=false && (today_time-date_time>=1 ||date==null)){		
 			ipset.add(ip);
 			videoDAO.hitUp(no);
-		}
-		//하루가 지나면 초기화
-		
-		Date today=new Date();
-		today.getTime();
-		
-		
-		VideoDTO vdto=videoDAO.getVideo(no);		
-		//hits
+			map.put(vdto.getVideo_hash(), today);			
+		}			
+		//hits' validity end
+				
+		//hits' format start
 		DecimalFormat df=new DecimalFormat("#,##0");
 		String readcount=df.format(vdto.getReadcount());
+		//hits' format end
+		
+		//logined member information at present
+		Object member_object=session.getAttribute("memberDTO");
+		if(member_object!=null){
+		member=(MemberDTO)member_object;
+		}
+		
+		//RecentVideo insert start		
+		RecentVideoDTO recent_dto=new RecentVideoDTO();
+		
+		if(member!=null){
+		recent_dto.setMember_no(member.getNo());
+		recent_dto.setVideo_name(vdto.getVideo_name());
+		
+		int res=recentvideoDAO.insertRecent(recent_dto);
+		}else{
+			recent_dto.setIp(ip);
+			recent_dto.setVideo_name(vdto.getVideo_name());
+			
+			int res=recentvideoDAO.insertRecent(recent_dto);			
+		}
+		//RecentVideo insert end
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/*MemberDTO mdto=memberDAO.getMember_by_no(no);//no member
-*/		//ReplyList where=video		
+		//ReplyList where=video		
 		List<ReplyDTO> r_list=replyDAO.replyList_by_video(vdto.getVideo_name());
 		
 		//Reply writer
 		String r_name=replyDAO.getName();
+		
 		/*List name_list=new ArrayList();
 		for(ReplyDTO dto:r_list){			
 			MemberDTO mdto=memberDAO.getMember_by_no(dto.getMember_no());			
@@ -312,6 +343,8 @@ public class TftubeController {
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
 		int no=Integer.parseInt(arg0.getParameter("no"));		
+		
+		
 		
 		VideoDTO vdto=videoDAO.getVideo(no);		
 		//delete from tftube_video

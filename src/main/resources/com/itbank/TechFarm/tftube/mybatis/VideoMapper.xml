@@ -21,7 +21,7 @@ update tftube_video set readcount = readcount+1 where no = #{no}
 </update>
 
 <select id="listVideo" resultType="videoDTO">
-select * from tftube_video order by no
+select * from tftube_video order by no desc
 </select>
 
 <select id="getVideo" resultType="videoDTO" parameterType="int">
@@ -31,7 +31,6 @@ select * from tftube_video where no=#{no} order by no desc
 <select id="getVideo_member_no" resultType="videoDTO" parameterType="int">
 select * from tftube_video where member_no=#{member_no} order by no desc
 </select> 
-
 
 <update id="readCount" parameterType="java.util.HashMap">
 		${sql}

@@ -7,11 +7,13 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:annotation-config/>
-	<bean class="com.itbank.TechFarm.login.member.MemberDAOImpl" id="memberDAO"/>
+	<bean id="memberDAO" class="com.itbank.TechFarm.login.member.MemberDAOImpl" />
 	<bean id="multipartResolver"
 	class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
-	 <bean id="replyDAO" class="com.itbank.TechFarm.tftube.dao.ReplyDAOImpl"/>
+	<bean id="replyDAO" class="com.itbank.TechFarm.tftube.dao.ReplyDAOImpl"/>
 	<bean id="videoDAO" class="com.itbank.TechFarm.tftube.dao.VideoDAOImpl"/>
+	<bean id="recentvideoDAO" class="com.itbank.TechFarm.tftube.dao.RecentVideoDAOImpl"/>
+	    
 	
 		
 </beans>

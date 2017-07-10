@@ -31,7 +31,7 @@
 <c:if test="${memberDTO!=null}">
 		<a href="tftube_mychannel">내 채널</a><br>
 </c:if>
-최근 본 동영상<br>
+<a href="tftube_recentvideo_listRecent_member_no">최근 본 동영상</a><br>
 -----------------------------<br>
 음악<br>
 스포츠<br>

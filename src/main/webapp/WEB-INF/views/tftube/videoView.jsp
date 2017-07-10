@@ -56,18 +56,8 @@ ${rdto.content}<br>
 </tr>
 </c:forEach>
 </table>
-	<%-- <a href="board_insert.do">글쓰기</a>
-	<table border="1">	
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>등록자</th>
-			<th>등록일</th>	
-			<th>조회</th>
-			<th>IP</th>
-			<th>파일</th>		
-		</tr>
-		
+	
+		<%--
 		<c:forEach var="dto" items="${boardList}">
 		<tr>
 			<td>${number=number-1}</td>

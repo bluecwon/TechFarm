@@ -9,6 +9,7 @@
   	<typeAlias alias = "videoDTO" type="com.itbank.TechFarm.tftube.dto.VideoDTO"/>
   	<typeAlias alias = "replyDTO" type="com.itbank.TechFarm.tftube.dto.ReplyDTO"/>
   	<typeAlias alias = "memberDTO" type="com.itbank.TechFarm.login.member.MemberDTO"/>
+  	<typeAlias alias = "recentvideoDTO" type="com.itbank.TechFarm.tftube.dto.RecentVideoDTO"/>
   </typeAliases>
   <environments default="development"> 
       <environment id="development"> 
@@ -24,6 +25,7 @@
   <mappers> 
   	<mapper resource="com/itbank/TechFarm/login/member/MemberMapper.xml"/>
     <mapper resource="com/itbank/TechFarm/tftube/mybatis/VideoMapper.xml"/>
-    <mapper resource="com/itbank/TechFarm/tftube/mybatis/ReplyMapper.xml"/> 
+    <mapper resource="com/itbank/TechFarm/tftube/mybatis/ReplyMapper.xml"/>
+    <mapper resource="com/itbank/TechFarm/tftube/mybatis/RecentVideoMapper.xml"/> 
   </mappers> 
 </configuration> 
