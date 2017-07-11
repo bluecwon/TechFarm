@@ -5,24 +5,21 @@
 <html>
 <head>
 <link type="text/css" href="resources/login/style.css" rel="stylesheet"/>
-<title>Welcome to TF</title>
+<title>Edit My Info</title>
 	<script type="text/javascript">
 		var goodColor = "#66cc66";
     	var badColor = "#ff6666";
-    	var result=true;
 		function checkPasswd(){ // 비밀번호 형식 및 일치여부 확인 메소드
-			 var pass1 = document.getElementById('pwd1'); 
-		     var message = document.getElementById('sid');
-		     var goodColor = "#66cc66";
-		     var badColor = "#ff6666";
-		     if(pass1.value!=("${sessionScope.memberDTO.passwd}")){
+			var pass = document.getElementById('pwd');
+	    	var message = document.getElementById('sid');
+		     if(pass.value!=("${sessionScope.memberDTO.passwd}")){
 		    	 message.style.color = badColor;
 		    	 message.innerHTML = "비밀번호를 확인해 주세요."
-		    	 result=true;
+		    	 return false;
 		     }else{
 		    	 message.style.color = goodColor;
 		    	 message.innerHTML = "비밀번호가 일치 합니다. 정보수정 가능합니다."
-		    	 result=false;
+		    	 return true;
 		     }
 		}
 		function checkBirthDay(){ // 생일의 신뢰성 향상 메소드
@@ -72,19 +69,26 @@
 				alert("이름를 입력하세요")
 				member.name.focus()
 				return false;
-			}else if(member.email1.value==""){
+			}else if(member.email.value==""){
 				alert("이메일을 입력하세요")
-				member.email1.focus()
+				member.email.focus()
 				return false;
 			}else if(member.birthday_year.value==""){
 				alert("생일을 입력하세요")
 				member.birthday_year.focus()
 				return false;
-			}else if(result){
-				alert("비밀번호를 확인하세요")
-				member.passwd.focus()
+			}
+			var result=checkPasswd();
+			if(!result){
+				alert("비밀번호를 확인해 주세요.")
 				return false;
 			}
+			result=checkBirthDay();
+			if(!result){
+				alert("생일을 확인해 주세요.")
+				return false;
+			}
+			return true;
 		}
 	</script>
 </head>
@@ -96,7 +100,7 @@
 				<td><img src="resources/home/imgs/name.png" width="200"></td>
 			</tr>
 			<tr>
-				<td><font size=5>회원가입</font></td>
+				<td><font size=5>정보수정</font></td>
 			</tr>
 			<tr>
 				<td>아이디<br><input id="id" type="text" name="id" value="${sessionScope.memberDTO.id}" readonly="readonly"></td>
@@ -105,7 +109,7 @@
 				<td><span><font color="#ff6666">아이디는 변경 불가합니다.</font></span></td>
 			</tr>
 			<tr>
-				<td>비밀번호<br><input id="pwd1" type="password" name="passwd" onblur="checkPasswd()"></td>
+				<td>비밀번호<br><input id="pwd" type="password" name="passwd" onblur="checkPasswd()"></td>
 			</tr>
 			<tr>
 				<td><span id="sid"></span></td>

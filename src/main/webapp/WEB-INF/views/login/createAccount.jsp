@@ -100,15 +100,14 @@
 			}
 			var result=checkPasswd();
 			if(!result){
-				alert("비밀번호 값이 일치하지 않습니다.");
+				alert("비밀번호를 확인해 주세요.")
 				return false;
 			}
 			result=checkBirthDay();
 			if(!result){
-				alert("생일의 형식이 맞지 않습니다.");
+				alert("생일을 확인해 주세요.")
 				return false;
 			}
-			
 			return true;
 		}
 	</script>
