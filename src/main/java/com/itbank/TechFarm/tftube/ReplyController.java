@@ -1,13 +1,6 @@
 package com.itbank.TechFarm.tftube;
 
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -42,10 +35,11 @@ public class ReplyController {
 		
 		ReplyDTO dto=new ReplyDTO();	
 		int num=Integer.parseInt(arg0.getParameter("num"));
+		int re_step=Integer.parseInt(arg0.getParameter("re_step"));
 		if (num==0){
 			replyDAO.update_re_step();			 
 		}else {
-			replyDAO.update_re_step_reply();
+			replyDAO.update_re_step_reply(re_step);
 			dto.setRe_step(dto.getRe_step());
 			dto.setRe_level(dto.getRe_level() + 1);
 		}		

@@ -263,7 +263,7 @@ public class TftubeController {
 		
 		//ReplyList where=video		
 		List<ReplyDTO> r_list=replyDAO.replyList_by_video(vdto.getVideo_name());
-		
+		String r_size=df.format(r_list.size());
 		//Reply writer
 		String r_name=replyDAO.getName();
 		
@@ -278,6 +278,7 @@ public class TftubeController {
 		/*List r_list=replyDAO.replyList();*/
 		mv.addObject("r_list",r_list);
 		mv.addObject("r_name",r_name);
+		mv.addObject("r_size",r_size);
 		
 			
 		mv.setViewName("tftube/videoView");			

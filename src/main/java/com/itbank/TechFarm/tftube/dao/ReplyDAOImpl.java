@@ -36,7 +36,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 
 	@Override
-	public int update_re_step_reply() {
+	public int update_re_step_reply(int re_step) {
 		return ReplyMapper.update_re_step_reply();
 	}
 	
