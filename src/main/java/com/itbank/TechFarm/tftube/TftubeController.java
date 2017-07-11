@@ -10,6 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -49,6 +50,8 @@ import com.itbank.TechFarm.tftube.dto.RecentVideoDTO;
 import com.itbank.TechFarm.tftube.dto.ReplyDTO;
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
 import com.itbank.TechFarm.tftube.java.Sha3;
+
+
  
 @Controller
 public class TftubeController {
@@ -67,8 +70,8 @@ public class TftubeController {
 	private String upPath_image=null;
 	private HttpSession session=null;
 	private String msg=null, url=null;
-	private ArrayList date=null;
-	private static HashMap<String, Date> map=new HashMap();
+	
+	private static HashMap<String, Date> map=new HashMap<String,Date>();
 	
 	
 	//?Wrong (Constructor) Example 
@@ -84,6 +87,9 @@ public class TftubeController {
 		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
 		System.out.println("member"+member);
 		
+		if(session.getAttribute("no")!=null){
+			session.removeAttribute("no");
+		}
 		/*upPath_image="D:\\workspace_tftube\\techfarm\\src\\main\\webapp\\resources\\tftube\\uploadImage";
 		upPath_video="D:\\workspace_tftube\\techfarm\\src\\main\\webapp\\resources\\tftube\\uploadVideo";*/
 		/*upPath_image=session.getServletContext().getRealPath("/resources/tftube/"+member.getId()+"Image");*/
@@ -139,21 +145,13 @@ public class TftubeController {
 		if(filename.trim().equals("")){}
 		else{
 		mf.transferTo(file);		
-		}
-		
-
-		/*Sha3 sha3=new Sha3();
-		String hashValue_video=sha3.Digest_Sha3(file);
-		System.out.println(hashValue_video);*/
+		}		
 
 		Sha3 sha3=new Sha3();
 		String video_hash=sha3.Digest_Sha3(file);
 		
-
-		
 		MultipartFile mf2 = mr.getFile("image");
-		String image = mf2.getOriginalFilename(); 		
-		
+		String image = mf2.getOriginalFilename(); 			
 		
 		File file2 = new File(upPath_image,image);
 		File upPath_image_file=new File(upPath_image);
@@ -181,9 +179,7 @@ public class TftubeController {
 		dto.setImage_hash(image_hash);
 		
 		int res =videoDAO.insertVideo(dto);	
-		if(res>0){
-			map=new HashMap();
-			
+		if(res>0){			
 			mv.setViewName("redirect:tftube_main");			
 		}
 		else{
@@ -196,21 +192,6 @@ public class TftubeController {
 		return mv;
 	}	
 	
-	/*@RequestMapping(value = "/file/upload", method = RequestMethod.POST)
-	@ResponseBody
-	public List upload(
-	    @RequestParam(value = "files[]", required = false) MultipartFile[] files) throws IllegalStateException, IOException {
-
-	  List fileMetas = new ArrayList();
-	  for (MultipartFile file : files) {
-	    File uploadFile = new File("/", file.getOriginalFilename());
-	    file.transferTo(uploadFile);
-	    FileMeta fileMeta = new FileMeta(uploadFile.getAbsolutePath(), file.getSize(), "");
-	    fileMetas.add(fileMeta);
-	  }
-
-	  return fileMetas;
-	}*/
 	
 	@RequestMapping(value="/tftube_videoView", method=RequestMethod.GET)
 	public ModelAndView tftube_videoView(HttpServletRequest arg0, 
@@ -218,7 +199,7 @@ public class TftubeController {
 		ModelAndView mv=new ModelAndView();
 		
 		int no=ServletRequestUtils.getIntParameter(arg0, "no");//tftube_video
-		
+		session.setAttribute("video_no",no);
 		Date today=new Date();//today			
 		
 		VideoDTO vdto=videoDAO.getVideo(no);//video's total information	
@@ -277,8 +258,7 @@ public class TftubeController {
 			
 			int res=recentvideoDAO.insertRecent(recent_dto);			
 		}
-		//RecentVideo insert end
-		
+		//RecentVideo insert end		
 		
 		//ReplyList where=video		
 		List<ReplyDTO> r_list=replyDAO.replyList_by_video(vdto.getVideo_name());
@@ -298,11 +278,7 @@ public class TftubeController {
 		mv.addObject("r_list",r_list);
 		mv.addObject("r_name",r_name);
 		
-		/*BoardDTO bdto=new BoardDTO();
-		bdto.setContent(arg0.getParameter("content"));
-		bdto.setContent((String)session.getAttribute("tube_id"));
-		int res=boardDAO.insertBoard(bdto);*/
-		
+			
 		mv.setViewName("tftube/videoView");			
 		
 		/*int pageSize = 5;
@@ -318,9 +294,9 @@ public class TftubeController {
 		
 		if (endRow>countRow) endRow = countRow;
 		int number = countRow - (currentPage-1) * pageSize;
-		
-		List<BoardDBBean> list = boardDAO.listBoard(startRow, endRow);			
-		
+		*/
+		/*List<ReplyDTO> list =replyDAO.listBoard(startRow, endRow);*/			
+		/*
 		if (countRow>0) {
 			int pageCount = countRow/pageSize + (countRow%pageSize==0 ? 0 : 1);
 			int pageBlock = 3;

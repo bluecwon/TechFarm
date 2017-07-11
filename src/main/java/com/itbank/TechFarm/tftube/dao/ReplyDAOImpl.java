@@ -30,6 +30,18 @@ public class ReplyDAOImpl implements ReplyDAO {
 		return ReplyMapper.getName();
 	}
 
+	@Override
+	public int update_re_step() {		
+		return ReplyMapper.update_re_step();
+	}
+
+	@Override
+	public int update_re_step_reply() {
+		return ReplyMapper.update_re_step_reply();
+	}
+	
+	
+
 	
 	
 	
