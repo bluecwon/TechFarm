@@ -12,6 +12,9 @@
 				<!-- 소식 이미지 텍스트 상자 시작 -->
 				<div class="portfolio-thumbs clearfix" >
 				
+				<c:if test="${newsMyFollowList.size() == 0}">
+					<h2  class="post-heading"><a href="#">팔로우 한 목록이 없습니다.</a></h2>
+				</c:if>
 				<c:forEach var="dto" items="${newsMyFollowList}">
 					<c:choose>
 						<c:when test="${newsMyFollowList.size() != 0}">
@@ -22,13 +25,18 @@
 			    					<span>${dto.profileContents}</span>
 			    					<em>${dto.profileDate}</em>
 				        		</figcaption>	
-		        				<a href="#"  class="thumb">
-		        				
+				        		
+		        				<c:if test="${dto.profileId == sessionScope.memberDTO.id}">
+				        			<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${dto.profileId}&num=${dto.profileNum}&my=true" class="thumb">
+				        		</c:if>
+				        		<c:if test="${dto.profileId != sessionScope.memberDTO.id}">
+				        			<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${dto.profileId}&num=${dto.profileNum}&my=false&myId=${sessionScope.memberDTO.id}" class="thumb">
+				        		</c:if>
 		        					<!-- 컨텍스트 메뉴 처리 시작 -->
 									<%@include file="newsContextMenu.jsp"%>
 		        					<!-- 컨텍스트 메뉴 처리 끝 -->
-		        					
 		        				</a>
+		        				
 	        				</figure>
 						</c:when>
 					</c:choose>

@@ -8,69 +8,69 @@
 		<div id="main">	
 			<div class="wrapper clearfix">
 			
-				<!-- 소식 게시물 리스트 시작 -->
+				<!-- 커뮤니티 게시물 리스트 시작 -->
 	        	<div id="posts-list">
 	        	
 	        		<h2 class="page-heading">
 	        			<span>
-	        				${newsBoardName}
-	        				<c:if test="${newsprofileId==sessionScope.memberDTO.id}">
-		        				<a href="#" onclick="window.open('tfPlusNewsProfileBoardWriting?name=${newsBoardName}','window','location=no, directories=no,resizable=no,status=no,toolbar=no,menubar=no, width=715,height=500,left=500, top=250, scrollbars=yes');return false"  title="게시물을 등록할까요?" class="poshytip">
+	        				${memberBoardName}
+	        				<c:if test="${memberprofileId==sessionScope.memberDTO.id}">
+		        				<a href="#" onclick="window.open('tfPlusMemberProfileBoardWriting?name=${memberBoardName}','window','location=no, directories=no,resizable=no,status=no,toolbar=no,menubar=no, width=715,height=500,left=500, top=250, scrollbars=yes');return false"  title="게시물을 등록할까요?" class="poshytip">
 		        					<img src="resources/tfPlus/img/social/plus.png"/>
 		        				</a>
 	        				</c:if>
 	        			</span>
 	        		</h2>	
 	        		
-	        		<c:if test="${newsBoardList.size() == 0}">
+	        		<c:if test="${memberBoardList.size() == 0}">
         				<article class="format-standard">
 							<h2  class="post-heading"><a href="#">등록된 글이 없습니다.</a></h2>
 						</article>
 	        		</c:if>
-	        		<c:forEach var="dto" items="${newsBoardList}">
-	        		<c:set var="profileBoardNum" value="${dto.profileBoardPK}"/>
+	        		<c:forEach var="dto" items="${memberBoardList}">
+	        		<c:set var="profileBoardNum" value="${dto.mProfileBoardPK}"/>
 	        			<c:choose>
-	        				<c:when test="${newsBoardList.size() != 0}">
+	        				<c:when test="${memberBoardList.size() != 0}">
 	        					<article class="format-standard">
-	        						<c:set var="BoardDate" value="${dto.profileBoardDate}"/>
+	        						<c:set var="BoardDate" value="${dto.mProfileBoardDate}"/>
 									<div class="entry-date">
 										<div class="number">${fn:substring(BoardDate,8,10)}</div> 
 										<div class="year">${fn:substring(BoardDate,5,7)}, ${fn:substring(BoardDate,0,4)}</div>
 									</div>
 									<div class="feature-image">
-										<a href="${newsProfileBoardUpPath}/${dto.profileBoardPhoto}" data-rel="prettyPhoto">
-											<img src="${newsProfileBoardUpPath}/${dto.profileBoardPhoto}" alt="Alt text" width="600px" height="300px"/>
+										<a href="${memberProfileBoardUpPath}/${dto.mProfileBoardPhoto}" data-rel="prettyPhoto">
+											<img src="${memberProfileBoardUpPath}/${dto.mProfileBoardPhoto}" alt="Alt text" width="600px" height="300px"/>
 										</a>
 									</div>
-									<h2  class="post-heading"><a href="#">${dto.profileBoardTitle}</a></h2>
-									<div class="excerpt">${dto.profileBoardContents}</div>
-									<a href="single.html" class="read-more">더보기 &#8594;</a>
+									<h2  class="post-heading"><a href="#">${dto.mProfileBoardTitle}</a></h2>
+									<div class="excerpt">${dto.mProfileBoardContents}</div>
+									<a href="#" class="read-more">더보기 &#8594;</a>
 									<div class="div_add">
 										<div class="meta">
-											<div class="categories">좋아요 : ${dto.profileBoardGood}</div>
+											<div class="categories">좋아요 : ${dto.mProfileBoardGood}</div>
 											<div class="comments"><a href="javascript:;">댓글 보기</a></div>
-											<div class="user">작성자 : ${dto.profileBoardName}</div>
+											<div class="user">작성자 : ${dto.mProfileBoardName}</div>
 										</div>
 										
 										<!-- 댓글 -->
 										<table class="jjm494_add">
-											<c:if test="${newsAddList.size() == 0}">
+											<c:if test="${memberAddList.size() == 0}">
 												<tr>
 													<th></th>
 													<td>등록된 댓글이 하나도 없습니다.</td>
 												</tr>
 											</c:if>
-											<c:forEach var="dto" items="${newsAddList}">
+											<c:forEach var="dto" items="${memberAddList}">
 												<c:choose>
-													<c:when test="${dto.profileBoardFK == profileBoardNum}">
+													<c:when test="${dto.mProfileBoardFK == profileBoardNum}">
 														<tr>
 															<th scope="row">
-																${dto.profileAddName}
+																${dto.mProfileAddName}
 																<a href="javascript:;">삭제</a>
 															</th>
 															<td>
 																<div class="subMenuDiv_add">
-																	${dto.profileAddContents}
+																	${dto.mProfileAddContents}
 																	<a href="javascript:;">답글</a>
 																	<form>
 																		<table class="jjm494_subAdd">
@@ -97,7 +97,7 @@
 											</c:forEach>
 										</table>
 										
-										<form name="f" action="tfPlusNewsProfileAddPro" method="post">
+										<form name="f" action="tfPlusMemberProfileAddPro" method="post">
 											<table class="jjm494_add">
 											    <tr>
 											        <th scope="row">${sessionScope.memberDTO.name}</th>
@@ -109,8 +109,8 @@
 															<input type="hidden" value="${sessionScope.memberDTO.name}" name="profileBoardName" id="to" />
 															<input type="hidden" value="${profileBoardNum}" name="profileBoardFK" id="to" />
 															
-															<input type="hidden" value="${newsBoardName}" name="profileName" id="to" />
-															<input type="hidden" value="${newsprofileId}" name="id" id="to" />
+															<input type="hidden" value="${memberBoardName}" name="profileName" id="to" />
+															<input type="hidden" value="${memberprofileId}" name="id" id="to" />
 															<input type="hidden" value="${num}" name="num" id="to" />
 															<input type="hidden" value="${my}" name="my" id="to" />
 														<!-- 히든으로 넘어갈 정보들 -->
@@ -164,6 +164,6 @@
 			</div>
 		</div>
 		<!-- ENDS MAIN -->
-		
+
 <!-- 하단 부분 -->
 <%@include file="../footer.jsp"%>

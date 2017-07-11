@@ -11,11 +11,11 @@
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script> <!-- 이미지 미리보기 -->
 		<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!-- 이미지 미리보기 -->
 		
-		<title>소식 글 등록</title>
+		<title>커뉴니티 글  등록</title>
 	</head>
 	<body>
-
-		<form name="f" id="contactForm" action="tfPlusNewsProfileBoardWritingPro" method="post" enctype="multipart/form-data">
+	
+		<form name="f" id="contactForm" action="tfPlusMemberProfileBoardWritingPro" method="post" enctype="multipart/form-data">
 			<fieldset>
 				<table class="jjm494">
 					<tr>
@@ -68,6 +68,6 @@
 				reader.readAsDataURL(file[0]);
 			};
 		</script>
-		
+	
 	</body>
 </html>

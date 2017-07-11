@@ -713,6 +713,12 @@ nav a{
 
 .address-block .email{ background: url(../img/icon-email.png) no-repeat top left }
 
+.address-block .comments{ background: url(../img/icon-comments.png) no-repeat top left }
+
+.address-block .tags{ background: url(../img/icon-tags.png) no-repeat top left }
+
+.address-block .user{ background: url(../img/icon-user.png) no-repeat top left }
+
 /* PAGE ------------------------------------------------------------*/
 
 .floated-content,

@@ -9,6 +9,11 @@
 		<typeAlias alias="NewsFollowIdDTO" type="com.itbank.TechFarm.tfPlusDTO.NewsFollowIdDTO"/>
 		<typeAlias alias="NewsProfileBoardDTO" type="com.itbank.TechFarm.tfPlusDTO.NewsProfileBoardDTO"/>
 		<typeAlias alias="NewsProfileAddCommentDTO" type="com.itbank.TechFarm.tfPlusDTO.NewsProfileAddCommentDTO"/>
+		
+		<typeAlias alias="MemberProfileDTO" type="com.itbank.TechFarm.tfPlusDTO.MemberProfileDTO"/>
+		<typeAlias alias="MemberJoinIdDTO" type="com.itbank.TechFarm.tfPlusDTO.MemberJoinIdDTO"/>
+		<typeAlias alias="MemberProfileBoardDTO" type="com.itbank.TechFarm.tfPlusDTO.MemberProfileBoardDTO"/>
+		<typeAlias alias="MemberProfileAddCommentDTO" type="com.itbank.TechFarm.tfPlusDTO.MemberProfileAddCommentDTO"/>
 	</typeAliases> 
   	<environments default="development"> 
       <environment id="development"> 
@@ -23,5 +28,6 @@
   </environments> 
   <mappers> 
     <mapper resource="com/itbank/TechFarm/tfPlus/NewsProfileMapper.xml"/>
+    <mapper resource="com/itbank/TechFarm/tfPlus/MemberProfileMapper.xml"/>
   </mappers> 
 </configuration> 

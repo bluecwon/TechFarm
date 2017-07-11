@@ -64,7 +64,7 @@ public class NewsProfileDAOImpl implements NewsProfileDAO {
 	} 
 
 	@Override
-	public List newsFollowAllLiat() {
+	public List newsFollowAllList() {
 		return NewsProfileMapper.followList(); 
 	} 
 
@@ -127,6 +127,6 @@ public class NewsProfileDAOImpl implements NewsProfileDAO {
 	@Override
 	public int newsAddListInsert(NewsProfileAddCommentDTO newsProfileAddCommentDTO) {
 		return NewsProfileMapper.newsAddListInsert(newsProfileAddCommentDTO);
-	} 
+	}
 	
 }

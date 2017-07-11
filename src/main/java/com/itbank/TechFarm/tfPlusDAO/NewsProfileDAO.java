@@ -17,7 +17,7 @@ public interface NewsProfileDAO {
 	public List newsFollowMyList(String id); 
 	public NewsProfileDTO newsNumList(int num); 
 	public int newsFollowInsert(int profileNum, String id); 
-	public List newsFollowAllLiat(); 
+	public List newsFollowAllList(); 
 	public int newsFollowDelete(int newsfollowPK); 
 	public int newsProfileCount();
 	public int newsProfileDelete(int profileNum); 
