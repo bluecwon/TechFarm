@@ -56,6 +56,22 @@ public class ReplyMapper {
   		return name;
   	}
   	
+  	public static int update_re_step(){
+  		SqlSession session=sqlMapper.openSession();
+  		int res=session.update("update_re_step");
+  		session.commit();
+  		session.close();
+  		return res;  		
+  	}
+  	
+  	public static int update_re_step_reply(){
+  		SqlSession session=sqlMapper.openSession();
+  		int res=session.update("update_re_step_reply");
+  		session.commit();
+  		session.close();
+  		return res;  		
+  	}
+  	
   	
   	
   	

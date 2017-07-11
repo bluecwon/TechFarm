@@ -6,7 +6,7 @@
 <mapper namespace="com.itbank.TechFarm.tftube.mybatis.RecentVideoMapper">
 
  <insert id="insertRecent" parameterType="RecentVideoDTO" useGeneratedKeys="true">
- insert into tftube_recentvideo(member_no,video_name) values(#{member_no},#{video_name})
+ insert into tftube_recentvideo(member_no,video_name,ip) values(#{member_no},#{video_name},#{ip})
  </insert>
  
  <select id="listRecent_member_no" resultType="RecentVideoDTO" parameterType="String">

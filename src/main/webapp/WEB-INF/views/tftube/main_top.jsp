@@ -13,7 +13,7 @@
 <td>
 <a href="tftube_main">TFtube </a>
 </td> 
-<td>검색						 
+<td>검색<input type="text" name="search"> <input type="button" value="검색">						 
 <c:choose>
 <c:when test="${memberDTO==null}"><a href="login">업로드</a>	
 		<a href="login">로그인</a>
@@ -42,12 +42,5 @@ TV프로그램<br>
 실시간<br>
 </td>
 <td>
-
-
-
-
-
-
-
 </body>
 </html>

@@ -16,37 +16,7 @@
 	
 	<select id="getName" resultType="String">
 	select a.name  from  tfmember.member a  join tftube.tftube_reply b  on a.no = b.member_no
-	</select>
-	
-	
-	
-	<!-- public BoardDBBean getBoard(int num, String mode) throws SQLException{
-		if (mode.equals("content")){
-			String sql = "";
-			con = ds.getConnection();
-			ps = con.prepareStatement(sql);
-			ps.setInt(1, num);
-			ps.executeUpdate();
-		}
-		String sql = "select * from board where num = ?";
-		try{
-			con = ds.getConnection();
-			ps = con.prepareStatement(sql);
-			ps.setInt(1, num);
-			rs = ps.executeQuery();
-			List<BoardDBBean> list = makeList(rs);
-			return list.get(0);
-		}finally{
-			if (rs != null) rs.close();
-			if (ps != null) ps.close();
-			if (con != null) con.close();
-		}
-	} -->
-	
-	
-	
-	
-	
+	</select>	
 	
 	<select id="getreply" resultType="replyDTO" parameterType="int">
 		select * from tftube_reply where num = #{num}
@@ -62,29 +32,19 @@
 		values(#{member_no},#{content},#{video_name})		
 	</insert>
 	
-	<update id="insertreply2_1">	
+	<update id="update_re_step">	
 		update tftube_reply set re_step = re_step + 1
 	</update>
 	
-	<update id="insertreply2_2" parameterType="replyDTO">	
-		update tftube_reply set re_step = re_step + 1 where re_step > #{re_step}
+	<update id="update_re_step_reply" parameterType="replyDTO">	
+		update tftube_reply set re_step = re_step + 1 where re_step >= #{re_step}
 	</update>
 	
 	<update id="updatereply" parameterType="replyDTO">
 		update tftube_reply set writer=#{writer}, email=#{email},
 		subject=#{subject}, content=#{content} where num=#{num}
 	</update>
-	
-	<update id="readCount" parameterType="java.util.HashMap">
-		${sql}
-		<!-- 문자열을 받을때는 $를 이용해서 받아준다.
-		#은 해당 문자열에 대한 값 -->
-	</update>
-	
-	<select id="isPassword" resultType="String" parameterType="int">
-	select passwd from tftube_reply where num = #{num}
-	</select>
-	
+		
 	<select id="getCount" resultType="int">
 	select count(*) from tftube_reply
 	</select>

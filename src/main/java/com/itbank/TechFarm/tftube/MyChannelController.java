@@ -8,14 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.itbank.TechFarm.tftube.dto.ReplyDTO;
-
-
 @Controller
 public class MyChannelController {
-
-
-
 	@RequestMapping(value="/tftube_mychannel", method=RequestMethod.GET)
 	public ModelAndView tftube_mychannel(HttpServletRequest arg0, 
 			HttpServletResponse arg1) throws Exception {
@@ -26,7 +20,6 @@ public class MyChannelController {
 		dto.setContent(arg0.getParameter("content").trim());
 		dto.setId(id);		
 		int res=replyDAO.insertReply(dto);*/
-
 		mv.setViewName("tftube/mychannel");	
 		return mv;		
 	}
