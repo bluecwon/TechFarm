@@ -50,7 +50,7 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
  <c:forEach var="rdto" items="${r_list}">
 <tr>
 <td>
-<a href="mychannel?name=${r_name}">${r_name}</a>   ${rdto.reg_date}<br><!-- id sysdate-reg_date 아니면 java에서 변환 -->
+<a href="tftube_mychannel?name=${r_name}">${r_name}</a>   ${rdto.reg_date}<br><!-- id sysdate-reg_date 아니면 java에서 변환 -->
 ${rdto.content}<br> 
 <!--답글이 존재한다면 답글:답글갯수 -->
 </tr>

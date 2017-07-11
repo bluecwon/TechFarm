@@ -99,6 +99,7 @@ public class TftubeController {
 		session.setAttribute
 		("list",list);		
 		mav.setViewName("tftube/main");
+		
 		return mav;
 	}	
 	
