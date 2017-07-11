@@ -21,14 +21,12 @@ public class ContactsController {
 	private ContactsDAO contactsDAO;
 	
 	@RequestMapping(value = "/listContacts", method = RequestMethod.GET)
-	public ModelAndView listContacts(HttpServletRequest request, HttpServletResponse response){
-		ModelAndView mav = new ModelAndView();
+	public String listContacts(Model model, HttpServletRequest request, HttpServletResponse response){
 		MemberDTO memberDTO = (MemberDTO)request.getSession().getAttribute("memberDTO"); 
 		String id = memberDTO.getId();
 		List<ContactsDTO> listContacts = contactsDAO.listContacts(id);
-		mav.setViewName("contacts/listContacts");
-		mav.addObject("listContacts", listContacts);
-		return mav;
+		model.addAttribute("listContacts", listContacts);
+		return "contacts/listContacts";
 	}
 	
 	@RequestMapping(value = "/addContact", method = RequestMethod.GET)
@@ -36,59 +34,38 @@ public class ContactsController {
 		return "contacts/addContact";
 	}
 	@RequestMapping(value = "/addContact", method = RequestMethod.POST)
-	public ModelAndView addContactPro(HttpServletRequest request, HttpServletResponse response){
-		ModelAndView mav = new ModelAndView();
-		ContactsDTO dto = makeDTO(request);
+	public String addContactPro(ContactsDTO dto, HttpServletRequest request, HttpServletResponse response){
 		MemberDTO memberDTO = (MemberDTO)request.getSession().getAttribute("memberDTO"); 
 		dto.setId(memberDTO.getId());
 		int res = contactsDAO.addContact(dto);
-		mav.setViewName("redirect:listContacts");
-		return mav;
+		return "redirect:listContacts";
 	}
 	@RequestMapping(value="/getContact", method = RequestMethod.GET)
-	public ModelAndView getContact(HttpServletRequest request, HttpServletResponse response){
-		ModelAndView mav = new ModelAndView();
+	public String getContact(Model model, HttpServletRequest request, HttpServletResponse response){
 		int no = Integer.parseInt(request.getParameter("no"));
 		ContactsDTO dto = contactsDAO.getContact(no);
-		mav.setViewName("/contacts/getContact");
-		mav.addObject("dto", dto);
-		return mav;
+		model.addAttribute("dto", dto);
+		return "contacts/getContact";
 	}
 	@RequestMapping(value="/editContact", method = RequestMethod.GET)
-	public ModelAndView editContact(HttpServletRequest request, HttpServletResponse response){
-		ModelAndView mav = new ModelAndView();
+	public String editContact(Model model, HttpServletRequest request, HttpServletResponse response){
 		int no = Integer.parseInt(request.getParameter("no"));
 		ContactsDTO dto = contactsDAO.getContact(no);
-		mav.setViewName("/contacts/editContact");
-		mav.addObject("dto", dto);
-		return mav;
+		model.addAttribute("dto", dto);
+		return "contacts/editContact";
 	}
 	@RequestMapping(value="/editContact", method = RequestMethod.POST)
-	public ModelAndView editContactPro(HttpServletRequest request, HttpServletResponse response){
-		ModelAndView mav = new ModelAndView();
-		ContactsDTO dto = makeDTO(request);
+	public String editContactPro(ContactsDTO dto, HttpServletRequest request, HttpServletResponse response){
 		dto.setNo(Integer.parseInt(request.getParameter("no")));
 		int res = contactsDAO.editContact(dto);
-		mav.setViewName("redirect:listContacts");
-		return mav;
+		return "redirect:listContacts";
 	}
-	private ContactsDTO makeDTO(HttpServletRequest request){
-		ContactsDTO dto = new ContactsDTO();
-		dto.setName(request.getParameter("name"));
-		dto.setCompany(request.getParameter("company"));
-		dto.setJobtitle(request.getParameter("jobtitle"));
-		dto.setEmail(request.getParameter("email"));
-		dto.setPhone(request.getParameter("phone"));
-		dto.setNotes(request.getParameter("notes"));
-		return dto;
-	}
+	
 	@RequestMapping(value="/deleteContact", method = RequestMethod.GET)
-	public ModelAndView deleteContact(HttpServletRequest request, HttpServletResponse response){
-		ModelAndView mav = new ModelAndView();
+	public String deleteContact(HttpServletRequest request, HttpServletResponse response){
 		int no = Integer.parseInt(request.getParameter("no"));
 		int res = contactsDAO.deleteContact(no);
-		mav.setViewName("redirect:listContacts");
-		return mav;
+		return "redirect:listContacts";
 	}
 	
 }
