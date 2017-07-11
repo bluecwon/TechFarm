@@ -1,18 +1,17 @@
 package com.itbank.TechFarm.login;
 
 import java.io.IOException;
-
 import java.util.Locale;
-
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -71,24 +70,16 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/inputmember", method = RequestMethod.POST)
-	public ModelAndView inputMember(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav=new ModelAndView();
-		MemberDTO dto=new MemberDTO();
-		dto.setId(request.getParameter("id"));
-		dto.setPasswd(request.getParameter("passwd"));
-		dto.setName(request.getParameter("name"));
-		String email=request.getParameter("email1")+"@"+request.getParameter("email2");
-		dto.setEmail(email);
-		dto.setBirthday_year(Integer.parseInt(request.getParameter("birthday_year")));
-		dto.setBirthday_month(Integer.parseInt(request.getParameter("birthday_month")));
-		dto.setBirthday_day(Integer.parseInt(request.getParameter("birthday_day")));
-		dto.setSex(ServletRequestUtils.getIntParameter(request, "sex", 0));
+	public String inputMember(@ModelAttribute("inputInfo") @Valid MemberDTO dto, Errors errors) {
+		if(errors.hasErrors()){
+			return "login/createAccount";
+		}
 		int res=memberDAO.insertMember(dto);
 		if(res==1){
-			mav.setViewName("redirect:login");
+			return "redirect:login";
 		}else{
-			mav.setViewName("redirect:createAccount");
+			return "redirect:createAccount";
 		}
-		return mav;
 	}
+	
 }

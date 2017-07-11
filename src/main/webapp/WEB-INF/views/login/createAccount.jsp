@@ -18,9 +18,9 @@
 		     var message = document.getElementById('sid');
 		     var goodColor = "#66cc66";
 		     var badColor = "#ff6666";
-		     if(!/^[a-zA-Z0-9]{6,20}$/.test(pass1.value)){
+		     if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,}$/.test(pass1.value)){
 		    	 message.style.color = badColor;
-		    	 message.innerHTML = "비밀번호는 숫자와 영문자의 조합으로 6~12자리를 입력해야합니다."
+		    	 message.innerHTML = "비밀번호는 숫자,영문자,특수문자의 조합으로 6~12자리를 입력해야합니다."
 		    	 return false;
 		     }else{
 		    	 message.style.color = goodColor;
@@ -108,6 +108,8 @@
 				alert("생일을 확인해 주세요.")
 				return false;
 			}
+			var email=member.email1.value+"@"+member.email2.value;
+			member.email.value=email;
 			return true;
 		}
 	</script>
@@ -123,10 +125,10 @@
 				<td><font size=5>회원가입</font></td>
 			</tr>
 			<tr>
-				<td>아이디<br><input id="id" type="text" name="id"></td>
+				<td>아이디<br><input id="id" type="text" name="id" value="${inputInfo.id}"></td>
 			</tr>
 			<tr>
-				<td>비밀번호<br><input id="pwd1" type="password" name="passwd" onblur="checkPasswd()"></td>
+				<td>비밀번호<br><input id="pwd1" type="password" name="passwd" value="${inputInfo.passwd}" onblur="checkPasswd()"></td>
 			</tr>
 			<tr>
 				<td><span id="sid"></span></td>
@@ -138,17 +140,17 @@
 				<td><span id="sid2"></span></td>
 			</tr>
 			<tr>
-				<td>이름<br><input type="text" name="name"></td>
+				<td>이름<br><input type="text" name="name" value="${inputInfo.name}"></td>
 			</tr>
 			<tr>
-				<td>E-mail<br><input type="text" name="email1">@<input type="text" name="email2"></td>
+				<td>E-mail<br><input type="text" name="email1" value="${inputInfo.email1}">@<input type="text" name="email2" value="${inputInfo.email2}"></td>
 			</tr>
 				<td><span>인증 및 비밀번호 찾기 서비스에 사용될 e-mail을 입력해주세요.</span></td>
 			<tr>
 				<td>생일<br>
-					<input id="year" type="text" name="birthday_year" size="4" maxlength="4" onblur="checkBirthDay()">년
-					<input id="month" type="text" name="birthday_month" size="2" maxlength="2" onblur="checkBirthDay()">월
-					<input id="day" type="text" name="birthday_day" size="2" maxlength="2" onblur="checkBirthDay()">일
+					<input id="year" type="text" name="birthday_year" size="4" maxlength="4" value="${inputInfo.birthday_year}" onblur="checkBirthDay()">년
+					<input id="month" type="text" name="birthday_month" size="2" maxlength="2" value="${inputInfo.birthday_month}" onblur="checkBirthDay()">월
+					<input id="day" type="text" name="birthday_day" size="2" maxlength="2" value="${inputInfo.birthday_day}" onblur="checkBirthDay()">일
 				</td>
 			</tr>
 			<tr>
@@ -164,6 +166,7 @@
 			<tr>
 				<td align="center"><input type="submit" value="가입"><input type="reset" value="다시작성"></td>
 			</tr>
+			<input type="hidden" name="email">
 			</form>
 		</table>
 	</div>
