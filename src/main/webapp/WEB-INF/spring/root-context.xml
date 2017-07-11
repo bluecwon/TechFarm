@@ -9,12 +9,12 @@
 	<context:annotation-config/>
 	<bean class="com.itbank.TechFarm.login.member.MemberDAOImpl" id="memberDAO"/>
 	<bean class="com.itbank.TechFarm.search.SearchNaver" id="sn"/>
-	<bean class="com.itbank.TechFarm.CommonExceptionHandler"/>
 
 	<!-- tfPlus DAO -->
 	<bean class="com.itbank.TechFarm.tfPlusDAO.NewsProfileDAOImpl" id="newsProfileDAO"/>
 	<!-- tfblog DAO-->
 	<bean class="com.itbank.TechFarm.blog.dao.Blog_OptionDAOImpl" id="Blog_OptionDAO"/>
+	<bean class="com.itbank.TechFarm.blog.dao.Blog_BoardDAOImpl" id="Blog_BoardDAO"/>
 	<!-- tftube -->
 	<bean id="replyDAO" class="com.itbank.TechFarm.tftube.dao.ReplyDAOImpl"/>
 	<bean id="videoDAO" class="com.itbank.TechFarm.tftube.dao.VideoDAOImpl"/>

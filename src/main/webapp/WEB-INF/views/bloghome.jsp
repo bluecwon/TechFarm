@@ -41,7 +41,7 @@ $(document).ready(function(){
 <div id="main" align="center" valign="center">
 <h1>Farm 블로그에 오신걸 환영합니다.</h1>
 <h2>A safe place for all your files</h2>
-<img src="resources/images/Enter.png" onclick="location.href='blogStart.blog'" style="cursor:pointer;" width="200" height="100"/>
+<img src="resources/images/Enter.png" onclick="location.href='blogStart'" style="cursor:pointer;" width="200" height="100"/>
 </div>
 </body>
 </html>

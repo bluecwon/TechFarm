@@ -19,6 +19,7 @@
 				</div>
 				<div id=profile>
 				<img src="resources/upload/${optionDTO.id}/${optionDTO.profile}" width="300px" height="300px"><br>
+				<b>${optionDTO.nickname}</b>(${optionDTO.id})<br>
 				${optionDTO.introduce}<br><br><br><br>
 				</div><br><br><br>
 				<hr>
@@ -28,8 +29,13 @@
 				</div>
 				<div id="board">
 					<div align="right">
-					<a href="makeBoard">게시판 만들기</a>&nbsp;&nbsp;<br>
+					<a href="editBlog?mode=board&id=${optionDTO.id}">게시판 관리</a>&nbsp;&nbsp;<br>
 					</div>
+					<c:forEach var="dto" items="${list}">
+					<c:if test="${dto.sideno % 2 == 1}">
+					${dto.title}<br><br>
+					</c:if>
+					</c:forEach>
 				</div>
 			</div>  <!-- sidebar1 div end -->
 			</td>
@@ -44,7 +50,6 @@
 		</tr>
 		<tr>
 			<td height="500px" width="60%" align="center" class="header"background="resources/upload/${optionDTO.id}/${optionDTO.header}" >
-			
 			</td>
 		</tr>
 		<tr>
@@ -74,6 +79,7 @@
 				</div>
 				<div id=profile>
 				<img src="resources/upload/${optionDTO.id}/${optionDTO.profile}" width="300px" height="300px"><br>
+				<b>${optionDTO.nickname}</b>(${optionDTO.id})<br>
 				${optionDTO.introduce}<br><br><br><br>
 				</div><br><br><br>
 				<hr>
@@ -84,8 +90,13 @@
 				</div>
 				<div id="board">
 					<div align="right">
-					<a href="makeBoard">게시판 만들기</a>&nbsp;&nbsp;<br>
+					<a href="editBlog?mode=board&id=${optionDTO.id}">게시판 관리</a>&nbsp;&nbsp;<br>
 					</div>
+					<c:forEach var="dto" items="${list}">
+					<c:if test="${dto.sideno % 2 == 0}">
+					${dto.title}<br><br>
+					</c:if>
+					</c:forEach>
 				</div>
 			</div>  <!-- sidebar1 div end -->
 			</td>
@@ -113,6 +124,7 @@
 				</div>
 				<div id=profile>
 				<img src="resources/upload/${optionDTO.id}/${optionDTO.profile}" width="300px" height="300px"><br>
+				<b>${optionDTO.nickname}</b>(${optionDTO.id})<br>
 				${optionDTO.introduce}<br><br><br><br>
 				</div><br><br><br>
 				<hr>
@@ -123,8 +135,13 @@
 				</div>
 				<div id="board">
 					<div align="right">
-					<a href="makeBoard">게시판 만들기</a>&nbsp;&nbsp;<br>
+					<a href="editBlog?mode=board&id=${optionDTO.id}">게시판 관리</a>&nbsp;&nbsp;<br>
 					</div>
+					<c:forEach var="dto" items="${list}">
+					<c:if test="${dto.sideno % 2 == 1}">
+					${dto.title}<br><br>
+					</c:if>
+					</c:forEach>
 				</div>
 			</div>  <!-- sidebar1 div end -->
 			</td>
@@ -165,6 +182,7 @@
 				</div>
 				<div id=profile>
 				<img src="resources/upload/${optionDTO.id}/${optionDTO.profile}" width="300px" height="300px"><br>
+				<b>${optionDTO.nickname}</b>(${optionDTO.id})<br>
 				${optionDTO.introduce}<br><br><br><br>
 				</div><br><br><br>
 				<hr>
@@ -175,8 +193,13 @@
 				</div>
 				<div id="board">
 					<div align="right">
-					<a href="makeBoard">게시판 만들기</a>&nbsp;&nbsp;<br>
+					<a href="editBlog?mode=board&id=${optionDTO.id}">게시판 관리</a>&nbsp;&nbsp;<br>
 					</div>
+					<c:forEach var="dto" items="${list}">
+					<c:if test="${dto.sideno % 2 == 0}">
+					${dto.title}<br><br>
+					</c:if>
+					</c:forEach>
 				</div>
 			</div>  <!-- sidebar1 div end -->
 			</td>
@@ -207,6 +230,7 @@
 				</div>
 				<div id=profile>
 				<img src="resources/upload/${optionDTO.id}/${optionDTO.profile}" width="300px" height="300px"><br>
+				<b>${optionDTO.nickname}</b>(${optionDTO.id})<br>
 				${optionDTO.introduce}<br><br><br><br>
 				</div><br><br><br>
 				<hr>
@@ -217,8 +241,13 @@
 				</div>
 				<div id="board">
 					<div align="right">
-					<a href="makeBoard">게시판 만들기</a>&nbsp;&nbsp;<br>
+					<a href="editBlog?mode=board&id=${optionDTO.id}">게시판 관리</a>&nbsp;&nbsp;<br><br>
 					</div>
+					<c:forEach var="dto" items="${list}">
+					<c:if test="${dto.sideno % 2 == 1}">
+					${dto.title}<br><br>
+					</c:if>
+					</c:forEach>
 				</div>
 			</div>  <!-- sidebar1 div end -->
 			</td>
@@ -234,8 +263,13 @@
 			<div id="sidebar2">
 				<div id="board">
 					<div align="right">
-					<a href="makeBoard">게시판 만들기</a>&nbsp;&nbsp;<br>
+					<a href="editBlog?mode=board&id=${optionDTO.id}">게시판 관리</a>&nbsp;&nbsp;<br><br>
 					</div>
+					<c:forEach var="dto" items="${list}">
+					<c:if test="${dto.sideno % 2 == 0}">
+					${dto.title}<br><br>
+					</c:if>
+					</c:forEach>
 				</div>
 			</div>  <!-- sidebar2 div end -->
 			</td>
@@ -263,6 +297,7 @@
 				</div>
 				<div id=profile>
 				<img src="resources/upload/${optionDTO.id}/${optionDTO.profile}" width="300px" height="300px"><br>
+				<b>${optionDTO.nickname}</b>(${optionDTO.id})<br>
 				${optionDTO.introduce}<br><br><br><br>
 				</div><br><br><br>
 				<hr>
@@ -273,8 +308,13 @@
 				</div>
 				<div id="board">
 					<div align="right">
-					<a href="makeBoard">게시판 만들기</a>&nbsp;&nbsp;<br>
+					<a href="editBlog?mode=board&id=${optionDTO.id}">게시판 관리</a>&nbsp;&nbsp;<br>
 					</div>
+					<c:forEach var="dto" items="${list}">
+					<c:if test="${dto.sideno % 2 == 1}">
+					${dto.title}<br><br>
+					</c:if>
+					</c:forEach>
 				</div>
 			</div>  <!-- sidebar1 div end -->
 			</td>
@@ -287,8 +327,13 @@
 			<div id="sidebar2">
 				<div id="board">
 					<div align="right">
-					<a href="makeBoard">게시판 만들기</a>&nbsp;&nbsp;<br>
-					</div>
+					<a href="editBlog?mode=board&id=${optionDTO.id}">게시판 관리</a>&nbsp;&nbsp;<br>
+					</div><br><br>
+					<c:forEach var="dto" items="${list}">
+					<c:if test="${dto.sideno % 2 == 0}">
+					${dto.title}<br><br>
+					</c:if>
+					</c:forEach>
 				</div>
 			</div>  <!-- sidebar2 div end -->
 			</td>

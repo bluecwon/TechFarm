@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.TechFarm.blog.dao.Blog_OptionDAO;
 import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
+import com.itbank.TechFarm.login.member.MemberDTO;
 
 /**
  * Handles requests for the application home page.
@@ -55,12 +56,29 @@ public class BlogMainController {
 		return new ModelAndView("WEB-INF/blog/main.jsp");
 	}
 	
-	@RequestMapping(value="/blogStart.blog")
+	@RequestMapping(value="/blogStart")
 	public ModelAndView blogStart(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blogmain/index");
-		String id = "asdf";
-		mav.addObject("id", id);
+		HttpSession session = request.getSession();
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
+		String id = null;
+		String mode = null;
+		if(memberDTO != null){
+			mode="member";
+			id= memberDTO.getId();
+			Blog_OptionDTO optionDTO =  optionDAO.getBlog(id);
+			
+			if(optionDTO == null){
+				mode = "membernoblog";
+				mav.addObject("id", id);
+			}
+			mav.addObject("optionDTO", optionDTO);
+
+		}else{
+			mode="guest";
+		}
+		mav.addObject("mode", mode);
 		return mav;
 	}
 		
@@ -68,28 +86,24 @@ public class BlogMainController {
 	public ModelAndView blogMake(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blogmain/makeBlog");
-		String id = request.getParameter("id");
-		mav.addObject("id", id);
+		//String id = request.getParameter("id");
+		String mode = request.getParameter("mode");
+		//mav.addObject("id", id);
+		mav.addObject("mode", mode);
 		return mav;
 	}
 	
-	@RequestMapping(value="/blogMake2.blog")
+	@RequestMapping(value="/blogMake2")
 	public ModelAndView blogMake2(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blogmain/makeBlog2");
 			
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)request;
-		String id = mr.getParameter("id");
 		String blogname = mr.getParameter("blogname");
 		String nickname = mr.getParameter("nickname");
 		String introduce = mr.getParameter("introduce");
 		String headerword = mr.getParameter("headerword");
-		
-		System.out.println("id : "+id);
-		System.out.println("blogname : "+blogname);
-		System.out.println("nickname : "+nickname);
-		System.out.println("introduce : "+introduce);
-		System.out.println("headerword : "+headerword);
+		String mode = mr.getParameter("mode");
 		
 	/*	MultipartFile mf = mr.getFile("profile");
 		String profile = mf.getOriginalFilename();
@@ -101,7 +115,7 @@ public class BlogMainController {
 		else{
 		mf.transferTo(file);
 		}*/
-		mav.addObject("id", id);
+		mav.addObject("mode",mode);
 		mav.addObject("blogname", blogname);
 		mav.addObject("nickname", nickname);
 		mav.addObject("introduce",introduce);
@@ -111,36 +125,32 @@ public class BlogMainController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/blogMake3.blog")
+	@RequestMapping(value="/blogMake3")
 	public ModelAndView blogMake3(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blogmain/makeBlog3");
-		String id = request.getParameter("id");
 		String blogname = request.getParameter("blogname");
 		String nickname = request.getParameter("nickname");
 		String introduce = request.getParameter("introduce");
 		String headerword = request.getParameter("headerword");
 		int layout = ServletRequestUtils.getIntParameter(request, "layout");
-		
-		System.out.println("id : "+id);
-		System.out.println("blogname : "+blogname);
-		System.out.println("nickname : "+nickname);
-		System.out.println("introduce : "+introduce);
-		System.out.println("layout : "+layout);
-		
-		mav.addObject("id",id);
+		String mode = request.getParameter("mode");
+
 		mav.addObject("blogname", blogname);
 		mav.addObject("nickname", nickname);
 		mav.addObject("introduce",introduce);
 		mav.addObject("layout",layout);
 		mav.addObject("headerword",headerword);
+		mav.addObject("mode",mode);
 		
 		return mav;
 	}
 	
 	@RequestMapping(value="/blogMakePro")
 	public ModelAndView blogMakePro(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("blogmain/makeBlogSuccess");
+		String mode = request.getParameter("mode");
 		Blog_OptionDTO dto = getBlogOption(request);
 		int res = optionDAO.makeBlog(dto);
 		HttpSession session = request.getSession();
@@ -166,7 +176,9 @@ public class BlogMainController {
 		hdcopyFile.close();
 		hdoriginFile.close();
 		
-		return new ModelAndView("redirect:blogMake4.blog");
+		mav.addObject("mode",mode);
+		mav.addObject("id",dto.getId());
+		return mav;
 	}
 	
 	private Blog_OptionDTO getBlogOption(HttpServletRequest arg0) throws Exception{
@@ -182,14 +194,11 @@ public class BlogMainController {
 		String headerword = id+"님의 블로그에 오신걸 환영합니다";*/
 		String skin = mr.getParameter("skin");
 		int skinnum = Integer.parseInt(skin.substring(4));
-		System.out.println(skinnum);
 		
 		String header="hd_skin"+skinnum+".jpg";
 		String profile="pf_skin"+skinnum+".jpg";
 		String background = "bg_skin.jpg";
-		if(skinnum>28){
-			background = "bg_skin"+skinnum+".jpg";
-		}
+		
 		/*MultipartFile mf = mr.getFile("background");
 		MultipartFile mf2 = mr.getFile("header");
 		String background = mf.getOriginalFilename();
@@ -215,10 +224,10 @@ public class BlogMainController {
 			dto.setBlogname(arg0.getParameter("blogname"));
 			dto.setLayout(Integer.parseInt(arg0.getParameter("layout")));
 			String headerword=arg0.getParameter("headerword");
-			if(headerword=="null" || headerword==""){
+			if(headerword.trim()=="" || headerword.equals("")){
 				headerword = "Welcome To "+id+" BLOG";
 			}
-			dto.setHeaderword(arg0.getParameter("headerword"));
+			dto.setHeaderword(headerword);
 			dto.setNickname(arg0.getParameter("nickname"));
 			dto.setIntroduce(arg0.getParameter("introduce"));
 			dto.setProfile(profile);

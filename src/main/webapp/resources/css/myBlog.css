@@ -30,3 +30,6 @@ body{
 .sidebar2{border-left: 2px solid gray;}
 #sidebar2{padding-left: 12px;}
 #profile{width:300px; height:100%; border:2px solid #ccc; border-radius: 12px;}
+#pf{display:none;}
+
+

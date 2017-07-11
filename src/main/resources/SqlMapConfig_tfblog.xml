@@ -8,6 +8,8 @@
   <typeAliases>
   	 <typeAlias alias="BlogBoardDTO" type="com.itbank.TechFarm.blog.dto.Blog_BoardDTO"/>
   	 <typeAlias alias="BlogOptionDTO" type="com.itbank.TechFarm.blog.dto.Blog_OptionDTO"/>
+  	 <typeAlias alias="BlogMakeBoardDTO" type="com.itbank.TechFarm.blog.dto.Blog_MakeBoardDTO"/>
+  	  <typeAlias alias="memberDTO" type="com.itbank.TechFarm.login.member.MemberDTO"/>
   </typeAliases>
   <environments default="development"> 
       <environment id="development"> 

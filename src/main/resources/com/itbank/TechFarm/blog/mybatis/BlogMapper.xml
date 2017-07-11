@@ -21,4 +21,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <delete parameterType="String" id="deleteBlog">
   delete from blog_option where id=#{id}
   </delete>
+  
+  <insert id="makeBoard" parameterType="BlogMakeBoardDTO" useGeneratedKeys="true">
+  insert into blog_makeboard (sideno,id,title) values(#{sideno},#{id},#{title})
+  </insert>
+  
+  <select resultType="BlogMakeBoardDTO" id="listBoardTitle" parameterType="String">
+  select * from blog_makeboard where id=#{id}
+  </select>
+  
+  <update id="editBlog_pf_int" parameterType="BlogOptionDTO">
+  update blog_option set profile=#{profile},introduce=#{introduce} where id=#{id}
+  </update>
+  
+  <update id="editBlog_layout" parameterType="BlogOptionDTO">
+  update blog_option set layout=#{layout} where id=#{id}
+  </update>
+  
+  <update id="editBlog_skin" parameterType="BlogOptionDTO">
+  update blog_option set profile=#{profile},header=#{header} where id=#{id}
+  </update>
+  
+  <update id="editBlog_headerword" parameterType="BlogOptionDTO">
+  update blog_option set headerword=#{headerword} where id=#{id}
+  </update>
 </mapper>

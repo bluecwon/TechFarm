@@ -13,12 +13,12 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 	<article>
 		<h1>블로그 만들기<img src="resources/images/2step.jpg" align="right" width="150" height="50"></h1>
 		<h2>2단계:레이아웃 선택</h2>
-		<form action="blogMake3.blog" method="post" enctype="multipart/form-data">
+		<form action="blogMake3" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="blogname" value="${blogname}">
 		<input type="hidden" name="nickname" value="${nickname}">
 		<input type="hidden" name="introduce" value="${introduce}">
-		<input type="hidden" name="id" value="${id}">
-		<input type="hidden" name="headerword" value="${headerword}">		
+		<input type="hidden" name="headerword" value="${headerword}">	
+		<input type="hidden" name="mode" value="${mode}">	
 			<table>
 				<tr>
 					<td width="8%">레이<br>아웃</td>

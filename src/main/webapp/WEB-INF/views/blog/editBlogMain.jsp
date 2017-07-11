@@ -5,19 +5,32 @@
 <%@ include file="editBlogTop.jsp"%>
 		<td valign="top">
 <form action="editBlog" method="post" enctype="multipart/form-data">
+<br>
+&nbsp;&nbsp;&nbsp;<input type="submit" value="저장">
+<br><br>
 <input type="hidden" value="${mode}">	
+
 <c:if test="${mode=='profile'}">
 	<div align="center">
 	<h1>프로필 사진 변경</h1><br>
-	<img src="resources/upload/profile/${optionDTO.profile}" width="200px" height="200px"><br>
-	<input type="file" name="profile"><br><br>
+	<input type="hidden" name="id" value="${optionDTO.id}">
+	<input type="hidden" name="mode" value="${mode}">
+	<img src="resources/upload/${optionDTO.id}/${optionDTO.profile}" width="200px" height="200px" id="pfimg"><br>
+	<input type="file" name="profile" id="pf">
+	<input type="button" value="등록" onclick="document.getElementById('pf').click();">
+	<br>
+	이미지 파일은 jpg,png,gif 파일만 등록 가능합니다.
+	<br><br>
 	<h1>소개 글 변경</h1><br>
 	<textarea rows="10" cols="20" maxlength="200" name="introduce">${optionDTO.introduce}</textarea>
 	</div>
 </c:if>
+
 <c:if test="${mode=='layout'}">
 	<div align="center">
 		<h1>레이아웃 변경</h1><br>
+		<input type="hidden" name="id" value="${optionDTO.id}">
+		<input type="hidden" name="mode" value="${mode}">
 		<input type="radio" name="layout" value="1" id="layout1" checked style="display:none;">
 		<img src="resources/images/layout/layout1on.jpg" onclick='layoutChoice(1)' style="cursor:pointer;" class="layout1">
 		<input type="radio" name="layout" value="2" id="layout2" style="display:none;">&nbsp;
@@ -200,9 +213,12 @@
 						</table>
 					</div>
 </c:if>
+
 <c:if test="${mode=='skin'}">
 					<div align="center">
 					<h1>스킨 변경</h1><input type="button" value="미리보기"><br>
+					<input type="hidden" name="id" value="${optionDTO.id}">
+					<input type="hidden" name="mode" value="${mode}">
 					<table width="100%">
 						<tr>
 							<td>고양이</td>
@@ -252,34 +268,72 @@
 							<td width="20%"><input type="radio" name="skin" value="skin26"></td>
 							<td width="20%"><input type="radio" name="skin" value="skin27"></td>
 							<td width="20%"><input type="radio" name="skin" value="skin28"></td>
-						</tr>
-						<tr>
-							<td>패턴</td>
-							<td width="20%"><input type="radio" name="skin" value="skin29"></td>
-							<td width="20%"><input type="radio" name="skin" value="skin30"></td>
-							<td width="20%"><input type="radio" name="skin" value="skin31"></td>
-							<td width="20%"><input type="radio" name="skin" value="skin32"></td>
 						</tr>	
 					</table>
 					</div>
 </c:if>
+
 <c:if test="${mode=='neighbor'}">
 <div align="center">
 <h1>이웃 관리</h1><br>
+<input type="hidden" name="mode" value="${mode}">
 </div>
 </c:if>
+
 <c:if test="${mode=='blog'}">
 <div align="center">
 <h1>블로그 타이틀 변경</h1><br>
+<input type="hidden" name="id" value="${optionDTO.id}">
 <textarea rows="3" cols="20" maxlength="30" name="headerword">${optionDTO.headerword}</textarea><br><br><br><br>
+<input type="hidden" name="mode" value="${mode}">
 <h1>블로그 탈퇴</h1><br>
-<input type="button" value="탈퇴하기" 
-onclick="javascript:checkDel('${optionDTO.id}','${optionDTO.header}','${optionDTO.profile}');">
+<input type="button" value="탈퇴하기" onclick="javascript:checkDel('${optionDTO.id}');">
+</div>
+</c:if>
+
+<c:if test="${mode=='board'}">
+<div align="center">
+<h1>게시판 관리</h1><br>
+게시판은 각 사이드바에 속하며 사이드바가 없는 레이아웃을 선택시, 게시판이 보이지 않을 수 있습니다.
+<div align="right">
+<a href="makeBoardTitle?id=${optionDTO.id}">게시판 추가</a>
+</div>
+<div>
+<table border="1" width="500px" >
+	<tr align="center">
+		<td width="250px">사이드바1</td>
+		<td width="250px">사이드바2</td>
+	</tr>
+	<tr align="center">
+		<c:choose>
+		<c:when test="${list.size()==0}">
+		<td colspan="2" align="center">
+			게시판이 없습니다
+		</td>
+		</c:when>
+		<c:otherwise>
+		<td>
+		<c:forEach var="dto" items="${list}">
+		<c:if test="${dto.sideno % 2 == 1}">
+		${dto.title}&nbsp;&nbsp;&nbsp;<a href="editBoardTitle?id=${dto.id}">수정</a>&nbsp;|&nbsp;<a href="">삭제</a><br>
+		</c:if>
+		</c:forEach>
+		</td>
+		<td>
+		<c:forEach var="dto" items="${list}">
+		<c:if test="${dto.sideno % 2 == 0}">
+		${dto.title}&nbsp;&nbsp;&nbsp;<a href="editBoardTitle?id=${dto.id}">수정</a>&nbsp;|&nbsp;<a href="editBoardTitle?id=${optionDTO.id}">삭제</a><br>
+		</c:if>
+		</c:forEach>
+		</td> 
+		</c:otherwise>
+		</c:choose>
+	</tr>	
+</table>
+</div>
 </div>
 </c:if>
 </form>
-<br><br><br><br>	
-<input type="submit" value="저장">
 		</td>
 	</tr>
 </table>
