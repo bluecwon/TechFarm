@@ -21,8 +21,9 @@
   	
 	<update id="editContact" parameterType="contactsDTO">
 		update contacts set photo=#{photo}, name=#{name}, company=#{company}, 
-		jobtitle=#{jobtitle}, email=#{email}, phone=#{phone}, notes=#{notes}, 
-		address=#{address}, birthday=#{birthday}, relationship=#{relationship}
+			jobtitle=#{jobtitle}, email=#{email}, phone=#{phone}, notes=#{notes}, 
+			address=#{address}, birthday=#{birthday}, relationship=#{relationship} 
+		where no=#{no}
 	</update>
 	
   	<delete id="deleteContact" parameterType="int">

@@ -6,6 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Contacts</title>
+	<script type="text/javascript">
+		function confirmDel(no){
+			if(confirm("이 연락처를 삭제하시겠습니까?")){
+				location.href="deleteContact?no="+no;
+			}
+		}
+	</script>
 </head>
 <body>
 	<div align="center">
@@ -23,7 +30,7 @@
 							<td>${dto.email }</td>
 							<td>${dto.phone }</td>
 							<td><a href="editContact?no=${dto.no }">수정</a></td>
-							<td><a href="deleteContact?no=${dto.no }">삭제</a></td>			
+							<td><a href="javascript:onClick=confirmDel('${dto.no }')">삭제</a></td>			
 						</tr>
 					</c:forEach>
 				</c:otherwise>
