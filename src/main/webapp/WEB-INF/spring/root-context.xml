@@ -18,5 +18,7 @@
 	<!-- tftube -->
 	<bean id="replyDAO" class="com.itbank.TechFarm.tftube.dao.ReplyDAOImpl"/>
 	<bean id="videoDAO" class="com.itbank.TechFarm.tftube.dao.VideoDAOImpl"/>
-
+	<!-- tfcontacts -->
+	<bean class="com.itbank.TechFarm.contacts.ContactsDAOImpl" id="contactsDAO"/>	
+	
 </beans>

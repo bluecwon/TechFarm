@@ -4,9 +4,11 @@
     PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
     "http://mybatis.org/dtd/mybatis-3-config.dtd">  
 <configuration> 
-  <properties resource="db.properties"/>
+  <properties resource="com/itbank/TechFarm/db.properties"/>
   <typeAliases>
-  	<typeAlias alias = "categoryDTO" type="shop.CategoryDTO"/>
+  	<typeAlias alias = "videoDTO" type="com.itbank.TechFarm.tftube.dto.VideoDTO"/>
+  	<typeAlias alias = "replyDTO" type="com.itbank.TechFarm.tftube.dto.ReplyDTO"/>
+  	<typeAlias alias = "memberDTO" type="com.itbank.TechFarm.login.member.MemberDTO"/>
   </typeAliases>
   <environments default="development"> 
       <environment id="development"> 
@@ -20,6 +22,8 @@
     </environment> 
   </environments> 
   <mappers> 
-    <mapper resource="shop/mybatis/CategoryMapper.xml"/> 
+  	<mapper resource="com/itbank/TechFarm/login/member/MemberMapper.xml"/>
+    <mapper resource="com/itbank/TechFarm/tftube/mybatis/VideoMapper.xml"/>
+    <mapper resource="com/itbank/TechFarm/tftube/mybatis/ReplyMapper.xml"/> 
   </mappers> 
 </configuration> 
