@@ -5,8 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.bouncycastle.jcajce.provider.digest.SHA3;
-import org.bouncycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,31 +21,55 @@ public class ReplyController {
 	private ReplyDAO replyDAO;
 
 	private HttpSession session=null;
-	String msg=null, url=null;	
-	
-	@RequestMapping(value="/tftube_reply_insert", method=RequestMethod.GET)
+	private String msg=null, url=null;	
+	//, method=RequestMethod.GET
+	@RequestMapping(value="/tftube_reply_insert")
 	public ModelAndView tftube_reply_insert(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
-		ModelAndView mv=new ModelAndView();
+		ModelAndView mv=new ModelAndView();	
 		
 		session=arg0.getSession();
 		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
+		if(member!=null){}			
+		else{
+				msg="로그인이 필요한 서비스 입니다. 로그인을 해주세요.";
+				url="login";
+				mv.addObject("msg",msg);
+				mv.addObject("url",url);
+				mv.setViewName("tftube/message");					
+		}
+		ReplyDTO dto=new ReplyDTO();//space to save reply information.	
 		
-		ReplyDTO dto=new ReplyDTO();	
-		int num=Integer.parseInt(arg0.getParameter("num"));
-		int re_step=Integer.parseInt(arg0.getParameter("re_step"));
-		if (num==0){
-			replyDAO.update_re_step();			 
-		}else {
-			replyDAO.update_re_step_reply(re_step);
-			dto.setRe_step(dto.getRe_step());
-			dto.setRe_level(dto.getRe_level() + 1);
-		}		
+		String re_step_raw=arg0.getParameter("re_step");//not exist reply
+		int re_step=0;
+		if(re_step_raw!=null){
+		re_step=Integer.parseInt(re_step_raw);}
 		
-		dto.setContent(arg0.getParameter("content").trim());
-		dto.setMember_no(member.getNo());//null
+		String mode=arg0.getParameter("mode");
+		System.out.println("mode:"+mode);
+		String content=null;
+		int res=0;
+		
+		dto.setMember_no(member.getNo());		
 		dto.setVideo_name(arg0.getParameter("video_name"));
-		int res=replyDAO.insertReply(dto);
+		
+		if(mode.equals("general")){			
+			content=arg0.getParameter("content");			 
+			dto.setRe_level(0);
+			dto.setContent(content);
+			res=replyDAO.insertReply(dto);
+			replyDAO.update_re_step();
+		}else{
+			 content=arg0.getParameter("content_reply");
+			 System.out.println("대댓글일때:"+content);
+			 dto.setRe_level(1);//distinction reply and re_reply
+			 dto.setContent(content);			 
+			 res=replyDAO.insertReply(dto);
+			 replyDAO.update_re_step_reply(re_step);
+		}
+		
+		
+		
 		int no=(Integer)session.getAttribute("video_no");
 		if(res>0){
 			mv.setViewName("redirect:tftube_videoView?no="+no);			
@@ -67,21 +89,14 @@ public class ReplyController {
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
 		
-		session=arg0.getSession();
-		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
-		
-		ReplyDTO dto=new ReplyDTO();		
-		
-		dto.setContent(arg0.getParameter("content").trim());
-		dto.setMember_no(member.getNo());//null
-		dto.setVideo_name(arg0.getParameter("video_name"));
-		int res=replyDAO.insertReply(dto);
-		int no=(Integer)session.getAttribute("video_no");
+		int no=Integer.parseInt(arg0.getParameter("no"));
+		int r_no=Integer.parseInt(arg0.getParameter("r_no"));
+		int res=replyDAO.delete_reply(r_no);
 		if(res>0){
 			mv.setViewName("redirect:tftube_videoView?no="+no);			
 		}
 		else{
-			msg="fail to reply";
+			msg="fail to delete";
 			url="tftube_main";
 			mv.setViewName("tftube/message");
 			mv.addObject("msg",msg);

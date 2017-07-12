@@ -14,7 +14,6 @@ import com.itbank.TechFarm.tftube.dto.ReplyDTO;
 
 
 public class ReplyMapper {
-
 	private static SqlSessionFactory sqlMapper;
 	static {
 		try {
@@ -34,9 +33,9 @@ public class ReplyMapper {
 		return res;
 	}
 
-  	public static List listReply(){
+  	public static List<ReplyDTO> listReply(){
   		SqlSession session = sqlMapper.openSession();  	
-  		List list = session.selectList("replyList");
+  		List<ReplyDTO> list = session.selectList("replyList");
   		session.close();
   		return list;
   	}
@@ -50,8 +49,11 @@ public class ReplyMapper {
   	
   	public static String getName(){
   		SqlSession session=sqlMapper.openSession();
+  		System.out.println("plist:"+session.selectList("getName"));
   		List list=(List)session.selectList("getName");
-  		String name=(String)list.get(0);
+  		String name=null;
+  		if(list.size()==0){}
+  		else{name=(String)list.get(0);}
   		session.close();
   		return name;
   	}
@@ -70,6 +72,14 @@ public class ReplyMapper {
   		session.commit();
   		session.close();
   		return res;  		
+  	}
+  	
+  	public static int delete_reply(int no){
+  	SqlSession session=sqlMapper.openSession();
+  	int res=session.delete("deletereply",no);
+  	session.commit();
+  	session.close();
+  	return res;  	
   	}
   	
   	

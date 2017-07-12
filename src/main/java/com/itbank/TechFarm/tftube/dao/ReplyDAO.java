@@ -15,6 +15,8 @@ public interface ReplyDAO {
 	public String getName();
 	public int update_re_step();
 	public int update_re_step_reply(int re_step);
+	public int delete_reply(int no);
+	
 	
 
 	

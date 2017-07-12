@@ -59,16 +59,14 @@ public class TftubeController {
 	@Autowired
 	private VideoDAO videoDAO;
 	@Autowired
-	private ReplyDAO replyDAO;
-	@Autowired
-	private MemberDAO memberDAO;
+	private ReplyDAO replyDAO;	
 	@Autowired
 	private RecentVideoDAO recentvideoDAO;
 	
 	
 	private String upPath_video=null;
 	private String upPath_image=null;
-	private HttpSession session=null;
+	private HttpSession session=null;//re_check Is it necessity?
 	private String msg=null, url=null;
 	
 	private static HashMap<String, Date> map=new HashMap<String,Date>();
@@ -79,17 +77,24 @@ public class TftubeController {
 	public ModelAndView tftube_main(HttpServletRequest arg0, 
 			HttpServletResponse arg1) throws Exception {
 		ModelAndView mav=new ModelAndView();
-		session=arg0.getSession(); 	
+		
+		//local variable
+		//Problems occur when you access another page directly without going through the main.
+		HttpSession session=arg0.getSession();
+		
 		/*System.out.println("contextPath"+arg0.getContextPath());
 		System.out.println("servletPath"+arg0.getServletPath());*/
 		
 		List<VideoDTO> list=videoDAO.listVideo();		
 		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
-		System.out.println("member"+member);
+		System.out.println("member:"+member);
+		System.out.println("main_list:"+list);
 		
-		if(session.getAttribute("no")!=null){
+		/*no가 뭐냐? 필요 없는 코드 같은데. 중복 방지를 위해서ㅈ거*/
+		/*if(session.getAttribute("no")!=null){
 			session.removeAttribute("no");
-		}
+		}*/
+		
 		/*upPath_image="D:\\workspace_tftube\\techfarm\\src\\main\\webapp\\resources\\tftube\\uploadImage";
 		upPath_video="D:\\workspace_tftube\\techfarm\\src\\main\\webapp\\resources\\tftube\\uploadVideo";*/
 		/*upPath_image=session.getServletContext().getRealPath("/resources/tftube/"+member.getId()+"Image");*/
@@ -198,9 +203,9 @@ public class TftubeController {
 	public ModelAndView tftube_videoView(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
-		
-		int no=ServletRequestUtils.getIntParameter(arg0, "no");//tftube_video
-		session.setAttribute("video_no",no);
+		HttpSession session=arg0.getSession();
+		int no=ServletRequestUtils.getIntParameter(arg0, "no");//tftube_video		
+		session.setAttribute("video_no",no);//error and time lag
 		Date today=new Date();//today			
 		
 		VideoDTO vdto=videoDAO.getVideo(no);//video's total information	
@@ -211,7 +216,7 @@ public class TftubeController {
 		
 		MemberDTO member=new MemberDTO();
 		
-		//hits' validity start
+		//start of hits' validity 
 		HashSet<String> ipset=new HashSet();
 		Iterator it=ipset.iterator();
 		boolean p;
@@ -232,12 +237,12 @@ public class TftubeController {
 			videoDAO.hitUp(no);
 			map.put(vdto.getVideo_hash(), today);			
 		}			
-		//hits' validity end
+		// end of hits' validity
 				
-		//hits' format start
+		//start of hits' format 
 		DecimalFormat df=new DecimalFormat("#,##0");
 		String readcount=df.format(vdto.getReadcount());
-		//hits' format end
+		//end of hits' format 
 		
 		//logined member information at present
 		Object member_object=session.getAttribute("memberDTO");
@@ -245,9 +250,9 @@ public class TftubeController {
 		member=(MemberDTO)member_object;
 		}
 		
-		//RecentVideo insert start		
+		//start of RecentVideo insert 		
 		RecentVideoDTO recent_dto=new RecentVideoDTO();
-		System.out.println("ip:"+ip);
+		
 		if(member_object!=null){
 		recent_dto.setMember_no(member.getNo());
 		recent_dto.setVideo_name(vdto.getVideo_name());
@@ -259,7 +264,7 @@ public class TftubeController {
 			
 			int res=recentvideoDAO.insertRecent(recent_dto);			
 		}
-		//RecentVideo insert end		
+		//end of RecentVideo insert 		
 		
 		//ReplyList where=video		
 		List<ReplyDTO> r_list=replyDAO.replyList_by_video(vdto.getVideo_name());
@@ -273,11 +278,15 @@ public class TftubeController {
 			name_list.add(mdto.getName());			
 		}*/		
 //		mv.addObject("name_list",name_list);
+		//information of recent video
 		mv.addObject("vdto",vdto);		
-		mv.addObject("readcount",readcount);
-		/*List r_list=replyDAO.replyList();*/
+		//hits of reply
+		mv.addObject("readcount",readcount);		
+		//list of reply where video
 		mv.addObject("r_list",r_list);
+		//writer of reply
 		mv.addObject("r_name",r_name);
+		//size of reply
 		mv.addObject("r_size",r_size);
 		
 			

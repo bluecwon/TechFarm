@@ -4,6 +4,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<img src="" style="position: relative;"><span style="position: absolute; top: 5px; right: 5px;">My profile</span></img>
 <head>
 <meta charset="UTF-8">
 <style>
@@ -29,11 +30,18 @@ function like() {
  likes=likes+1;
 }
 
-function goReply(){
-	document.f.action="tftube_reply_insert";
+function GReply(){
+	document.f.action="tftube_reply_insert?mode=general";
 	document.f.submit();	
 }
 
+function DReply(){
+	document.f.action="tftube_reply_insert?mode=deep";
+	document.f.submit();	
+}
+
+//태그를 안붙여주면 잘 못찾는 것 같다.
+//하나씩만 열리도록 설정
 $(document).ready(function(){
 	$(".reply_area").hide();	
 	
@@ -45,8 +53,9 @@ $(document).ready(function(){
 	alert("로그인이 필요한 서비스 입니다. 로그인 페이지로 이동합니다.");
 	})
 	
-	$(".cancel").click(function(){ 
-		$(this).hide();	
+	$(".cancel").click(function(){ 		
+		$("a#reply").hide();
+		
 	});		
 });
 </script>
@@ -55,11 +64,16 @@ $(document).ready(function(){
 <body>
 
 <!-- Video -->
-<video src="resources/tftube/uploadVideo/${vdto.video_name}" autoplay  
+<table>
+<tr><td><video src="resources/tftube/uploadVideo/${vdto.video_name}" autoplay  
 poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="600" height="450"></video>
+</td></tr>
+<tr><td align="right">	조회수 ${readcount}회 <br></td></tr>
+<tr><td align="right"> <button id="button" onclick="like ()">like</button> </td></tr>
 <br>
+</table>
 
-<!-- Edit and Dselete -->
+<!-- Video Edit and Delete -->
 <table>
 <tr><td>
 <c:if test="${vdto.member_no eq memberDTO.no}">
@@ -69,79 +83,87 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
 <!-- information -->
  <tr><td> 
  <font size="18">${vdto.title}</font><br>
-  게시일:${vdto.uploaddate.substring(0,10)}<!-- 게시일 -->				조회수 ${readcount}회 <br>
-  
-
-<button id="button" onclick="like ()">like</button> <p>	
+  게시일:${vdto.uploaddate.substring(0,10)}<br>			
+	
  ${vdto.description}<!-- 간략히 버튼 추가 --><p> 
  </td></tr>
  </table>
  
  
 <!-- Reply -->
-
-댓글 ${r_size}개<br>
+<table>
+<tr><td>댓글 ${r_size}개</td></tr>
 <c:choose>
 <c:when test="${memberDTO==null}">
-로그인이 필요한 서비스 입니다. <a href="login">로그인</a>을 해주세요.
+<tr><td>로그인이 필요한 서비스 입니다. <a href="login">로그인</a>을 해주세요.</td></tr>
 </c:when>
 <c:otherwise>
-<%
-		int num = 0, re_step = 0, re_level = 0;
-		String snum = request.getParameter("num");//답글쓰기일경우
-		if (snum != null){
-			num = Integer.parseInt(snum);
-			re_step = Integer.parseInt(request.getParameter("re_step"));
-			re_level = Integer.parseInt(request.getParameter("re_level"));
-		}
-%>
-<form name="f">
+<tr><td>
+<form name="f" method="post" action="tftube_reply_insert">
 <textArea name="content"></textArea><!--클릭시 로그인창 열리는 방법찾기 -->
 <input type="hidden" name="video_name" value="${vdto.video_name}">
-<input type="hidden" name="no" value="${no}">
-<input type="hidden" name="num" value="<%=num%>">
-<input type="hidden" name="re_step" value="<%=re_step%>">
-<input type="hidden" name="re_level" value="<%=re_level%>">
+<input type="hidden" name="no" value="${vdto.no}">
 <c:if test="${memberDTO!=null}">
-<input type="button" value="입력" onClick="javascript:goReply()">
+<input type="button" value="입력" onClick="javascript:GReply()">
 </c:if>
-
+</td></tr>
 </c:otherwise></c:choose>
+
+</table>
 
 
 <c:set var="i" value="0"/>
+
 <table>
+
+<!-- Reply list -->
+
 <c:forEach var="rdto" items="${r_list}">
 <tr>
+
+<!-- empty space in front of reply_reply -->
+
+<c:choose>
+<c:when test="${rdto.re_level==1}">
+
+<!-- <img src="" style="position: relative;"><span style="position: absolute; top: 5px; right: 5px;">My profile</span></img> -->
+
+
+<!-- <img src="resources/tftube/imgs/vaccum.JPG" height="80" width="80"> -->
+
+
+</c:when><c:otherwise></c:otherwise>
+</c:choose>
 <td>
-<a href="tftube_mychannel?name=${r_name}">${r_name}</a>   ${rdto.reg_date}<br><!-- id sysdate-reg_date 아니면 java에서 변환 -->
-${rdto.content}<br>
+<img src="" width="100" height="80"></img> 
+<img src="" style="position: relative; top:8px" height="80">
+<a href="tftube_mychannel?name=${r_name}">${r_name}</a>   ${rdto.reg_date}<br />
+<!-- id sysdate-reg_date 아니면 java에서 변환 -->
+${rdto.content}
+<input type="hidden" name="re_step" value="${rdto.re_step}"/>
 <c:choose>
 <c:when test="${memberDTO==null}">
-
-<a href="login" class="not_login">답글</a>
+<a href="login" class="not_login">답글</a></img>
 </c:when>
 <c:otherwise>
-<div id="reply"> 
-
 <a class="reply_button" onmouseover="" style="cursor: pointer;">답글</a>
-					<a href="tftube_reply_delete">삭제</a>
-<a class="reply_area">
-<textArea></textArea>
-<input type="button" value="입력" onClick="javascript:goReply()">
+					<a href="tftube_reply_delete?r_no=${rdto.no}&no=${vdto.no}">삭제</a>
+<a id="reply" class="reply_area">
+<textArea name="content_reply"></textArea>
+<input type="button" value="입력" onClick="javascript:DReply()">
 <input class="cancel" type="button" value="취소">
 <br>
 </a>
-</div>
+
 </form>
 </c:otherwise>
 </c:choose>
-<%-- <c:set var="i" value="${i=i+1}"/> --%>
 <!--답글이 존재한다면 답글:답글갯수 -->
 </tr>
 </c:forEach>
+<!-- end of Reply List -->
 </table>
-<!-- end of Reply -->
+
 	
 		<%--
 		<c:forEach var="dto" items="${boardList}">

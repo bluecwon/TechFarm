@@ -7,15 +7,15 @@
 <mapper namespace="com.itbank.TechFarm.tftube.mybatis.ReplyMapper">
 
 	<select id="replyList" resultType="replyDTO">
-		select * from tftube_reply order by no desc
+		select * from tftube_reply order by re_step desc
 	</select>
 	
 	<select id="replyList_by_video" parameterType="String" resultType="replyDTO">
-		select * from tftube_reply where video_name=#{video_name} order by no desc
+		select * from tftube_reply where video_name=#{video_name} order by re_step desc
 	</select>		
 	
 	<select id="getName" resultType="String">
-	select a.name  from  tfmember.member a  join tftube.tftube_reply b  on a.no = b.member_no
+	select a.name from tfmember.member a  join tftube.tftube_reply b on a.no = b.member_no
 	</select>	
 	
 	<select id="getreply" resultType="replyDTO" parameterType="int">
@@ -23,13 +23,13 @@
 	</select>
 	
 	<delete id="deletereply" parameterType="int">
-		delete from tftube_reply where num = #{num}
+		delete from tftube_reply where no = #{no}
 	</delete>
 	
 	<insert id="insertReply" parameterType="replyDTO" useGeneratedKeys="true">	
 		insert into tftube_reply 
-		(member_no,content,video_name)
-		values(#{member_no},#{content},#{video_name})		
+		(member_no,content,video_name,re_level)
+		values(#{member_no},#{content},#{video_name},#{re_level})		
 	</insert>
 	
 	<update id="update_re_step">	
@@ -37,7 +37,7 @@
 	</update>
 	
 	<update id="update_re_step_reply" parameterType="replyDTO">	
-		update tftube_reply set re_step = re_step + 1 where re_step >= #{re_step}
+		update tftube_reply set re_step = re_step + 1 where re_step > #{re_step}
 	</update>
 	
 	<update id="updatereply" parameterType="replyDTO">
