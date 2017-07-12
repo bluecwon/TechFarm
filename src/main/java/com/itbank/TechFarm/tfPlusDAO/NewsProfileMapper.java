@@ -188,4 +188,12 @@ public class NewsProfileMapper {
 		return res;
 	}
 	
+	public static int newsAddDelete(int profileAddPK) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.delete("newsAddDelete",profileAddPK);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
 }

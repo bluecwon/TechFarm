@@ -128,5 +128,10 @@ public class NewsProfileDAOImpl implements NewsProfileDAO {
 	public int newsAddListInsert(NewsProfileAddCommentDTO newsProfileAddCommentDTO) {
 		return NewsProfileMapper.newsAddListInsert(newsProfileAddCommentDTO);
 	}
+
+	@Override
+	public int newsAddDelete(int profileAddPK) {
+		return NewsProfileMapper.newsAddDelete(profileAddPK);
+	}
 	
 }

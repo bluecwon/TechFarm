@@ -61,9 +61,20 @@
 													<c:set var="ch" value="1"/>
 														<tr>
 															<th scope="row">
-																<img src="resources/tfPlus/images/default/basicImg.JPG" style="width:50px; height:25px;">
+																<c:set var="addCheck" value="0"/>
+																<c:forEach var="addDto" items="${myProfileAllList}">
+																	<c:if test="${dto.profileAddId == addDto.myId}">
+																		<img id="img_size" src="${myProfileUpPath}/${addDto.photo}" style="width:50px; height:25px;"/>
+																		<c:set var="addCheck" value="1"/>
+																	</c:if>
+																</c:forEach>
+																<c:if test="${addCheck==0}">
+																	<img src="resources/tfPlus/images/default/basicImg.JPG" style="width:50px; height:25px;">
+																</c:if>
 																${dto.profileAddName}
-																<a href="javascript:;">삭제</a>
+																<c:if test="${dto.profileAddId == sessionScope.memberDTO.id}">
+																	<a href="tfPlusNewsAddDelete?addPK=${dto.profileAddPK}&profileName=${newsBoardName}&id=${newsprofileId}&my=${my}&myId=${sessionScope.memberDTO.id}">삭제</a>
+																</c:if>
 															</th>
 															<td>
 																<div class="subMenuDiv_add">
@@ -72,7 +83,15 @@
 																	<form>
 																		<table class="jjm494_subAdd">
 																			<tr>
-																				<th scope="row">여긴 아직 test</th>
+																				<th scope="row">
+																		        	<c:if test="${myProfileDTO != null}">
+																		        		<img id="img_size" src="${myProfileUpPath}/${myProfileDTO.photo}" style="width:50px; height:25px;"/>
+																		        	</c:if>
+																		        	<c:if test="${myProfileDTO == null}">
+																		        		<img src="resources/tfPlus/images/default/basicImg.JPG" style="width:50px; height:25px;">
+																		        	</c:if>
+																					여긴 아직 test
+																				</th>
 																				<td>
 																					<input name="profileBoardTitle" type="text" class="form-poshytip" title="내용을 입력하세요"/>
 																					<input type="submit" value="등록">
@@ -97,7 +116,15 @@
 										<form name="f" action="tfPlusNewsProfileAddPro" method="post">
 											<table class="jjm494_add">
 											    <tr>
-											        <th scope="row">${sessionScope.memberDTO.name}</th>
+											        <th scope="row">
+											        	<c:if test="${myProfileDTO != null}">
+											        		<img id="img_size" src="${myProfileUpPath}/${myProfileDTO.photo}" style="width:50px; height:25px;"/>
+											        	</c:if>
+											        	<c:if test="${myProfileDTO == null}">
+											        		<img src="resources/tfPlus/images/default/basicImg.JPG" style="width:50px; height:25px;">
+											        	</c:if>
+											        	${sessionScope.memberDTO.name}
+											        </th>
 											        <td>
 											        	<input name="profileAddContents" type="text" class="form-poshytip" title="내용을 입력하세요."/>
 											        	<input type="submit" value="등록">

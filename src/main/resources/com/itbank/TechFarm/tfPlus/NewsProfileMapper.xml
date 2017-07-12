@@ -127,4 +127,9 @@
 			WHERE profileNum = #{profileNum}
 	</delete>
 	
+	<delete id="newsAddDelete" parameterType="int">
+		DELETE FROM newsprofileaddcomment
+			WHERE profileAddPK = #{profileAddPK}
+	</delete>
+	
 </mapper>

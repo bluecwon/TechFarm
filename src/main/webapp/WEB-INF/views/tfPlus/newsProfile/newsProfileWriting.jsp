@@ -53,7 +53,14 @@
         	<aside id="contact-sidebar">
         		<div class="block">
 	        		<h4>사용자 정보</h4>
-	        		<img src="resources/tfPlus/images/default/basicImg.JPG" style="width:100px; height:50px;">
+	        		<c:if test="${myProfileDTO != null}">
+	        			<img id="img_size" src="${myProfileUpPath}/${myProfileDTO.photo}" style="width:100px; height:50px;"/>
+	        			<p>취미 : ${myProfileDTO.hobby}</p>
+	        		</c:if>
+	        		<c:if test="${myProfileDTO == null}">
+	        			<img src="resources/tfPlus/images/default/basicImg.JPG" style="width:100px; height:50px;"/>
+	        			<p>취미 : 아직 등록안함</p>
+	        		</c:if>
 	        		<p>이름 : ${sessionScope.memberDTO.name}</p>
 	        		<p>내 소식 : ${newsMyList.size()}</p>
 	        		<ul class="address-block">

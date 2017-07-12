@@ -27,4 +27,5 @@ public interface NewsProfileDAO {
 	public List newsProfileTOP(int top);
 	public List newsAddList();
 	public int newsAddListInsert(NewsProfileAddCommentDTO newsProfileAddCommentDTO);
+	public int newsAddDelete(int profileAddPK);
 }

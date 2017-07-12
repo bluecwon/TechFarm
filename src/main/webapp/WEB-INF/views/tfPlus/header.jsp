@@ -19,6 +19,7 @@
 		<c:set var="newsProfileBoardUpPath" value="resources/tfPlus/images/contents/profileBoard"/>
 		<c:set var="memberProfileUpPath" value="resources/tfPlus/images/contents/memberProfile"/>
 		<c:set var="memberProfileBoardUpPath" value="resources/tfPlus/images/contents/memberBoard"/>
+		<c:set var="myProfileUpPath" value="resources/tfPlus/images/contents/myProfile"/>
 		
 		<!-- JS -->
 		<script src="resources/tfPlus/js/jquery-1.9.0.js" type="text/javascript"></script>
@@ -235,7 +236,7 @@
 								<li><a href="tfPlusMemberProfileWriting?id=${sessionScope.memberDTO.id}">내가 소유한 커뮤니티</a></li>
 							</ul>
 						</li>
-						<li><a href="tfPlusMyProfile">프로필</a></li>
+						<li><a href="tfPlusMyProfile?myId=${sessionScope.memberDTO.id}">프로필</a></li>
 						<li>
 							<a href="#">알림</a>
 							<ul>

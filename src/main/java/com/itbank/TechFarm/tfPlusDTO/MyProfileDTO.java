@@ -4,6 +4,7 @@ public class MyProfileDTO {
 	private int myProfilePK;
 	private String hobby;
 	private String photo;
+	private String myId;
 	
 	public int getMyProfilePK() {
 		return myProfilePK;
@@ -22,6 +23,12 @@ public class MyProfileDTO {
 	}
 	public void setPhoto(String photo) {
 		this.photo = photo;
+	}
+	public String getMyId() {
+		return myId;
+	}
+	public void setMyId(String myId) {
+		this.myId = myId;
 	}
 	
 }

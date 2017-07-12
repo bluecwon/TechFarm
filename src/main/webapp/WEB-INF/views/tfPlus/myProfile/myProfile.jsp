@@ -10,24 +10,30 @@
 	<div class="wrapper clearfix">
 		<div id="page-content" class="clearfix">
 			<script type="text/javascript" src="js/form-validation.js"></script>
-			<form name="f" id="contactForm" action="tfPlusNewsProfileWritingPro?id=${sessionScope.memberDTO.id}" method="post" enctype="multipart/form-data">
+			<form name="f" id="contactForm" action="tfPlusMyProfilePro" method="post" enctype="multipart/form-data">
 				<h2 class="page-heading"><span>내 프로필 정보 등록</span></h2>
 				<p></p>	
 				<fieldset>
+					<c:set var="idCheck" value="0"/>
+	        		<c:forEach var="dto" items="#{myProfileList}">
+	        			<c:if test="${dto.myId == sessionScope.memberDTO.id}">
+	        				<c:set var="idCheck" value="1"/>
+	        			</c:if>
+	        		</c:forEach>
 					<table class="jjm494_myProfile">
 						<tr>
 							<td>
 								<div class="filebox bs3-primary preview-image">
 									<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
 									<label for="input_file">프로필 사진등록</label> 
-									<input type="file" id="input_file" class="upload-hidden"> 
+									<input type="file" id="input_file" class="upload-hidden" name="photo"> 
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td align="center">
 								취미등록 : 
-								<select class="selectOption" name="checkOption">
+								<select class="selectOption" name="hobby">
 									<option>게임</option>
 									<option>운동</option>
 									<option>학업</option>
@@ -37,6 +43,12 @@
 						</tr>
 						<tr>
 							<td align="center">
+								<!-- 히든으로 넘어갈 정보들 -->
+									<input type="hidden" value="${sessionScope.memberDTO.id}" name="myId" id="to" />
+									<c:if test="${idCheck==1}">
+										<input type="hidden" value="update" name="update" id="to"/>
+									</c:if>
+								<!-- 히든으로 넘어갈 정보들 -->
 								<input type="submit" value="만들기"/>
 							</td>
 						</tr>
@@ -47,8 +59,24 @@
         	<aside id="contact-sidebar">
         		<div class="block">
 	        		<h4>사용자 정보</h4>
-	        		<img src="resources/tfPlus/images/default/basicImg.JPG" style="width:100px; height:50px;">
+	        		<c:set var="check" value="0"/>
+	        		<c:forEach var="dto" items="${myProfileList}">
+	        			<c:if test="${dto.myId == sessionScope.memberDTO.id}">
+	        				<img id="img_size" src="${myProfileUpPath}/${dto.photo}" style="width:100px; height:50px;"/>
+	        				<c:set var="check" value="1"/>
+	        				<c:set var="hobby" value="${dto.hobby}"/>
+	        			</c:if>
+	        		</c:forEach>
+	        		<c:if test="${check==0}">
+	        			<img src="resources/tfPlus/images/default/basicImg.JPG" style="width:100px; height:50px;">
+	        		</c:if>
 	        		<p>이름 : ${sessionScope.memberDTO.name}</p>
+	        		<c:if test="${check==0}">
+	        			<p>취미 : 아직 등록안함</p>
+	        		</c:if>
+	        		<c:if test="${check!=0}">
+	        			<p>취미 : ${hobby}</p>
+	        		</c:if>
 	        		<ul class="address-block">
 	        			<li class="address">ID : ${sessionScope.memberDTO.id}</li>
 	        			<li class="email"><a href="mailto:email@server.com">${sessionScope.memberDTO.email}</a></li>
