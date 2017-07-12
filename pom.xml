@@ -169,7 +169,12 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
 		</dependency>
-		
+		<!-- Java Mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>1.5.6</version>
+		</dependency>
 		<!-- 검증 관련 api -->
 		<dependency>
 			<groupId>javax.validation</groupId>
