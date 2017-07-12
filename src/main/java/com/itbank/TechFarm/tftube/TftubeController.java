@@ -210,12 +210,12 @@ public class TftubeController {
 		//when null->or not error?
 		String like_status_raw=arg0.getParameter("like");
 		String unlike_status_raw=arg0.getParameter("unlike");
-		
+		//어느 비디오에서 해줄지 빠짐
 		int like_status=0;
 		int unlike_status=0;
 		System.out.println("like_status:"+like_status);
 		System.out.println("unlike_status:"+unlike_status);
-		VideoDTO likedto=new VideoDTO();
+		
 		int res_like=0;
 		if(like_status_raw!=null){
 			 like_status=Integer.parseInt(like_status_raw);			 
