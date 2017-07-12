@@ -1,15 +1,17 @@
 package com.itbank.TechFarm.login.member;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class MemberDTO {
 	private int no;
 	@NotEmpty
-	@Length(min=4,max=10)
+	@Length(min=4, max=15)
 	private String id;
 	@NotEmpty
 	@Pattern(regexp="^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,}$")
@@ -20,13 +22,19 @@ public class MemberDTO {
 	private String email1;
 	@NotEmpty
 	private String email2;
-	@Email
+	@Pattern(regexp="^(?=.*[@])(?=.*[.]).{6,}$")
 	private String email;
-	@NotEmpty
+	@NotNull
+	@Min(1900)
+	@Max(2016)
 	private int birthday_year;
-	@NotEmpty
+	@NotNull
+	@Min(1)
+	@Max(12)
 	private int birthday_month;
-	@NotEmpty
+	@NotNull
+	@Min(1)
+	@Max(31)
 	private int birthday_day;
 	private int sex;
 	private String joindate;

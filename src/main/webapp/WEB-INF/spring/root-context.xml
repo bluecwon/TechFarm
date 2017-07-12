@@ -19,6 +19,16 @@
 	<bean id="replyDAO" class="com.itbank.TechFarm.tftube.dao.ReplyDAOImpl"/>
 	<bean id="videoDAO" class="com.itbank.TechFarm.tftube.dao.VideoDAOImpl"/>
 	<!-- tfcontacts -->
-	<bean class="com.itbank.TechFarm.contacts.ContactsDAOImpl" id="contactsDAO"/>	
+	<bean class="com.itbank.TechFarm.contacts.ContactsDAOImpl" id="contactsDAO"/>
+	<!-- messagesource -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>message.error</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
 	
 </beans>

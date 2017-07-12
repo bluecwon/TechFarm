@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -77,7 +79,7 @@
 		}
 		
 		function checkForm(){
-			if(member.id.value==""){
+			/* if(member.id.value==""){
 				alert("아이디를 입력하세요")
 				member.id.focus()
 				return false;
@@ -107,7 +109,7 @@
 			if(!result){
 				alert("생일을 확인해 주세요.")
 				return false;
-			}
+			} */
 			var email=member.email1.value+"@"+member.email2.value;
 			member.email.value=email;
 			return true;
@@ -117,6 +119,7 @@
 <body>
 	<div class="createmain">
 		<table>
+			<spring:hasBindErrors name="inputInfo"/>
 			<form name="member" action="inputmember" method="post" onsubmit="return checkForm()">
 			<tr>
 				<td><img src="resources/home/imgs/name.png" width="200"></td>
@@ -125,10 +128,12 @@
 				<td><font size=5>회원가입</font></td>
 			</tr>
 			<tr>
-				<td>아이디<br><input id="id" type="text" name="id" value="${inputInfo.id}"></td>
+				<td>아이디<br><input id="id" type="text" name="id" value="${inputInfo.id}"><br>
+				<form:errors path="inputInfo.id"/></td>
 			</tr>
 			<tr>
-				<td>비밀번호<br><input id="pwd1" type="password" name="passwd" value="${inputInfo.passwd}" onblur="checkPasswd()"></td>
+				<td>비밀번호<br><input id="pwd1" type="password" name="passwd" value="${inputInfo.passwd}" onblur="checkPasswd()"><br>
+				<form:errors path="inputInfo.passwd"/></td>
 			</tr>
 			<tr>
 				<td><span id="sid"></span></td>
@@ -140,10 +145,12 @@
 				<td><span id="sid2"></span></td>
 			</tr>
 			<tr>
-				<td>이름<br><input type="text" name="name" value="${inputInfo.name}"></td>
+				<td>이름<br><input type="text" name="name" value="${inputInfo.name}">
+				<br><form:errors path="inputInfo.name"/></td>
 			</tr>
 			<tr>
-				<td>E-mail<br><input type="text" name="email1" value="${inputInfo.email1}">@<input type="text" name="email2" value="${inputInfo.email2}"></td>
+				<td>E-mail<br><input type="text" name="email1" value="${inputInfo.email1}">@<input type="text" name="email2" value="${inputInfo.email2}">
+				<br><form:errors path="inputInfo.email"/></td>
 			</tr>
 				<td><span>인증 및 비밀번호 찾기 서비스에 사용될 e-mail을 입력해주세요.</span></td>
 			<tr>
@@ -151,6 +158,9 @@
 					<input id="year" type="text" name="birthday_year" size="4" maxlength="4" value="${inputInfo.birthday_year}" onblur="checkBirthDay()">년
 					<input id="month" type="text" name="birthday_month" size="2" maxlength="2" value="${inputInfo.birthday_month}" onblur="checkBirthDay()">월
 					<input id="day" type="text" name="birthday_day" size="2" maxlength="2" value="${inputInfo.birthday_day}" onblur="checkBirthDay()">일
+					<br><form:errors path="inputInfo.birthday_year"/>
+					<br><form:errors path="inputInfo.birthday_month"/>
+					<br><form:errors path="inputInfo.birthday_day"/></td>
 				</td>
 			</tr>
 			<tr>

@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,43 +26,38 @@ public class LoginController {
 	private MemberDAO memberDAO;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav=new ModelAndView("login/login");
+	public String login(HttpServletRequest request, HttpSession session, Model model) {
 		String id=request.getParameter("id");
 		MemberDTO dto=memberDAO.getLogin(id);
-		request.getSession().setAttribute("loginDTO", dto);
+		session.setAttribute("loginDTO", dto);
 		if(dto==null){
-			mav.addObject("cid", 2);
+			model.addAttribute("cid", 2);
 		}else{
-			mav.addObject("cid", 1);
+			model.addAttribute("cid", 1);
 		}
-		return mav;
+		return "login/login";
 	}
 	
 	@RequestMapping(value = "/login2", method = RequestMethod.POST)
-	public ModelAndView login2(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		ModelAndView mav=new ModelAndView();
+	public String login2(Model model,HttpServletRequest request, HttpSession session) throws IOException {
 		String passwd=request.getParameter("passwd");
-		MemberDTO dto=(MemberDTO)request.getSession().getAttribute("loginDTO");
+		MemberDTO dto=(MemberDTO)session.getAttribute("loginDTO");
 		if(dto.getPasswd().equals(passwd)){
 			MemberDTO info=memberDAO.getMember(dto.getId());
-			request.getSession().invalidate();
-			request.getSession().setAttribute("memberDTO", info);
-			mav.setViewName("redirect:/");				
-			return mav;
+			session.removeAttribute("loginDTO");
+			session.setAttribute("memberDTO", info);			
+			return "redirect:/";
 		}else{
-			mav.addObject("cidd", 3);
-			mav.addObject("cid", 1);
-			mav.setViewName("login/login");
-			return mav;
+			model.addAttribute("cidd", 3);
+			model.addAttribute("cid", 1);
+			return "login/login";
 		}
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav=new ModelAndView("home");
-		request.getSession().invalidate();
-		return mav;
+	public String logout(HttpServletRequest request, HttpSession session) {
+		session.invalidate();
+		return "home";
 	}
 	
 	@RequestMapping(value = "/createAccount", method = RequestMethod.GET)
@@ -70,7 +66,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/inputmember", method = RequestMethod.POST)
-	public String inputMember(@ModelAttribute("inputInfo") @Valid MemberDTO dto, Errors errors) {
+	public String inputMember(@Valid @ModelAttribute("inputInfo") MemberDTO dto, Errors errors) {
 		if(errors.hasErrors()){
 			return "login/createAccount";
 		}
