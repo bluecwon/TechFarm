@@ -1,6 +1,7 @@
 package com.itbank.TechFarm.tfPlusController;
 
 import java.io.File;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.TechFarm.tfPlusDAO.MemberProfileDAO;
+import com.itbank.TechFarm.tfPlusDAO.MyProfileDAO;
 import com.itbank.TechFarm.tfPlusDAO.NewsProfileDAO;
 import com.itbank.TechFarm.tfPlusDTO.MemberJoinIdDTO;
 import com.itbank.TechFarm.tfPlusDTO.MemberProfileAddCommentDTO;
@@ -33,6 +35,8 @@ public class tfPlusNewsProfileController {
 	private NewsProfileDAO newsProfileDAO; 
 	@Autowired
 	private MemberProfileDAO memberProfileDAO;
+	@Autowired
+	private MyProfileDAO myProfileDAO;
 	
 	// ************************************** //
 	/* start News */
@@ -192,8 +196,18 @@ public class tfPlusNewsProfileController {
 	public ModelAndView tfPlusIndex(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		List newsProfileList = newsProfileDAO.newsProfileTOP(6);
+		List memberProfileList = memberProfileDAO.memberProfileTOP(4);
 		mav.setViewName("tfPlus/index");
 		mav.addObject("newsProfileList",newsProfileList);
+		mav.addObject("memberProfileList",memberProfileList);
+		return mav;
+	}
+	
+	/* myProfile */
+	@RequestMapping(value="/tfPlusMyProfile")
+	public ModelAndView tfPlusMyProfile(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("tfPlus/myProfile/myProfile");
 		return mav;
 	}
 	
@@ -244,7 +258,7 @@ public class tfPlusNewsProfileController {
 		String num = request.getParameter("num");
 		String my = request.getParameter("my");
 		
-		List listAdd = newsProfileDAO.newsAddList(Integer.parseInt(num));
+		List listAdd = newsProfileDAO.newsAddList(); 
 		List list = newsProfileDAO.newsProfileBoard(profileName, id);
 		
 		if(my.equals("true")){
@@ -419,6 +433,7 @@ public class tfPlusNewsProfileController {
 		String num = request.getParameter("num");
 		String my = request.getParameter("my");
 		String myId = request.getParameter("profileAddId");
+		profileName = URLEncoder.encode(profileName,"UTF-8");
 		mav.setViewName("redirect:tfPlusNewsProfileBoardList?profileName="+profileName+"&id="+id+"&num="+num+"&my="+my+"&myId="+myId);
 		return mav;
 	}		
@@ -451,7 +466,7 @@ public class tfPlusNewsProfileController {
 		
 		result = memberProfileDAO.memberGoodList(startRow, endRow);
 		mav.setViewName("tfPlus/memberProfile/memberProfileList");
-		mav.addObject("newsGoodList",result);
+		mav.addObject("memberGoodList",result);
 		mav.addObject("joinList",joinList);
 
 		mav.addObject("currentPage",currentPage); 
@@ -486,7 +501,7 @@ public class tfPlusNewsProfileController {
 		
 		result = memberProfileDAO.memberMyList(startRow, endRow, id);
 		mav.setViewName("tfPlus/memberProfile/memberProfileWriting");
-		mav.addObject("newsMyList",result);
+		mav.addObject("memberMyList",result);
 		
 		mav.addObject("currentPage",currentPage);
 		mav.addObject("countRow",countRow); 
@@ -537,8 +552,8 @@ public class tfPlusNewsProfileController {
 		String num = request.getParameter("num");
 		String my = request.getParameter("my");
 		
-		List listAdd = memberProfileDAO.memberAddList(Integer.parseInt(num));
-		List list = memberProfileDAO.memberProfileBoard(profileName, id);
+		List listAdd = memberProfileDAO.memberAddList();
+		List list = memberProfileDAO.memberProfileBoard(profileName);
 		
 		if(my.equals("true")){
 			mav.setViewName("tfPlus/memberProfile/memberProfileBoardList");
@@ -648,10 +663,12 @@ public class tfPlusNewsProfileController {
 		String num = request.getParameter("num");
 		String my = request.getParameter("my");
 		String myId = request.getParameter("profileAddId");
+		profileName = URLEncoder.encode(profileName,"UTF-8");
 		mav.setViewName("redirect:tfPlusMemberProfileBoardList?profileName="+profileName+"&id="+id+"&num="+num+"&my="+my+"&myId="+myId);
 		return mav;
 	}		
 	/* end Member */
+	
 }
 
 

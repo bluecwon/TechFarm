@@ -70,9 +70,9 @@ public class MemberProfileMapper {
 		return dto;
 	}
 	
-	public static List memberAddList(int profileBoardPK) {
+	public static List memberAddList() {
 		SqlSession session = sqlMapper.openSession();
-		List list = session.selectList("memberAddList",profileBoardPK);
+		List list = session.selectList("memberAddList");
 		session.close();
 		return list;
 	}

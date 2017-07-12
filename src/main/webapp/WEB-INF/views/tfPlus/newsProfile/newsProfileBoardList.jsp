@@ -49,22 +49,19 @@
 										<div class="meta">
 											<div class="categories">좋아요 : ${dto.profileBoardGood}</div>
 											<div class="comments"><a href="javascript:;">댓글 보기</a></div>
-											<div class="user">작성자 : ${dto.profileBoardName}</div>
+											<div class="user">작성자 : ${dto.profileBoardId}</div>
 										</div>
 										
 										<!-- 댓글 -->
 										<table class="jjm494_add">
-											<c:if test="${newsAddList.size() == 0}">
-												<tr>
-													<th></th>
-													<td>등록된 댓글이 하나도 없습니다.</td>
-												</tr>
-											</c:if>
+											<c:set var="ch" value="0"/>
 											<c:forEach var="dto" items="${newsAddList}">
 												<c:choose>
 													<c:when test="${dto.profileBoardFK == profileBoardNum}">
+													<c:set var="ch" value="1"/>
 														<tr>
 															<th scope="row">
+																<img src="resources/tfPlus/images/default/basicImg.JPG" style="width:50px; height:25px;">
 																${dto.profileAddName}
 																<a href="javascript:;">삭제</a>
 															</th>
@@ -87,14 +84,14 @@
 															</td>
 														</tr>
 													</c:when>
-													<c:otherwise>
-														<tr>
-															<th></th>
-															<td>등록된 댓글이 하나도 없습니다.</td>
-														</tr>
-													</c:otherwise>
 												</c:choose>
 											</c:forEach>
+											<c:if test="${ch != 1}">
+												<tr>
+													<th></th>
+													<td>등록된 댓글이 하나도 없습니다.</td>
+												</tr>
+											</c:if>
 										</table>
 										
 										<form name="f" action="tfPlusNewsProfileAddPro" method="post">

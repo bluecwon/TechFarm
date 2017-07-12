@@ -14,11 +14,9 @@
 	        		<h2 class="page-heading">
 	        			<span>
 	        				${memberBoardName}
-	        				<c:if test="${memberprofileId==sessionScope.memberDTO.id}">
-		        				<a href="#" onclick="window.open('tfPlusMemberProfileBoardWriting?name=${memberBoardName}','window','location=no, directories=no,resizable=no,status=no,toolbar=no,menubar=no, width=715,height=500,left=500, top=250, scrollbars=yes');return false"  title="게시물을 등록할까요?" class="poshytip">
-		        					<img src="resources/tfPlus/img/social/plus.png"/>
-		        				</a>
-	        				</c:if>
+	        				<a href="#" onclick="window.open('tfPlusMemberProfileBoardWriting?name=${memberBoardName}','window','location=no, directories=no,resizable=no,status=no,toolbar=no,menubar=no, width=715,height=500,left=500, top=250, scrollbars=yes');return false"  title="게시물을 등록할까요?" class="poshytip">
+	        					<img src="resources/tfPlus/img/social/plus.png"/>
+	        				</a>
 	        			</span>
 	        		</h2>	
 	        		
@@ -49,20 +47,16 @@
 										<div class="meta">
 											<div class="categories">좋아요 : ${dto.mProfileBoardGood}</div>
 											<div class="comments"><a href="javascript:;">댓글 보기</a></div>
-											<div class="user">작성자 : ${dto.mProfileBoardName}</div>
+											<div class="user">작성자 : ${dto.mProfileBoardId}</div>
 										</div>
 										
 										<!-- 댓글 -->
 										<table class="jjm494_add">
-											<c:if test="${memberAddList.size() == 0}">
-												<tr>
-													<th></th>
-													<td>등록된 댓글이 하나도 없습니다.</td>
-												</tr>
-											</c:if>
+											<c:set var="ch" value="0"/>
 											<c:forEach var="dto" items="${memberAddList}">
 												<c:choose>
 													<c:when test="${dto.mProfileBoardFK == profileBoardNum}">
+													<c:set var="ch" value="1"/>
 														<tr>
 															<th scope="row">
 																${dto.mProfileAddName}
@@ -87,14 +81,14 @@
 															</td>
 														</tr>
 													</c:when>
-													<c:otherwise>
-														<tr>
-															<th></th>
-															<td>등록된 댓글이 하나도 없습니다.</td>
-														</tr>
-													</c:otherwise>
 												</c:choose>
 											</c:forEach>
+											<c:if test="${ch != 1}">
+												<tr>
+													<th></th>
+													<td>등록된 댓글이 하나도 없습니다.</td>
+												</tr>
+											</c:if>
 										</table>
 										
 										<form name="f" action="tfPlusMemberProfileAddPro" method="post">

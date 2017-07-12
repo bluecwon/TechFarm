@@ -26,8 +26,11 @@
 					<div>
 						<select class="selectOption" name="checkOption">
 							<option>공개여부를 선택하세요.</option>
-							<option>공개</option>
-							<option>비공개</option>
+							<option>분류를 지정하세요.</option>
+							<option>게임</option>
+							<option>운동</option>
+							<option>학업</option>
+							<option>미용</option>
 						</select>
 					</div><br>
 					<div>
@@ -51,6 +54,7 @@
         	<aside id="contact-sidebar">
         		<div class="block">
 	        		<h4>사용자 정보</h4>
+	        		<img src="resources/tfPlus/images/default/basicImg.JPG" style="width:100px; height:50px;">
 	        		<p>이름 : ${sessionScope.memberDTO.name}</p>
 	        		<p>내 소식 : ${memberMyList.size()}</p>
 	        		<ul class="address-block">

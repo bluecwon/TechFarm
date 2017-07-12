@@ -91,48 +91,51 @@
 	        	
 	        	<!-- 메인 커뮤니티 이미지박스 시작 -->
 	        	<div class="home-block">
-	        	
 	        		<h2 class="home-block-heading"><span>커뮤니티 모음</span></h2>
 	        		<div class="one-fourth-thumbs clearfix">
-	        			<figure>
-		        			<figcaption>
-	        					<strong>글 제목</strong>
-	        					<span>글내용</span>
-	        					<em>작성날짜</em>
-	        					<a href="single.html" class="opener"></a>
-			        		</figcaption>
-			        		<a href="single.html"  class="thumb"><img src="resources/tfPlus/img/dummies/featured-7.jpg" alt="Alt text" /></a>
-		        		</figure>
-		        		<figure>
-		        			<figcaption>
-	        					<strong>글 제목</strong>
-	        					<span>글내용</span>
-	        					<em>작성날짜</em>
-	        					<a href="single.html" class="opener"></a>
-			        		</figcaption>
-			        		<a href="single.html"  class="thumb"><img src="resources/tfPlus/img/dummies/featured-8.jpg" alt="Alt text" /></a>
-		        		</figure>
-		        		<figure>
-		        			<figcaption>
-	        					<strong>글 제목</strong>
-	        					<span>글내용</span>
-	        					<em>작성날짜</em>
-	        					<a href="single.html" class="opener"></a>
-			        		</figcaption>
-			        		<a href="single.html"  class="thumb"><img src="resources/tfPlus/img/dummies/featured-9.jpg" alt="Alt text" /></a>
-		        		</figure>
-		        		<figure class="last">
-		        			<figcaption>
-	        					<strong>글 제목</strong>
-	        					<span>글내용</span>
-	        					<em>작성날짜</em>
-	        					<a href="single.html" class="opener"></a>
-			        		</figcaption>
-			        		<a href="single.html"  class="thumb"><img src="resources/tfPlus/img/dummies/featured-10.jpg" alt="Alt text" /></a>
-		        		</figure>
-		        		<a href="#" class="more-link right">더보기..  &#8594;</a>
+	        		
+	        			<c:set var="count" value="1"/>
+	        			<c:forEach var="dto" items="${memberProfileList}"> 
+	        				<c:choose>
+	        					<c:when test="${count!=4}">
+	        						<figure>
+					        			<figcaption>
+				        					<strong>${dto.mProfileName}</strong>
+				        					<span>${dto.mProfileContents}</span>
+				        					<em>${dto.mProfileDate}</em>
+						        		</figcaption>
+						        		<c:if test="${dto.mProfileId == sessionScope.memberDTO.id}">
+				        					<a href="tfPlusMemberProfileBoardList?profileName=${dto.mProfileName}&id=${dto.mProfileId}&num=${dto.mProfileNum}&my=true"  class="thumb">
+				        				</c:if>
+				        				<c:if test="${dto.mProfileId != sessionScope.memberDTO.id}">
+				        					<a href="tfPlusMemberProfileBoardList?profileName=${dto.mProfileName}&id=${dto.mProfileId}&num=${dto.mProfileNum}&my=false&myId=${sessionScope.memberDTO.id}" class="thumb">
+				        				</c:if>
+				        					<img src="${memberProfileUpPath}/${dto.mPhoto}" id="img_size" alt="Alt text" />
+				        				</a>
+					        		</figure>
+	        					</c:when>
+	        					<c:otherwise>
+		        					<figure class="last">
+					        			<figcaption>
+				        					<strong>${dto.mProfileName}</strong>
+				        					<span>${dto.mProfileContents}</span>
+				        					<em>${dto.mProfileDate}</em>
+						        		</figcaption>
+						        		<c:if test="${dto.mProfileId == sessionScope.memberDTO.id}">
+				        					<a href="tfPlusMemberProfileBoardList?profileName=${dto.mProfileName}&id=${dto.mProfileId}&num=${dto.mProfileNum}&my=true"  class="thumb">
+				        				</c:if>
+				        				<c:if test="${dto.mProfileId != sessionScope.memberDTO.id}">
+				        					<a href="tfPlusMemberProfileBoardList?profileName=${dto.mProfileName}&id=${dto.mProfileId}&num=${dto.mProfileNum}&my=false&myId=${sessionScope.memberDTO.id}" class="thumb">
+				        				</c:if>
+				        					<img src="${memberProfileUpPath}/${dto.mPhoto}" id="img_size" alt="Alt text" />
+				        				</a>
+					        		</figure>
+		        				</c:otherwise>
+	        				</c:choose>
+	        				<c:set var="count" value="${count = count + 1}"/>
+	        			</c:forEach>
+	        			<a href="tfPlusMemberProfileList" class="more-link right">더보기..  &#8594;</a>
 		        	</div>
-		        
 		        </div>
 	        	<!-- 메인 커뮤니티 이미지 박스 끝 -->
 	        	

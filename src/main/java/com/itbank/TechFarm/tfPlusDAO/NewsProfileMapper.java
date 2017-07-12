@@ -173,9 +173,9 @@ public class NewsProfileMapper {
 		return list;
 	}
 	
-	public static List newsAddList(int profileBoardPK) {
+	public static List newsAddList() {
 		SqlSession session = sqlMapper.openSession();
-		List list = session.selectList("newsAddList",profileBoardPK);
+		List list = session.selectList("newsAddList");
 		session.close();
 		return list;
 	}

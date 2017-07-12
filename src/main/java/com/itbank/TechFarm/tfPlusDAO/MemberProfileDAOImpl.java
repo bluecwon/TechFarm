@@ -48,18 +48,17 @@ public class MemberProfileDAOImpl implements MemberProfileDAO {
 	}
 
 	@Override
-	public List memberAddList(int ProfileBoardPK) {
-		return MemberProfileMapper.memberAddList(ProfileBoardPK);
+	public List memberAddList() {
+		return MemberProfileMapper.memberAddList();
 	}
 
 	@Override
-	public List memberProfileBoard(String profileName, String profileId) {
+	public List memberProfileBoard(String profileName) {
 		Map mapParameter = new HashMap();
 		mapParameter.put("profileName", profileName);
-		mapParameter.put("profileId", profileId);
 		return MemberProfileMapper.memberProfileBoardList(mapParameter);
 	}
-
+ 
 	@Override
 	public boolean memberJoinIdCheck(int num, String id) {
 		Map mapParameter = new HashMap();

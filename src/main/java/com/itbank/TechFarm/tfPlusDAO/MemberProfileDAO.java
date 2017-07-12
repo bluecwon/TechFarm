@@ -13,8 +13,8 @@ public interface MemberProfileDAO {
 	public List memberMyList(int startRow, int endRow, String id);
 	public List memberJoinMyList(String id);
 	public MemberProfileDTO memberNumList(int num);
-	public List memberAddList(int ProfileBoardPK);
-	public List memberProfileBoard(String profileName, String profileId);
+	public List memberAddList();
+	public List memberProfileBoard(String profileName);
 	public boolean memberJoinIdCheck(int num, String id);
 	public int memberProfileInsert(MemberProfileDTO memberProfileDTO);
 	public int memberProfileBoardInsert(MemberProfileBoardDTO memberProfileBoardDTO);

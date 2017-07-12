@@ -25,6 +25,6 @@ public interface NewsProfileDAO {
 	public int newsProfileUnFollow(int profileNum); 
 	public List newsProfileBoard(String profileName, String profileId);
 	public List newsProfileTOP(int top);
-	public List newsAddList(int profileBoardPK);
+	public List newsAddList();
 	public int newsAddListInsert(NewsProfileAddCommentDTO newsProfileAddCommentDTO);
 }

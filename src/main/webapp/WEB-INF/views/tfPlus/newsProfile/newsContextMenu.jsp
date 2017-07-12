@@ -14,7 +14,7 @@
 				<c:choose>
 					<c:when test="${followList.size()==0}">
 						<a href="tfPlusNewsFollowInsert?profileNum=${dto.profileNum}&id=${sessionScope.memberDTO.id}">
-							<img id="img_center" src="resources/tfPlus/images/default/follow.JPG">1
+							<img id="img_center" src="resources/tfPlus/images/default/follow.JPG">
 						</a>
 					</c:when>
 					<c:otherwise>
@@ -23,7 +23,7 @@
 								<c:when test="${dto.profileNum==fdto.newsfollowNum && fdto.newsfollowId==sessionScope.memberDTO.id}">
 									<c:set var="follow" value="1"/>
 									<a href="tfPlusNewsFollowDelect?profileNum=${dto.profileNum}&newsfollowPK=${fdto.newsfollowPK}">
-										<img id="img_center" src="resources/tfPlus/images/default/unfollow.JPG">2
+										<img id="img_center" src="resources/tfPlus/images/default/unfollow.JPG">
 									</a>
 								</c:when>
 							</c:choose>
@@ -33,7 +33,7 @@
 							<c:if test="${follow==1}"></c:if>
 							<c:if test="${follow!=1}">
 								<a href="tfPlusNewsFollowInsert?profileNum=${dto.profileNum}&id=${sessionScope.memberDTO.id}">
-									<img id="img_center" src="resources/tfPlus/images/default/follow.JPG">3
+									<img id="img_center" src="resources/tfPlus/images/default/follow.JPG">
 								</a>
 								<c:set var="follow" value="1"/>
 							</c:if>

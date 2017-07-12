@@ -14,7 +14,7 @@
 				<c:choose>
 					<c:when test="${joinList.size()==0}">
 						<a href="tfPlusMemberJoinInsert?profileNum=${dto.mProfileNum}&id=${sessionScope.memberDTO.id}">
-							<img id="img_center" src="resources/tfPlus/images/default/follow.JPG">1
+							<img id="img_center" src="resources/tfPlus/images/default/join.JPG">
 						</a>
 					</c:when>
 					<c:otherwise>
@@ -23,7 +23,7 @@
 								<c:when test="${dto.mProfileNum==fdto.memberJoinNum && fdto.memberJoinId==sessionScope.memberDTO.id}">
 									<c:set var="join" value="1"/>
 									<a href="tfPlusMemberJoinDelect?profileNum=${dto.mProfileNum}&newsJoinPK=${fdto.memberJoinPK}">
-										<img id="img_center" src="resources/tfPlus/images/default/unfollow.JPG">2
+										<img id="img_center" src="resources/tfPlus/images/default/unjoin.JPG">
 									</a>
 								</c:when>
 							</c:choose>
@@ -33,7 +33,7 @@
 							<c:if test="${join==1}"></c:if>
 							<c:if test="${join!=1}">
 								<a href="tfPlusMemberJoinInsert?profileNum=${dto.mProfileNum}&id=${sessionScope.memberDTO.id}">
-									<img id="img_center" src="resources/tfPlus/images/default/follow.JPG">3
+									<img id="img_center" src="resources/tfPlus/images/default/join.JPG">
 								</a>
 								<c:set var="join" value="1"/>
 							</c:if>

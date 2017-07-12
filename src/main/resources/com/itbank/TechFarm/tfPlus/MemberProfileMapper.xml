@@ -25,7 +25,7 @@
 		SELECT * FROM (
 			SELECT @NO:=@NO+1 AS ROWNUM, a.* FROM (
 				SELECT * FROM memberprofile WHERE mProfileId = #{id})a,(SELECT @NO:=0)b)c
-					WHERE c.ROWNUM BETWEEN #{startRow} AND #{endRow} ORDER BY mProfileDate DESC
+					WHERE c.ROWNUM BETWEEN #{startRow} AND #{endRow} ORDER BY @NO DESC
 	</select>
 	
 	<select id="memberJoinMyList" resultType="memberJoinIdDTO" parameterType="String">
@@ -38,14 +38,13 @@
 			WHERE mProfileNum = #{num}
 	</select>
 	
-	<select id="memberAddList" resultType="MemberProfileAddCommentDTO" parameterType="int">
+	<select id="memberAddList" resultType="MemberProfileAddCommentDTO">
 		SELECT * FROM memberprofileaddcomment
-			WHERE mProfileBoardFK = #{profileBoardPK}
 	</select>
 	
 	<select id="memberProfileBoardList" resultType="memberProfileBoardDTO" parameterType="java.util.HashMap">
 		SELECT * FROM memberprofileboard
-			WHERE mProfileBoardName = #{profileName} AND mProfileBoardId = #{profileId}
+			WHERE mProfileBoardName = #{profileName}
 	</select>
 	
 	<select id="memberJoinIdCheck" resultType="memberJoinIdDTO" parameterType="java.util.HashMap">
@@ -101,10 +100,10 @@
 	<insert id="memberAddListInsert" parameterType="memberProfileAddCommentDTO" useGeneratedKeys="true">
 		INSERT INTO memberprofileaddcomment(mProfileBoardFK,mProfileAddName,mProfileAddContents,mProfileAddId) VALUES
 		(
-			#{profileBoardFK},
-			#{profileAddName},
-			#{profileAddContents},
-			#{profileAddId}
+			#{mProfileBoardFK},
+			#{mProfileAddName},
+			#{mProfileAddContents},
+			#{mProfileAddId}
 		)
 	</insert>
 	

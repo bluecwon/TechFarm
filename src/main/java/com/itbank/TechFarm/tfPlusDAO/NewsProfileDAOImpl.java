@@ -8,7 +8,7 @@ import com.itbank.TechFarm.tfPlusDTO.NewsProfileAddCommentDTO;
 import com.itbank.TechFarm.tfPlusDTO.NewsProfileBoardDTO;
 import com.itbank.TechFarm.tfPlusDTO.NewsProfileDTO;
 
-public class NewsProfileDAOImpl implements NewsProfileDAO {
+public class NewsProfileDAOImpl implements NewsProfileDAO { 
 
 	@Override
 	public List newsGoodList(int startRow, int endRow) {
@@ -120,8 +120,8 @@ public class NewsProfileDAOImpl implements NewsProfileDAO {
 	}
 
 	@Override
-	public List newsAddList(int profileBoardPK) {
-		return NewsProfileMapper.newsAddList(profileBoardPK);
+	public List newsAddList() {
+		return NewsProfileMapper.newsAddList();
 	}
 
 	@Override

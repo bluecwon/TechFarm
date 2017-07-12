@@ -5,7 +5,7 @@
 <html class="no-js">
 	<head>
 		<meta charset="utf-8"/>
-		<title>GooglePlus</title>
+		<title>tfPlus</title>
 		<link rel="stylesheet" media="all" href="resources/tfPlus/css/style.css"/>
 		<link rel="stylesheet" href="resources/tfPlus/css/add.css"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -117,6 +117,9 @@
 			});
 		</script>
 		
+		<c:if test="${sessionScope.memberDTO == null}">
+		</c:if>
+		
 	</head>
 	<body lang="en" onContextmenu="return false">
 	
@@ -128,50 +131,81 @@
 				<div class="wrapper">
 					<div id="top-widget">
 						<div class="padding">
-						<ul  class="widget-cols clearfix">
-							<li class="first-col">
-								<div class="widget-block">
-									<h4>ㅇㅇ</h4>
-									<div class="recent-post">
-										<a href="#" class="thumb"><img src="resources/tfPlus/img/dummies/54x54.gif" alt="Post" /></a>
-										<div class="post-head">
-											<a href="#">ㅇㅇ</a><span>날짜</span>
+							<ul  class="widget-cols clearfix">
+								<li class="first-col">
+									<div class="widget-block">
+										<div class="recent-post">
+											<a href="#" class="thumb"><img src="resources/tfPlus/images/default/account.png" style="width:50px; height:50px;"></a>
+											<div class="post-head">
+												<a href="#">내계정</a><span>내계정 정보</span>
+											</div>
+										</div>
+										<div class="recent-post">
+											<a href="#" class="thumb"><img src="resources/tfPlus/images/default/search.png" style="width:50px; height:50px;"></a>
+											<div class="post-head">
+												<a href="#">검색</a><span>검색 사이트</span>
+											</div>
+										</div>
+										<div class="recent-post">
+											<a href="#" class="thumb"><img src="resources/tfPlus/images/default/mail.png" style="width:50px; height:50px;"></a>
+											<div class="post-head">
+												<a href="#">메일</a><span>메일 보내기</span>
+											</div>
 										</div>
 									</div>
-									<div class="recent-post">
-										<a href="#" class="thumb"><img src="resources/tfPlus/img/dummies/54x54.gif" alt="Post" /></a>
-										<div class="post-head">
-											<a href="#">ㅇㅇ</a><span>날짜</span>
+								</li>
+								<li class="first-col">
+									<div class="widget-block">
+										<div class="recent-post">
+											<a href="#" class="thumb"><img src="resources/tfPlus/images/default/social.png" style="width:50px; height:50px;"></a>
+											<div class="post-head">
+												<a href="#">SNS</a><span>소식 커뮤니티</span>
+											</div>
+										</div>
+										<div class="recent-post">
+											<a href="#" class="thumb"><img src="resources/tfPlus/images/default/utube.png" style="width:50px; height:50px;"></a>
+											<div class="post-head">
+												<a href="#">영상</a><span>유튜브</span>
+											</div>
+										</div>
+										<div class="recent-post">
+											<a href="#" class="thumb"><img src="resources/tfPlus/images/default/drive.png" style="width:50px; height:50px;"></a>
+											<div class="post-head">
+												<a href="#">클라우드</a><span>자료 저장</span>
+											</div>
 										</div>
 									</div>
-									<div class="recent-post">
-										<a href="#" class="thumb"><img src="resources/tfPlus/img/dummies/54x54.gif" alt="Post" /></a>
-										<div class="post-head">
-											<a href="#">ㅇㅇ</a><span>날짜</span>
+								</li>
+								<li class="first-col">
+									<div class="widget-block">
+										<div class="recent-post">
+											<a href="#" class="thumb"><img src="resources/tfPlus/images/default/memo.png" style="width:50px; height:50px;"></a>
+											<div class="post-head">
+												<a href="#">메모</a><span>메모기능</span>
+											</div>
+										</div>
+										<div class="recent-post">
+											<a href="#" class="thumb"><img src="resources/tfPlus/images/default/chatting.png" style="width:50px; height:50px;"></a>
+											<div class="post-head">
+												<a href="#">채팅</a><span>채팅 구현</span>
+											</div>
+										</div>
+										<div class="recent-post">
+											<a href="#" class="thumb"><img src="resources/tfPlus/images/default/document.png" style="width:50px; height:50px;"></a>
+											<div class="post-head">
+												<a href="#">문서</a><span>문서 작성</span>
+											</div>
 										</div>
 									</div>
-								</div>
-							</li>
-							<li class="second-col">
-								<div class="widget-block">
-									<h4>글 제목</h4>
-									<p>글 내용<a href="#" >링크</a></p>
-								</div>
-							</li>
-							<li class="third-col">
-								<div class="widget-block">
-									<div id="tweets" class="footer-col tweet">
-				         				<h4>ㅇㅇㅇ</h4>
-				         			</div>
-			         			</div>
-			         		</li>
-			         		<li class="fourth-col">
-								<div class="widget-block">
-									<h4>글 제목</h4>
-									<p>글내용<a href="#">링크</a></p>
-								</div>
-							</li>
-						</ul>
+								</li>
+								
+								<li class="fourth-col">
+									<div class="widget-block">
+										<h4>tfPlus</h4>
+										<p>관심있는 분야에 대해 정보를 받을 수 있는 사이트.<a href="#">↑↑↑</a></p>
+									</div>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -182,7 +216,7 @@
 			<!-- 네비 메뉴 시작 -->
 			<div class="wrapper clearfix">
 				<a href="#" id="logo">
-					<h2><span style="color:white">GooglePlus테스트${sessionScope.memberDTO.name}</span></h2>
+					<h2><span style="color:white">tfPlus${sessionScope.memberDTO.name}</span></h2>
 				</a>
 				<nav>
 					<ul id="nav" class="sf-menu">
@@ -201,8 +235,18 @@
 								<li><a href="tfPlusMemberProfileWriting?id=${sessionScope.memberDTO.id}">내가 소유한 커뮤니티</a></li>
 							</ul>
 						</li>
-						<li><a href="#">프로필</a></li>
-						<li><a href="#">알림</a></li>
+						<li><a href="tfPlusMyProfile">프로필</a></li>
+						<li>
+							<a href="#">알림</a>
+							<ul>
+								<li><a href="#">프로필 name : 1</a></li>
+								<li><a href="#">프로필 name : 1</a></li>
+								<li><a href="#">프로필 name : 1</a></li>
+							</ul>
+						</li>
+						<li>
+							<img src="resources/tfPlus/images/default/ExclamationMark.png" style="width:25px; height:25px;">
+						</li>
 					</ul>
 					<div id="combo-holder"></div>
 				</nav>

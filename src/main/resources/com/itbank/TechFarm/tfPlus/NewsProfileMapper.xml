@@ -13,9 +13,8 @@
 					WHERE c.ROWNUM BETWEEN #{startRow} AND #{endRow} ORDER BY good DESC
 	</select>
 	
-	<select id="newsAddList" resultType="NewsProfileAddCommentDTO" parameterType="int">
+	<select id="newsAddList" resultType="NewsProfileAddCommentDTO">
 		SELECT * FROM newsprofileaddcomment
-			WHERE profileBoardFK = #{profileBoardPK}
 	</select>
 	
 	<select id="followList" resultType="newsFollowIdDTO">
@@ -26,7 +25,7 @@
 		SELECT * FROM (
 			SELECT @NO:=@NO+1 AS ROWNUM, a.* FROM (
 				SELECT * FROM newsprofile WHERE profileId = #{id})a,(SELECT @NO:=0)b)c 
-					WHERE c.ROWNUM BETWEEN #{startRow} AND #{endRow} ORDER BY profileDate DESC
+					WHERE c.ROWNUM BETWEEN #{startRow} AND #{endRow} ORDER BY @NO DESC
 	</select>
 	
 	<select id="newsFollowIdSearch" resultType="newsFollowIdDTO" parameterType="int">
