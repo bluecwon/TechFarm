@@ -41,6 +41,7 @@ public class ReplyController {
 		ReplyDTO dto=new ReplyDTO();//space to save reply information.	
 		
 		String re_step_raw=arg0.getParameter("re_step");//not exist reply
+		System.out.println("리스텝?니스텝깔깔:"+re_step_raw);
 		int re_step=0;
 		if(re_step_raw!=null){
 		re_step=Integer.parseInt(re_step_raw);}
@@ -56,13 +57,16 @@ public class ReplyController {
 		if(mode.equals("general")){			
 			content=arg0.getParameter("content");			 
 			dto.setRe_level(0);
+			dto.setRe_step(0);
 			dto.setContent(content);
+			
 			res=replyDAO.insertReply(dto);
 			replyDAO.update_re_step();
 		}else{
 			 content=arg0.getParameter("content_reply");
 			 System.out.println("대댓글일때:"+content);
 			 dto.setRe_level(1);//distinction reply and re_reply
+			 dto.setRe_step(re_step);
 			 dto.setContent(content);			 
 			 res=replyDAO.insertReply(dto);
 			 replyDAO.update_re_step_reply(re_step);

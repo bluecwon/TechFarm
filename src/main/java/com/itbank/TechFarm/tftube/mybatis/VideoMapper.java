@@ -77,4 +77,38 @@ public class VideoMapper {
   		session.close();
   		return res;
   	}
+	
+	public static int click_like(int like_status){
+		SqlSession session=sqlMapper.openSession();
+  		int res=session.update("click_like",like_status); 
+  		session.commit();
+  		session.close();
+		return res;
+	}
+	
+	public static int click_unlike(int unlike_status){
+		SqlSession session=sqlMapper.openSession();
+  		int res=session.update("click_unlike",unlike_status); 
+  		session.commit();
+  		session.close();
+		return res;
+	}
+	
+	public static int cancel_like(int like_status){
+		SqlSession session=sqlMapper.openSession();
+  		int res=session.update("cancel_like",like_status); 
+  		session.commit();
+  		session.close();
+		return res;
+	}
+	
+	public static int cancel_unlike(int unlike_status){
+		SqlSession session=sqlMapper.openSession();
+  		int res=session.update("cancel_unlike",unlike_status); 
+  		session.commit();
+  		session.close();
+		return res;
+	}
+	
+	
 }

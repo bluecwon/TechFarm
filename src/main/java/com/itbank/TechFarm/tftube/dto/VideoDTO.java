@@ -11,11 +11,12 @@ public class VideoDTO {
 	private int readcount;
 	private String image;
 	private int likep;//default 0
-	private int unlikep; //default 0
+	private int unlikep; //default 0	
 	private String uploaddate;//sysdate
 	private String video_hash;
 	private String image_hash;
-	
+	private int like_status;
+	private int unlike_status;	
 	
 	
 	public int getNo() {
@@ -103,6 +104,20 @@ public class VideoDTO {
 	public void setImage_hash(String image_hash) {
 		this.image_hash = image_hash;
 	}
+	public int getLike_status() {
+		return like_status;
+	}
+	public void setLike_status(int like_status) {
+		this.like_status = like_status;
+	}
+	public int getUnlike_status() {
+		return unlike_status;
+	}
+	public void setUnlike_status(int unlike_status) {
+		this.unlike_status = unlike_status;
+	}
+	
+	
 	
 	
 	

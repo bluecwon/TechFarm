@@ -102,6 +102,7 @@ public class TftubeController {
 		upPath_image=session.getServletContext().getRealPath("/resources/tftube/uploadImage");
 		upPath_video=session.getServletContext().getRealPath("/resources/tftube/uploadVideo");
 		
+		
 				
 		session.setAttribute
 		("upPath_image",upPath_image);		
@@ -204,7 +205,33 @@ public class TftubeController {
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
 		HttpSession session=arg0.getSession();
-		int no=ServletRequestUtils.getIntParameter(arg0, "no");//tftube_video		
+		int no=ServletRequestUtils.getIntParameter(arg0, "no");//tftube_video
+		
+		//when null->or not error?
+		String like_status_raw=arg0.getParameter("like");
+		String unlike_status_raw=arg0.getParameter("unlike");
+		
+		int like_status=0;
+		int unlike_status=0;
+		System.out.println("like_status:"+like_status);
+		System.out.println("unlike_status:"+unlike_status);
+		VideoDTO likedto=new VideoDTO();
+		int res_like=0;
+		if(like_status_raw!=null){
+			 like_status=Integer.parseInt(like_status_raw);			 
+				switch(like_status){
+				case 1:res_like=videoDAO.click_like(1);
+				case 0:res_like=videoDAO.cancel_like(0);		
+				}
+		}
+		if(unlike_status_raw!=null){
+			unlike_status=Integer.parseInt(unlike_status_raw);			
+			switch(unlike_status){
+			case 1:res_like=videoDAO.click_unlike(1);
+			case 0:res_like=videoDAO.cancel_unlike(0);		
+			}			
+		}
+		
 		session.setAttribute("video_no",no);//error and time lag
 		Date today=new Date();//today			
 		

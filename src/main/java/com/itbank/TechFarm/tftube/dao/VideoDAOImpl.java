@@ -38,5 +38,31 @@ public class VideoDAOImpl implements VideoDAO {
 	public int hitUp(int no) {
 		return VideoMapper.hitUp(no);
 	}
+
+
+	@Override
+	public int click_like(int like_status) {
+		return VideoMapper.click_like(like_status);
+	}
+
+
+	@Override
+	public int cancel_like(int like_status) {
+		return VideoMapper.cancel_like(like_status);
+	}
+
+
+	@Override
+	public int click_unlike(int unlike_status) {
+		return VideoMapper.click_unlike(unlike_status);
+	}
+
+
+	@Override
+	public int cancel_unlike(int unlike_status) {
+		return VideoMapper.cancel_unlike(unlike_status);
+	}
+	
+	
 	
 }

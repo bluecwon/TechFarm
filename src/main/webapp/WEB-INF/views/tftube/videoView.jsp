@@ -7,9 +7,24 @@
 <img src="" style="position: relative;"><span style="position: absolute; top: 5px; right: 5px;">My profile</span></img>
 <head>
 <meta charset="UTF-8">
+<c:set var="like" value="0"/>
+<c:set var="unlike" value="0"/>
 <style>
-#button {
-   background-color: #4CAF50;
+#like_disabled,#unlike_disabled{
+   background-color: #D5D5D5;
+   border: none;
+   color: white;
+   padding: 15px 32px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+   margin: 4px 2px;
+   cursor: pointer;   
+}
+
+#like,#unlike{
+background-color: #6799FF;
    border: none;
    color: white;
    padding: 15px 32px;
@@ -21,15 +36,69 @@
    cursor: pointer;
 }
 </style>
+
 <script src="resources/js/jquery-1.9.0.js" type="text/javascript"></script>
 <script type="text/javascript">
-var likes =0; 
-function like() {
+
+/* function like() {
  //THIS FUNCTION WILL WORK WHEN THE USER CLICKS THE BUTTON
- document.getEelementById ("show").innerHTML=likes; //WILL DISPLAY THE NUMBER OF LIKES!
+ document.getElementById ("show").innerHTML=likes; //WILL DISPLAY THE NUMBER OF LIKES!
  likes=likes+1;
+} */
+var like=${like};
+var unlike=${unlike};
+/* like & unlike */
+$(function(){
+	if(like==0){
+	$("#like").hide();}
+	else{	
+	$("#like_disabled").hide();
+	}
+	
+	if(unlike==0){
+	$("#unlike").hide();}
+	else{	
+	$("#unlike_disabled").hide();
+	}	
+});
+function like(){like--;location.href="tftube_videoView?like="+like}
+function like_disabled(){like++;location.href="tftube_videoView?like="+like}
+
+function unlike(){unlike--;location.href="tftube_videoView?unlike="+unlike}
+function unlike_disabled(){unlike++;location.href="tftube_videoView?unlike="+unlike}
+
+/* function like(){
+	$("#like").click(function(){
+		like--;		 
+		$(this).hide(1);		
+		$("#like_disabled").show('fast'); 
+	});
+}
+function like_disabled(){		
+	$("#like_disabled").click(function(){
+		like=like+1;
+		$(this).hide(1);
+		$("#like").show('fast'); 	    
+	});
+}	
+
+function unlike(){
+	$("#unlike").click(function(){
+		like=like-1;	
+		$(this).hide(1);
+		$("#unlike_disabled").show('fast');
+	});
 }
 
+function unlike_disabled(){		
+	$("#unlike_disabled").click(function(){
+		like=like+1;
+		$(this).hide(1);
+	    $("#unlike").show('fast'); 
+	});
+} */
+
+/* move */
 function GReply(){
 	document.f.action="tftube_reply_insert?mode=general";
 	document.f.submit();	
@@ -51,7 +120,7 @@ $(document).ready(function(){
 	
 	$("a.not_login").click(function(){
 	alert("로그인이 필요한 서비스 입니다. 로그인 페이지로 이동합니다.");
-	})
+	});
 	
 	$(".cancel").click(function(){ 		
 		$("a#reply").hide();
@@ -62,14 +131,27 @@ $(document).ready(function(){
 <title>Insert title here</title>
 </head>
 <body>
-
+<span class="likebtn-wrapper" data-white_label="true" data-identifier="item_1"></span>
 <!-- Video -->
 <table>
 <tr><td><video src="resources/tftube/uploadVideo/${vdto.video_name}" autoplay  
 poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="600" height="450"></video>
 </td></tr>
 <tr><td align="right">	조회수 ${readcount}회 <br></td></tr>
-<tr><td align="right"> <button id="button" onclick="like ()">like</button> </td></tr>
+<tr><td align="right"> 
+<form>
+<input type="button" id="like_disabled" onclick="like_disabled ()" value="like">like</button>
+<input type="button" id="like" onclick="like ()" value="like">like</button>
+<input type="button" id="unlike_disabled" onclick="unlike_disabled ()" value="unlike">unlike</button>
+<input type="button" id="unlike" onclick="unlike ()" value="unlike">unlike</button>
+
+</form>
+<!-- <button id="like_disabled" onclick="like_disabled ()" value="like">like</button>
+<button id="like" onclick="like ()" value="like">like</button>
+<button id="unlike_disabled" onclick="unlike_disabled ()" value="unlike">unlike</button>
+<button id="unlike" onclick="unlike ()" value="unlike">unlike</button> -->
+
+</td></tr>
 <br>
 </table>
 
@@ -100,7 +182,7 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
 <c:otherwise>
 <tr><td>
 <form name="f" method="post" action="tftube_reply_insert">
-<textArea name="content"></textArea><!--클릭시 로그인창 열리는 방법찾기 -->
+<textArea name="content"></textArea>
 <input type="hidden" name="video_name" value="${vdto.video_name}">
 <input type="hidden" name="no" value="${vdto.no}">
 <c:if test="${memberDTO!=null}">
@@ -120,40 +202,40 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
 
 <c:forEach var="rdto" items="${r_list}">
 <tr>
-
+<td>
 <!-- empty space in front of reply_reply -->
 
-<c:choose>
-<c:when test="${rdto.re_level==1}">
+
+<c:if test="${rdto.re_level==1}">
 
 <!-- <img src="" style="position: relative;"><span style="position: absolute; top: 5px; right: 5px;">My profile</span></img> -->
 
 
 <!-- <img src="resources/tftube/imgs/vaccum.JPG" height="80" width="80"> -->
 
+</c:if>
 
-</c:when><c:otherwise></c:otherwise>
-</c:choose>
-<td>
-<img src="" width="100" height="80"></img> 
-<img src="" style="position: relative; top:8px" height="80">
-<a href="tftube_mychannel?name=${r_name}">${r_name}</a>   ${rdto.reg_date}<br />
+
+<a href="tftube_mychannel?name=${r_name}">${r_name}</a>   ${rdto.reg_date}<br>
 <!-- id sysdate-reg_date 아니면 java에서 변환 -->
-${rdto.content}
+${rdto.content}<br>
+
 <input type="hidden" name="re_step" value="${rdto.re_step}"/>
 <c:choose>
 <c:when test="${memberDTO==null}">
-<a href="login" class="not_login">답글</a></img>
+<a href="login" class="not_login">답글</a><br>
 </c:when>
 <c:otherwise>
-<a class="reply_button" onmouseover="" style="cursor: pointer;">답글</a>
-					<a href="tftube_reply_delete?r_no=${rdto.no}&no=${vdto.no}">삭제</a>
+<a class="reply_button" onmouseover="" style="cursor: pointer;">답글</a><br>
+					
 <a id="reply" class="reply_area">
 <textArea name="content_reply"></textArea>
 <input type="button" value="입력" onClick="javascript:DReply()">
 <input class="cancel" type="button" value="취소">
+
 <br>
 </a>
+
 
 </form>
 </c:otherwise>
