@@ -4,10 +4,6 @@ import java.util.List;
 
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
 
-
-
-
-
 public interface VideoDAO {
 	
 	public int insertVideo(VideoDTO dto);

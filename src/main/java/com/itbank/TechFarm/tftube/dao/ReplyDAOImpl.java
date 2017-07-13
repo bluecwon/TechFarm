@@ -44,6 +44,13 @@ public class ReplyDAOImpl implements ReplyDAO {
 	public int delete_reply(int no) {
 		return ReplyMapper.delete_reply(no);
 	}
+
+	@Override
+	public String getName_by_video(String video_name) {
+		return ReplyMapper.getName_by_video(video_name);
+	}
+	
+	
 	
 	
 	

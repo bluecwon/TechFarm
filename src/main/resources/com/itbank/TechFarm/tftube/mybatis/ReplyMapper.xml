@@ -20,9 +20,9 @@
 	
 	</select>
 	
-	<select id="" parameterType="String" resultType="String">
+	<select id="getName_by_video" parameterType="String" resultType="String">
 	select a.name from tfmember.member a join tftube_reply b on a.no = b.memb
-er_no and b.video_name=#{video_name};
+	er_no and b.video_name=#{video_name};
 	</select>
 			
 	
