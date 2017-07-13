@@ -1,4 +1,4 @@
-package com.itbank.email;
+package com.itbank.TechFarm;
 
 import javax.management.MBeanServerConnection;
 import javax.management.MBeanServerInvocationHandler;

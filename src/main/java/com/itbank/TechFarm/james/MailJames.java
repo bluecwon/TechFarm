@@ -11,6 +11,8 @@ public class MailJames {
 			properties.put("mail.imap.host", host);
 			properties.put("mail.imap.port", 143);
 			Session emailSession = Session.getDefaultInstance(properties);
-		}catch()
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 }
