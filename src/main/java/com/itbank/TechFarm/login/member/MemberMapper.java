@@ -14,7 +14,7 @@ public class MemberMapper {
 
 	  static {
 	    try {
-	    	String resource="SqlMapConfig_tfmember.xml";
+	    	String resource="com/itbank/TechFarm/SqlMapConfig_tfmember.xml";
 	    	Reader reader = Resources.getResourceAsReader(resource); 
 			sqlMapper = new SqlSessionFactoryBuilder().build(reader); 
 	    } catch (IOException e) {
@@ -56,6 +56,14 @@ public class MemberMapper {
 	  public static int editMember(MemberDTO dto){
 		  SqlSession session = sqlMapper.openSession();
 			int res=session.update("editMember", dto);
+			session.commit();
+			session.close();
+			return res;
+	  }
+	  
+	  public static int editPw(MemberDTO dto){
+		  SqlSession session = sqlMapper.openSession();
+			int res=session.update("editPw", dto);
 			session.commit();
 			session.close();
 			return res;

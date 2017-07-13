@@ -41,5 +41,11 @@
 	   	sex=#{sex}
 	    where id=#{id};
 	</insert>
+	
+	<insert id="editPw" parameterType="MemberDTO">
+	    update member set 
+	    passwd=#{passwd}
+	    where id=#{id};
+	</insert>
   
 </mapper>

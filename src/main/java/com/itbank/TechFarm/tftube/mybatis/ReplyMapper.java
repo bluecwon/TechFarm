@@ -18,7 +18,7 @@ public class ReplyMapper {
 	private static SqlSessionFactory sqlMapper;
 	static {
 		try {
-			String resource = "SqlMapConfig_tftube.xml"; 
+			String resource = "com/itbank/TechFarm/SqlMapConfig_tftube.xml"; 
 			Reader reader = Resources.getResourceAsReader(resource); 
 			sqlMapper = new SqlSessionFactoryBuilder().build(reader);
 		} catch (IOException e) {

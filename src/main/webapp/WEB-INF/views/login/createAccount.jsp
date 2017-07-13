@@ -79,7 +79,7 @@
 		}
 		
 		function checkForm(){
-			/* if(member.id.value==""){
+			if(member.id.value==""){
 				alert("아이디를 입력하세요")
 				member.id.focus()
 				return false;
@@ -109,7 +109,7 @@
 			if(!result){
 				alert("생일을 확인해 주세요.")
 				return false;
-			} */
+			}
 			var email=member.email1.value+"@"+member.email2.value;
 			member.email.value=email;
 			return true;

@@ -30,7 +30,10 @@
 							<td><a href="editMyInfo">회원정보 수정</a></td>
 						</tr>
 						<tr>
-							<td><a href="#">비밀번호 변경</a></td>
+							<td><a href="editMyPw">비밀번호 변경</a></td>
+						</tr>
+						<tr>
+							<td><a href="deleteMember">회원 탈퇴</a></td>
 						</tr>
 					</table>
 				</div>
