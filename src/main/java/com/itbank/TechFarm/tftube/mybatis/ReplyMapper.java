@@ -82,6 +82,14 @@ public class ReplyMapper {
   	return res;  	
   	}
   	
+  	/*public static List<ReplyDTO> replyList_plus_name(){
+  		SqlSession session=sqlMapper.openSession();
+  		List<ReplyDTO> list=session.selectList("replyList_by_video",video_name);
+  		session.close();
+  		return list;
+  		
+  	}*/
+  	
   	
   	
   	

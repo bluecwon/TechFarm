@@ -41,12 +41,18 @@ public class ReplyController {
 		ReplyDTO dto=new ReplyDTO();//space to save reply information.	
 		
 		String re_step_raw=arg0.getParameter("re_step");//not exist reply
+		String re_level_raw=arg0.getParameter("re_level");
 		System.out.println("리스텝?니스텝깔깔:"+re_step_raw);
 		int re_step=0;
+		int re_level=0;
 		if(re_step_raw!=null){
 		re_step=Integer.parseInt(re_step_raw);}
+		if(re_level_raw!=null){
+			re_level=Integer.parseInt(re_level_raw);
+		}
 		
 		String mode=arg0.getParameter("mode");
+		
 		System.out.println("mode:"+mode);
 		String content=null;
 		int res=0;
@@ -64,9 +70,14 @@ public class ReplyController {
 			replyDAO.update_re_step();
 		}else{
 			 content=arg0.getParameter("content_reply");
-			 System.out.println("대댓글일때:"+content);
+			 System.out.println("대댓글일때:"+content);		 
+			/* if(re_level==0){
+				 
+			 }else{
+				 
+			 }*/
 			 dto.setRe_level(1);//distinction reply and re_reply
-			 dto.setRe_step(re_step);
+			 dto.setRe_step(re_step);			
 			 dto.setContent(content);			 
 			 res=replyDAO.insertReply(dto);
 			 replyDAO.update_re_step_reply(re_step);
@@ -88,13 +99,20 @@ public class ReplyController {
 		return mv;		
 	}
 	
-	@RequestMapping(value="/tftube_reply_delete", method=RequestMethod.GET)
+	@RequestMapping(value="/tftube_reply_delete")
 	public ModelAndView tftube_reply_delete(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
+		int no=0;
+		int r_no=0;
+		String no_raw=arg0.getParameter("no");//video number
+		if(no_raw!=null){
+		no=Integer.parseInt(no_raw);}
 		
-		int no=Integer.parseInt(arg0.getParameter("no"));
-		int r_no=Integer.parseInt(arg0.getParameter("r_no"));
+		String r_no_raw=arg0.getParameter("r_no");//reply number
+		if(r_no_raw!=null){
+		r_no=Integer.parseInt(r_no_raw);}
+		
 		int res=replyDAO.delete_reply(r_no);
 		if(res>0){
 			mv.setViewName("redirect:tftube_videoView?no="+no);			

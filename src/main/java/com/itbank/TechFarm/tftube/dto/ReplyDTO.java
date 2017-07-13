@@ -50,7 +50,5 @@ public class ReplyDTO {
 	}
 	public void setRe_level(int re_level) {
 		this.re_level = re_level;
-	}	
-	
-	
+	}		
 }

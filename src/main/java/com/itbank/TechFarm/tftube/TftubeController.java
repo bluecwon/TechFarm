@@ -66,7 +66,7 @@ public class TftubeController {
 	
 	private String upPath_video=null;
 	private String upPath_image=null;
-	private HttpSession session=null;//re_check Is it necessity?
+	/*private HttpSession session=null;*///re_check Is it necessity?
 	private String msg=null, url=null;
 	
 	private static HashMap<String, Date> map=new HashMap<String,Date>();
@@ -205,37 +205,54 @@ public class TftubeController {
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
 		HttpSession session=arg0.getSession();
-		int no=ServletRequestUtils.getIntParameter(arg0, "no");//tftube_video
 		
-		//when null->or not error?
-		String like_status_raw=arg0.getParameter("like");
-		String unlike_status_raw=arg0.getParameter("unlike");
-		//어느 비디오에서 해줄지 빠짐
-		int like_status=0;
-		int unlike_status=0;
-		System.out.println("like_status:"+like_status);
-		System.out.println("unlike_status:"+unlike_status);
+		String no_raw=arg0.getParameter("no");
+		int no=0;
+		if(no_raw!=null){
+		no=Integer.parseInt(no_raw);}//tftube_video
+		VideoDTO vdto=videoDAO.getVideo(no);//video's total information
+		
+		/*like*/		
+		
+		//request
+		String like_stat_raw=arg0.getParameter("like");
+		String unlike_stat_raw=arg0.getParameter("unlike");
+				
+		System.out.println("like_status_raw:"+like_stat_raw);
+		System.out.println("unlike_status_raw:"+unlike_stat_raw);
 		
 		int res_like=0;
-		if(like_status_raw!=null){
-			 like_status=Integer.parseInt(like_status_raw);			 
-				switch(like_status){
+		int res_unlike=0;
+		
+		if(like_stat_raw!=null){
+			int like_stat=Integer.parseInt(like_stat_raw);			 
+				switch(like_stat){
 				case 1:res_like=videoDAO.click_like(1);
 				case 0:res_like=videoDAO.cancel_like(0);		
 				}
 		}
-		if(unlike_status_raw!=null){
-			unlike_status=Integer.parseInt(unlike_status_raw);			
-			switch(unlike_status){
-			case 1:res_like=videoDAO.click_unlike(1);
-			case 0:res_like=videoDAO.cancel_unlike(0);		
+		
+		if(unlike_stat_raw!=null){
+			int unlike_stat=Integer.parseInt(unlike_stat_raw);			
+			switch(unlike_stat){
+			case 1:res_unlike=videoDAO.click_unlike(1);
+			case 0:res_unlike=videoDAO.cancel_unlike(0);		
 			}			
 		}
+		//end of response
+		
+		//response
+		int like_status=videoDAO.getVideo(no).getLike_status();
+		int unlike_status=videoDAO.getVideo(no).getUnlike_status();
+		mv.addObject("like",like_status);
+		mv.addObject("unlike",unlike_status);		
+		//end of response		
+		/*end of like*/
 		
 		session.setAttribute("video_no",no);//error and time lag
 		Date today=new Date();//today			
 		
-		VideoDTO vdto=videoDAO.getVideo(no);//video's total information	
+			
 		
 		Date date=map.get(vdto.getVideo_hash());//video's date clicked information		
 
@@ -296,15 +313,11 @@ public class TftubeController {
 		//ReplyList where=video		
 		List<ReplyDTO> r_list=replyDAO.replyList_by_video(vdto.getVideo_name());
 		String r_size=df.format(r_list.size());
-		//Reply writer
-		String r_name=replyDAO.getName();
+		//member_no
 		
-		/*List name_list=new ArrayList();
-		for(ReplyDTO dto:r_list){			
-			MemberDTO mdto=memberDAO.getMember_by_no(dto.getMember_no());			
-			name_list.add(mdto.getName());			
-		}*/		
-//		mv.addObject("name_list",name_list);
+		//Reply writer
+		//String r_name=replyDAO.getName(member_no);		
+		
 		//information of recent video
 		mv.addObject("vdto",vdto);		
 		//hits of reply
@@ -312,7 +325,7 @@ public class TftubeController {
 		//list of reply where video
 		mv.addObject("r_list",r_list);
 		//writer of reply
-		mv.addObject("r_name",r_name);
+		//mv.addObject("r_name",r_name);
 		//size of reply
 		mv.addObject("r_size",r_size);
 		

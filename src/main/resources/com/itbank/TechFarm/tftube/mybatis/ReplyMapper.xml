@@ -14,9 +14,18 @@
 		select * from tftube_reply where video_name=#{video_name} order by re_step asc
 	</select>		
 	
-	<select id="getName" resultType="String">
-	select a.name from tfmember.member a  join tftube.tftube_reply b on a.no = b.member_no
-	</select>		
+	<select id="getName" resultType="" parameterType="int">
+	select a.name from tfmember.member a join tftube.tftube_reply b on a.no = b.member_no
+	select * from tftube_reply
+	
+	</select>
+	
+	<select id="" parameterType="String" resultType="String">
+	select a.name from tfmember.member a join tftube_reply b on a.no = b.memb
+er_no and b.video_name=#{video_name};
+	</select>
+			
+	
 	
 	<delete id="deletereply" parameterType="int">
 		delete from tftube_reply where no = #{no}
@@ -46,5 +55,7 @@
  	select * from (select rownum rn,A.*from(select * from tftube_reply order by re_step asc)A)
 	where rn between ${start} and ${end}
 	</select>
+	
+	
 	
 </mapper>

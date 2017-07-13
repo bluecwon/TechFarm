@@ -37,11 +37,11 @@ select * from tftube_video where member_no=#{member_no} order by no desc
 </update>
 
 <update id="click_like" parameterType="int">
-update tftube_video set likep=likep+1,like_status=#{like_status}
+update tftube_video set likep=likep+1,like_status=#{like_status} where no=#{no}
 </update>
 
 <update id="cancel_like" parameterType="int">
-update tftube_video set likep=likep-1,like_status=#{like_status} 
+update tftube_video set likep=likep-1,like_status=#{like_status} where no=#{no}
 </update>
 
 <update id="click_unlike" parameterType="int">
