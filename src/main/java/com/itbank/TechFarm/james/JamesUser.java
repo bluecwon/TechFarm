@@ -1,4 +1,4 @@
-package com.itbank.TechFarm;
+package com.itbank.TechFarm.james;
 
 import javax.management.MBeanServerConnection;
 import javax.management.MBeanServerInvocationHandler;

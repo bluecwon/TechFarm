@@ -1,8 +1,10 @@
 package com.itbank.TechFarm.james;
 
+import javax.mail.Message;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,9 @@ import com.itbank.TechFarm.login.member.MemberDTO;
 
 @Controller
 public class JamesController {
+	@Autowired
+	private JamesDAO jamesDAO;
+	
 	String host="52.79.140.54";
 	String mailStoreType ="imap";
 	
@@ -19,13 +24,14 @@ public class JamesController {
 	public String listJames(Model model, HttpServletRequest request, HttpSession session){
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
 		String id = memberDTO.getId();
-		String passwd = memberDTO.getPasswd();
-		
+		String password = memberDTO.getPasswd();
+		Message[] messages = jamesDAO.listJames(host, mailStoreType, id, password);
+		model.addAttribute("message", messages);
 		return "james/listJames";
 	}
-	@RequestMapping(value="/composeJames", method = RequestMethod.GET)
+	@RequestMapping(value="/sendJames", method = RequestMethod.GET)
 	public String composeJames(Model model, HttpServletRequest request){
 		
-		return "james/composeJames";
+		return "james/sendJames";
 	}
 }

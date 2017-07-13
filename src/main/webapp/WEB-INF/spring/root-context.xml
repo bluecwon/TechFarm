@@ -20,6 +20,8 @@
 	<bean id="videoDAO" class="com.itbank.TechFarm.tftube.dao.VideoDAOImpl"/>
 	<!-- tfcontacts -->
 	<bean class="com.itbank.TechFarm.contacts.ContactsDAOImpl" id="contactsDAO"/>
+	<!-- james -->
+	<bean class="com.itbank.TechFarm.james.JamesDAOImpl" id="jamesDAO"/>
 	<!-- messagesource -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
