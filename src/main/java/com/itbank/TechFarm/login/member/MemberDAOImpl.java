@@ -39,6 +39,12 @@ public class MemberDAOImpl implements MemberDAO{
 		int res=MemberMapper.editPw(dto);
 		return res;
 	}
+
+	@Override
+	public int deleteMember(int no) {
+		int res=MemberMapper.deleteMember(no);
+		return res;
+	}
 	
 	
 }

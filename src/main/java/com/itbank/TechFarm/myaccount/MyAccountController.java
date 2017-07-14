@@ -96,6 +96,14 @@ public class MyAccountController {
 	
 	@RequestMapping(value = "/deleteMyAccount", method = RequestMethod.POST)
 	public String deleteMyAccount(HttpServletRequest request, HttpSession session, Model model) {
-		return "redirect:/";
+		MemberDTO dto=(MemberDTO)session.getAttribute("memberDTO");
+		int res=memberDAO.deleteMember(dto.getNo());
+		if(res==1){
+			session.invalidate();
+			return "home";
+		}else{
+			return "redirect:deleteMember";
+		}
+		
 	}
 }

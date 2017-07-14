@@ -13,14 +13,14 @@
 			 var check = document.getElementById('check');  
 		     var message = document.getElementById('sid');
 		     var checkmessage='${deletesentence}';
-		     if(check!=checkmessage){
-		    	 message.style.color = badColor;
-		    	 message.innerHTML = "해당 문구를 정확히 입력해주세요."
-		    	 return false;
-		     }else{
+		     if(check.value==checkmessage){
 		    	 message.style.color = goodColor;
 		    	 message.innerHTML = "일치합니다."
 		    	 return true;
+		     }else{
+		    	 message.style.color = badColor;
+		    	 message.innerHTML = "해당 문구를 정확히 입력해주세요."
+		    	 return false;
 		     }
 		}
 		function checkForm(){

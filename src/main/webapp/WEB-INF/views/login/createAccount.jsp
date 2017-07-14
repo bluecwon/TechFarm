@@ -128,8 +128,8 @@
 				<td><font size=5>회원가입</font></td>
 			</tr>
 			<tr>
-				<td>아이디<br><input id="id" type="text" name="id" value="${inputInfo.id}"><br>
-				<form:errors path="inputInfo.id"/></td>
+				<td>아이디<br><input id="id" type="text" name="id" value="${inputInfo.id}"><input type="button" value="중복체크" onclick="checkid()">
+				<br><form:errors path="inputInfo.id"/></td>
 			</tr>
 			<tr>
 				<td>비밀번호<br><input id="pwd1" type="password" name="passwd" value="${inputInfo.passwd}" onblur="checkPasswd()"><br>
@@ -159,8 +159,8 @@
 					<input id="month" type="text" name="birthday_month" size="2" maxlength="2" value="${inputInfo.birthday_month}" onblur="checkBirthDay()">월
 					<input id="day" type="text" name="birthday_day" size="2" maxlength="2" value="${inputInfo.birthday_day}" onblur="checkBirthDay()">일
 					<br><form:errors path="inputInfo.birthday_year"/>
-					<br><form:errors path="inputInfo.birthday_month"/>
-					<br><form:errors path="inputInfo.birthday_day"/></td>
+					<form:errors path="inputInfo.birthday_month"/>
+					<form:errors path="inputInfo.birthday_day"/></td>
 				</td>
 			</tr>
 			<tr>

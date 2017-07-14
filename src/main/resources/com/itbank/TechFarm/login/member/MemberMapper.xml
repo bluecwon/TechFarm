@@ -47,5 +47,9 @@
 	    passwd=#{passwd}
 	    where id=#{id};
 	</insert>
+	
+	<insert id="deleteMember" parameterType="int">
+	    delete from member where no=#{no};
+	</insert>
   
 </mapper>

@@ -68,4 +68,12 @@ public class MemberMapper {
 			session.close();
 			return res;
 	  }
+	  
+	  public static int deleteMember(int no){
+		  SqlSession session = sqlMapper.openSession();
+			int res=session.delete("deleteMember", no);
+			session.commit();
+			session.close();
+			return res;
+	  }
 }

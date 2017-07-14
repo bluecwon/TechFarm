@@ -9,4 +9,5 @@ public interface MemberDAO {
 	public MemberDTO getMember_by_no(int no);
 	public int editMember(MemberDTO dto);
 	public int editPw(MemberDTO dto);
+	public int deleteMember(int no);
 }
