@@ -12,7 +12,7 @@ window.onload = function () {
     var chatArea = document.getElementById("chat-area");
 
     // Connect to the WebSocket server!
-    var socket = new WebSocket("ws://192.168.52.35:8081");
+    var socket = new WebSocket("ws://192.168.52.35:8081/TechFarm/chat");
 
     /**
     * WebSocket onopen event.
@@ -127,6 +127,17 @@ window.onload = function () {
     function sendText() {
         if (socket.readyState == WebSocket.OPEN) {
             var json = '{ "name" : "' + nameView.value + '", "message" : "' + textView.value + '" }';
+            var jsonObject = JSON.parse(json);
+
+            // Extract the values for each key.
+            var userName = jsonObject.name;
+            var userMessage = jsonObject.message;
+
+            // Display message.
+            chatArea.innerHTML = chatArea.innerHTML + "<p>" + userName + " says: <strong>" + userMessage + "</strong>" + "</p>";
+
+            // Scroll to bottom.
+            chatArea.scrollTop = chatArea.scrollHeight;
             socket.send(json);
 
             textView.value = "";
