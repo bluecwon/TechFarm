@@ -103,8 +103,16 @@ public class ReplyController {
 	public ModelAndView tftube_reply_delete(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
+		
 		int no=0;
+		/*ReplyDTO rdto=(ReplyDTO)arg0.getParameter("rdto");
+		String rdto_raw=arg0.getParameter("rdto");
+		if(rdto_raw!=null){
+			rdto=(ReplyDTO)rdto_raw;
+		}*/
 		int r_no=0;
+		
+		//re_step, re_level
 		String no_raw=arg0.getParameter("no");//video number
 		if(no_raw!=null){
 		no=Integer.parseInt(no_raw);}
@@ -123,7 +131,9 @@ public class ReplyController {
 			mv.setViewName("tftube/message");
 			mv.addObject("msg",msg);
 			mv.addObject("url",url);				
-		}			
+		}
+		
+		
 		return mv;		
 	}
 }

@@ -4,7 +4,6 @@
 <%@ include file="main_top.jsp"%>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" type="text/css" href="resources/tftube/style.css">
 <head>
 <meta charset="UTF-8">
 <c:set var="like" value="${like}"/>
@@ -13,37 +12,43 @@
 <script type="text/javascript">
 var like=${like};
 var unlike=${unlike};
+var no=${vdto.no}
 /* like & unlike */
 $(function(){
-	if(like==0){
-	$("#like").hide();}
+	if(like==0||like==null){
+	$("#like").hide();
+	$("#like_disabled").show();
+	}	
 	else{	
 	$("#like_disabled").hide();
+	$("#like").show();
 	}
 	
-	if(unlike==0){
+	if(unlike==0||like==null){
 	$("#unlike").hide();}
 	else{	
 	$("#unlike_disabled").hide();
 	}	
 });
-function like(){like--;location.href="tftube_videoView?like="+like}
-function like_disabled(){like++;location.href="tftube_videoView?like="+like}
+function like()
+{like--;location.href="tftube_videoView?no="+no+"&like="+like;}
+function like_disabled()
+{like++;location.href="tftube_videoView?no="+no+"&like="+like;}
 
-function unlike(){unlike--;location.href="tftube_videoView?unlike="+unlike}
-function unlike_disabled(){unlike++;location.href="tftube_videoView?unlike="+unlike}
+function unlike(){unlike--;location.href="tftube_videoView?no="+no+"&unlike="+unlike;}
+function unlike_disabled(){unlike++;location.href="tftube_videoView?no="+no+"&unlike="+unlike;}
 
 /* function like(){
 	$("#like").click(function(){
 		like--;		 
-		$(this).hide(1);		
+		$(this).he(1);		
 		$("#like_disabled").show('fast'); 
 	});
 }
 function like_disabled(){		
 	$("#like_disabled").click(function(){
 		like=like+1;
-		$(this).hide(1);
+		$(this).he(1);
 		$("#like").show('fast'); 	    
 	});
 }	
@@ -51,7 +56,7 @@ function like_disabled(){
 function unlike(){
 	$("#unlike").click(function(){
 		like=like-1;	
-		$(this).hide(1);
+		$(this).he(1);
 		$("#unlike_disabled").show('fast');
 	});
 }
@@ -59,7 +64,7 @@ function unlike(){
 function unlike_disabled(){		
 	$("#unlike_disabled").click(function(){
 		like=like+1;
-		$(this).hide(1);
+		$(this).he(1);
 	    $("#unlike").show('fast'); 
 	});
 } */
@@ -97,29 +102,31 @@ $(function(){
 <title>Insert title here</title>
 </head>
 <body>
-<!-- Video -->
+<!-- video -->
 <table>
-<tr><td><video src="resources/tftube/uploadVideo/${vdto.video_name}" autoplay  
+<tr><td><video src="resources/tftube/uploadvideo/${vdto.video_name}" autoplay  
 poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="600" height="450"></video>
 </td></tr>
 <tr><td align="right">	조회수 ${readcount}회 <br></td></tr>
 <tr><td align="right"> 
+<!-- 
 <form>
-<!-- <input type="button" id="like_disabled" onclick="like_disabled ()" value="like"></button>
-<input type="button" id="like" onclick="like ()" value="like"></button>
-<input type="button" id="unlike_disabled" onclick="unlike_disabled ()" value="unlike"></button>
-<input type="button" id="unlike" onclick="unlike ()" value="unlike"></button> -->
+ <input type="button" ="like_disabled" onclick="like_disabled ()" value="like"></button>
+<input type="button" ="like" onclick="like ()" value="like"></button>
+<input type="button" ="unlike_disabled" onclick="unlike_disabled ()" value="unlike"></button>
+<input type="button" ="unlike" onclick="unlike ()" value="unlike"></button>
 
 </form>
-<button id="like_disabled" onclick="like_disabled ()" value="like">like</button>
-<button id="like" onclick="like ()" value="like">like</button>
-<button id="unlike_disabled" onclick="unlike_disabled ()" value="unlike">unlike</button>
-<button id="unlike" onclick="unlike ()" value="unlike">unlike</button>
+ -->
+<button id="like_disabled" onclick="like_disabled()">like</button>
+<button id="like" onclick="like()" >like</button><!-- it's not work -->
+<button id="unlike_disabled" onclick="unlike_disabled()" value="unlike">unlike</button>
+<button id="unlike" onclick="unlike()" >unlike</button>
 
 </td></tr>
 </table>
 <br>
-<!-- Video Edit and Delete -->
+<!-- video Edit and Delete -->
 <table>
 <tr><td>
 <c:if test="${vdto.member_no eq memberDTO.no}">
@@ -145,13 +152,10 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
 </c:when>
 <c:otherwise>
 <tr><td>
-<form name="f1" method="post">
+<form name="f1" method="post" action=tftube_reply_insert>
 <textArea name="content"></textArea>
 <input type="hidden" name="video_name" value="${vdto.video_name}">
 <input type="hidden" name="no" value="${vdto.no}">
-<c:if test="${memberDTO!=null}">
-
-</c:if>
 <input type="hidden" name="mode" value="general">
 <input type="submit" value="입력">
 </form>
@@ -177,10 +181,10 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
 <!-- re_reply -->
 <form name="f2" method="post" action="tftube_reply_insert">
 <!-- reply contents with reply information -->
-<div class = "titl" width="800"><!--empty space securement-->
 
-<a href="tftube_mychannel?name=${rdto.member_no}">${rdto.name}</a> ${rdto.reg_date}<br>
- 
+<div class = "titl"><!--empty space securement-->
+<a href="tftube_mychannel?name=${rdto.member_no}">${rdto.name}</a>  ${rdto.reg_date}<br> 
+
 ${rdto.content}<br>
 
 <input type="hidden" name="re_step" value="${rdto.re_step}"/>
@@ -190,15 +194,17 @@ ${rdto.content}<br>
 <a href="login" class="not_login">답글</a><br>
 </c:when>
 <c:otherwise>
-<a class="reply_button" onmouseover="" style="cursor: pointer;">답글</a> 
-<c:if test="${memberDTO.no.equals(rdto.member_no)}">
- <a href="tftube_reply_delete?no=${vdto.no}&r_no=${rdto.no}">삭제</a></c:if> <br>					
+<a class="reply_button" onmouseover="" style="cursor: pointer;">답글</a>
+
+<c:if test="${rdto.member_no eq memberDTO.no}"> 				수정 |<a href="tftube_reply_delete?no=${vdto.no}&reply=${rdto}">삭제</a> <br></c:if><br>
+<c:if test="${re_reply_size>2}">
+답글 ${re_reply_size}개 모두 보기	
+</c:if>				
+
 <a id="reply" class="reply_area">
 
-<textArea name="content_reply">
-<c:if test="${rdto.re_level==1}&&${rdto.member_no!=memberDTO.no}">
-+${rdto.id}  
-</c:if>
+<textArea name="content_reply"><c:if test="${rdto.re_level==1&&rdto.member_no!=memberDTO.no}">+${rdto.name}</c:if>
+
 </textArea>
 
 <input type="hidden" name="video_name" value="${vdto.video_name}">
@@ -245,5 +251,56 @@ ${rdto.content}<br>
 		</table> --%>
  
 </body>
-<%@ include file="main_bottom.jsp"%> 
+<%@ include file="main_bottom.jsp"%>
+<style>
+#like_disabled{
+   background-color: #D5D5D5;
+   border: none;
+   color: white;
+   padding: 15px 32px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+   margin: 4px 2px;
+   cursor: pointer;   
+}
+#unlike_disabled{
+   background-color: #D5D5D5;
+   border: none;
+   color: white;
+   padding: 15px 32px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+   margin: 4px 2px;
+   cursor: pointer;   
+}
+
+#like{
+background-color: #6799FF;
+   border: none;
+   color: white;
+   padding: 15px 32px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+   margin: 4px 2px;
+   cursor: pointer;
+} 
+#unlike{
+background-color: #6799FF;
+   border: none;
+   color: white;
+   padding: 15px 32px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+   margin: 4px 2px;
+   cursor: pointer;
+} 
+</style>
 </html>

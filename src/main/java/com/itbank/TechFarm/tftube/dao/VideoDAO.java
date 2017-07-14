@@ -11,8 +11,8 @@ public interface VideoDAO {
 	public VideoDTO getVideo(int no);
 	public int deleteVideo(int no);
 	public int hitUp(int no);
-	public int click_like(int like_status);
-	public int cancel_like(int like_status);
-	public int click_unlike(int unlike_status);
-	public int cancel_unlike(int unlike_status);
+	public int click_like(int no);
+	public int cancel_like(int no);
+	public int click_unlike(int no);
+	public int cancel_unlike(int no);
 }
