@@ -51,8 +51,7 @@ public class VideoMapper {
 		SqlSession session=sqlMapper.openSession();
 		VideoDTO dto=(VideoDTO)session.selectOne("getVideo",no);		
 		session.close();
-		return dto;
-		
+		return dto;		
 	}
 	
 	public static int deleteVideo(int ind){
@@ -78,33 +77,33 @@ public class VideoMapper {
   		return res;
   	}
 	
-	public static int click_like(int like_status){
+	public static int click_like(int no){
 		SqlSession session=sqlMapper.openSession();
-  		int res=session.update("click_like",like_status); 
+  		int res=session.update("click_like",no); 
   		session.commit();
   		session.close();
 		return res;
 	}
 	
-	public static int click_unlike(int unlike_status){
+	public static int click_unlike(int no){
 		SqlSession session=sqlMapper.openSession();
-  		int res=session.update("click_unlike",unlike_status); 
+  		int res=session.update("click_unlike",no); 
   		session.commit();
   		session.close();
 		return res;
 	}
 	
-	public static int cancel_like(int like_status){
+	public static int cancel_like(int no){
 		SqlSession session=sqlMapper.openSession();
-  		int res=session.update("cancel_like",like_status); 
+  		int res=session.update("cancel_like",no); 
   		session.commit();
   		session.close();
 		return res;
 	}
 	
-	public static int cancel_unlike(int unlike_status){
+	public static int cancel_unlike(int no){
 		SqlSession session=sqlMapper.openSession();
-  		int res=session.update("cancel_unlike",unlike_status); 
+  		int res=session.update("cancel_unlike",no); 
   		session.commit();
   		session.close();
 		return res;

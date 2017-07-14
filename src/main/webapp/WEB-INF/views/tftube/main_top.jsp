@@ -3,11 +3,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<link rel="stylesheet" type="text/css" href="resources/tftube/style.css">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+
 <table colspan="2" border="3">
 <tr>
 <td>
@@ -30,8 +32,8 @@
 
 <c:if test="${memberDTO!=null}">
 		<a href="tftube_mychannel">내 채널</a><br>
-</c:if>
 <a href="tftube_recentvideo_listRecent_member_no">최근 본 동영상</a><br>
+</c:if>
 -----------------------------<br>
 음악<br>
 스포츠<br>

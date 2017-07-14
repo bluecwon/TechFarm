@@ -8,8 +8,8 @@
 	
 <insert id="insertVideo" parameterType="videoDTO" useGeneratedKeys="true">
 insert into tftube_video
-(member_no,title,description,open,video_name,video_size,readcount,image,likep,unlikep,video_hash,image_hash,like_status,unlike_status) values
-(#{member_no}, #{title},#{description},#{open},#{video_name},#{video_size},0,#{image},0,0,#{video_hash},#{image_hash},0,0) 
+(member_no,title,description,open,video_name,video_size,readcount,image,likep,unlikep,video_hash,image_hash,like_status) values
+(#{member_no}, #{title},#{description},#{open},#{video_name},#{video_size},0,#{image},0,0,#{video_hash},#{image_hash},0) 
 </insert>
 
 <delete id="deleteVideo" parameterType="int">
@@ -36,20 +36,20 @@ select * from tftube_video where member_no=#{member_no} order by no desc
 		${sql}
 </update>
 
-<update id="click_like" parameterType="int">
-update tftube_video set likep=likep+1,like_status=#{like_status} where no=#{no}
+<update id="click_like" parameterType="videoDTO">
+update tftube_video set likep=likep+1 , like_status=1 where no=#{no}
 </update>
 
-<update id="cancel_like" parameterType="int">
-update tftube_video set likep=likep-1,like_status=#{like_status} where no=#{no}
+<update id="cancel_like" parameterType="videoDTO">
+update tftube_video set likep=likep-1 , like_status=0 where no=#{no}
 </update>
 
-<update id="click_unlike" parameterType="int">
-update tftube_video set unlikep=unlikep+1, unlike_status=#{unlike_status}
+<update id="click_unlike" parameterType="videoDTO"> 
+update tftube_video set unlikep=unlikep+1 , unlike_status=1 where no=#{no}
 </update>
 
-<update id="cancel_unlike" parameterType="int">
-update tftube_video set unlikep=unlikep-1, unlike_status=#{unlike_status}
+<update id="cancel_unlike" parameterType="videoDTO">
+update tftube_video set unlikep=unlikep-1 , unlike_status=0 where no=#{no}
 </update>		
 	
 

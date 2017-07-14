@@ -48,6 +48,7 @@ import com.itbank.TechFarm.tftube.dao.ReplyDAO;
 import com.itbank.TechFarm.tftube.dao.VideoDAO;
 import com.itbank.TechFarm.tftube.dto.RecentVideoDTO;
 import com.itbank.TechFarm.tftube.dto.ReplyDTO;
+import com.itbank.TechFarm.tftube.dto.ReplyFormat;
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
 import com.itbank.TechFarm.tftube.java.Sha3;
 
@@ -134,6 +135,7 @@ public class TftubeController {
 		MultipartFile mf = mr.getFile("filename");
 		String filename = mf.getOriginalFilename();
 		
+		
 		/*if(!(filename.substring(filename.length()-3, filename.length()).equals("mp4"))){			
 			msg="only mp4 available";
 			url="tftube_video_insert";
@@ -206,46 +208,54 @@ public class TftubeController {
 		ModelAndView mv=new ModelAndView();
 		HttpSession session=arg0.getSession();
 		
-		String no_raw=arg0.getParameter("no");
+		String no_raw=arg0.getParameter("no");//number of video
 		int no=0;
 		if(no_raw!=null){
 		no=Integer.parseInt(no_raw);}//tftube_video
-		VideoDTO vdto=videoDAO.getVideo(no);//video's total information
 		
+		VideoDTO vdto=videoDAO.getVideo(no);//a video's total information
+		
+		String video_name=vdto.getVideo_name();//video_name at present		
 		/*like*/		
-		
+			
 		//request
 		String like_stat_raw=arg0.getParameter("like");
 		String unlike_stat_raw=arg0.getParameter("unlike");
-				
-		System.out.println("like_status_raw:"+like_stat_raw);
-		System.out.println("unlike_status_raw:"+unlike_stat_raw);
+
+		
+		System.out.println("request like:"+like_stat_raw);
+		System.out.println("request unlike:"+unlike_stat_raw);
 		
 		int res_like=0;
 		int res_unlike=0;
-		
+		/*VideoDTO likedto=new VideoDTO();*/
 		if(like_stat_raw!=null){
-			int like_stat=Integer.parseInt(like_stat_raw);			 
+			int like_stat=Integer.parseInt(like_stat_raw);
+			System.out.println("들어온 like 숫자 변환"+like_stat);
 				switch(like_stat){
-				case 1:res_like=videoDAO.click_like(1);
-				case 0:res_like=videoDAO.cancel_like(0);		
+				/*case 1:res_like=videoDAO.click_like(no);break;*/
+				case 0:res_like=videoDAO.cancel_like(no);break;
+				default:res_like=videoDAO.click_like(no);break;
 				}
 		}
 		
 		if(unlike_stat_raw!=null){
 			int unlike_stat=Integer.parseInt(unlike_stat_raw);			
 			switch(unlike_stat){
-			case 1:res_unlike=videoDAO.click_unlike(1);
-			case 0:res_unlike=videoDAO.cancel_unlike(0);		
+			/*case 1:res_unlike=videoDAO.click_unlike(1);break;*/
+			case 0:res_unlike=videoDAO.cancel_unlike(0);break;
+			default:res_like=videoDAO.click_like(no);break;
 			}			
 		}
-		//end of response
-		
 		//response
-		int like_status=videoDAO.getVideo(no).getLike_status();
-		int unlike_status=videoDAO.getVideo(no).getUnlike_status();
-		mv.addObject("like",like_status);
-		mv.addObject("unlike",unlike_status);		
+				int like_status=videoDAO.getVideo(no).getLike_status();
+				int unlike_status=videoDAO.getVideo(no).getUnlike_status();
+				System.out.println("response like:"+like_status);
+				System.out.println("response unlike:"+unlike_status);
+				mv.addObject("like",like_status);
+				mv.addObject("unlike",unlike_status);		
+				//end of response	
+		
 		//end of response		
 		/*end of like*/
 		
@@ -261,7 +271,7 @@ public class TftubeController {
 		MemberDTO member=new MemberDTO();
 		
 		//start of hits' validity 
-		HashSet<String> ipset=new HashSet();
+		HashSet<String> ipset=new HashSet<String>();
 		Iterator it=ipset.iterator();
 		boolean p;
 		while(it.hasNext()){
@@ -288,7 +298,7 @@ public class TftubeController {
 		String readcount=df.format(vdto.getReadcount());
 		//end of hits' format 
 		
-		//logined member information at present
+		//Did login member information at present
 		Object member_object=session.getAttribute("memberDTO");
 		if(member_object!=null){
 		member=(MemberDTO)member_object;
@@ -299,20 +309,17 @@ public class TftubeController {
 		
 		if(member_object!=null){
 		recent_dto.setMember_no(member.getNo());
-		recent_dto.setVideo_name(vdto.getVideo_name());
-		
-		int res=recentvideoDAO.insertRecent(recent_dto);
-		}else{
-			recent_dto.setIp(ip);
-			recent_dto.setVideo_name(vdto.getVideo_name());
-			
-			int res=recentvideoDAO.insertRecent(recent_dto);			
+		recent_dto.setVideo_name(video_name);		
+		recentvideoDAO.insertRecent(recent_dto);
 		}
 		//end of RecentVideo insert 		
 		
+		
 		//ReplyList where=video		
-		List<ReplyDTO> r_list=replyDAO.replyList_by_video(vdto.getVideo_name());
-		String r_size=df.format(r_list.size());
+		/*List<ReplyDTO> r_list=replyDAO.replyList_by_video(video_name);*/
+		List<ReplyFormat> r_list=replyDAO.getName_by_video(video_name);
+		String r_size=df.format(replyDAO.reply_number(video_name));
+		
 		//member_no
 		
 		//Reply writer
@@ -328,6 +335,7 @@ public class TftubeController {
 		//mv.addObject("r_name",r_name);
 		//size of reply
 		mv.addObject("r_size",r_size);
+		mv.addObject("no",no);
 		
 			
 		mv.setViewName("tftube/videoView");			

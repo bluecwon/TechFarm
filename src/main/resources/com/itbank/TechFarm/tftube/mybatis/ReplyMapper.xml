@@ -6,26 +6,19 @@
 
 <mapper namespace="com.itbank.TechFarm.tftube.mybatis.ReplyMapper">
 
-	<select id="replyList" resultType="replyDTO">
-		select * from tftube_reply order by re_step desc
+	<select id="reply_number" resultType="int" parameterType="String">
+		select count(*) from tftube_reply where re_level = 0 and video_name=#{video_name} 
 	</select>
 	
 	<select id="replyList_by_video" parameterType="String" resultType="replyDTO">
 		select * from tftube_reply where video_name=#{video_name} order by re_step asc
-	</select>		
+	</select>	
 	
-	<select id="getName" resultType="" parameterType="int">
-	select a.name from tfmember.member a join tftube.tftube_reply b on a.no = b.member_no
-	select * from tftube_reply
-	
+	<select id="getName_by_video" parameterType="String" resultType="replyformat">
+	select a.name,b.* from tfmember.member a join tftube_reply b on a.no = b.member_no and b.video_name=#{video_name} order by re_step asc;
 	</select>
 	
-	<select id="" parameterType="String" resultType="String">
-	select a.name from tfmember.member a join tftube_reply b on a.no = b.memb
-er_no and b.video_name=#{video_name};
-	</select>
-			
-	
+		
 	
 	<delete id="deletereply" parameterType="int">
 		delete from tftube_reply where no = #{no}
@@ -52,9 +45,13 @@ er_no and b.video_name=#{video_name};
 	
 	
 	<select id="listreply" parameterType="java.util.HashMap" resultType="replyDTO">
- 	select * from (select rownum rn,A.*from(select * from tftube_reply order by re_step asc)A)
+ 	select * from 
+ 	(select rownum rn,A.* from(select * from tftube_reply order by re_step asc)A)
 	where rn between ${start} and ${end}
 	</select>
+	
+	select rownum rn,A.* from(select *from tftube_reply order by re_step asc)A
+	where rn between ${start} and ${end}
 	
 	
 	

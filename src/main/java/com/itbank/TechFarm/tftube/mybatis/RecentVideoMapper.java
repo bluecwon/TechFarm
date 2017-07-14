@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.itbank.TechFarm.tftube.dto.RecentVideoDTO;
+import com.itbank.TechFarm.tftube.dto.VideoDTO;
 
 public class RecentVideoMapper {
 	
@@ -40,9 +41,9 @@ public class RecentVideoMapper {
 		return list;	
 	}
 	
-	public static List<RecentVideoDTO> listRecent_ip(String ip){
+	public static List<VideoDTO> listVideo_recent(){
 		SqlSession session=sqlMapper.openSession();
-		List<RecentVideoDTO> list=session.selectList("listRecent_ip",ip);
+		List<VideoDTO> list=session.selectList("listVideo_recent");
 		session.close();
 		return list;	
 	}

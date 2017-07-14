@@ -3,6 +3,7 @@ package com.itbank.TechFarm.tftube.dao;
 import java.util.List;
 
 import com.itbank.TechFarm.tftube.dto.RecentVideoDTO;
+import com.itbank.TechFarm.tftube.dto.VideoDTO;
 import com.itbank.TechFarm.tftube.mybatis.RecentVideoMapper;
 
 public class RecentVideoDAOImpl implements RecentVideoDAO{
@@ -18,8 +19,12 @@ public class RecentVideoDAOImpl implements RecentVideoDAO{
 	}
 
 	@Override
-	public List<RecentVideoDTO> listRecent_ip(String ip) {
-		return RecentVideoMapper.listRecent_ip(ip);
-	}	
+	public List<VideoDTO> listVideo_recent() {		
+		return RecentVideoMapper.listVideo_recent();
+	}
+	
+	
+
+	
 
 }
