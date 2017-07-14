@@ -4,9 +4,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>메일 보내기</title>
 </head>
 <body>
-
+<div class="container">
+  <h4>메일 보내기</h4>
+  <form action="sendJames" method="post">
+    <div align="center"><!-- 받는 사람 이메일 -->
+      <input type="text" name="to" size="120" style="width:100%" placeholder="상대의 이메일" >
+    </div>     
+    <div align="center"><!-- 제목 -->
+      <input type="text" name="subject" size="120" style="width:100%" placeholder="제목을 입력해주세요" >
+    </div>
+    <p>
+    <div align="center"><!-- 내용 --> 
+      <textarea name="text" cols="120" rows="12" style="width:100%; resize:none" placeholder="내용#" ></textarea>
+    </div>
+    <p>
+    <div align="center">
+      <input type="submit" value="메일 보내기" >
+      <input type="reset" value="취소">
+    </div>
+  </form>
+</div>
 </body>
-</html>
+</html> 

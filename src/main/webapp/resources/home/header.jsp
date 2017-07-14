@@ -54,7 +54,7 @@
 				<tr>
 					<td align="center"><a href="#" onclick="check('myAccount');"><img id="img_handle" src="resources/home/imgs/account.png" width="40%" height="35%"></a><br>내계정</td>
 					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/search.png" width="40%" height="35%"></a><br>검색</td>
-					<td align="center"><a href="#" onclick="check('listJames');"><img id="img_handle" src="resources/home/imgs/mail.png" width="40%" height="35%"></a><br>메일</td>
+					<td align="center"><a href="#" onclick="check('sendJames');"><img id="img_handle" src="resources/home/imgs/mail.png" width="40%" height="35%"></a><br>메일</td>
 				</tr>
 				<tr>
 					<td align="center"><a href="#" onclick="check('tfPlusIndex');"><img id="img_handle" src="resources/home/imgs/social.png" width="40%" height="35%"></a><br>SNS</td>

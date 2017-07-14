@@ -1,13 +1,24 @@
 package com.itbank.TechFarm.james;
 
-import javax.mail.Message;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.mail.internet.MimeMessage;
+
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
 public class JamesDAOImpl implements JamesDAO{
-
+	//@Autowired
+	private JavaMailSender mailSender;
+	String host="52.79.140.54";
+	String mailStoreType ="imap";
+	
 	@Override
-	public Message[] listJames(String host, String storeType, String user, String password) {
-		MailJames mailJames = new MailJames();
-		return mailJames.check(host, storeType, user, password);
+	public List<JamesDTO> listJames(String user, String password) {
+		List<JamesDTO> listJames = new ArrayList<JamesDTO>();
+		
+		return listJames;
 	}
 
 	@Override
@@ -17,8 +28,23 @@ public class JamesDAOImpl implements JamesDAO{
 	}
 
 	@Override
-	public void sendJames() {
-		// TODO Auto-generated method stub
+	public int sendJames(JamesDTO dto) {
+		mailSender=MailConfig.mailSender(dto.getId()+"@"+host, dto.getPassword());
+		try{
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+			
+			messageHelper.setFrom(dto.getId()+"@"+host);
+			messageHelper.setTo(dto.getTo());
+			messageHelper.setSubject(dto.getSubject());
+			messageHelper.setText(dto.getText());
+			
+			mailSender.send(message);
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
+		return 1;
 		
 	}
 

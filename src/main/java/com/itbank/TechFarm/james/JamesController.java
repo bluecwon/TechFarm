@@ -1,6 +1,7 @@
 package com.itbank.TechFarm.james;
 
-import javax.mail.Message;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,21 +18,26 @@ public class JamesController {
 	@Autowired
 	private JamesDAO jamesDAO;
 	
-	String host="52.79.140.54";
-	String mailStoreType ="imap";
-	
 	@RequestMapping(value="/listJames", method = RequestMethod.GET)
 	public String listJames(Model model, HttpServletRequest request, HttpSession session){
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
 		String id = memberDTO.getId();
 		String password = memberDTO.getPasswd();
-		Message[] messages = jamesDAO.listJames(host, mailStoreType, id, password);
-		model.addAttribute("message", messages);
+		List<JamesDTO> listJames = jamesDAO.listJames(id, password);
+		model.addAttribute("listJames", listJames);
 		return "james/listJames";
 	}
 	@RequestMapping(value="/sendJames", method = RequestMethod.GET)
-	public String composeJames(Model model, HttpServletRequest request){
-		
+	public String sendJames(HttpServletRequest request){
 		return "james/sendJames";
+	}
+	
+	@RequestMapping(value="/sendJames", method = RequestMethod.POST)
+	public String sendJamesPro(Model model, JamesDTO dto, HttpServletRequest request, HttpSession session){
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
+		dto.setId(memberDTO.getId());
+		dto.setPassword(memberDTO.getPasswd());
+		int res = jamesDAO.sendJames(dto);
+		return "james/listJames";
 	}
 }
