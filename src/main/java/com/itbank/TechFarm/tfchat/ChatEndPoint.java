@@ -14,7 +14,6 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint("/chat")
 public class ChatEndPoint {
 	private static Set<Session> clients = Collections
-
 			.synchronizedSet(new HashSet<Session>());
 
 

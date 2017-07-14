@@ -12,7 +12,7 @@ window.onload = function () {
     var chatArea = document.getElementById("chat-area");
 
     // Connect to the WebSocket server!
-    var socket = new WebSocket("ws://192.168.52.35:8081/TechFarm/chat");
+    var socket = new WebSocket("ws://52.79.140.54:8080/TechFarm/chat");
 
     /**
     * WebSocket onopen event.
