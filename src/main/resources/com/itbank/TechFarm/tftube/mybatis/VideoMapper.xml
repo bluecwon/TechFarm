@@ -21,7 +21,7 @@ update tftube_video set readcount = readcount+1 where no = #{no}
 </update>
 
 <select id="listVideo" resultType="videoDTO">
-select * from tftube_video order by no desc
+ select * from tftube_video order by no desc
 </select>
 
 <select id="getVideo" resultType="videoDTO" parameterType="int">

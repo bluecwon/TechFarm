@@ -89,9 +89,9 @@ public class TftubeController {
 		List<VideoDTO> list=videoDAO.listVideo();		
 		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
 		System.out.println("member:"+member);
-		System.out.println("main_list:"+list);
+		/*System.out.println("main_list:"+list);*/
 		
-		/*no가 뭐냐? 필요 없는 코드 같은데. 중복 방지를 위해서ㅈ거*/
+		/*no가 뭐냐? 필요 없는 코드 같은데. 중복 방지를 위해서*/
 		/*if(session.getAttribute("no")!=null){
 			session.removeAttribute("no");
 		}*/
@@ -323,7 +323,7 @@ public class TftubeController {
 		//member_no
 		
 		//Reply writer
-		//String r_name=replyDAO.getName(member_no);		
+		/*String r_name=replyDAO.getName_by_video(vdto.getVideo_name());*/		
 		
 		//information of recent video
 		mv.addObject("vdto",vdto);		
@@ -332,7 +332,7 @@ public class TftubeController {
 		//list of reply where video
 		mv.addObject("r_list",r_list);
 		//writer of reply
-		//mv.addObject("r_name",r_name);
+		/*mv.addObject("r_name",r_name);*/
 		//size of reply
 		mv.addObject("r_size",r_size);
 		mv.addObject("no",no);

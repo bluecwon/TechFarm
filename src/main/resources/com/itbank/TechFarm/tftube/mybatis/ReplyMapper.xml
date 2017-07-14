@@ -50,8 +50,8 @@
 	where rn between ${start} and ${end}
 	</select>
 	
-	select rownum rn,A.* from(select *from tftube_reply order by re_step asc)A
-	where rn between ${start} and ${end}
+	<!-- select rownum rn,A.* from(select *from tftube_reply order by re_step asc)A
+	where rn between ${start} and ${end} -->
 	
 	
 	

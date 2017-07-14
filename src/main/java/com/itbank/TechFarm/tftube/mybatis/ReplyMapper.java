@@ -83,12 +83,22 @@ public class ReplyMapper {
   	return res;  	
   	}
   	
+
   	public static List<ReplyFormat>getName_by_video(String video_name){
   		SqlSession session=sqlMapper.openSession();
   		List<ReplyFormat> list=session.selectList("getName_by_video",video_name);
   		session.close();
   		return list;
   	}
+
+  	/*public static List<ReplyDTO> getName_by_video(String video_name){
+
+  		SqlSession session=sqlMapper.openSession();
+  		List<ReplyFormat> list=session.selectList("getName_by_video",video_name);
+  		session.close();
+
+  		return list;
+  	}*/
   	
   	public static int reply_number(String video_name){
   		SqlSession session=sqlMapper.openSession();
@@ -98,6 +108,8 @@ public class ReplyMapper {
   	}
   	
   	
+
+
   	
   	
   	

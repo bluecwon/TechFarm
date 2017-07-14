@@ -6,9 +6,6 @@ import com.itbank.TechFarm.tftube.dto.VideoDTO;
 import com.itbank.TechFarm.tftube.mybatis.ReplyMapper;
 import com.itbank.TechFarm.tftube.mybatis.VideoMapper;
 
-
-
-
 public class VideoDAOImpl implements VideoDAO {
 	@Override
 	public int insertVideo(VideoDTO dto) {		
@@ -59,10 +56,12 @@ public class VideoDAOImpl implements VideoDAO {
 
 
 	@Override
+
 	public int cancel_unlike(int no) {
 		return VideoMapper.cancel_unlike(no);
 	}
 	
 	
 	
+
 }
