@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.itbank.TechFarm.tftube.dto.NameFormat;
 import com.itbank.TechFarm.tftube.dto.ReplyDTO;
 
 
@@ -17,7 +18,7 @@ public class ReplyMapper {
 	private static SqlSessionFactory sqlMapper;
 	static {
 		try {
-			String resource = "SqlMapConfig_tftube.xml"; 
+			String resource = "com/itbank/TechFarm/SqlMapConfig_tftube.xml"; 
 			Reader reader = Resources.getResourceAsReader(resource); 
 			sqlMapper = new SqlSessionFactoryBuilder().build(reader);
 		} catch (IOException e) {
@@ -89,15 +90,16 @@ public class ReplyMapper {
   		return list;  		
   	}*/
   	
-	public static String getName_by_video(String video_name){
-  		SqlSession session=sqlMapper.openSession();
-  		System.out.println("plist:"+session.selectList("getName"));
-  		List list=(List)session.selectList("getName_by_video",video_name);
-  		String name=null;
-  		if(list.size()==0){}
-  		else{name=(String)list.get(0);}
+	public static List<NameFormat> getName_by_video(String video_name){
+  		SqlSession session=sqlMapper.openSession();  		
+  		List<NameFormat> list=(List)session.selectList("getName_by_video",video_name);
+  		System.out.println(video_name);
+  		
+  		/*List list2=(List)session.selectList("getName_by_video",video_name);*/
+  		System.out.println("mapper안 리스트:"+list);
+  		/*System.out.println("mapper안 리스트2:"+list2);*/ 	
   		session.close();
-  		return name;
+  		return list;
   	}
   	
   	

@@ -2,6 +2,7 @@ package com.itbank.TechFarm.tftube.dao;
 
 import java.util.List;
 
+import com.itbank.TechFarm.tftube.dto.NameFormat;
 import com.itbank.TechFarm.tftube.dto.ReplyDTO;
 
 
@@ -16,7 +17,7 @@ public interface ReplyDAO {
 	public int update_re_step();
 	public int update_re_step_reply(int re_step);
 	public int delete_reply(int no);
-	public String getName_by_video(String video_name);
+	public List<NameFormat> getName_by_video(String video_name);
 	
 	
 

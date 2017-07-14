@@ -5,16 +5,12 @@
 
 <mapper namespace="com.itbank.TechFarm.tftube.mybatis.RecentVideoMapper">
 
- <insert id="insertRecent" parameterType="RecentVideoDTO" useGeneratedKeys="true">
- insert into tftube_recentvideo(member_no,video_name,ip) values(#{member_no},#{video_name},#{ip})
+ <insert id="insertRecent" parameterType="recentVideoDTO" useGeneratedKeys="true">
+ insert into tftube_recentvideo(member_no,video_name) values(#{member_no},#{video_name})
  </insert>
  
- <select id="listRecent_member_no" resultType="RecentVideoDTO" parameterType="String">
+ <select id="listRecent_member_no" resultType="recentVideoDTO" parameterType="String">
  select * from tftube_recentvideo where member_no=#{member_no} order by no desc
- </select>
- 
- <select id="listRecent_ip" resultType="RecentVideoDTO" parameterType="String">
- select * from tftube_recentvideo where ip=#{ip} order by no desc
- </select>
+ </select> 
 
 </mapper>

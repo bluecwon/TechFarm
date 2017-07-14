@@ -17,9 +17,6 @@ public class RecentVideoDAOImpl implements RecentVideoDAO{
 		return RecentVideoMapper.listRecent_member_no(member_no);
 	}
 
-	@Override
-	public List<RecentVideoDTO> listRecent_ip(String ip) {
-		return RecentVideoMapper.listRecent_ip(ip);
-	}	
+	
 
 }

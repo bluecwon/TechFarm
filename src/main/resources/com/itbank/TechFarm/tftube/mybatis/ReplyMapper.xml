@@ -9,30 +9,26 @@
 	<select id="replyList" resultType="replyDTO">
 		select * from tftube_reply order by re_step desc
 	</select>
-	
+		
 	<select id="replyList_by_video" parameterType="String" resultType="replyDTO">
 		select * from tftube_reply where video_name=#{video_name} order by re_step asc
 	</select>		
 	
-	<select id="getName" resultType="" parameterType="int">
+	<!-- <select id="getName" resultType="" parameterType="int">
 	select a.name from tfmember.member a join tftube.tftube_reply b on a.no = b.member_no
-	select * from tftube_reply
+	select * from tftube_reply	
+	</select>-->
 	
-	</select>
-	
-	<select id="getName_by_video" parameterType="String" resultType="String">
-	select a.name from tfmember.member a join tftube_reply b on a.no = b.memb
-	er_no and b.video_name=#{video_name};
-	</select>
-			
-	
+	<select id="getName_by_video" parameterType="String" resultType="ReplyDTOFormat">
+		select a.name,b.* from tfmember.member a join tftube_reply b on a.no = b.member_no and b.video_name=#{video_name} order by re_step asc;
+	</select>	
 	
 	<delete id="deletereply" parameterType="int">
 		delete from tftube_reply where no = #{no}
 	</delete>
 	
 	<insert id="insertReply" parameterType="replyDTO" useGeneratedKeys="true">	
-		insert into tftube_reply 
+		insert into tftube_reply
 		(member_no,content,video_name,re_step,re_level)
 		values(#{member_no},#{content},#{video_name},#{re_step},#{re_level})		
 	</insert>

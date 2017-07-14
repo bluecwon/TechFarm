@@ -2,6 +2,7 @@ package com.itbank.TechFarm.tftube.dao;
 
 import java.util.List;
 
+import com.itbank.TechFarm.tftube.dto.NameFormat;
 import com.itbank.TechFarm.tftube.dto.ReplyDTO;
 import com.itbank.TechFarm.tftube.mybatis.ReplyMapper;
 
@@ -46,9 +47,11 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 
 	@Override
-	public String getName_by_video(String video_name) {
+	public List<NameFormat> getName_by_video(String video_name) {
 		return ReplyMapper.getName_by_video(video_name);
 	}
+
+	
 	
 	
 	

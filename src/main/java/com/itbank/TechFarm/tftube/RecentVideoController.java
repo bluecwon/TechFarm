@@ -37,8 +37,8 @@ public class RecentVideoController {
 		if(memberDTO!=null){
 		int member_no=memberDTO.getNo();
 		recent_list=recentvideoDAO.listRecent_member_no(member_no);		
-		}else{
-		recent_list=recentvideoDAO.listRecent_ip(ip);}
+		}
+		
 		
 		mv.addObject("recent_list",recent_list);		
 		mv.setViewName("tftube/recentVideo");		

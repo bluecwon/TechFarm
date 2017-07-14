@@ -211,7 +211,7 @@ public class TftubeController {
 		if(no_raw!=null){
 		no=Integer.parseInt(no_raw);}//tftube_video
 		VideoDTO vdto=videoDAO.getVideo(no);//video's total information
-		
+		String video_name=vdto.getVideo_name();
 		/*like*/		
 		
 		//request
@@ -299,24 +299,23 @@ public class TftubeController {
 		
 		if(member_object!=null){
 		recent_dto.setMember_no(member.getNo());
-		recent_dto.setVideo_name(vdto.getVideo_name());
+		recent_dto.setVideo_name(video_name);
 		
-		int res=recentvideoDAO.insertRecent(recent_dto);
-		}else{
-			recent_dto.setIp(ip);
-			recent_dto.setVideo_name(vdto.getVideo_name());
-			
-			int res=recentvideoDAO.insertRecent(recent_dto);			
-		}
+		recentvideoDAO.insertRecent(recent_dto);}
+		
 		//end of RecentVideo insert 		
 		
-		//ReplyList where=video		
-		List<ReplyDTO> r_list=replyDAO.replyList_by_video(vdto.getVideo_name());
+		//ReplyList where=video
+		System.out.println(video_name);
+		List r_list=replyDAO.getName_by_video(video_name);
+		System.out.println("컨트롤러안"+r_list);
+		System.out.println(r_list.size());
 		String r_size=df.format(r_list.size());
 		//member_no
 		
 		//Reply writer
-		String r_name=replyDAO.getName_by_video(vdto.getVideo_name());		
+		/*List name_list=replyDAO.getName_by_video(video_name);
+		System.out.println(name_list);*/
 		
 		//information of recent video
 		mv.addObject("vdto",vdto);		
@@ -325,7 +324,7 @@ public class TftubeController {
 		//list of reply where video
 		mv.addObject("r_list",r_list);
 		//writer of reply
-		mv.addObject("r_name",r_name);
+		
 		//size of reply
 		mv.addObject("r_size",r_size);
 		

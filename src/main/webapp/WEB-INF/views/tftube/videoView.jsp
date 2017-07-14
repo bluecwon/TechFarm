@@ -65,7 +65,7 @@ function unlike_disabled(){
 } */
 
 /* move */
-function GReply(){
+/* function GReply(){
 	document.f1.action="tftube_reply_insert?mode=general";
 	document.f1.submit();	
 }
@@ -73,7 +73,7 @@ function GReply(){
 function DReply(){
 	document.f2.action="tftube_reply_insert?mode=deep";
 	document.f2.submit();	
-}
+} */
 
 //태그를 안붙여주면 잘 못찾는 것 같다.
 //하나씩만 열리도록 설정
@@ -150,9 +150,10 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
 <input type="hidden" name="video_name" value="${vdto.video_name}">
 <input type="hidden" name="no" value="${vdto.no}">
 <c:if test="${memberDTO!=null}">
-<input type="button" value="입력" onClick="javascript:GReply()">
+
 </c:if>
 <input type="hidden" name="mode" value="general">
+<input type="submit" value="입력">
 </form>
 </td></tr>
 </c:otherwise></c:choose>
@@ -177,7 +178,8 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
 <form name="f2" method="post" action="tftube_reply_insert">
 <!-- reply contents with reply information -->
 <div class = "titl" width="800"><!--empty space securement-->
-<a href="tftube_mychannel?name=${rdto.member_no}">${rdto.member_no}</a>  ${rdto.reg_date}
+
+<a href="tftube_mychannel?name=${rdto.member_no}">${rdto.name}</a> ${rdto.reg_date}<br>
  
 ${rdto.content}<br>
 
@@ -188,7 +190,9 @@ ${rdto.content}<br>
 <a href="login" class="not_login">답글</a><br>
 </c:when>
 <c:otherwise>
-<a class="reply_button" onmouseover="" style="cursor: pointer;">답글</a>  <a href="tftube_reply_delete?no=${vdto.no}&r_no=${rdto.no}">삭제</a> <br>					
+<a class="reply_button" onmouseover="" style="cursor: pointer;">답글</a> 
+<c:if test="${memberDTO.no.equals(rdto.member_no)}">
+ <a href="tftube_reply_delete?no=${vdto.no}&r_no=${rdto.no}">삭제</a></c:if> <br>					
 <a id="reply" class="reply_area">
 
 <textArea name="content_reply">

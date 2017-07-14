@@ -10,6 +10,6 @@ public interface RecentVideoDAO {
 	
 	public List<RecentVideoDTO> listRecent_member_no(int member_no);
 	
-	public List<RecentVideoDTO> listRecent_ip(String ip);
+	
 
 }
