@@ -78,8 +78,8 @@ public class VideoMapper {
   	}
 	
 	public static int click_like(int no){
-		SqlSession session=sqlMapper.openSession();
-  		int res=session.update("click_like",no); 
+		SqlSession session=sqlMapper.openSession();		
+  		int res=session.update("clicklike",no);  		
   		session.commit();
   		session.close();
 		return res;

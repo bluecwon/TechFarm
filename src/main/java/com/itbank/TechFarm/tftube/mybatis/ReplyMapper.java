@@ -91,6 +91,15 @@ public class ReplyMapper {
   		session.close();
   		return list;
   	}
+  	
+  	public static int delete_reply_video_name(String video_name){
+  		SqlSession session=sqlMapper.openSession();
+  	  	int res=session.delete("delete_reply_video_name",video_name);
+  	  	session.commit();
+  	  	session.close();
+  	  	return res; 
+  		
+  	}
 
   	/*public static List<ReplyDTO> getName_by_video(String video_name){
 

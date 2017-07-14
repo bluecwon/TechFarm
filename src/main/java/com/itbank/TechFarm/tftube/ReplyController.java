@@ -111,7 +111,8 @@ public class ReplyController {
 			rdto=(ReplyDTO)rdto_raw;
 		}*/
 		int r_no=0;
-		
+		ReplyDTO rdto=(ReplyDTO)arg0.getAttribute("rdto");
+		System.out.println(rdto);
 		//re_step, re_level
 		String no_raw=arg0.getParameter("no");//video number
 		if(no_raw!=null){

@@ -6,16 +6,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<c:set var="like" value="${like}"/>
-<c:set var="unlike" value="${unlike}"/>
+<c:set var="likep" value="${likep}"/>
+<c:set var="unlikep" value="${unlikep}"/>
 <script src="resources/js/jquery-1.9.0.js" type="text/javascript"></script>
 <script type="text/javascript">
-var like=${like};
-var unlike=${unlike};
-var no=${vdto.no}
+var likep=${likep};
+var unlikep=${unlikep};
+var no=${vdto.no};
 /* like & unlike */
 $(function(){
-	if(like==0||like==null){
+	if(likep==0||likep==null){
 	$("#like").hide();
 	$("#like_disabled").show();
 	}	
@@ -24,19 +24,20 @@ $(function(){
 	$("#like").show();
 	}
 	
-	if(unlike==0||like==null){
+	if(unlikep==0||likep==null){
 	$("#unlike").hide();}
 	else{	
 	$("#unlike_disabled").hide();
 	}	
 });
-function like()
-{like--;location.href="tftube_videoView?no="+no+"&like="+like;}
-function like_disabled()
-{like++;location.href="tftube_videoView?no="+no+"&like="+like;}
 
-function unlike(){unlike--;location.href="tftube_videoView?no="+no+"&unlike="+unlike;}
-function unlike_disabled(){unlike++;location.href="tftube_videoView?no="+no+"&unlike="+unlike;}
+function likes()
+{likep--;location.href="tftube_videoView?no="+no+"&likep="+likep;}
+function likes_disabled()
+{alert(no);likep++;location.href="tftube_videoView?no="+no+"&likep="+likep;}
+
+function unlikes(){unlikep--;location.href="tftube_videoView?no="+no+"&unlikep="+unlikep;}
+function unlikes_disabled(){unlikep++;location.href="tftube_videoView?no="+no+"&unlikep="+unlikep;}
 
 /* function like(){
 	$("#like").click(function(){
@@ -118,10 +119,10 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
 
 </form>
  -->
-<button id="like_disabled" onclick="like_disabled()">like</button>
-<button id="like" onclick="like()" >like</button><!-- it's not work -->
-<button id="unlike_disabled" onclick="unlike_disabled()" value="unlike">unlike</button>
-<button id="unlike" onclick="unlike()" >unlike</button>
+<button id="like_disabled" onclick="likes_disabled()">like</button>
+<button id="like" onclick="likes()" >like</button><!-- it's not work -->
+<button id="unlike_disabled" onclick="unlikes_disabled()" value="unlike">unlike</button>
+<button id="unlike" onclick="unlikes()" >unlike</button>
 
 </td></tr>
 </table>
@@ -196,7 +197,8 @@ ${rdto.content}<br>
 <c:otherwise>
 <a class="reply_button" onmouseover="" style="cursor: pointer;">답글</a>
 
-<c:if test="${rdto.member_no eq memberDTO.no}"> 				수정 |<a href="tftube_reply_delete?no=${vdto.no}&reply=${rdto}">삭제</a> <br></c:if><br>
+<c:if test="${rdto.member_no eq memberDTO.no}"> 				수정 |<a href="tftube_reply_delete?no=${vdto.no}">${paramScope.rdto}삭제</a> <br></c:if><br>
+
 <c:if test="${re_reply_size>2}">
 답글 ${re_reply_size}개 모두 보기	
 </c:if>				

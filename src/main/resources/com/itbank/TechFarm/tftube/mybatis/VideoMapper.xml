@@ -36,24 +36,21 @@ select * from tftube_video where member_no=#{member_no} order by no desc
 		${sql}
 </update>
 
-<update id="click_like" parameterType="videoDTO">
-update tftube_video set likep=likep+1 , like_status=1 where no=#{no}
+<update id="clicklike" parameterType="java.util.HashMap">
+${sql}
+<!-- update tftube_video set likep=likep+1 , like_status=1 where no=#{no} -->
 </update>
 
-<update id="cancel_like" parameterType="videoDTO">
-update tftube_video set likep=likep-1 , like_status=0 where no=#{no}
+<update id="cancellike" parameterType="int">
+update tftube_video set likep=likep-1, like_status=0 where no=#{no}
 </update>
 
-<update id="click_unlike" parameterType="videoDTO"> 
-update tftube_video set unlikep=unlikep+1 , unlike_status=1 where no=#{no}
+<update id="click_unlike" parameterType="int"> 
+update tftube_video set unlikep=unlikep+1, unlike_status=1 where no=#{no}
 </update>
 
-<update id="cancel_unlike" parameterType="videoDTO">
-update tftube_video set unlikep=unlikep-1 , unlike_status=0 where no=#{no}
-</update>		
-
-	
-
-
+<update id="cancel_unlike" parameterType="int">
+update tftube_video set unlikep=unlikep-1, unlike_status=0 where no=#{no}
+</update>	
 
 </mapper>	

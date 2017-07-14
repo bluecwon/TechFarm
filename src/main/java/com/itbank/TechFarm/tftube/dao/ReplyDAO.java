@@ -20,6 +20,7 @@ public interface ReplyDAO {
 	public int delete_reply(int no);
 	public List<ReplyFormat>getName_by_video(String video_name);
 	public int reply_number(String video_name);
+	public int delete_reply_video_name(String video_name);
 
 
 	

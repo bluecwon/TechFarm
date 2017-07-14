@@ -208,44 +208,44 @@ public class TftubeController {
 		ModelAndView mv=new ModelAndView();
 		HttpSession session=arg0.getSession();
 		
-		String no_raw=arg0.getParameter("no");//number of video
+		String no_raw=arg0.getParameter("no");//no of video
+		//videoView or main
 		int no=0;
+		System.out.println(no_raw);
 		if(no_raw!=null){
 		no=Integer.parseInt(no_raw);}//tftube_video
 
-		VideoDTO vdto=videoDAO.getVideo(no);//a video's total information
-
-		
+		VideoDTO vdto=videoDAO.getVideo(no);//a video's total information	
 		String video_name=vdto.getVideo_name();//video_name at present		
 		/*like*/		
-			
+		/*String like_video_no_raw=arg0.getParameter("like_video_no");
+		int like_video_no=Integer.parseInt(like_video_no_raw);*/
 		//request
-		String like_stat_raw=arg0.getParameter("like");
-		String unlike_stat_raw=arg0.getParameter("unlike");
+		String likep_stat_raw=arg0.getParameter("likep");
+		String unlikep_stat_raw=arg0.getParameter("unlikep");
 
 		
-		System.out.println("request like:"+like_stat_raw);
-		System.out.println("request unlike:"+unlike_stat_raw);
+		System.out.println("request like:"+likep_stat_raw);
 		
-		int res_like=0;
-		int res_unlike=0;
+		
+		
 		/*VideoDTO likedto=new VideoDTO();*/
-		if(like_stat_raw!=null){
-			int like_stat=Integer.parseInt(like_stat_raw);
-			System.out.println("들어온 like 숫자 변환"+like_stat);
-				switch(like_stat){
+		if(likep_stat_raw!=null){
+			int likep_stat=Integer.parseInt(likep_stat_raw);
+			System.out.println("들어온 like 숫자 변환"+likep_stat);
+				switch(likep_stat){
 				/*case 1:res_like=videoDAO.click_like(no);break;*/
-				case 0:res_like=videoDAO.cancel_like(no);break;
-				default:res_like=videoDAO.click_like(no);break;
+				case 0:videoDAO.cancel_like(no);break;
+				default:videoDAO.click_like(no);break;
 				}
 		}
 		
-		if(unlike_stat_raw!=null){
-			int unlike_stat=Integer.parseInt(unlike_stat_raw);			
-			switch(unlike_stat){
+		if(unlikep_stat_raw!=null){
+			int unlikep_stat=Integer.parseInt(unlikep_stat_raw);			
+			switch(unlikep_stat){
 			/*case 1:res_unlike=videoDAO.click_unlike(1);break;*/
-			case 0:res_unlike=videoDAO.cancel_unlike(0);break;
-			default:res_like=videoDAO.click_like(no);break;
+			case 0:videoDAO.cancel_unlike(no);break;
+			default:videoDAO.click_unlike(no);break;
 			}			
 		}
 		//response
@@ -253,8 +253,8 @@ public class TftubeController {
 				int unlike_status=videoDAO.getVideo(no).getUnlike_status();
 				System.out.println("response like:"+like_status);
 				System.out.println("response unlike:"+unlike_status);
-				mv.addObject("like",like_status);
-				mv.addObject("unlike",unlike_status);		
+				mv.addObject("likep",like_status);
+				mv.addObject("unlikep",unlike_status);		
 				//end of response	
 		
 		//end of response		
@@ -310,7 +310,6 @@ public class TftubeController {
 		
 		if(member_object!=null){
 		recent_dto.setMember_no(member.getNo());
-
 		recent_dto.setVideo_name(video_name);		
 		recentvideoDAO.insertRecent(recent_dto);
 		}
@@ -384,7 +383,8 @@ public class TftubeController {
 		ModelAndView mv=new ModelAndView();
 		int no=Integer.parseInt(arg0.getParameter("no"));
 		
-		VideoDTO vdto=videoDAO.getVideo(no);		
+		VideoDTO vdto=videoDAO.getVideo(no);
+		
 		//delete from tftube_video
 		int res=videoDAO.deleteVideo(no);
 		
@@ -396,6 +396,7 @@ public class TftubeController {
 			//resources/tftube/uploadVideo/
 			deletefile.delete();
 			deleteimage.delete();
+			replyDAO.delete_reply_video_name(vdto.getVideo_name());
 		}
 		else{
 			msg="file delete failed.";

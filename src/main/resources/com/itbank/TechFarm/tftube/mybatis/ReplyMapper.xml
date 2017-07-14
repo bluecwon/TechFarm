@@ -12,8 +12,7 @@
 		
 	<select id="replyList_by_video" parameterType="String" resultType="replyDTO">
 		select * from tftube_reply where video_name=#{video_name} order by re_step asc
-	</select>	
-	
+	</select>		
 
 	<select id="getName_by_video" parameterType="String" resultType="replyformat">
 	select a.name,b.* from tfmember.member a join tftube_reply b on a.no = b.member_no and b.video_name=#{video_name} order by re_step asc;
@@ -21,6 +20,10 @@
 	
 	<delete id="deletereply" parameterType="int">
 		delete from tftube_reply where no = #{no}
+	</delete>
+	
+	<delete id="delete_reply_video_name" parameterType="String">
+		delete from tftube_reply where video_name = #{video_name}
 	</delete>
 	
 	<insert id="insertReply" parameterType="replyDTO" useGeneratedKeys="true">	

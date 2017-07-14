@@ -16,7 +16,8 @@
 controls poster="C:\Users\Public\Pictures\Sample Pictures\Chrysanthemum.jpg"
 width="600" height="450"></video>
 </div>
-<%int count=0;%>
+<c:set var="count" value="0"/>
+
 <table border="3">
 <tr>
 <c:forEach var="dto" items="${list}"> 
@@ -24,7 +25,7 @@ width="600" height="450"></video>
 <a href="tftube_videoView?no=${dto.no}">
 <img src="resources/tftube/uploadImage/${dto.image}" width="196" height="100"><br>
 ${dto.title}</a></td>
-<c:set var="count" value="<%=++count%>"/>
+<c:set var="count" value="${count=count+1}"/>
 <c:if test="${count%6==0}">
 </tr><tr>
 </c:if>
