@@ -63,7 +63,7 @@
 				</tr>
 				<tr>
 					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/memo.png" width="40%" height="35%"></a><br>메모</td>
-					<td align="center"><a href="chatting"><img id="img_handle" src="resources/home/imgs/chatting.png" width="40%" height="35%"></a><br>채팅</td>
+					<td align="center"><a href="tfchat_main"><img id="img_handle" src="resources/home/imgs/chatting.png" width="40%" height="35%"></a><br>채팅</td>
 					<td align="center"><a href="#" onclick="check('listContacts');"><img id="img_handle" src="resources/home/imgs/calendar.png" width="40%" height="35%"></a><br>연락처</td>
 				</tr>
 				<tr>
