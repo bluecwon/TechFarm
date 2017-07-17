@@ -7,11 +7,15 @@
 <mapper namespace="com.itbank.TechFarm.tftube.mybatis.SubingMapper">
 
 <insert id="insertSubed" parameterType="subingDTO">
-insert into tftube_subing(channel,member_no,subed_member_no) values(#{channel},#{member_no},#{subing_member_no})  
+insert into tftube_subed(channel,member_no,subed_member_no) values(#{channel},#{member_no},#{subed_member_no})  
 </insert>
 
-<!-- <select id="get_subing_member" parameterType="int" resultType="int">
-select subing_member from tftube_subing where member_no=#{member_no}
-</select> -->
+<select id="get_subed_member" parameterType="int" resultType="int">
+select subed_member_no from tftube_subed where member_no=#{member_no}
+</select>
+
+<delete id="deleteSubed" parameterType="int">
+delete from tftube_subed where subed_member_no=#{subed_member_no}
+</delete>
 
 </mapper>

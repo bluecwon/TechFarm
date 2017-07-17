@@ -15,7 +15,7 @@
 	</select>		
 
 	<select id="getName_by_video" parameterType="String" resultType="replyformat">
-	select a.name,b.* from tfmember.member a join tftube_reply b on a.no = b.member_no and b.video_name=#{video_name} order by re_step asc;
+	select a.name,b.* from tfmember.member a join tftube_reply b on a.no = b.member_no and b.video_name=#{video_name} order by re_step asc
 	</select>
 	
 	<delete id="deletereply" parameterType="int">
@@ -41,10 +41,10 @@
 	</update>
 	
 	
-	<select id="listreply" parameterType="java.util.HashMap" resultType="replyDTO">
+	<!-- <select id="listreply" parameterType="java.util.HashMap" resultType="replyDTO">
  	select * from 
  	(select rownum rn,A.* from(select * from tftube_reply order by re_step asc)A)
 	where rn between ${start} and ${end}
-	</select>	
+	</select>	 -->
 
 </mapper>

@@ -41,11 +41,11 @@ public class RecentVideoMapper {
 		return list;	
 	}
 	
-	/*public static List<VideoDTO> listVideo_recent(){
+	public static List<VideoDTO> listVideo_recent(){
 		SqlSession session=sqlMapper.openSession();
 		List<VideoDTO> list=session.selectList("listVideo_recent");
 		session.close();
 		return list;	
-	}*/
+	}
 
 }

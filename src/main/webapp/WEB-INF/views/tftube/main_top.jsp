@@ -45,7 +45,7 @@ $("#but").click(function(){
 <c:if test="${memberDTO!=null}">
 		<a href="tftube_mychannel">내 채널</a><br>
 <a href="tftube_recentvideo_listRecent_member_no">최근 본 동영상</a><br>
-<a href="likeVideo?member_no=${memberDTO.no}">관심 동영상</a>
+<a href="likeVideo">관심 동영상</a>
 </c:if>
 <p>
 음악<br>

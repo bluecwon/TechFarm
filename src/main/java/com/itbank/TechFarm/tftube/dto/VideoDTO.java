@@ -3,8 +3,7 @@ package com.itbank.TechFarm.tftube.dto;
 public class VideoDTO {
 	
 	private int no;
-	private int member_no;
-	private String channel;
+	private int member_no;	
 	private String title;
 	private String description;
 	private String open;
@@ -19,6 +18,7 @@ public class VideoDTO {
 	private String image_hash;
 	private int like_status;
 	private int unlike_status;	
+	private String channel;
 	
 	
 	public int getNo() {

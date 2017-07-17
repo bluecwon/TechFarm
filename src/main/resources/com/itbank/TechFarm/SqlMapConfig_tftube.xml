@@ -12,6 +12,7 @@
   	<typeAlias alias = "replyformat" type="com.itbank.TechFarm.tftube.dto.ReplyDTOFormat"/>
   	<typeAlias alias = "mychannelDTO" type="com.itbank.TechFarm.tftube.dto.MyChannelDTO"/>
   	<typeAlias alias = "subingDTO" type="com.itbank.TechFarm.tftube.dto.SubingDTO"/>
+  	<typeAlias alias = "subedDTO" type="com.itbank.TechFarm.tftube.dto.SubedDTO"/>
   	<typeAlias alias = "memberDTO" type="com.itbank.TechFarm.login.member.MemberDTO"/>
   </typeAliases>
   <environments default="development"> 

@@ -8,4 +8,5 @@ public interface SubedDAO {
 
 	public int insertSubed(SubedDTO sddto);
 	public List<SubedDTO> get_subed(int member_no);
+	public int deleteSubed(int subbed_member_no);
 }

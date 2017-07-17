@@ -62,8 +62,8 @@ public class MyChannelController {
 		List<VideoDTO> like_list=videoDAO.listLike(member_no);
 		
 		//구덕정보
-		List<SubingDTO> subling_list=subingDAO.get_subing(member_no);
-		
+		List<SubingDTO> subling_list=subingDAO.get_subing_member(member_no);
+	
 		//구독자
 		List<SubedDTO> subed_list=subedDAO.get_subed(member_no);
 		mv.setViewName("tftube/mychannel");	

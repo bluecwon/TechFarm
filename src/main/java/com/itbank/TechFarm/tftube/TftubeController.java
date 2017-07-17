@@ -281,53 +281,93 @@ public class TftubeController {
 		/*mv.addObject("vdto",vdto);*///consider of like only
 		/*end of like*/
 		
-		/*sub*/
+		//*sub*구독
 		
 		//response
-		int cu_member_no=0;
+		/*int cu_member_no=0;
 		int subing_member=0;
-		int saved_subing_member=0;
-		saved_subing_member=subingDAO.get_subing_member(cu_member_no);
+		int saved_subing_member=0;*/
 		
-		if(saved_subing_member!=0){
-			mv.addObject("subing_status",1);
+		//현재 로그인한 회원 정보
+		MemberDTO cu_member=(MemberDTO)session.getAttribute("memberDTO");
+		
+		List<SubingDTO> saved_subing_member=null;
+		//현재 로그인한 회원의 구독 목록
+		if(cu_member!=null){//로그인 된 상태라면
+		 saved_subing_member=subingDAO.get_subing_member(cu_member.getNo());
+		 //													현재 로그인회원의 구독목록
+		 }
+		System.out.print("내가 구독 누른 인간:");
+		System.out.print(saved_subing_member);
+		
+		if(saved_subing_member!=null){//구독 목록이 있다면
+		for(SubingDTO dto:saved_subing_member){			
+		if(vdto.getMember_no()==dto.getMember_no()){	//게시판 작성자의 이름과 목록중에 같은 것 		
+			mv.addObject("subing_status",1);//목록에 현재 비디오를 등록한 사람이 포함 되어 있다면 1 아니면 0
+			break;
 		}else{
 			mv.addObject("subing_status",0);
 		}
+		}
+		}else{
+			mv.addObject("subing_status",0);			
+		}
+		
+	/*	if(saved_subing_member_raw.size()==0){
+			saved_subing_member=saved_subing_member_raw.getSubing_member_no();//0일 가능성 잇다.				
+		};
+		
+		if(saved_subing_member!=0){//구독했다.
+			mv.addObject("subing_status",1);
+		}else{//구독하지 않았다.
+			mv.addObject("subing_status",0);
+		*/
 		
 		//end of response
 		
 		
 		//request
-		String subing_member_no_raw=arg0.getParameter("subing_member_no");
-		MemberDTO cu_member=(MemberDTO)session.getAttribute("memberDTO");
-		
+	
+		String subing_member_no_raw=arg0.getParameter("subing_member_no");//이 비디오의 작성자 
+		//필요하다면 따로 보내준다.
+		//disabled인 상태에서 구독이 되도록 한다
+		//평소에 null 누르면 값이 들어옴
+		//작성자이름으로 구분할듯.
+		String mode=arg0.getParameter("mode");
 		SubingDTO sidto=null;
 		SubedDTO sddto=null;
-		if(subing_member_no_raw!=null){
+		if(subing_member_no_raw!=null&&mode.equals("injection")){//구독 버튼을 눌렀을때
+			int subing_member_no=Integer.parseInt(subing_member_no_raw);
 		sidto=new SubingDTO();		
-		String cu_channel=mychannelDAO.getChannel(cu_member_no);		
-		sidto.setChannel(cu_channel);
-		sidto.setMember_no(cu_member.getNo());	
-		sidto.setSubing_member_no(subing_member);
-		
-		
-	
+		String cu_channel=mychannelDAO.getChannel(cu_member.getNo());//현재 로그인한 사람 정보,채널		
+		sidto.setChannel(cu_channel);//로그인 한 사람 채널
+		sidto.setMember_no(cu_member.getNo());	//현재 로그인한 사람 회원 번호
+		sidto.setSubing_member_no(subing_member_no);//비디오 작성자	
+		//다 읽어보진 않았지만 아마도 피구독 구독 값 설정중
 		sddto.setChannel(vdto.getChannel());
 		sddto.setMember_no(vdto.getMember_no());
 		sddto.setSubed_member_no(cu_member.getNo());
-		}			
 		
-		String subing_status_raw=arg0.getParameter("subing_status");
+		subingDAO.insertSubing(sidto);//db에 넣기
+		subedDAO.insertSubed(sddto);//db에 넣기		
+		}else if(subing_member_no_raw!=null&&mode.equals("cancel")){			
+			/*subingDAO.deleteSubing(vdto.getMember_no());
+			subedDAO.deleteSubed(vdto.getMember_no());*/
+		}
+		
+		//취소는 안만들어 놨다.
+		
+		//처음에는 무조건 null(언제 값을 보내 주는가?) 
+		/*String subing_status_raw=arg0.getParameter("subing_status");//이게 뭐냐?
 		int subing_status=0;
-		if(subing_status_raw!=null){
+		if(subing_status_raw!=null){//값을 보내주면 db에 최종적으로 값을 넣는다. 
 			subing_status=Integer.parseInt(subing_status_raw);
 			if(subing_status==1){
-			int res=subingDAO.insertSubing(sidto);
-			subedDAO.insertSubed(sddto);
+			int res=subingDAO.insertSubing(sidto);//db에 넣기
+			subedDAO.insertSubed(sddto);//db에 넣기
 			mv.addObject("subing_status",res);
-			}
-		}
+			}//subing 
+		}*/
 		
 		
 		//?

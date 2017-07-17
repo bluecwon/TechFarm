@@ -2,7 +2,7 @@ package com.itbank.TechFarm.tftube.dto;
 
 public class SubedDTO {
 	private int no;
-	private String Channel;
+	private String channel;
 	private int member_no;
 	private int subed_member_no;
 	public int getNo() {
@@ -11,11 +11,13 @@ public class SubedDTO {
 	public void setNo(int no) {
 		this.no = no;
 	}
+	
+
 	public String getChannel() {
-		return Channel;
+		return channel;
 	}
 	public void setChannel(String channel) {
-		Channel = channel;
+		this.channel = channel;
 	}
 	public int getMember_no() {
 		return member_no;

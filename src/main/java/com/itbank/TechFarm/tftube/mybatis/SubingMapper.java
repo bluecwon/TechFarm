@@ -31,20 +31,23 @@ public class SubingMapper {
 		return res;		
 	}
 	    
-	    public static int get_subing_member(int member_no){
+	    public static List<SubingDTO> get_subing_member(int member_no){
 			SqlSession session=sqlMapper.openSession();
-			int subing_member=session.selectOne("get_subing_member",member_no);
+			List<SubingDTO> subingdto=session.selectOne("get_subing_member",member_no);
 			session.close();
-			return subing_member;
-			
+			return subingdto;			
 		}
 	    
-	    public static List<SubingDTO> get_subing(int member_no){
-			SqlSession session=sqlMapper.openSession();
-			List<SubingDTO> subing_member=session.selectOne("get_subing",member_no);
+	    public static int deleteSubing(int subing_member_no){
+	    	SqlSession session=sqlMapper.openSession();
+			int res=session.insert("deleteSubing",subing_member_no);	
+			session.commit();
 			session.close();
-			return subing_member;			
-		}
+			return res;
+	    	
+	    }
+	    
+	   
 	    
 	    
 	

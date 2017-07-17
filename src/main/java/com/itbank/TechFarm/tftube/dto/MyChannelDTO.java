@@ -1,10 +1,10 @@
 package com.itbank.TechFarm.tftube.dto;
 
 public class MyChannelDTO {
-	
 	private int no;
 	private int member_no;
 	private String channel;
+	
 	public int getNo() {
 		return no;
 	}
@@ -23,9 +23,4 @@ public class MyChannelDTO {
 	public void setChannel(String channel) {
 		this.channel = channel;
 	}
-	
-	
-	
-	
-
 }

@@ -17,4 +17,11 @@ public class SubedDAOImpl implements SubedDAO{
 		return SubedMapper.get_subed(member_no);
 	}
 
+	@Override
+	public int deleteSubed(int subbed_member_no) {
+		return SubedMapper.deleteSubed(subbed_member_no);
+	}
+	
+	
+
 }

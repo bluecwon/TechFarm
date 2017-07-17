@@ -13,18 +13,15 @@ public class SubingDAOImpl implements SubingDAO{
 	}
 
 	@Override
-	public int get_subing_member(int member_no) {
+	public List<SubingDTO> get_subing_member(int member_no) {
 		return SubingMapper.get_subing_member(member_no);
 	}
 
 	@Override
-	public List<SubingDTO> get_subing(int member_no) {
-		
-		return SubingMapper.get_subing(member_no);		
+	public int deleteSubing(int subing_member_no) {
+		return SubingMapper.deleteSubing(subing_member_no);
 	}
-	
-	
-	
+
 	
 	
 }

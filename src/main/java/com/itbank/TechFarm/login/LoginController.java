@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.itbank.TechFarm.login.member.MemberDAO;
 import com.itbank.TechFarm.login.member.MemberDTO;
 import com.itbank.TechFarm.tftube.dao.MyChannelDAO;
-import com.itbank.TechFarm.tftube.dto.MyChannelDTO;
+
 
 
 @Controller

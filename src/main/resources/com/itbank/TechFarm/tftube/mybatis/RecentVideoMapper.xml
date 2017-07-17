@@ -10,16 +10,16 @@
  insert into tftube_recentvideo(member_no,video_name) values(#{member_no},#{video_name})
  </insert>
  
- <select id="listRecent_member_no" resultType="recentVideoDTO" parameterType="int">
+ <select id="listRecent_member_no" resultType="recentvideoDTO" parameterType="int">
  select * from tftube_recentvideo where member_no=#{member_no} order by no desc 
  </select>
  
 
  
-<!-- <select id="listVideo_recent">
+<select id="listVideo_recent">
  select * from tftube_video a join tftube_recentvideo b on a.video_name=b.video_name
  
-select c.name tfmember.member c join (select member_no from tftube_video a join tftube_recentvideo b on a.video_name=b.video_name)d on c.member_no=d.member_no  
-</select> -->
+<!-- select c.name tfmember.member c join (select member_no from tftube_video a join tftube_recentvideo b on a.video_name=b.video_name)d on c.member_no=d.member_no -->  
+</select>
 
 </mapper>

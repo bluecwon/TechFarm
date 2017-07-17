@@ -40,4 +40,12 @@ public class SubedMapper {
 	    	
 	    };
 	    
+	    public static int deleteSubed(int subbed_member_no){
+	    	SqlSession session=sqlMapper.openSession();
+			int res=session.delete("deleteSubed",subbed_member_no);
+			session.commit();
+			session.close();
+			return res;	    	
+	    }
+	    
 }
