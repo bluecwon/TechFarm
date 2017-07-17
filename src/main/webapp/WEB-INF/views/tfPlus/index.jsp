@@ -15,19 +15,36 @@
 					<!-- 메인 이미지 시작 -->
 					<div class="flexslider home-slider">
 						<ul class="slides">
-						<c:forEach var="dto" items="${newsProfileOptionList}"> 
-							<li>
-								<c:if test="${dto.profileId == sessionScope.memberDTO.id}">
-		        					<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${dto.profileId}&num=${dto.profileNum}&my=true"  class="thumb">
-		        				</c:if>
-		        				<c:if test="${dto.profileId != sessionScope.memberDTO.id}">
-		        					<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${dto.profileId}&num=${dto.profileNum}&my=false&myId=${sessionScope.memberDTO.id}" class="thumb">
-		        				</c:if>
-									<img src="${newsProfileUpPath}/${dto.photo}" width="700px" height="300px" alt="alt text" />
-									<p class="flex-caption">${dto.profileContents}</p>
-								</a>
-							</li>
-						</c:forEach>
+						<c:if test="${check == true}">
+							<c:forEach var="dto" items="${newsProfileList}"> 
+								<li>
+									<c:if test="${dto.profileId == sessionScope.memberDTO.id}">
+			        					<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${dto.profileId}&num=${dto.profileNum}&my=true"  class="thumb">
+			        				</c:if>
+			        				<c:if test="${dto.profileId != sessionScope.memberDTO.id}">
+			        					<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${dto.profileId}&num=${dto.profileNum}&my=false&myId=${sessionScope.memberDTO.id}" class="thumb">
+			        				</c:if>
+										<img src="${newsProfileUpPath}/${dto.photo}" width="700px" height="300px" alt="alt text" />
+										<p class="flex-caption">${dto.profileContents}</p>
+									</a>
+								</li>
+							</c:forEach>
+						</c:if>
+						<c:if test="${check != true}">
+							<c:forEach var="dto" items="${newsProfileOptionList}"> 
+								<li>
+									<c:if test="${dto.profileId == sessionScope.memberDTO.id}">
+			        					<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${dto.profileId}&num=${dto.profileNum}&my=true"  class="thumb">
+			        				</c:if>
+			        				<c:if test="${dto.profileId != sessionScope.memberDTO.id}">
+			        					<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${dto.profileId}&num=${dto.profileNum}&my=false&myId=${sessionScope.memberDTO.id}" class="thumb">
+			        				</c:if>
+										<img src="${newsProfileUpPath}/${dto.photo}" width="700px" height="300px" alt="alt text" />
+										<p class="flex-caption">${dto.profileContents}</p>
+									</a>
+								</li>
+							</c:forEach>
+						</c:if>
 						</ul>
 					</div>
 					<!-- 메인 이미지 끝 -->

@@ -384,13 +384,17 @@ public class tfPlusNewsProfileController {
 		List newsProfileList = newsProfileDAO.newsProfileTOP(6);
 		List memberProfileList = memberProfileDAO.memberProfileTOP(4);
 		MyProfileDTO dto = myProfileDAO.myProfilePhoto(id);
-		String option = dto.getHobby();
-		List newsProfileOptionList  = newsProfileDAO.newsProfileOption(option);
+		if(dto != null) {
+			String option = dto.getHobby();
+			List newsProfileOptionList  = newsProfileDAO.newsProfileOption(option);
+			mav.addObject("newsProfileOptionList",newsProfileOptionList);
+		} else if(dto == null){
+			mav.addObject("check","true");
+		}
 		
 		mav.setViewName("tfPlus/index");
 		mav.addObject("newsProfileList",newsProfileList);
 		mav.addObject("memberProfileList",memberProfileList);
-		mav.addObject("newsProfileOptionList",newsProfileOptionList);
 		return mav;
 	}
 	

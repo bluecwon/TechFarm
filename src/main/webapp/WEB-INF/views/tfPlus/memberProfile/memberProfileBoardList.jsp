@@ -36,7 +36,7 @@
 										<div class="year">${fn:substring(BoardDate,5,7)}, ${fn:substring(BoardDate,0,4)}</div>
 									</div>
 									<div class="feature-image">
-										<a href="${memberProfileBoardUpPath}/${dto.mProfileBoardPhoto}" data-rel="prettyPhoto">
+										<a href="${memberProfileBoardUpPath}/${dto.mProfileBoardPhoto}">
 											<img src="${memberProfileBoardUpPath}/${dto.mProfileBoardPhoto}" alt="Alt text" width="600px" height="300px"/>
 										</a>
 									</div>
