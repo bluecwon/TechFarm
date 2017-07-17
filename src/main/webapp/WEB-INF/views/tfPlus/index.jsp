@@ -15,10 +15,17 @@
 					<!-- 메인 이미지 시작 -->
 					<div class="flexslider home-slider">
 						<ul class="slides">
-						<c:forEach var="dto" items="${newsProfileList}"> 
+						<c:forEach var="dto" items="${newsProfileOptionList}"> 
 							<li>
-								<img src="${newsProfileUpPath}/${dto.photo}" width="700px" height="300px" alt="alt text" />
-								<p class="flex-caption">${dto.profileContents}</p>
+								<c:if test="${dto.profileId == sessionScope.memberDTO.id}">
+		        					<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${dto.profileId}&num=${dto.profileNum}&my=true"  class="thumb">
+		        				</c:if>
+		        				<c:if test="${dto.profileId != sessionScope.memberDTO.id}">
+		        					<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${dto.profileId}&num=${dto.profileNum}&my=false&myId=${sessionScope.memberDTO.id}" class="thumb">
+		        				</c:if>
+									<img src="${newsProfileUpPath}/${dto.photo}" width="700px" height="300px" alt="alt text" />
+									<p class="flex-caption">${dto.profileContents}</p>
+								</a>
 							</li>
 						</c:forEach>
 						</ul>
@@ -30,8 +37,7 @@
 					<!-- 메인 텍스트 상자 시작 -->
 					<div id="headline">
 						<h1>회원님이 관심있을만한 소식</h1>
-		        		<p>ㅇㅇㅇㅇㅇ</p>
-		        		<p>ㅇㅇㅇ <a href="#">글씨는 두껍게</a>ㅇㅇㅇㅇ</p>
+		        		<p>회원님께 <a href="#">추천</a> 하는 소식들</p>
 		        		<em id="corner"></em>
 		        	</div>
 		        	<!-- 메인 텍스트 상자 끝 -->

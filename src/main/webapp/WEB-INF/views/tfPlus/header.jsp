@@ -221,7 +221,7 @@
 				</a>
 				<nav>
 					<ul id="nav" class="sf-menu">
-						<li class="current-menu-item"><a href="tfPlusIndex">HOME</a></li>
+						<li class="current-menu-item"><a href="tfPlusIndex?id=${sessionScope.memberDTO.id}">HOME</a></li>
 						<li><a href="#">소식모음</a>
 							<ul>
 								<li><a href="tfPlusNewsProfileList">추천 소식 모음</a></li>
@@ -238,15 +238,7 @@
 						</li>
 						<li><a href="tfPlusMyProfile?myId=${sessionScope.memberDTO.id}">프로필</a></li>
 						<li>
-							<a href="#">알림</a>
-							<ul>
-								<li><a href="#">프로필 name : 1</a></li>
-								<li><a href="#">프로필 name : 1</a></li>
-								<li><a href="#">프로필 name : 1</a></li>
-							</ul>
-						</li>
-						<li>
-							<img src="resources/tfPlus/images/default/ExclamationMark.png" style="width:25px; height:25px;">
+							<a href="tfPlusMyNotice?myId=${sessionScope.memberDTO.id}">알림</a>
 						</li>
 					</ul>
 					<div id="combo-holder"></div>

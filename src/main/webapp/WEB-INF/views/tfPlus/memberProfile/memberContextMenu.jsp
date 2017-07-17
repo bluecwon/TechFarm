@@ -47,7 +47,11 @@
 	
 	<c:if test="${dto.mProfileId == sessionScope.memberDTO.id}">
 		<ul class="subMenu">
-			<li><a href="#">수정 하기</a></li>
+			<li>
+				<a href="#" onclick="window.open('tfPlusMemberProfileUpdate?profileNum=${dto.mProfileNum}','window','location=no, directories=no,resizable=no,status=no,toolbar=no,menubar=no, width=715,height=500,left=500, top=250, scrollbars=yes');return false"  title="게시물을 수정할까요?" class="poshytip">
+				수정 하기
+				</a>
+			</li>
 			<li><a href="memberProfileDelete?profileNum=${dto.mProfileNum}">삭제 하기</a></li>
 		</ul>
 	</c:if>

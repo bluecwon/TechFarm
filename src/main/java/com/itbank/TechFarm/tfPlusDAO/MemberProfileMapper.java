@@ -188,4 +188,67 @@ public class MemberProfileMapper {
 		return res;
 	}
 	
+	public static int memberAddDelete(int profileAddPK) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.delete("memberAddDelete",profileAddPK);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
+	public static MemberProfileDTO memberProfileUpdate(int profileNum) {
+		SqlSession session = sqlMapper.openSession();
+		MemberProfileDTO dto = session.selectOne("memberProfileUpdate",profileNum);
+		session.close();
+		return dto;
+	}
+	
+	public static int memberProfileUpdatePro(MemberProfileDTO dto) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.update("memberProfileUpdatePro",dto);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
+	public static int memberProfileBoardDelete(int profileBoardPK) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.delete("memberProfileBoardDelete",profileBoardPK);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
+	public static MemberProfileBoardDTO memberProfileBoardUpdate(int profileBoardPK) {
+		SqlSession session = sqlMapper.openSession();
+		MemberProfileBoardDTO dto = new MemberProfileBoardDTO();
+		dto = session.selectOne("memberProfileBoardUpdate",profileBoardPK);
+		session.close();
+		return dto;
+	}
+	
+	public static int memberProfileBoardUodatePro(MemberProfileBoardDTO dto) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.update("memberProfileBoardUpdatePro",dto);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
+	public static int memberAddUpdateSub(int sql) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.update("memberAddUpdateSub",sql);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
+	public static int memberAddUpdateSub2() {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.update("memberAddUpdateSub2");
+		session.commit();
+		session.close();
+		return res;
+	}
+	
 }

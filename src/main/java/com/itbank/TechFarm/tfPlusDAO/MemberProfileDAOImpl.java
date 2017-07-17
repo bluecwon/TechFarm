@@ -7,6 +7,7 @@ import java.util.Map;
 import com.itbank.TechFarm.tfPlusDTO.MemberProfileAddCommentDTO;
 import com.itbank.TechFarm.tfPlusDTO.MemberProfileBoardDTO;
 import com.itbank.TechFarm.tfPlusDTO.MemberProfileDTO;
+import com.itbank.TechFarm.tfPlusDTO.NewsProfileBoardDTO;
 
 public class MemberProfileDAOImpl implements MemberProfileDAO {
 
@@ -127,6 +128,46 @@ public class MemberProfileDAOImpl implements MemberProfileDAO {
 	@Override
 	public int memberAddListInsert(MemberProfileAddCommentDTO memberProfileAddCommentDTO) {
 		return MemberProfileMapper.memberAddListInsert(memberProfileAddCommentDTO);
+	}
+
+	@Override
+	public int memberAddDelete(int profileAddPK) {
+		return MemberProfileMapper.memberAddDelete(profileAddPK);
+	}
+
+	@Override
+	public MemberProfileDTO memberProfileUpdate(int profileNum) {
+		return MemberProfileMapper.memberProfileUpdate(profileNum);
+	}
+
+	@Override
+	public int memberProfileUpdatePro(MemberProfileDTO memberProfileDTO) {
+		return MemberProfileMapper.memberProfileUpdatePro(memberProfileDTO);
+	}
+
+	@Override
+	public int memberProfileBoardDelete(int profileBoardPK) {
+		return MemberProfileMapper.memberProfileBoardDelete(profileBoardPK);
+	}
+
+	@Override
+	public MemberProfileBoardDTO memberProfileBoardUpdate(int profileBoardPK) {
+		return MemberProfileMapper.memberProfileBoardUpdate(profileBoardPK);
+	}
+
+	@Override
+	public int memberProfileBoardUpdatePro(MemberProfileBoardDTO dto) {
+		return MemberProfileMapper.memberProfileBoardUodatePro(dto);
+	}
+
+	@Override
+	public int memberAddUpdateSub(int sql) {
+		return MemberProfileMapper.memberAddUpdateSub(sql);
+	}
+
+	@Override
+	public int memberAddUpdateSub2() {
+		return MemberProfileMapper.memberAddUpdateSub2();
 	}
 
 }

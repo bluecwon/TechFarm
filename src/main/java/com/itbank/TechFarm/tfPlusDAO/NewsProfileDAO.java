@@ -2,6 +2,7 @@ package com.itbank.TechFarm.tfPlusDAO;
 
 import java.util.List;
 
+import com.itbank.TechFarm.tfPlusDTO.NewsFollowIdDTO;
 import com.itbank.TechFarm.tfPlusDTO.NewsProfileAddCommentDTO;
 import com.itbank.TechFarm.tfPlusDTO.NewsProfileBoardDTO;
 import com.itbank.TechFarm.tfPlusDTO.NewsProfileDTO;
@@ -28,4 +29,13 @@ public interface NewsProfileDAO {
 	public List newsAddList();
 	public int newsAddListInsert(NewsProfileAddCommentDTO newsProfileAddCommentDTO);
 	public int newsAddDelete(int profileAddPK);
+	public NewsProfileDTO newsProfileUpdate(int profileNum);
+	public int newsProfileUpdatePro(NewsProfileDTO newsProfileDTO);
+	public List newsFollowNotice(int profileNum);
+	public int newsProfileBoardDelete(int profileBoardPK);
+	public NewsProfileBoardDTO newsProfileBoardUpdate(int profileBoardPK);
+	public int newsProfileBoardUpdatePro(NewsProfileBoardDTO dto);
+	public int newsAddUpdateSub(int sql);
+	public int newsAddUpdateSub2();
+	public List newsProfileOption(String option);
 }

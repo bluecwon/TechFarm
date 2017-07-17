@@ -27,4 +27,12 @@ public interface MemberProfileDAO {
 	public int memberProfileUnJoin(int profileNum);
 	public List memberProfileTOP(int top);
 	public int memberAddListInsert(MemberProfileAddCommentDTO memberProfileAddCommentDTO);
+	public int memberAddDelete(int profileAddPK);
+	public MemberProfileDTO memberProfileUpdate(int profileNum);
+	public int memberProfileUpdatePro(MemberProfileDTO memberProfileDTO);
+	public int memberProfileBoardDelete(int profileBoardPK);
+	public MemberProfileBoardDTO memberProfileBoardUpdate(int profileBoardPK);
+	public int memberProfileBoardUpdatePro(MemberProfileBoardDTO dto);
+	public int memberAddUpdateSub(int sql);
+	public int memberAddUpdateSub2();
 }

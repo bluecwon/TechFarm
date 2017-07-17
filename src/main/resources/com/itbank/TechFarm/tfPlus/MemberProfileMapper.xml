@@ -39,7 +39,7 @@
 	</select>
 	
 	<select id="memberAddList" resultType="MemberProfileAddCommentDTO">
-		SELECT * FROM memberprofileaddcomment
+		SELECT * FROM memberprofileaddcomment ORDER BY mRe_step ASC
 	</select>
 	
 	<select id="memberProfileBoardList" resultType="memberProfileBoardDTO" parameterType="java.util.HashMap">
@@ -65,6 +65,16 @@
 	<select id="memberProfileTOP" resultType="memberProfileDTO" parameterType="int">
 		SELECT * FROM memberprofile
 			ORDER BY mGood DESC LIMIT #{top}
+	</select>
+	
+	<select id="memberProfileUpdate" resultType="memberProfileDTO" parameterType="int">
+		SELECT * FROM memberprofile
+			WHERE mProfileNum = #{profileNum}
+	</select> 
+	
+	<select id="memberProfileBoardUpdate" resultType="memberProfileBoardDTO" parameterType="int">
+		SELECT * FROM memberprofileboard
+			WHERE mProfileBoardPK = #{profileBoardPK}
 	</select>
 	
 	<insert id="memberProfileInsert" parameterType="memberProfileDTO" useGeneratedKeys="true">
@@ -98,12 +108,14 @@
 	</insert>
 	
 	<insert id="memberAddListInsert" parameterType="memberProfileAddCommentDTO" useGeneratedKeys="true">
-		INSERT INTO memberprofileaddcomment(mProfileBoardFK,mProfileAddName,mProfileAddContents,mProfileAddId) VALUES
+		INSERT INTO memberprofileaddcomment(mProfileBoardFK,mProfileAddName,mProfileAddContents,mProfileAddId,mRe_step,mRe_level) VALUES
 		(
 			#{mProfileBoardFK},
 			#{mProfileAddName},
 			#{mProfileAddContents},
-			#{mProfileAddId}
+			#{mProfileAddId},
+			#{mRe_step},
+			#{mRe_level}
 		)
 	</insert>
 	
@@ -117,6 +129,16 @@
 			WHERE mProfileNum = #{profileNum}
 	</delete>
 	
+	<delete id="memberAddDelete" parameterType="int">
+		DELETE FROM memberprofileaddcomment
+			WHERE mProfileAddPK = #{profileAddPK}
+	</delete>
+	
+	<delete id="memberProfileBoardDelete" parameterType="int">
+		DELETE FROM memberprofileboard
+			WHERE mProfileBoardPK = #{profileBoardPK}
+	</delete>
+	
 	<update id="memberProfileJoin" parameterType="int">
 		UPDATE memberprofile SET mGood = mGood + 1
 			WHERE mProfileNum = #{profileNum}
@@ -125,6 +147,33 @@
 	<update id="memberProfileUnJoin" parameterType="int">
 		UPDATE memberprofile SET mGood = mGood - 1
 			WHERE mProfileNum = #{profileNum}
+	</update>
+	
+	<update id="memberProfileUpdatePro" parameterType="memberProfileDTO">
+		UPDATE memberprofile SET
+			mProfileName = #{mProfileName},
+			mCheckOption = #{mCheckOption},
+			mProfileContents = #{mProfileContents},
+			mPhoto = #{mPhoto}
+				WHERE mProfileNum = #{mProfileNum}
+	</update>
+	
+	<update id="memberProfileBoardUpdatePro" parameterType="memberProfileBoardDTO">
+		UPDATE memberprofileboard SET
+			mProfileBoardTitle = #{mProfileBoardTitle},
+			mProfileBoardContents = #{mProfileBoardContents},
+			mProfileBoardPhoto = #{mProfileBoardPhoto}
+				WHERE mProfileBoardPK = #{mProfileBoardPK}
+	</update>
+	
+	<update id="memberAddUpdateSub" parameterType="String">
+		UPDATE memberprofileaddcomment SET 
+			mRe_step = mRe_step+1 WHERE mRe_step > #{re_step}
+	</update>
+	
+	<update id="memberAddUpdateSub2">
+		UPDATE memberprofileaddcomment SET 
+			mRe_step = mRe_step+1
 	</update>
 
 </mapper>

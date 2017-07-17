@@ -14,7 +14,7 @@
 	</select>
 	
 	<select id="newsAddList" resultType="NewsProfileAddCommentDTO">
-		SELECT * FROM newsprofileaddcomment
+		SELECT * FROM newsprofileaddcomment ORDER BY re_step ASC
 	</select>
 	
 	<select id="followList" resultType="newsFollowIdDTO">
@@ -67,6 +67,26 @@
 			ORDER BY good DESC LIMIT #{top}
 	</select>
 	
+	<select id="newsProfileUpdate" resultType="newsProfileDTO" parameterType="int">
+		SELECT * FROM newsprofile
+			WHERE profileNum = #{profileNum}
+	</select>
+	
+	<select id="newsFollowNotice" resultType="newsFollowIdDTO" parameterType="int">
+		SELECT * FROM newsfollowid
+			WHERE newsfollowNum = #{profileNum}
+	</select>
+	
+	<select id="newsProfileBoardUpdate" resultType="newsProfileBoardDTO" parameterType="int">
+		SELECT * FROM newsprofileboard
+			WHERE profileBoardPK = #{profileBoardPK}
+	</select>
+	
+	<select id="newsProfileOption" resultType="newsProfileDTO" parameterType="String">
+		SELECT * FROM newsprofile
+			WHERE checkOption = #{option}
+	</select>
+	
 	<insert id="newsProfileInsert" parameterType="newsProfileDTO" useGeneratedKeys="true">
 		INSERT INTO newsprofile(profileName,checkOption,photo,profileContents,profileId) VALUES
 		(	
@@ -79,12 +99,14 @@
 	</insert>
 	
 	<insert id="newsAddListInsert" parameterType="newsProfileAddCommentDTO" useGeneratedKeys="true">
-		INSERT INTO newsprofileaddcomment(profileBoardFK,profileAddName,profileAddContents,profileAddId) VALUES
+		INSERT INTO newsprofileaddcomment(profileBoardFK,profileAddName,profileAddContents,profileAddId,re_step,re_level) VALUES
 		(
 			#{profileBoardFK},
 			#{profileAddName},
 			#{profileAddContents},
-			#{profileAddId}
+			#{profileAddId},
+			#{re_step},
+			#{re_level}
 		)
 	</insert>
 	
@@ -117,6 +139,33 @@
 			WHERE profileNum = #{profileNum}
 	</update>
 	
+	<update id="newsProfileUpdatePro" parameterType="newsProfileDTO">
+		UPDATE newsprofile SET 
+			profileName = #{profileName},
+			checkOption = #{checkOption}, 
+			profileContents = #{profileContents}, 
+			photo = #{photo}
+				WHERE profileNum = #{profileNum}
+	</update>
+	
+	<update id="newsProfileBoardUpdatePro" parameterType="newsProfileBoardDTO">
+		UPDATE newsprofileboard SET
+			profileBoardTitle = #{profileBoardTitle},
+			profileBoardContents = #{profileBoardContents},
+			profileBoardPhoto = #{profileBoardPhoto}
+				WHERE profileBoardPK = #{profileBoardPK}
+	</update>
+	
+	<update id="newsAddUpdateSub" parameterType="String">
+		UPDATE newsprofileaddcomment SET 
+			re_step = re_step+1 WHERE re_step > #{re_step}
+	</update>
+	
+	<update id="newsAddUpdateSub2">
+		UPDATE newsprofileaddcomment SET 
+			re_step = re_step+1
+	</update>
+	
 	<delete id="newsFollowDelete" parameterType="int">
 		DELETE FROM newsfollowid 
 			WHERE newsfollowPK = #{newsfollowPK}
@@ -130,6 +179,11 @@
 	<delete id="newsAddDelete" parameterType="int">
 		DELETE FROM newsprofileaddcomment
 			WHERE profileAddPK = #{profileAddPK}
+	</delete>
+	
+	<delete id="newsProfileBoardDelete" parameterType="int">
+		DELETE FROM newsprofileboard
+			WHERE profileBoardPK = #{profileBoardPK}
 	</delete>
 	
 </mapper>

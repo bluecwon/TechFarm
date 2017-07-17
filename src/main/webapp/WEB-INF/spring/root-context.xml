@@ -12,6 +12,7 @@
 	<bean class="com.itbank.TechFarm.tfPlusDAO.NewsProfileDAOImpl" id="newsProfileDAO"/>
 	<bean class="com.itbank.TechFarm.tfPlusDAO.MemberProfileDAOImpl" id="memberProfileDAO"/>
 	<bean class="com.itbank.TechFarm.tfPlusDAO.MyProfileDAOImpl" id="myProfileDAO"/>
+	<bean class="com.itbank.TechFarm.tfPlusDAO.MyNoticeDAOImpl" id="myNoticeDAO"/>
 	<!-- end tfPlus DAO -->
 	
 	<bean class="com.itbank.TechFarm.login.member.MemberDAOImpl" id="memberDAO"/>	

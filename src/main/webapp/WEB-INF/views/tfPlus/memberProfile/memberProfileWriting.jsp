@@ -25,7 +25,6 @@
 					</div>
 					<div>
 						<select class="selectOption" name="checkOption">
-							<option>공개여부를 선택하세요.</option>
 							<option>분류를 지정하세요.</option>
 							<option>게임</option>
 							<option>운동</option>

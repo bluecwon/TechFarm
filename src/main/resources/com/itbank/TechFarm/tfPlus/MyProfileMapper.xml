@@ -6,9 +6,8 @@
 	
 <mapper namespace="com.itbank.TechFarm.tfPlus.MyProfileMapper">
 
-	<select id="myProfileList"  resultType="myProfileDTO" parameterType="String">
+	<select id="myProfileList"  resultType="myProfileDTO">
 		SELECT * FROM myprofile
-			WHERE myId = #{myId}
 	</select>
 	
 	<select id="myProfileAllList" resultType="myProfileDTO">
