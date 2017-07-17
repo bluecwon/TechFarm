@@ -490,6 +490,7 @@ public class tfPlusNewsProfileController {
 		String my = request.getParameter("my");
 		String noticeCheck = request.getParameter("noticeCheck");
 		String myNoticePK = request.getParameter("myNoticePK");
+		String myId = request.getParameter("myId");
 		if(noticeCheck == null) {
 			noticeCheck = "false";
 		}
@@ -497,7 +498,7 @@ public class tfPlusNewsProfileController {
 		List listAdd = newsProfileDAO.newsAddList(); 
 		List list = newsProfileDAO.newsProfileBoard(profileName, id);
 		List listAll = myProfileDAO.myProfileAllList();
-		MyProfileDTO dto = myProfileDAO.myProfilePhoto(id);
+		MyProfileDTO dto = myProfileDAO.myProfilePhoto(myId);
 		
 		if(my.equals("true")){
 			if(noticeCheck.equals("true")){
@@ -505,7 +506,6 @@ public class tfPlusNewsProfileController {
 			}
 			mav.setViewName("tfPlus/newsProfile/newsProfileBoardList");
 		} else if(my.equals("false")){
-			String myId = request.getParameter("myId");
 			boolean bool = newsProfileDAO.newsFollowIdCheck(Integer.parseInt(num), myId);
 			if(bool == true){
 				mav.setViewName("tfPlus/newsProfile/newsProfileBoardList");
@@ -941,16 +941,16 @@ public class tfPlusNewsProfileController {
 		String id = request.getParameter("id");
 		String num = request.getParameter("num");
 		String my = request.getParameter("my");
+		String myId = request.getParameter("myId");
 		
 		List listAdd = memberProfileDAO.memberAddList();
 		List list = memberProfileDAO.memberProfileBoard(profileName);
 		List listAll = myProfileDAO.myProfileAllList();
-		MyProfileDTO dto = myProfileDAO.myProfilePhoto(id);
+		MyProfileDTO dto = myProfileDAO.myProfilePhoto(myId);
 		
 		if(my.equals("true")){
 			mav.setViewName("tfPlus/memberProfile/memberProfileBoardList");
 		} else if(my.equals("false")){
-			String myId = request.getParameter("myId");
 			boolean bool = memberProfileDAO.memberJoinIdCheck(Integer.parseInt(num), myId);
 			if(bool == true){
 				mav.setViewName("tfPlus/memberProfile/memberProfileBoardList");

@@ -24,7 +24,7 @@
 				        		</figcaption>	
 				        		
 				        		<c:if test="${dto.profileId == sessionScope.memberDTO.id}">
-				        			<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${dto.profileId}&num=${dto.profileNum}&my=true" class="thumb">
+				        			<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${dto.profileId}&num=${dto.profileNum}&my=true&myId=${sessionScope.memberDTO.id}" class="thumb">
 				        		</c:if>
 				        		<c:if test="${dto.profileId != sessionScope.memberDTO.id}">
 				        			<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${dto.profileId}&num=${dto.profileNum}&my=false&myId=${sessionScope.memberDTO.id}" class="thumb">

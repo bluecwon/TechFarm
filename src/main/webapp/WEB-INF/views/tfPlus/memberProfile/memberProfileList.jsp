@@ -24,7 +24,7 @@
 				        		</figcaption>	
 				        		
 				        		<c:if test="${dto.mProfileId == sessionScope.memberDTO.id}">
-				        			<a href="tfPlusMemberProfileBoardList?profileName=${dto.mProfileName}&id=${dto.mProfileId}&num=${dto.mProfileNum}&my=true" class="thumb">
+				        			<a href="tfPlusMemberProfileBoardList?profileName=${dto.mProfileName}&id=${dto.mProfileId}&num=${dto.mProfileNum}&my=true&myId=${sessionScope.memberDTO.id}" class="thumb">
 				        		</c:if>
 				        		<c:if test="${dto.mProfileId != sessionScope.memberDTO.id}">
 				        			<a href="tfPlusMemberProfileBoardList?profileName=${dto.mProfileName}&id=${dto.mProfileId}&num=${dto.mProfileNum}&my=false&myId=${sessionScope.memberDTO.id}" class="thumb">
