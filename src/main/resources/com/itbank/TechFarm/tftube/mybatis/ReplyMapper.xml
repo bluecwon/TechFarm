@@ -40,21 +40,11 @@
 		update tftube_reply set re_step = re_step + 1 where re_step > #{re_step}
 	</update>
 	
-		
-	<select id="getCount" resultType="int">
-	select count(*) from tftube_reply
-	</select>
-	
 	
 	<select id="listreply" parameterType="java.util.HashMap" resultType="replyDTO">
  	select * from 
  	(select rownum rn,A.* from(select * from tftube_reply order by re_step asc)A)
 	where rn between ${start} and ${end}
-	</select>
-	
-	<!-- select rownum rn,A.* from(select *from tftube_reply order by re_step asc)A
-	where rn between ${start} and ${end} -->
-	
-	
-	
+	</select>	
+
 </mapper>

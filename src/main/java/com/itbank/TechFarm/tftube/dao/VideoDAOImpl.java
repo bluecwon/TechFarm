@@ -60,6 +60,28 @@ public class VideoDAOImpl implements VideoDAO {
 	public int cancel_unlike(int no) {
 		return VideoMapper.cancel_unlike(no);
 	}
+
+
+	@Override
+	public List<VideoDTO> listRecent_inf(int member_no) {
+		return VideoMapper.listRecent_inf(member_no);
+	}
+
+
+	@Override
+	public List<VideoDTO> listVideo_member_no(int member_no) {
+		return VideoMapper.listVideo_member_no(member_no);
+	}
+	
+	@Override
+	public List<VideoDTO> listLike(int member_no) {
+		return VideoMapper.listLike(member_no);
+		
+	}
+	
+	
+	
+	
 	
 	
 	

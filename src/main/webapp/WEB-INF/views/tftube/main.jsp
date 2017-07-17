@@ -10,15 +10,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div align="center">
-<%@ include file="main_top.jsp"%> 
+<%@ include file="main_top.jsp"%>
+
+<div style="overflow: hidden;" align="center"> <!-- start of 2-2 -->
+
 <video src="resources/tftube/advertise/soccer.mp4" autoplay
 controls poster="C:\Users\Public\Pictures\Sample Pictures\Chrysanthemum.jpg"
 width="600" height="450"></video>
-</div>
-<c:set var="count" value="0"/>
+
 
 <table border="3">
+<c:set var="count" value="0"/>
 <tr>
 <c:forEach var="dto" items="${list}"> 
 <td>
@@ -44,7 +46,9 @@ muted : 음소거가 되도록 합니다.
 autoplay : 페이지가 로드되면 바로 동영상이 재생되도록 합니다.
 
 poster="이미지파일" : 동영상이 플레이 되기 전 대표로 보여줄 이미지파일을 지정합니다. -->
-<%@ include file="main_bottom.jsp"%>    
+</div><!-- start of 2-2 -->
+</div> <!-- end of 2 -->
+<%@ include file="main_bottom.jsp"%> 
 
 </body>
 </html>

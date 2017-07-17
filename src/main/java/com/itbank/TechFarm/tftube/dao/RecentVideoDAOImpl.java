@@ -19,10 +19,10 @@ public class RecentVideoDAOImpl implements RecentVideoDAO{
 	}
 
 
-	@Override
+	/*@Override
 	public List<VideoDTO> listVideo_recent() {		
 		return RecentVideoMapper.listVideo_recent();
-	}
+	}*/
 	
 	
 

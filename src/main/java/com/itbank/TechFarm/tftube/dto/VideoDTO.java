@@ -1,8 +1,10 @@
 package com.itbank.TechFarm.tftube.dto;
 
 public class VideoDTO {
+	
 	private int no;
 	private int member_no;
+	private String channel;
 	private String title;
 	private String description;
 	private String open;
@@ -116,6 +118,13 @@ public class VideoDTO {
 	public void setUnlike_status(int unlike_status) {
 		this.unlike_status = unlike_status;
 	}
+	public String getChannel() {
+		return channel;
+	}
+	public void setChannel(String channel) {
+		this.channel = channel;
+	}
+	
 	
 	
 	

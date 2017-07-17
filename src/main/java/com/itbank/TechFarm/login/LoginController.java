@@ -19,11 +19,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.TechFarm.login.member.MemberDAO;
 import com.itbank.TechFarm.login.member.MemberDTO;
+import com.itbank.TechFarm.tftube.dao.MyChannelDAO;
+import com.itbank.TechFarm.tftube.dto.MyChannelDTO;
+
 
 @Controller
 public class LoginController {
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	@Autowired
+	private MyChannelDAO mychannelDAO;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
@@ -84,7 +90,8 @@ public class LoginController {
 		dto.setBirthday_day(Integer.parseInt(request.getParameter("birthday_day")));
 		dto.setSex(ServletRequestUtils.getIntParameter(request, "sex", 0));
 		int res=memberDAO.insertMember(dto);
-		if(res==1){
+		if(res==1){			
+			mychannelDAO.insertChannel(dto);
 			mav.setViewName("redirect:login");
 		}else{
 			mav.setViewName("redirect:createAccount");

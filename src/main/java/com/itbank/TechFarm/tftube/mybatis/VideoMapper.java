@@ -31,14 +31,6 @@ public class VideoMapper {
 		return res;
 	}
 	
-	public static void readCount(String sql){
-  		SqlSession session = sqlMapper.openSession();
-  		java.util.HashMap map = new java.util.HashMap();
-  		map.put("sql", sql);
-  		session.update("readCount", map);
-  		session.commit();
-  		session.close();
-  	}
 	
 	public static List<VideoDTO> listVideo() {
 		SqlSession session=sqlMapper.openSession();
@@ -79,7 +71,7 @@ public class VideoMapper {
 	
 	public static int click_like(int no){
 		SqlSession session=sqlMapper.openSession();		
-  		int res=session.update("clicklike",no);  		
+  		int res=session.update("click_like",no);  		
   		session.commit();
   		session.close();
 		return res;
@@ -108,6 +100,31 @@ public class VideoMapper {
   		session.close();
 		return res;
 	}
+	
+	public static List<VideoDTO> listRecent_inf(int member_no){
+		SqlSession session=sqlMapper.openSession();
+		List<VideoDTO> list=session.selectList("listRecent_inf",member_no);
+		session.close();
+		return list;		
+	}
+	
+	public static List<VideoDTO> listVideo_member_no(int member_no){
+		SqlSession session=sqlMapper.openSession();
+		List<VideoDTO> list=session.selectList("listVideo_member_no",member_no);
+		session.close();
+		return list;
+		
+	}
+	
+	public static List<VideoDTO> listLike(int member_no){
+		SqlSession session=sqlMapper.openSession();
+		List<VideoDTO> list=session.selectList("listLike",member_no);
+		session.close();
+		return list;
+		
+	}
+	
+	
 	
 	
 }

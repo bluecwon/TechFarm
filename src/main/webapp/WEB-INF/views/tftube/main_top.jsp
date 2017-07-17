@@ -7,34 +7,47 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="resources/js/jquery-1.9.0.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+
+$("#but").click(function(){	
+	$("#top").slideToggle('fast');
+});
+}
+)
+</script>
 </head>
 <body>
 
-<table colspan="2" border="3">
-<tr>
-<td>
-<a href="tftube_main">TFtube </a>
-</td> 
-<td>검색<input type="text" name="search"> <input type="button" value="검색">						 
+
+
+<div><!-- start of 1 -->
+<Button id="but">펼치기</Button><a href="tftube_main">TFtube				</a>			
+검색	<input type="text" name="search"> <input type="button" value="검색" width="900">
 <c:choose>
 <c:when test="${memberDTO==null}"><a href="login">업로드</a>	
 		<a href="login">로그인</a>
 </c:when>
 <c:otherwise>
 <a href="tftube_video_insert">업로드</a> 
-</c:otherwise></c:choose>		
-</td>                            
-</tr>
-<tr>
-<td>
-<a href="tftube_main">홈</a><br>
-인기<br>
+</c:otherwise></c:choose>	
+</div>
 
+</table>
+<!-- start of 2 -->
+<div>
+<!-- stsrt of 2-1-->
+<div id="top" style="float: left;">
+<table>
+<tr><td><a href="tftube_main">홈</a><br>
+인기<br>
 <c:if test="${memberDTO!=null}">
 		<a href="tftube_mychannel">내 채널</a><br>
 <a href="tftube_recentvideo_listRecent_member_no">최근 본 동영상</a><br>
+<a href="likeVideo?member_no=${memberDTO.no}">관심 동영상</a>
 </c:if>
------------------------------<br>
+<p>
 음악<br>
 스포츠<br>
 게임<br>
@@ -43,6 +56,8 @@ TV프로그램<br>
 뉴스<br>
 실시간<br>
 </td>
-<td>
+
+</table>
+</div><!-- end of 2 -1-->
 </body>
 </html>

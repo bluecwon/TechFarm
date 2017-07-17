@@ -1,21 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="main_top.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<c:set var="likep" value="${likep}"/>
-<c:set var="unlikep" value="${unlikep}"/>
+<%-- <c:set var="like_status" value="${like_status}"/><!-- 컨트롤러에서받아옴 -->
+<c:set var="unlike_status" value="${unlike_status}"/> --%>
 <script src="resources/js/jquery-1.9.0.js" type="text/javascript"></script>
 <script type="text/javascript">
-var likep=${likep};
-var unlikep=${unlikep};
+var like_status=${like_status};
+var unlike_status=${unlike_status};
 var no=${vdto.no};
+var member_no=${member.no};
+var subing_member_no=${vdto.member_no}
+var subing_status=${subing_status} 
+
+/* 메서드 호출이 아니므로 실행잘될것으로 예상 */
+//처음에 값ㄴ
+/* var sub_status=${sub_status};   */
+//에러가 발생하면 그아래것들이 다터짐. ㅇㅇ 
 /* like & unlike */
 $(function(){
-	if(likep==0||likep==null){
+	if(like_status==0){
 	$("#like").hide();
 	$("#like_disabled").show();
 	}	
@@ -24,82 +33,63 @@ $(function(){
 	$("#like").show();
 	}
 	
-	if(unlikep==0||likep==null){
-	$("#unlike").hide();}
+	if(unlike_status==0){
+	$("#unlike").hide();
+	$("#unlike_disabled").show();	
+	}
 	else{	
 	$("#unlike_disabled").hide();
+	$("#unlike").show();
 	}	
+	
+	if(sres==1){
+	$("#sub_disabled").hide();
+	$("#sub").show();
+	}	
+	else{	
+	$("#sub_disabled").show();
+	$("#sub").hide();
+	} 
 });
 
 function likes()
-{likep--;location.href="tftube_videoView?no="+no+"&likep="+likep;}
+{like_status--;location.href="tftube_videoView?no="+no+"&likep="+like_status;}
 function likes_disabled()
-{alert(no);likep++;location.href="tftube_videoView?no="+no+"&likep="+likep;}
+{like_status++;location.href="tftube_videoView?no="+no+"&likep="+like_status;}
 
-function unlikes(){unlikep--;location.href="tftube_videoView?no="+no+"&unlikep="+unlikep;}
-function unlikes_disabled(){unlikep++;location.href="tftube_videoView?no="+no+"&unlikep="+unlikep;}
+function unlikes(){unlike_status--;location.href="tftube_videoView?no="+no+"&unlikep="+unlike_status;}
+function unlikes_disabled(){unlike_status++;location.href="tftube_videoView?no="+no+"&unlikep="+unlike_status;}
 
-/* function like(){
-	$("#like").click(function(){
-		like--;		 
-		$(this).he(1);		
-		$("#like_disabled").show('fast'); 
-	});
-}
-function like_disabled(){		
-	$("#like_disabled").click(function(){
-		like=like+1;
-		$(this).he(1);
-		$("#like").show('fast'); 	    
-	});
-}	
-
-function unlike(){
-	$("#unlike").click(function(){
-		like=like-1;	
-		$(this).he(1);
-		$("#unlike_disabled").show('fast');
-	});
+function subing_disabled(){
+	location.href="tftube_videoView?subing_member_no="+subing_member_no;	
 }
 
-function unlike_disabled(){		
-	$("#unlike_disabled").click(function(){
-		like=like+1;
-		$(this).he(1);
-	    $("#unlike").show('fast'); 
-	});
-} */
-
-/* move */
-/* function GReply(){
-	document.f1.action="tftube_reply_insert?mode=general";
-	document.f1.submit();	
+function move_login(){
+	alert("로그인이 필요한 서비스입니다. 로그인을 해주세요.");
+	location.href="login";
 }
-
-function DReply(){
-	document.f2.action="tftube_reply_insert?mode=deep";
-	document.f2.submit();	
-} */
 
 //태그를 안붙여주면 잘 못찾는 것 같다.
 //하나씩만 열리도록 설정
 $(function(){
-	$(".reply_area").hide();	
-	
-	$("a.reply_button").click(function(){
-	$(this).siblings().show('fast'); 
+	$(".reply_area").hide();		
+	 $("a.reply_button").click(function(){		
+	$(this).siblings().show('fast'); 	
 	});
+
 	
 	$("a.not_login").click(function(){
 	alert("로그인이 필요한 서비스 입니다. 로그인 페이지로 이동합니다.");
 	});
 	
 	$(".cancel").click(function(){ 		
-		$("a#reply").hide();
-		
+		$("a#reply").hide();		
 	});		
+	
+	
 });
 </script>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -109,21 +99,27 @@ $(function(){
 poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="600" height="450"></video>
 </td></tr>
 <tr><td align="right">	조회수 ${readcount}회 <br></td></tr>
-<tr><td align="right"> 
-<!-- 
-<form>
- <input type="button" ="like_disabled" onclick="like_disabled ()" value="like"></button>
-<input type="button" ="like" onclick="like ()" value="like"></button>
-<input type="button" ="unlike_disabled" onclick="unlike_disabled ()" value="unlike"></button>
-<input type="button" ="unlike" onclick="unlike ()" value="unlike"></button>
+<tr>
+<td align="left">
 
-</form>
- -->
+<button id="sub_disabled" onclick="subing_disabled()">구독</button>
+<button id="sub" onclick="subing()" >구독중</button>it's not work -->
+<td align="right"> 
+
+<c:choose>
+<c:when test="${member!=null}">
 <button id="like_disabled" onclick="likes_disabled()">like</button>
 <button id="like" onclick="likes()" >like</button><!-- it's not work -->
-<button id="unlike_disabled" onclick="unlikes_disabled()" value="unlike">unlike</button>
+<fmt:formatNumber value="${vdto.likep}" pattern="#,##0"/>
+<button id="unlike_disabled" onclick="unlikes_disabled()">unlike</button>
 <button id="unlike" onclick="unlikes()" >unlike</button>
-
+<fmt:formatNumber value="${vdto.unlikep}" pattern="#,##0"/>
+</c:when>
+<c:otherwise>
+<button id="like_disabled" onclick="move_login()">like</button>
+<button id="unlike_disabled" onclick="move_login()">unlike</button>
+</c:otherwise>
+</c:choose>
 </td></tr>
 </table>
 <br>
@@ -138,6 +134,7 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
  <tr><td> 
  <font size="18">${vdto.title}</font><br>
   게시일:${vdto.uploaddate.substring(0,10)}<br>			
+	
 	
  ${vdto.description}<!-- 간략히 버튼 추가 --><p> 
  </td></tr>
@@ -184,7 +181,7 @@ poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="6
 <!-- reply contents with reply information -->
 
 <div class = "titl"><!--empty space securement-->
-<a href="tftube_mychannel?name=${rdto.member_no}">${rdto.name}</a>  ${rdto.reg_date}<br> 
+<a href="tftube_mychannel">${rdto.name}</a>  ${rdto.reg_date}<br> 
 
 ${rdto.content}<br>
 
@@ -205,9 +202,7 @@ ${rdto.content}<br>
 
 <a id="reply" class="reply_area">
 
-<textArea name="content_reply"><c:if test="${rdto.re_level==1&&rdto.member_no!=memberDTO.no}">+${rdto.name}</c:if>
-
-</textArea>
+<textArea name="content_reply"><c:if test="${rdto.re_level==1&&rdto.member_no!=memberDTO.no}">+${rdto.name}</c:if></textArea>
 
 <input type="hidden" name="video_name" value="${vdto.video_name}">
 <input type="hidden" name="mode" value="deep">

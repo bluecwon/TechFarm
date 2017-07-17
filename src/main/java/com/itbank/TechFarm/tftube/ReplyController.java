@@ -30,8 +30,7 @@ public class ReplyController {
 		
 		session=arg0.getSession();
 		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
-		if(member!=null){}			
-		else{
+		if(member==null){
 				msg="로그인이 필요한 서비스 입니다. 로그인을 해주세요.";
 				url="login";
 				mv.addObject("msg",msg);

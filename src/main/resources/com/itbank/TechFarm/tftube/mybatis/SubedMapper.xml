@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com.itbank.TechFarm.tftube.mybatis.SubingMapper">
+
+<insert id="insertSubed" parameterType="subingDTO">
+insert into tftube_subing(channel,member_no,subed_member_no) values(#{channel},#{member_no},#{subing_member_no})  
+</insert>
+
+<!-- <select id="get_subing_member" parameterType="int" resultType="int">
+select subing_member from tftube_subing where member_no=#{member_no}
+</select> -->
+
+</mapper>

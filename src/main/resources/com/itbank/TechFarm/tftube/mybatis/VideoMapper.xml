@@ -8,8 +8,8 @@
 	
 <insert id="insertVideo" parameterType="videoDTO" useGeneratedKeys="true">
 insert into tftube_video
-(member_no,title,description,open,video_name,video_size,readcount,image,likep,unlikep,video_hash,image_hash,like_status) values
-(#{member_no}, #{title},#{description},#{open},#{video_name},#{video_size},0,#{image},0,0,#{video_hash},#{image_hash},0) 
+(member_no,title,description,open,video_name,video_size,readcount,image,likep,unlikep,video_hash,image_hash,like_status,unlike_status,channel) values
+(#{member_no}, #{title},#{description},#{open},#{video_name},#{video_size},0,#{image},0,0,#{video_hash},#{image_hash},0,0,#{channel}) 
 </insert>
 
 <delete id="deleteVideo" parameterType="int">
@@ -24,6 +24,10 @@ update tftube_video set readcount = readcount+1 where no = #{no}
  select * from tftube_video order by no desc
 </select>
 
+<select id="listVideo_member_no" parameterType="int" resultType="videoDTO">
+ select * from tftube_video where member_no=#{member_no} order by no desc  
+</select>
+
 <select id="getVideo" resultType="videoDTO" parameterType="int">
 select * from tftube_video where no=#{no} order by no desc
 </select>
@@ -32,16 +36,11 @@ select * from tftube_video where no=#{no} order by no desc
 select * from tftube_video where member_no=#{member_no} order by no desc
 </select> 
 
-<update id="readCount" parameterType="java.util.HashMap">
-		${sql}
+<update id="click_like" parameterType="int">
+update tftube_video set likep=likep+1 , like_status=1 where no=#{no}
 </update>
 
-<update id="clicklike" parameterType="java.util.HashMap">
-${sql}
-<!-- update tftube_video set likep=likep+1 , like_status=1 where no=#{no} -->
-</update>
-
-<update id="cancellike" parameterType="int">
+<update id="cancel_like" parameterType="int">
 update tftube_video set likep=likep-1, like_status=0 where no=#{no}
 </update>
 
@@ -51,6 +50,16 @@ update tftube_video set unlikep=unlikep+1, unlike_status=1 where no=#{no}
 
 <update id="cancel_unlike" parameterType="int">
 update tftube_video set unlikep=unlikep-1, unlike_status=0 where no=#{no}
-</update>	
+</update>
+
+ <select id="listRecent_inf" parameterType="int" resultType="videoDTO">
+ select * from tftube_video a join tftube_recentvideo b on a.video_name=b.video_name and b.member_no=#{member_no}
+ </select>	
+ <!-- where like_status=1 and -->
+ <select id="listLike" resultType="VideoDTO" parameterType="int">
+ select * from tftube_video where member_no=#{member_no}
+ </select> 
+
+
 
 </mapper>	

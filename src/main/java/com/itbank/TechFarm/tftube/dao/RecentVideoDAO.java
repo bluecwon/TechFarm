@@ -10,6 +10,6 @@ public interface RecentVideoDAO {
 	public int insertRecent(RecentVideoDTO dto);
 	
 	public List<RecentVideoDTO> listRecent_member_no(int member_no);
-	public List<VideoDTO> listVideo_recent();
+	/*public List<VideoDTO> listVideo_recent();*/
 
 }

@@ -9,10 +9,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.itbank.TechFarm.tftube.dto.NameFormat;
+
 import com.itbank.TechFarm.tftube.dto.ReplyDTO;
 import com.itbank.TechFarm.tftube.dto.ReplyFormat;
-
 
 
 public class ReplyMapper {
@@ -101,7 +100,7 @@ public class ReplyMapper {
   		
   	}
 
-  	/*public static List<ReplyDTO> getName_by_video(String video_name){
+ /* 	public static List<ReplyDTO> getName_by_video(String video_name){
 
   		SqlSession session=sqlMapper.openSession();
   		List<ReplyFormat> list=session.selectList("getName_by_video",video_name);

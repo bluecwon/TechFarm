@@ -15,4 +15,9 @@ public interface VideoDAO {
 	public int cancel_like(int no);
 	public int click_unlike(int no);
 	public int cancel_unlike(int no);
+	public List<VideoDTO> listRecent_inf(int member_no);
+	public List<VideoDTO> listVideo_member_no(int member_no);
+	public List<VideoDTO> listLike(int member_no);
+	
+	
 }

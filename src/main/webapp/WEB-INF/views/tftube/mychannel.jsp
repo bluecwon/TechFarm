@@ -37,7 +37,11 @@ ${dto.title}</a></td>
 </c:choose>
 </td></tr>
 <tr><td>좋아요 표시한 동영상</td></tr>
-<tr><td>구독정보</td></tr>
+list
+<tr><td>구독채널</td></tr>
+list
+<tr><td>구독자</td></tr>
+lsit
 </table>
 
 

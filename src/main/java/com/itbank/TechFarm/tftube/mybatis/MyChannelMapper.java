@@ -1,21 +1,20 @@
 package com.itbank.TechFarm.tftube.mybatis;
 
-
 import java.io.IOException;
 import java.io.Reader;
-import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.itbank.TechFarm.tftube.dto.RecentVideoDTO;
-import com.itbank.TechFarm.tftube.dto.VideoDTO;
+import com.itbank.TechFarm.login.member.MemberDTO;
+import com.itbank.TechFarm.tftube.dto.MyChannelDTO;
 
-public class RecentVideoMapper {
+public class MyChannelMapper {
 	
 	private static SqlSessionFactory sqlMapper;
+	
 	static {
 		try {
 			String resource = "com/itbank/TechFarm/SqlMapConfig_tftube.xml"; 
@@ -26,26 +25,23 @@ public class RecentVideoMapper {
 		}
 	}
 	
-	public static int insertRecent(RecentVideoDTO dto){
+	
+	
+	public static int insertChannel(MemberDTO dto){
 		SqlSession session=sqlMapper.openSession();
-		int res=session.insert("insertRecent", dto);
+		int res=session.insert("insertChannel",dto);
 		session.commit();
 		session.close();
-		return res;	
+		return res;
+		
 	}
 	
-	public static List<RecentVideoDTO> listRecent_member_no(int member_no){
+	public static String getChannel(int member_no){
 		SqlSession session=sqlMapper.openSession();
-		List<RecentVideoDTO> list=session.selectList("listRecent_member_no",member_no);
+		String channel=session.selectOne("getChannel",member_no);
 		session.close();
-		return list;	
+		return channel;
 	}
 	
-	/*public static List<VideoDTO> listVideo_recent(){
-		SqlSession session=sqlMapper.openSession();
-		List<VideoDTO> list=session.selectList("listVideo_recent");
-		session.close();
-		return list;	
-	}*/
 
 }
