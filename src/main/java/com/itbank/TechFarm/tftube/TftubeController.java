@@ -169,10 +169,11 @@ public class TftubeController {
 		HttpSession session=arg0.getSession();		
 		
 		System.out.println(upPath_video);
+		System.out.println("filename:"+filename);
 		File upPath_video_file=new File(upPath_video);
 		File file = new File(upPath_video,filename);
 		
-		if(!upPath_video_file.isDirectory()){//해당경로가 존재하지 않는다면
+		if(!upPath_video_file.exists()){//해당경로가 존재하지 않는다면
 			upPath_video_file.mkdirs();			
 		}
 		
@@ -189,7 +190,7 @@ public class TftubeController {
 		
 		File file2 = new File(upPath_image,image);
 		File upPath_image_file=new File(upPath_image);
-		if(!upPath_image_file.isDirectory()){//해당경로가 존재하지 않는다면
+		if(!upPath_image_file.exists()){//해당경로가 존재하지 않는다면
 			upPath_image_file.mkdirs();			
 		}
 		
