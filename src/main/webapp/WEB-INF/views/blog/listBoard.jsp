@@ -12,7 +12,7 @@
 				<img src="resources/images/write.jpg" onclick="location.href='insertBoard?boardno=${boardno}&id=${optionDTO.id}&title=${title}'" style="cursor:pointer;">&nbsp;&nbsp;<br>
 			</div><br>
 				<div>
-					<table>
+					<table class="listBoard">
 						<c:choose>
 						<c:when test="${listBoard.size()==0}">
 						<tr>
@@ -23,12 +23,12 @@
 						</c:when>
 						<c:otherwise>
 						<c:forEach var="listBoard" items="${listBoard}">
-						<tr>
-						<td width="50%" id="boardlist">${listBoard.subject}</td>
-						<td width="15%" id="boardlist">${optionDTO.nickname}(${listBoard.id})</td>		
-						<td width="10%" id="boardlist"><img src="resources/images/reply.jpg">&nbsp;${listBoard.reply} &nbsp;&nbsp;&nbsp;  <img src="resources/images/view.jpg">&nbsp;${listBoard.readcount}  </td>
-						<td width="15%" id="boardlist">${listBoard.reg_date}</td>
-						</tr><tr><td colspan="4"></td></tr>
+						<tr class="list">
+						<td width="50%" class="boardlist"><a href="viewBoard?boardno=${boardno}">${listBoard.subject}</a></td>
+						<td width="15%" class="boardlist">${optionDTO.nickname}(${listBoard.id})</td>		
+						<td width="10%" class="boardlist"><img src="resources/images/reply.jpg">&nbsp;${listBoard.reply} &nbsp;&nbsp;&nbsp;  <img src="resources/images/view.jpg">&nbsp;${listBoard.readcount}  </td>
+						<td width="15%" class="boardlist">${listBoard.reg_date}</td>
+						</tr>
 						
 						</c:forEach>
 						</c:otherwise>

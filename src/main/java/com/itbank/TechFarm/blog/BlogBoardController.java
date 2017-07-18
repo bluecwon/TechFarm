@@ -37,7 +37,7 @@ import com.itbank.TechFarm.blog.dao.Blog_OptionDAO;
 import com.itbank.TechFarm.blog.dto.Blog_BoardDTO;
 import com.itbank.TechFarm.blog.dto.Blog_MakeBoardDTO;
 import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
-import com.itbank.TechFarm.blog.dto.PhotoVo;
+
 
 @Controller
 public class BlogBoardController {
@@ -167,5 +167,19 @@ public class BlogBoardController {
 			
 		return dto;
 	}
+		
+	@RequestMapping(value="/viewBoard")
+	public ModelAndView blogMake(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		mav.setViewName("blog/myBlog");
+		String id = request.getParameter("id");
+		Blog_OptionDTO dto = optionDAO.getBlog(id);
+		List<Blog_MakeBoardDTO> list = boardDAO.listBoardTitle(id);
+		session.setAttribute("list", list);
+		mav.addObject("list",list);
+		mav.addObject("optionDTO",dto);
+		return mav;
+		}	
 
 }

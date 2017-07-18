@@ -78,3 +78,10 @@ $(function() {
 				area.options[0] = new Option('==선택하세요==',31)
 		} 
 	}
+	
+	//list
+	$(document).ready(function(){
+		$('table.listBoard'>'tr.list'>'td.boardlist')
+		.bind('mouseover' , function () {$(this).addClass('gray');})
+		.bind('mouseout' , function () {$(this).removeClass('gray');})
+	});
