@@ -88,6 +88,8 @@ body {
 	border: 1px solid #ccccff;
 	width:20%;
 	height:250px;
+	
+	z-index:3;
 }
 
 #main_bottom{
