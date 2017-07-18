@@ -5,7 +5,7 @@
 
 <link type="text/css" href="resources/myaccount/my_style.css" rel="stylesheet" />
 
-<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br> 
 <div id="main_my"><br><br>
 				<b>${sessionScope.memberDTO.name}</b>님 환영합니다.<br>
 				<b>한 곳</b>에서 <b>TechFarm</b>에 관한 계정을 관리할 수 있습니다.<br>
