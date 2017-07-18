@@ -90,7 +90,9 @@ public class LoginController {
 		dto.setBirthday_day(Integer.parseInt(request.getParameter("birthday_day")));
 		dto.setSex(ServletRequestUtils.getIntParameter(request, "sex", 0));
 		int res=memberDAO.insertMember(dto);
-		if(res==1){			
+		if(res==1){
+			MemberDTO getdto=memberDAO.getMember(dto.getId());
+			dto.setNo(getdto.getNo());
 			mychannelDAO.insertChannel(dto);
 			mav.setViewName("redirect:login");
 		}else{

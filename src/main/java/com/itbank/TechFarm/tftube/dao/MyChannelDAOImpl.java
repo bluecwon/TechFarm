@@ -14,7 +14,7 @@ public class MyChannelDAOImpl implements MyChannelDAO{
 	}
 
 	@Override
-	public List<MyChannelDTO> getChannel(int member_no) {
+	public MyChannelDTO getChannel(int member_no) {
 		return MyChannelMapper.getChannel(member_no);		
 	}
 	

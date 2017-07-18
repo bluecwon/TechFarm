@@ -8,6 +8,6 @@ import com.itbank.TechFarm.tftube.dto.MyChannelDTO;
 public interface MyChannelDAO {
 	
 	public int insertChannel(MemberDTO dto);
-	public List<MyChannelDTO> getChannel(int member_no);
+	public MyChannelDTO getChannel(int member_no);
 
 }

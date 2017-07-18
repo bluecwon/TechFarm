@@ -13,7 +13,7 @@
 <form name="f" method="post" enctype="multipart/form-data" action="tftube_video_insert">
 
 <table>
-<tr><td>동영상 파일: <input type="file" id="filename" name="filename" accept="video/*" ></td></tr>
+<tr><td>동영상 파일: <input type="file"  name="filename" accept="video/*" ></td></tr>
 <tr><td>제목: <input type="text" name="title"></td></tr>
 <tr><td>설명: <input type="text" name="description"></td></tr>
 
@@ -50,13 +50,13 @@
 </table>
 </form> 
 
- <form id="fileupload" action="tftube_video_insert" method="POST" enctype="multipart/form-data">
-        <!-- Redirect browsers with JavaScript disabled to the origin page -->
+<!--  <form id="fileupload" action="tftube_video_insert" method="POST" enctype="multipart/form-data">
+        Redirect browsers with JavaScript disabled to the origin page
         <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
-        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+        The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload
         <div class="row fileupload-buttonbar">
             <div class="col-lg-7">
-                <!-- The fileinput-button span is used to style the file input field as button -->
+                The fileinput-button span is used to style the file input field as button
                 <span class="btn btn-success fileinput-button">
                     <i class="glyphicon glyphicon-plus"></i>
                     <span>Add files...</span>
@@ -75,22 +75,22 @@
                     <span>Delete</span>
                 </button>
                 <input type="checkbox" class="toggle">
-                <!-- The global file processing state -->
+                The global file processing state
                 <span class="fileupload-process"></span>
             </div>
-            <!-- The global progress state -->
+            The global progress state
             <div class="col-lg-5 fileupload-progress fade">
-                <!-- The global progress bar -->
+                The global progress bar
                 <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
                     <div class="progress-bar progress-bar-success" style="width:0%;"></div>
                 </div>
-                <!-- The extended global progress state -->
+                The extended global progress state
                 <div class="progress-extended">&nbsp;</div>
             </div>
         </div>
-        <!-- The table listing the files available for upload/download -->
+        The table listing the files available for upload/download
         <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
-    </form>
+    </form> -->
 
 
 

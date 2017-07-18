@@ -134,6 +134,17 @@ public class TftubeController {
 	public ModelAndView tftube_video_insertForm(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();		
+		
+		mv.setViewName("tftube/insertForm");	
+		
+		return mv;		
+	}
+	
+	@RequestMapping(value="/tftube_video_insert", method=RequestMethod.POST)
+	public ModelAndView tftube_video_insertPro(HttpServletRequest arg0, 
+								HttpServletResponse arg1)  throws Exception  {
+		VideoDTO dto = new VideoDTO();
+		ModelAndView mv=new ModelAndView();	
 		HttpSession session=arg0.getSession();
 		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
 		if(member!=null){
@@ -142,18 +153,8 @@ public class TftubeController {
 				url="login";
 				mv.addObject("msg",msg);
 				mv.addObject("url",url);
-				mv.setViewName("tftube/message");				
+				mv.setViewName("tftube/message");	
 		}
-		return mv;		
-	}
-	
-	@RequestMapping(value="/tftube_video_insert", method=RequestMethod.POST)
-	public ModelAndView tftube_video_insertPro(HttpServletRequest arg0, 
-								HttpServletResponse arg1)  throws Exception  {
-		VideoDTO dto = new VideoDTO();
-		ModelAndView mv=new ModelAndView();		
-		
-
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)arg0;
 		
 		MultipartFile mf = mr.getFile("filename");
@@ -166,15 +167,18 @@ public class TftubeController {
 			url="tftube_video_insert";
 			return new ModelAndView("tftube/message");
 		}*/
-		HttpSession session=arg0.getSession();		
+				
 		
 		System.out.println(upPath_video);
+		//메인을 거치지 않으면 nullpoint Exception
 		File upPath_video_file=new File(upPath_video);
 		File file = new File(upPath_video,filename);
-		
-		if(!upPath_video_file.isDirectory()){//해당경로가 존재하지 않는다면
-			upPath_video_file.mkdirs();			
+		System.out.println("filename:"+filename);
+		if(!upPath_video_file.exists()){//해당경로가 존재하지 않는다면
+			upPath_video_file.mkdirs();		
+			//exist()
 		}
+		
 		
 		if(filename.trim().equals("")){}
 		else{
@@ -211,8 +215,11 @@ public class TftubeController {
 		dto.setImage(image);
 		dto.setVideo_hash(video_hash);
 		dto.setImage_hash(image_hash);
-		;
-		dto.setChannel(mychannelDAO.getChannel(memberdto.getNo()).get(0).getChannel());
+		
+		System.out.println("memberdto.getNo():"+memberdto.getNo());
+		System.out.println("mychannel:"+mychannelDAO.getChannel(memberdto.getNo()));
+		
+		dto.setChannel(mychannelDAO.getChannel(memberdto.getNo()).getChannel());
 		
 		int res =videoDAO.insertVideo(dto);	
 		if(res>0){			

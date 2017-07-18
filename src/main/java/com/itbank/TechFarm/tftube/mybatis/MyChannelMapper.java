@@ -37,9 +37,9 @@ public class MyChannelMapper {
 		
 	}
 	
-	public static List<MyChannelDTO> getChannel(int member_no){
+	public static MyChannelDTO getChannel(int member_no){
 		SqlSession session=sqlMapper.openSession();
-		List<MyChannelDTO> list=session.selectList("getChannel",member_no);
+		MyChannelDTO list=session.selectOne("getChannel",member_no);
 		session.close();
 		return list;
 	}
