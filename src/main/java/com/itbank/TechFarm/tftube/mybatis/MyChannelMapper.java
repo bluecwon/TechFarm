@@ -2,6 +2,7 @@ package com.itbank.TechFarm.tftube.mybatis;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -36,11 +37,11 @@ public class MyChannelMapper {
 		
 	}
 	
-	public static String getChannel(int member_no){
+	public static List<MyChannelDTO> getChannel(int member_no){
 		SqlSession session=sqlMapper.openSession();
-		String channel=session.selectOne("getChannel",member_no);
+		List<MyChannelDTO> list=session.selectList("getChannel",member_no);
 		session.close();
-		return channel;
+		return list;
 	}
 	
 

@@ -134,7 +134,16 @@ public class TftubeController {
 	public ModelAndView tftube_video_insertForm(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();		
-		mv.setViewName("tftube/insertForm");
+		HttpSession session=arg0.getSession();
+		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
+		if(member!=null){
+		mv.setViewName("tftube/insertForm");}
+		else{	msg="로그인이 필요한 서비스 입니다. 로그인을 해주세요.";
+				url="login";
+				mv.addObject("msg",msg);
+				mv.addObject("url",url);
+				mv.setViewName("tftube/message");				
+		}
 		return mv;		
 	}
 	
@@ -146,7 +155,9 @@ public class TftubeController {
 		
 
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)arg0;
+		
 		MultipartFile mf = mr.getFile("filename");
+		System.out.println(mf);
 		String filename = mf.getOriginalFilename();
 		
 		
@@ -157,7 +168,7 @@ public class TftubeController {
 		}*/
 		HttpSession session=arg0.getSession();		
 		
-		
+		System.out.println(upPath_video);
 		File upPath_video_file=new File(upPath_video);
 		File file = new File(upPath_video,filename);
 		
@@ -201,7 +212,7 @@ public class TftubeController {
 		dto.setVideo_hash(video_hash);
 		dto.setImage_hash(image_hash);
 		;
-		dto.setChannel(mychannelDAO.getChannel(memberdto.getNo()));
+		dto.setChannel(mychannelDAO.getChannel(memberdto.getNo()).get(0).getChannel());
 		
 		int res =videoDAO.insertVideo(dto);	
 		if(res>0){			

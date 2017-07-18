@@ -1,5 +1,7 @@
 package com.itbank.TechFarm.tftube.dao;
 
+import java.util.List;
+
 import com.itbank.TechFarm.login.member.MemberDTO;
 import com.itbank.TechFarm.tftube.dto.MyChannelDTO;
 import com.itbank.TechFarm.tftube.mybatis.MyChannelMapper;
@@ -12,7 +14,7 @@ public class MyChannelDAOImpl implements MyChannelDAO{
 	}
 
 	@Override
-	public String getChannel(int member_no) {
+	public List<MyChannelDTO> getChannel(int member_no) {
 		return MyChannelMapper.getChannel(member_no);		
 	}
 	
