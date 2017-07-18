@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ include file="/resources/home/header.jsp" %>
-
 <link type="text/css" href="resources/myaccount/my_style.css" rel="stylesheet" />
-
 <br><br><br><br><br><br><br><br><br> 
 <div id="main_my"><br><br>
 				<b>${sessionScope.memberDTO.name}</b>님 환영합니다.<br>
