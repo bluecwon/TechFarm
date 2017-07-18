@@ -81,7 +81,7 @@ $(document).ready(function(){
 });
 	
  function checkDel(id){
-	 var isDel = window.confirm("정말로 삭제하시겠습니까?")
+	 var isDel = window.confirm("삭제한 블로그는 복구할 수 없습니다. 정말로 삭제하시겠습니까?")
 	 if(isDel){
 		 location.href="deleteBlog?id="+id
 	 }

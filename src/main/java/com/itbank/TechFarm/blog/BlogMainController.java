@@ -44,16 +44,11 @@ public class BlogMainController {
 	private Blog_OptionDAO optionDAO;
 	
 	
-	@RequestMapping(value = "/blogmain.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/blogmain", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		return "bloghome";
-	}
-	
-	@RequestMapping(value="/login.do")
-	public ModelAndView adminHome(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		return new ModelAndView("WEB-INF/blog/main.jsp");
 	}
 	
 	@RequestMapping(value="/blogStart")
@@ -71,10 +66,11 @@ public class BlogMainController {
 			
 			if(optionDTO == null){
 				mode = "membernoblog";
-				mav.addObject("id", id);
+				//mav.addObject("id", id);
+				session.setAttribute("id", id);
 			}
-			mav.addObject("optionDTO", optionDTO);
-
+			//mav.addObject("optionDTO", optionDTO);
+			session.setAttribute("optionDTO", optionDTO);
 		}else{
 			mode="guest";
 		}
@@ -86,9 +82,7 @@ public class BlogMainController {
 	public ModelAndView blogMake(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blogmain/makeBlog");
-		//String id = request.getParameter("id");
 		String mode = request.getParameter("mode");
-		//mav.addObject("id", id);
 		mav.addObject("mode", mode);
 		return mav;
 	}
@@ -221,7 +215,11 @@ public class BlogMainController {
 			
 			String id = arg0.getParameter("id");
 			dto.setId(id);
-			dto.setBlogname(arg0.getParameter("blogname"));
+			String blogname = arg0.getParameter("blogname");
+			if(blogname.trim()=="" || blogname.equals("")){
+				blogname = id+" BLOG";
+			}
+			dto.setBlogname(blogname);
 			dto.setLayout(Integer.parseInt(arg0.getParameter("layout")));
 			String headerword=arg0.getParameter("headerword");
 			if(headerword.trim()=="" || headerword.equals("")){

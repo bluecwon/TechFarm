@@ -42,10 +42,12 @@ public class MyBlogController {
 	@RequestMapping(value="/myBlog")
 	public ModelAndView blogMake(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
 		mav.setViewName("blog/myBlog");
 		String id = request.getParameter("id");
 		Blog_OptionDTO dto = optionDAO.getBlog(id);
 		List<Blog_MakeBoardDTO> list = boardDAO.listBoardTitle(id);
+		session.setAttribute("list", list);
 		mav.addObject("list",list);
 		mav.addObject("optionDTO",dto);
 		return mav;
@@ -214,7 +216,7 @@ private Blog_OptionDTO getBlogOption(HttpServletRequest arg0) throws Exception{
 	@RequestMapping(value="/makeBoardTitle", method=RequestMethod.GET)
 	public ModelAndView makeBoardform(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("blog/makeBoardform");
+		mav.setViewName("blog/makeBoardTform");
 		String id = request.getParameter("id");
 		String mode = "board";
 		Blog_OptionDTO dto = optionDAO.getBlog(id);
@@ -247,20 +249,32 @@ private Blog_OptionDTO getBlogOption(HttpServletRequest arg0) throws Exception{
 	}
 	
 	@RequestMapping(value="/editBoardTitle", method=RequestMethod.GET)
-	public ModelAndView editBoardform(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ModelAndView editBoardTform(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("blog/editBoardform");
-		String id = request.getParameter("id");
-		String mode = "board";
-		Blog_OptionDTO dto = optionDAO.getBlog(id);
-		
-		mav.addObject("mode",mode);
-		mav.addObject("optionDTO",dto);
+		mav.setViewName("blog/editBoardTform");
+		int boardno = ServletRequestUtils.getIntParameter(request, "boardno");
+		Blog_MakeBoardDTO makeBoardDTO = boardDAO.getBoardTitle(boardno);
+		mav.addObject("makeBoardDTO",makeBoardDTO);
 		
 		return mav;
 	}
 	
-	
+	@RequestMapping(value="/editBoardTitle", method=RequestMethod.POST)
+	public ModelAndView editBoardT(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:editBlog");
+		String mode = "board";
+		String title = request.getParameter("title");
+		int sideno = ServletRequestUtils.getIntParameter(request, "sideno");
+		int boardno = ServletRequestUtils.getIntParameter(request, "boardno");
+		Blog_MakeBoardDTO makeBoardDTO = boardDAO.getBoardTitle(boardno);
+		makeBoardDTO.setSideno(sideno);
+		makeBoardDTO.setTitle(title);
+		int res = boardDAO.editBoardTitle(makeBoardDTO);
+		mav.addObject("id",makeBoardDTO.getId());
+		mav.addObject("mode",mode);
+		return mav;
+	}
 	
 	
 }

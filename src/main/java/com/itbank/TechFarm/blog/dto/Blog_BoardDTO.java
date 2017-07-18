@@ -4,11 +4,15 @@ public class Blog_BoardDTO {
 private int no;
 private String id;
 private String title;
+private int area;
 private String subject;
 private String content;
-private String filename;
+private String file1;
 private String reg_date;
-private int area;
+private int readcount;
+private int reply;
+private int open;
+private int boardno;
 
 public int getNo() {
 	return no;
@@ -28,6 +32,12 @@ public String getTitle() {
 public void setTitle(String title) {
 	this.title = title;
 }
+public int getArea() {
+	return area;
+}
+public void setArea(int area) {
+	this.area = area;
+}
 public String getSubject() {
 	return subject;
 }
@@ -40,11 +50,11 @@ public String getContent() {
 public void setContent(String content) {
 	this.content = content;
 }
-public String getFilename() {
-	return filename;
+public String getFile1() {
+	return file1;
 }
-public void setFilename(String filename) {
-	this.filename = filename;
+public void setFile1(String file1) {
+	this.file1 = file1;
 }
 public String getReg_date() {
 	return reg_date;
@@ -52,11 +62,29 @@ public String getReg_date() {
 public void setReg_date(String reg_date) {
 	this.reg_date = reg_date;
 }
-public int getArea() {
-	return area;
+public int getReadcount() {
+	return readcount;
 }
-public void setArea(int area) {
-	this.area = area;
+public void setReadcount(int readcount) {
+	this.readcount = readcount;
+}
+public int getReply() {
+	return reply;
+}
+public void setReply(int reply) {
+	this.reply = reply;
+}
+public int getOpen() {
+	return open;
+}
+public void setOpen(int open) {
+	this.open = open;
+}
+public int getBoardno() {
+	return boardno;
+}
+public void setBoardno(int boardno) {
+	this.boardno = boardno;
 }
 
 }

@@ -5,9 +5,7 @@
 <%@ include file="editBlogTop.jsp"%>
 		<td valign="top">
 <form action="editBlog" method="post" enctype="multipart/form-data">
-<br>
-&nbsp;&nbsp;&nbsp;<input type="submit" value="저장">
-<br><br>
+<br>&nbsp;&nbsp;&nbsp;<input type="submit" value="저장"><br><br>
 <input type="hidden" value="${mode}">	
 
 <c:if test="${mode=='profile'}">
@@ -294,7 +292,7 @@
 <c:if test="${mode=='board'}">
 <div align="center">
 <h1>게시판 관리</h1><br>
-게시판은 각 사이드바에 속하며 사이드바가 없는 레이아웃을 선택시, 게시판이 보이지 않을 수 있습니다.
+*게시판은 각 사이드바에 속하며 사이드바가 없는 레이아웃을 선택시,<br> 게시판이 보이지 않을 수 있습니다.
 <div align="right">
 <a href="makeBoardTitle?id=${optionDTO.id}">게시판 추가</a>
 </div>
@@ -315,14 +313,14 @@
 		<td>
 		<c:forEach var="dto" items="${list}">
 		<c:if test="${dto.sideno % 2 == 1}">
-		${dto.title}&nbsp;&nbsp;&nbsp;<a href="editBoardTitle?id=${dto.id}">수정</a>&nbsp;|&nbsp;<a href="">삭제</a><br>
+		${dto.title}&nbsp;&nbsp;&nbsp;<a href="editBoardTitle?boardno=${dto.boardno}">수정</a>&nbsp;|&nbsp;<a href="deleteBoardTitle?boardno=${dto.boardno}">삭제</a><br>
 		</c:if>
 		</c:forEach>
 		</td>
 		<td>
 		<c:forEach var="dto" items="${list}">
 		<c:if test="${dto.sideno % 2 == 0}">
-		${dto.title}&nbsp;&nbsp;&nbsp;<a href="editBoardTitle?id=${dto.id}">수정</a>&nbsp;|&nbsp;<a href="editBoardTitle?id=${optionDTO.id}">삭제</a><br>
+		${dto.title}&nbsp;&nbsp;&nbsp;<a href="editBoardTitle?boardno=${dto.boardno}">수정</a>&nbsp;|&nbsp;<a href="deleteBoardTitle?boardno=${dto.boardno}">삭제</a><br>
 		</c:if>
 		</c:forEach>
 		</td> 

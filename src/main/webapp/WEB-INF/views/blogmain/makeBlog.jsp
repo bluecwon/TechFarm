@@ -21,7 +21,7 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 			<table>
 				<tr>
 					<td>제목</td>
-					<td><input type="text" name="blogname" value="${sessionScope.memberDTO.id}님의 블로그" maxlength="30"></td>
+					<td><input type="text" name="blogname" value="${sessionScope.memberDTO.id} BLOG" maxlength="30"></td>
 					<td>한글,영문,숫자 혼용가능 (30자 이내)</td>
 				</tr>
 				<tr>

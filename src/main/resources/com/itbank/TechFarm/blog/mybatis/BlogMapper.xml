@@ -45,4 +45,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <update id="editBlog_headerword" parameterType="BlogOptionDTO">
   update blog_option set headerword=#{headerword} where id=#{id}
   </update>
+  
+  <select resultType="BlogMakeBoardDTO" id="getBoardT" parameterType="int">
+  select * from blog_makeboard where boardno=#{boardno}
+  </select>
+  
+  <update id="editBoardT" parameterType="BlogMakeBoardDTO">
+  update blog_makeboard set sideno=#{sideno},title=#{title} where boardno=#{boardno}
+  </update>
+  
+  <select resultType="BlogBoardDTO" id="listBoard" parameterType="int">
+  select * from blog_board where boardno=#{boardno}
+  </select>
+  
+  <insert id="insertBoard" parameterType="BlogBoardDTO" useGeneratedKeys="true">
+  insert into blog_board (id,area,subject,content,file1,readcount,reply,open,boardno,title) 
+  values(#{id},#{area},#{subject},#{content},#{file1},#{readcount},#{reply},#{open},#{boardno},#{title})
+  </insert>
+  
 </mapper>

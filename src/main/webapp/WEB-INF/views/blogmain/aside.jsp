@@ -21,8 +21,8 @@ String pfPath = config.getServletContext().getRealPath("/WEB-INF/blog/profile/")
 	</c:if>
 	<c:if test="${mode=='member'}">
 	<img src="resources/upload/${optionDTO.id}/${optionDTO.profile}" width="100" height="100" class="homemenu"/><br>
-	<b>${optionDTO.id}</b>님 &nbsp;&nbsp;<input type="button" value="로그아웃" style="width:70px;height:25px;"><br>
-	<input type="button" value="내 블로그" onclick="location.href='myBlog?id=${optionDTO.id}'">
+	<b>${sessionScope.memberDTO.id}</b>님 &nbsp;&nbsp;<input type="button" value="로그아웃" style="width:70px;height:25px;"><br>
+	<input type="button" value="내 블로그" onclick="location.href='myBlog?id=${sessionScope.memberDTO.id}'">
 	</c:if>
 	</div>
 </aside> 
