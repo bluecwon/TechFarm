@@ -6,8 +6,8 @@
 <html>
 	<head>
 		<meta charset="utf-8"/>
-		<title>TF HOME</title>
-		<link type="text/css" href="resources/home/style.css" rel="stylesheet" />
+		<title>My Account</title>
+		<link type="text/css" href="resources/myaccount/style.css" rel="stylesheet" />
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
@@ -35,6 +35,7 @@
 	<head>
 	<body>
 		<div id="header" align="right">
+		내 계정
 			<div class="topnav">
 	  			<a rel="tooltip" title="메뉴"><img id="menu" src="resources/home/imgs/menu.png" width="25" height="25"></a>&nbsp&nbsp&nbsp&nbsp
 	  			<c:if test="${sessionScope.memberDTO eq null}">
