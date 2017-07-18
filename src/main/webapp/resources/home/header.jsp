@@ -57,7 +57,7 @@
 					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/mail.png" width="40%" height="35%"></a><br>메일</td>
 				</tr>
 				<tr>
-					<td align="center"><a href="#" onclick="check('tfPlusIndex');"><img id="img_handle" src="resources/home/imgs/social.png" width="40%" height="35%"></a><br>SNS</td>
+					<td align="center"><a href="tfPlusIndex?id=${sessionScope.memberDTO.id}"><img id="img_handle" src="resources/home/imgs/social.png" width="40%" height="35%"></a><br>SNS</td>
 					<td align="center"><a href="tftube_main"><img id="img_handle" src="resources/home/imgs/utube.png" width="40%" height="35%"></a><br>영상</td>
 					<td align="center"><a href="blogmain.do"><img id="img_handle" src="resources/home/imgs/document.png" width="40%" height="35%"></a><br>블로그</td>
 				</tr>

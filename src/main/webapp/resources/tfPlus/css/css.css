@@ -51,9 +51,36 @@ select::-ms-expand {
 }
 
 #img_size {
-	width:400px;
+	width:350px;
 	height:300px;
 }
+
+table.jjm494_myProfile {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    border-left: 3px solid #000000;
+  margin : 20px 10px;
+}
+table.jjm494_myProfile th {
+    width: 50px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #000000;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+
+}
+table.jjm494_myProfile td {
+    width: 90%;
+    padding: 10px;
+    vertical-align: top;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
 
 
 

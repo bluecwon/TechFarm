@@ -4,19 +4,19 @@
 <%@include file="../header.jsp"%>
 <!-- 상단 부분 -->
 
-<!-- 내소식 쓰기+리스트 시작 -->
+<!-- 내커뮤니티 쓰기+리스트 시작 -->
 <div id="main">	
 
 	<div class="wrapper clearfix">
 		
        	
-		<!-- 내소식 컨텐츠 내용 시작 -->
+		<!-- 내커뮤니티 컨텐츠 내용 시작 -->
        	<div id="page-content" class="clearfix">
 
-			<!-- 소식 쓰기 폼 시작 -->
+			<!-- 커뮤니티 쓰기 폼 시작 -->
 			<script type="text/javascript" src="js/form-validation.js"></script>
-			<form name="f" id="contactForm" action="tfPlusNewsProfileWritingPro?id=${sessionScope.memberDTO.id}" method="post" enctype="multipart/form-data">
-				<h2 class="page-heading"><span>내 소식 만들기</span></h2>	
+			<form name="f" id="contactForm" action="tfPlusMemberProfileWritingPro?id=${sessionScope.memberDTO.id}" method="post" enctype="multipart/form-data">
+				<h2 class="page-heading"><span>내 커뮤니티 만들기</span></h2>	
 				<p></p>
 				<fieldset>
 					<div>
@@ -62,7 +62,7 @@
 	        			<p>취미 : 아직 등록안함</p>
 	        		</c:if>
 	        		<p>이름 : ${sessionScope.memberDTO.name}</p>
-	        		<p>내 소식 : ${newsMyList.size()}</p>
+	        		<p>내 소식 : ${memberMyList.size()}</p>
 	        		<ul class="address-block">
 	        			<li class="address">ID : ${sessionScope.memberDTO.id}</li>
 	        			<li class="email"><a href="mailto:email@server.com">${sessionScope.memberDTO.email}</a></li>
@@ -72,33 +72,33 @@
         	<div class="clearfix"></div>
 			<!-- 사용자 정보 사이드 메뉴 끝 -->
 			
-			<h2 class="page-heading"><span>내 소식 모음</span></h2>	
+			<h2 class="page-heading"><span>내 커뮤니티 모음</span></h2>	
 			
 			<div class="map-content">
 			
-				<!-- 내소식 이미지 박스 시작 -->
+				<!-- 내커뮤니티 이미지 박스 시작 -->
 				<div class="home-block">
 					<div class="one-fourth-thumbs clearfix">
-						<c:forEach var="dto" items="${newsMyList}">
+						<c:forEach var="dto" items="${memberMyList}">
 							<c:choose>
-								<c:when test="${newsMyList.size() != 0}">
+								<c:when test="${memberMyList.size() != 0}">
 									<figure>
 					        			<figcaption>
-					    					<strong>${dto.profileName}</strong>
-					    					<span>팔로우 : ${dto.good}</span>
-					    					<span>${dto.profileContents}</span>
-					    					<em>${dto.profileDate}</em>
+					    					<strong>${dto.mProfileName}</strong>
+					    					<span>팔로우 : ${dto.mGood}</span>
+					    					<span>${dto.mProfileContents}</span>
+					    					<em>${dto.mProfileDate}</em>
 					    					<a href="#" class="opener"></a>
 						        		</figcaption>	
 						        		
-										<c:if test="${dto.profileId == sessionScope.memberDTO.id}">
-						        			<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${dto.profileId}&num=${dto.profileNum}&my=true" class="thumb">
+										<c:if test="${dto.mProfileId == sessionScope.memberDTO.id}">
+						        			<a href="tfPlusMemberProfileBoardList?profileName=${dto.mProfileName}&id=${dto.mProfileId}&num=${dto.mProfileNum}&my=true" class="thumb">
 						        		</c:if>
-						        		<c:if test="${dto.profileId != sessionScope.memberDTO.id}">
-						        			<a href="tfPlusNewsProfileBoardList?profileName=${dto.profileName}&id=${dto.profileId}&num=${dto.profileNum}&my=false&myId=${sessionScope.memberDTO.id}" class="thumb">
+						        		<c:if test="${dto.mProfileId != sessionScope.memberDTO.id}">
+						        			<a href="tfPlusMemberProfileBoardList?profileName=${dto.mProfileName}&id=${dto.mProfileId}&num=${dto.mProfileNum}&my=false&myId=${sessionScope.memberDTO.id}" class="thumb">
 						        		</c:if>
 				        					<!-- 컨텍스트 메뉴 처리 시작 -->
-											<%@include file="newsContextMenu.jsp"%>
+											<%@include file="memberContextMenu.jsp"%>
 		        							<!-- 컨텍스트 메뉴 처리 끝 -->
 				        				</a>
 				        				
@@ -123,20 +123,20 @@
         					<c:set var="endPage" value="${pageCount}"/>
         				</c:if>
    						<c:if test="${startPage > pageBlock}">
-   							<li class="active"><a href="tfPlusNewsProfileWriting?pageNum=${startPage-pageBlock}&id=${sessionScope.memberDTO.id}">◀</a></li>
+   							<li class="active"><a href="tfPlusMemberProfileWriting?pageNum=${startPage-pageBlock}&id=${sessionScope.memberDTO.id}">◀</a></li>
    						</c:if>
    						<c:forEach var="i" begin="${startPage}" end="${endPage}">
    							<c:choose>
    								<c:when test="${i == currentPage}">
-   									<li class="active"><a href="tfPlusNewsProfileWriting?pageNum=${i}&id=${sessionScope.memberDTO.id}">${i}</a></li>
+   									<li class="active"><a href="tfPlusMemberProfileWriting?pageNum=${i}&id=${sessionScope.memberDTO.id}">${i}</a></li>
    								</c:when>
    								<c:otherwise>
-   									<li><a href="tfPlusNewsProfileWriting?pageNum=${i}&id=${sessionScope.memberDTO.id}">${i}</a></li>
+   									<li><a href="tfPlusMemberProfileWriting?pageNum=${i}&id=${sessionScope.memberDTO.id}">${i}</a></li>
    								</c:otherwise>
    							</c:choose>
    						</c:forEach>
    						<c:if test="${endPage < pageCount}">
-   							<li class="active"><a href="tfPlusNewsProfileWriting?pageNum=${startPage+pageBlick}&id=${sessionScope.memberDTO.id}">▶</a></li>
+   							<li class="active"><a href="tfPlusMemberProfileWriting?pageNum=${startPage+pageBlick}&id=${sessionScope.memberDTO.id}">▶</a></li>
    						</c:if>
 						<li class="paged">Page ${startPage} of ${endPage}</li>
 					</c:if>

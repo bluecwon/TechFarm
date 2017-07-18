@@ -10,6 +10,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.itbank.TechFarm.tfPlusDTO.NewsFollowIdDTO;
+import com.itbank.TechFarm.tfPlusDTO.NewsProfileAddCommentDTO;
+import com.itbank.TechFarm.tfPlusDTO.NewsProfileBoardDTO;
 import com.itbank.TechFarm.tfPlusDTO.NewsProfileDTO;
 
 public class NewsProfileMapper {
@@ -48,6 +51,14 @@ public class NewsProfileMapper {
 		return res;
 	}
 	
+	public static int newsProfileBoardInsert(NewsProfileBoardDTO dto) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.insert("newsProfileBoardInsert",dto);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
 	public static boolean newsFollowIdSearch(int num) {
 		boolean bool;
 		SqlSession session = sqlMapper.openSession();
@@ -60,6 +71,19 @@ public class NewsProfileMapper {
 		}
 		return bool;
 	} 
+	
+	public static boolean newsFollowIdCheck(Map mapParameter) {
+		boolean bool;
+		SqlSession session = sqlMapper.openSession();
+		List list = session.selectList("newsFollowIdCheck", mapParameter);
+		session.close();
+		if(list.size() == 0){
+			bool = false;
+		} else {
+			bool = true;
+		}
+		return bool;
+	}
 	
 	public static NewsProfileDTO newsProfileCheck(Map mapParameter) {
 		SqlSession session = sqlMapper.openSession();
@@ -139,6 +163,105 @@ public class NewsProfileMapper {
 	public static List newsProfileBoardList(Map mapParameter) {
 		SqlSession session = sqlMapper.openSession();
 		List list = session.selectList("newsProfileBoardList",mapParameter);
+		session.close();
+		return list;
+	}
+	
+	public static List newsProfileTOP(int top) {
+		SqlSession session = sqlMapper.openSession();
+		List list = session.selectList("newsProfileTOP",top);
+		session.close();
+		return list;
+	}
+	
+	public static List newsAddList() {
+		SqlSession session = sqlMapper.openSession();
+		List list = session.selectList("newsAddList");
+		session.close();
+		return list;
+	}
+	
+	public static int newsAddListInsert(NewsProfileAddCommentDTO newsProfileAddCommentDTO) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.insert("newsAddListInsert",newsProfileAddCommentDTO);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
+	public static int newsAddDelete(int profileAddPK) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.delete("newsAddDelete",profileAddPK);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
+	public static NewsProfileDTO newsProfileUpdate(int profileNum) {
+		SqlSession session = sqlMapper.openSession();
+		NewsProfileDTO dto = session.selectOne("newsProfileUpdate",profileNum);
+		session.close();
+		return dto;
+	}
+	
+	public static int newsProfileUpdatePro(NewsProfileDTO dto) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.update("newsProfileUpdatePro",dto);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
+	public static List newsFollowNotice(int profileNum) {
+		SqlSession session = sqlMapper.openSession();
+		List list = session.selectList("newsFollowNotice",profileNum);
+		session.close();
+		return list;
+	}
+	
+	public static int newsProfileBoardDelete(int profileBoardPK) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.delete("newsProfileBoardDelete",profileBoardPK);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
+	public static NewsProfileBoardDTO newsProfileBoardUpdate(int profileBoardPK) {
+		SqlSession session = sqlMapper.openSession();
+		NewsProfileBoardDTO dto = new NewsProfileBoardDTO();
+		dto = session.selectOne("newsProfileBoardUpdate",profileBoardPK);
+		session.close();
+		return dto;
+	}
+	
+	public static int newsProfileBoardUpdatePro(NewsProfileBoardDTO dto) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.update("newsProfileBoardUpdatePro",dto);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
+	public static int newsAddUpdateSub(int sql) {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.update("newsAddUpdateSub",sql);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
+	public static int newsAddUpdateSub2() {
+		SqlSession session = sqlMapper.openSession();
+		int res = session.update("newsAddUpdateSub2");
+		session.commit();
+		session.close();
+		return res;
+	}
+	
+	public static List newsProfileOption(String option) {
+		SqlSession session = sqlMapper.openSession();
+		List list = session.selectList("newsProfileOption",option);
 		session.close();
 		return list;
 	}

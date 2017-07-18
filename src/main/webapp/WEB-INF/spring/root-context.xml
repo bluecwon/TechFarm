@@ -11,8 +11,12 @@
 	<bean class="com.itbank.TechFarm.search.SearchNaver" id="sn"/>
 	<bean class="com.itbank.TechFarm.CommonExceptionHandler"/>
 
-	<!-- tfPlus DAO -->
+	<!-- start tfPlus DAO -->
 	<bean class="com.itbank.TechFarm.tfPlusDAO.NewsProfileDAOImpl" id="newsProfileDAO"/>
+	<bean class="com.itbank.TechFarm.tfPlusDAO.MemberProfileDAOImpl" id="memberProfileDAO"/>
+	<bean class="com.itbank.TechFarm.tfPlusDAO.MyProfileDAOImpl" id="myProfileDAO"/>
+	<bean class="com.itbank.TechFarm.tfPlusDAO.MyNoticeDAOImpl" id="myNoticeDAO"/>
+	<!-- end tfPlus DAO -->
 	<!-- tfblog DAO-->
 	<bean class="com.itbank.TechFarm.blog.dao.Blog_OptionDAOImpl" id="Blog_OptionDAO"/>
 	<!-- tftube -->

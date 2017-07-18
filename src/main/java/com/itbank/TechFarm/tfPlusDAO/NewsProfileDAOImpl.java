@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.itbank.TechFarm.tfPlusDTO.NewsFollowIdDTO;
+import com.itbank.TechFarm.tfPlusDTO.NewsProfileAddCommentDTO;
+import com.itbank.TechFarm.tfPlusDTO.NewsProfileBoardDTO;
 import com.itbank.TechFarm.tfPlusDTO.NewsProfileDTO;
 
-public class NewsProfileDAOImpl implements NewsProfileDAO {
+public class NewsProfileDAOImpl implements NewsProfileDAO { 
 
 	@Override
 	public List newsGoodList(int startRow, int endRow) {
@@ -62,7 +65,7 @@ public class NewsProfileDAOImpl implements NewsProfileDAO {
 	} 
 
 	@Override
-	public List newsFollowAllLiat() {
+	public List newsFollowAllList() {
 		return NewsProfileMapper.followList(); 
 	} 
 
@@ -97,6 +100,84 @@ public class NewsProfileDAOImpl implements NewsProfileDAO {
 		mapParameter.put("profileName", profileName);
 		mapParameter.put("profileId", profileId);
 		return NewsProfileMapper.newsProfileBoardList(mapParameter);
-	} 
+	}
+
+	@Override
+	public int newsProfileBoardInsert(NewsProfileBoardDTO newsProfileBoardDTO) {
+		return NewsProfileMapper.newsProfileBoardInsert(newsProfileBoardDTO);
+	}
+
+	@Override
+	public boolean newsFollowIdCheck(int num, String id) {
+		Map mapParameter = new HashMap();
+		mapParameter.put("newsFollowNum", num);
+		mapParameter.put("newsFollowId", id);
+		return NewsProfileMapper.newsFollowIdCheck(mapParameter);
+	}
+
+	@Override
+	public List newsProfileTOP(int top) {
+		return NewsProfileMapper.newsProfileTOP(top);
+	}
+
+	@Override
+	public List newsAddList() {
+		return NewsProfileMapper.newsAddList();
+	}
+
+	@Override
+	public int newsAddListInsert(NewsProfileAddCommentDTO newsProfileAddCommentDTO) {
+		return NewsProfileMapper.newsAddListInsert(newsProfileAddCommentDTO);
+	}
+
+	@Override
+	public int newsAddDelete(int profileAddPK) {
+		return NewsProfileMapper.newsAddDelete(profileAddPK);
+	}
+
+	@Override
+	public NewsProfileDTO newsProfileUpdate(int profileNum) {
+		return NewsProfileMapper.newsProfileUpdate(profileNum);
+	}
+
+	@Override
+	public int newsProfileUpdatePro(NewsProfileDTO newsProfileDTO) {
+		return NewsProfileMapper.newsProfileUpdatePro(newsProfileDTO);
+	}
+
+	@Override
+	public List newsFollowNotice(int profileNum) { 
+		return NewsProfileMapper.newsFollowNotice(profileNum);
+	}
+
+	@Override
+	public int newsProfileBoardDelete(int profileBoardPK) {
+		return NewsProfileMapper.newsProfileBoardDelete(profileBoardPK);
+	}
+
+	@Override
+	public NewsProfileBoardDTO newsProfileBoardUpdate(int profileBoardPK) {
+		return NewsProfileMapper.newsProfileBoardUpdate(profileBoardPK);
+	}
+
+	@Override
+	public int newsProfileBoardUpdatePro(NewsProfileBoardDTO dto) {
+		return NewsProfileMapper.newsProfileBoardUpdatePro(dto);
+	}
+
+	@Override
+	public int newsAddUpdateSub(int sql) {
+		return NewsProfileMapper.newsAddUpdateSub(sql);
+	}
+
+	@Override
+	public int newsAddUpdateSub2() {
+		return NewsProfileMapper.newsAddUpdateSub2();
+	}
+
+	@Override
+	public List newsProfileOption(String option) {
+		return NewsProfileMapper.newsProfileOption(option);
+	}
 	
 }
