@@ -31,9 +31,9 @@ public class SubedMapper {
 		return res;		
 	}
 	    
-	    public static List<SubedDTO> get_subed(int member_no){
+	    public static List<SubedDTO> get_subed_member(int member_no){
 	    	SqlSession session=sqlMapper.openSession();
-			List<SubedDTO> subedlist=session.selectList("get_subed",member_no);			
+			List<SubedDTO> subedlist=session.selectList("get_subed_member",member_no);			
 			session.close();
 			return subedlist;	
 	    	

@@ -13,8 +13,8 @@ public class SubedDAOImpl implements SubedDAO{
 	}
 
 	@Override
-	public List<SubedDTO> get_subed(int member_no) {
-		return SubedMapper.get_subed(member_no);
+	public List<SubedDTO> get_subed_member(int member_no) {
+		return SubedMapper.get_subed_member(member_no);
 	}
 
 	@Override

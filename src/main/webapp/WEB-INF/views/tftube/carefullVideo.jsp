@@ -12,7 +12,7 @@
 </head>
 <body>
 <%@ include file="main_top.jsp"%>
-<div> <!-- start of 2-2 -->
+<div> <!-- start of 2-2-1 -->
 
 <c:choose>
 <c:when test="${like_list.size()==0}">

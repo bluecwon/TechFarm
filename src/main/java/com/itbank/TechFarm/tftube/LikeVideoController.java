@@ -23,8 +23,8 @@ public class LikeVideoController {
 	
 	
 	String msg=null,url=null;
-	@RequestMapping(value="/likeVideo", method=RequestMethod.GET)
-	public ModelAndView likeVideo(HttpServletRequest arg0, 
+	@RequestMapping(value="/likeVideo_list", method=RequestMethod.GET)
+	public ModelAndView likeVideo_list(HttpServletRequest arg0, 
 			HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
 		HttpSession session=arg0.getSession();

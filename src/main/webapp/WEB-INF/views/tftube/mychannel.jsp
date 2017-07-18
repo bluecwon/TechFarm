@@ -8,44 +8,100 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-
 <body>
 <%@include file="main_top.jsp"%>
+<div id="2-2-1"><!-- start of 2-2-1 -->
+
+
+업로드한 동영상<p>
 <table>
-<!-- <tr><td>생성된 재생목록<br>
-재생 목록이 없습니다.
-</td></tr> -->
-<%int count=0;%>
-<tr><td>업로드한 동영상<br>
-<tr>
 <c:choose>
-<c:when test="${list.size==0}">
+<c:when test="${Video_member_no.size()==0}">
+<tr><td>
 재생 목록이 없습니다.
+</td></tr>
 </c:when>
 <c:otherwise>
-<c:forEach var="dto" items="${list}"> 
-<td>
-<a href="tftube_videoView?no=${dto.no}">
-<img src="resources/tftube/uploadImage/${dto.image}" width="196" height="100"><br>
-${dto.title}</a></td>
-<c:set var="count" value="<%=++count%>"/>
-<c:if test="${count%6==0}">
-</tr><tr>
-</c:if>
+<c:forEach var="videoList" items="${Video_member_no}">
+<tr><td>
+<a href="resources/tftube/uploadVideo/${Video_member_no.video_name}">
+<img src="resources/tftube/uploadImage/${Video_member_no.image}"></a><br>
+</td></tr>
+</c:forEach>
+</c:otherwise>
+</c:choose>
+
+
+
+구독채널<p>
+<table>
+<c:choose>
+<c:when test="${subing_list.size()==0}">
+<tr><td>
+구독 하시는 채널이 없습니다.
+</td></tr>
+</c:when>
+
+<c:otherwise>
+<c:forEach var="subingList" items="${subing_list}">
+<a href="resources/tftube/uploadVideo/${subingList.video_name}">
+<img src="resources/tftube/uploadImage/${subingList.image}"></a><br>
 </c:forEach>
 </c:otherwise>
 </c:choose>
 </td></tr>
-<tr><td>좋아요 표시한 동영상</td></tr>
-list
-<tr><td>구독채널</td></tr>
-list
-<tr><td>구독자</td></tr>
-lsit
+</table>
+
+구독자 <p>
+<table>
+<c:choose>
+<c:when test="${subed_list.size()==0}">
+<tr><td>
+관심 동영상이 없습니다.
+</td></tr>
+</c:when>
+
+<c:otherwise>
+<c:forEach var="subedList" items="${subed_list}">
+<tr><td>
+<a href="resources/tftube/uploadVideo/${subedList.video_name}">
+<img src="resources/tftube/uploadImage/${subedList.image}"></a>
+</td></tr>
+</c:forEach>
+</c:otherwise>
+</c:choose>
+</td></tr>
 </table>
 
 
+관심 동영상<p>
+<table></table>
+<c:choose>
+<c:when test="${like_list.size()==0}">
+<tr><td>
+관심 동영상이 없습니다.
+</td></tr>
+</c:when>
 
+<c:otherwise>
+<c:forEach var="likeList" items="${like_list}">
+<tr><td>
+<a href="resources/tftube/uploadVideo/${likeList.video_name}">
+<img src="resources/tftube/uploadImage/${likeList.image}"></a><br>
+</td></tr>
+</c:forEach>
+</c:otherwise>
+</c:choose>
+
+
+</table>
+</div><!-- end of 2-2-1 -->
+
+<p>
+<p>
+<p>
+<p>
+<p>
 <%@include file="main_bottom.jsp" %>
 </body>
 

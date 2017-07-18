@@ -55,4 +55,35 @@ public class RecentVideoController {
 		mv.setViewName("tftube/recentVideo");		
 		return mv;
 	}
+	
+	@RequestMapping(value="/tftube_recentvideo_insert", method=RequestMethod.GET)
+	public ModelAndView tftube_recentvideo_insert(HttpServletRequest arg0, 
+								HttpServletResponse arg1) throws Exception {		
+		ModelAndView mv=new ModelAndView();
+		//RecentVideo insert
+		String no_raw=arg0.getParameter("no");//no of video
+		//videoView or main
+		int no=0;		
+		if(no_raw!=null){
+		no=Integer.parseInt(no_raw);}//tftube_video
+		
+		MemberDTO member=null;
+		Object member_object=session.getAttribute("memberDTO");
+		
+		VideoDTO vdto=videoDAO.getVideo(no);
+		
+		if(member_object!=null){
+		member=(MemberDTO)member_object;
+		}	
+		RecentVideoDTO recent_dto=new RecentVideoDTO();
+				
+		if(member_object!=null){
+		recent_dto.setMember_no(member.getNo());
+		recent_dto.setVideo_name(vdto.getVideo_name());		
+		recentvideoDAO.insertRecent(recent_dto);
+		}
+				//end of RecentVideo insert 
+		mv.addObject("tftubevideoView");
+		return mv;
+	}
 }

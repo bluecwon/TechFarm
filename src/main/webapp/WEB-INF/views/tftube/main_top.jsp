@@ -12,7 +12,7 @@
 $(function(){
 
 $("#but").click(function(){	
-	$("#top").slideToggle('fast');
+	$(".top").slideToggle('fast');
 });
 }
 )
@@ -22,7 +22,7 @@ $("#but").click(function(){
 
 
 
-<div><!-- start of 1 -->
+<div id="1"><!-- start of 1 -->
 <Button id="but">펼치기</Button><a href="tftube_main">TFtube				</a>			
 검색	<input type="text" name="search"> <input type="button" value="검색" width="900">
 <c:choose>
@@ -32,20 +32,20 @@ $("#but").click(function(){
 <c:otherwise>
 <a href="tftube_video_insert">업로드</a> 
 </c:otherwise></c:choose>	
-</div>
+</div><!-- start of 2 -->
 
-</table>
+
 <!-- start of 2 -->
-<div>
+<div id="2">
 <!-- stsrt of 2-1-->
-<div id="top" style="float: left;">
+<div id="2-1" class="top" style="float: left;">
 <table>
 <tr><td><a href="tftube_main">홈</a><br>
 인기<br>
 <c:if test="${memberDTO!=null}">
-		<a href="tftube_mychannel">내 채널</a><br>
+<a href="tftube_mychannel">내 채널</a><br>
 <a href="tftube_recentvideo_listRecent_member_no">최근 본 동영상</a><br>
-<a href="likeVideo">관심 동영상</a>
+<a href="likeVideo_list">관심 동영상</a>
 </c:if>
 <p>
 음악<br>

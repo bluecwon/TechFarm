@@ -236,13 +236,14 @@ public class TftubeController {
 		//response
 		int like_status=videoDAO.getVideo(no).getLike_status();
 		int unlike_status=videoDAO.getVideo(no).getUnlike_status();
-		/*System.out.println("response like:"+like_status);
-		System.out.println("response unlike:"+unlike_status);*/
+		System.out.println("response like:"+like_status);
+		System.out.println("response unlike:"+unlike_status);
 		mv.addObject("like_status",like_status);
 		mv.addObject("unlike_status",unlike_status);		
 		//end of response
-		/*String like_video_no_raw=arg0.getParameter("like_video_no");
-		int like_video_no=Integer.parseInt(like_video_no_raw);*/
+		String like_video_no_raw=arg0.getParameter("like_video_no");
+		if(like_video_no_raw!=null){
+		int like_video_no=Integer.parseInt(like_video_no_raw);}
 		//request
 		String like_req_raw=arg0.getParameter("likep");//0 not like
 		String unlike_req_raw=arg0.getParameter("unlikep");
@@ -256,7 +257,7 @@ public class TftubeController {
 		 * 나간값 1 들어온값 1 실행 x
 		 * */
 		//어떤 목적으로 나눠놨던가? nullpointException을 잘 파악하기 위함 이었던가.		
-		/*VideoDTO likedto=new VideoDTO();*/
+		VideoDTO likedto=new VideoDTO();
 		if(like_req_raw!=null){
 			int like_req=Integer.parseInt(like_req_raw);			
 				if(like_req>like_status){
@@ -278,7 +279,7 @@ public class TftubeController {
 			mv.addObject("unlike_status",unlike_req);	
 		}
 		vdto=videoDAO.getVideo(no);
-		/*mv.addObject("vdto",vdto);*///consider of like only
+		mv.addObject("vdto",vdto);//consider of like only
 		/*end of like*/
 		
 		//*sub*구독
@@ -291,10 +292,11 @@ public class TftubeController {
 		//현재 로그인한 회원 정보
 		MemberDTO cu_member=(MemberDTO)session.getAttribute("memberDTO");
 		
-		List<SubingDTO> saved_subing_member=null;
+		/*List<SubingDTO> saved_subing_member=null;
 		//현재 로그인한 회원의 구독 목록
 		if(cu_member!=null){//로그인 된 상태라면
 		 saved_subing_member=subingDAO.get_subing_member(cu_member.getNo());
+		 
 		 //													현재 로그인회원의 구독목록
 		 }
 		System.out.print("내가 구독 누른 인간:");
@@ -313,7 +315,7 @@ public class TftubeController {
 			mv.addObject("subing_status",0);			
 		}
 		
-	/*	if(saved_subing_member_raw.size()==0){
+		if(saved_subing_member_raw.size()==0){
 			saved_subing_member=saved_subing_member_raw.getSubing_member_no();//0일 가능성 잇다.				
 		};
 		
@@ -321,7 +323,7 @@ public class TftubeController {
 			mv.addObject("subing_status",1);
 		}else{//구독하지 않았다.
 			mv.addObject("subing_status",0);
-		*/
+		
 		
 		//end of response
 		
@@ -344,16 +346,16 @@ public class TftubeController {
 		sidto.setMember_no(cu_member.getNo());	//현재 로그인한 사람 회원 번호
 		sidto.setSubing_member_no(subing_member_no);//비디오 작성자	
 		//다 읽어보진 않았지만 아마도 피구독 구독 값 설정중
-		sddto.setChannel(vdto.getChannel());
+		sddto.setChannel(vdto.getChannel());//??
 		sddto.setMember_no(vdto.getMember_no());
 		sddto.setSubed_member_no(cu_member.getNo());
 		
 		subingDAO.insertSubing(sidto);//db에 넣기
 		subedDAO.insertSubed(sddto);//db에 넣기		
 		}else if(subing_member_no_raw!=null&&mode.equals("cancel")){			
-			/*subingDAO.deleteSubing(vdto.getMember_no());
-			subedDAO.deleteSubed(vdto.getMember_no());*/
-		}
+			subingDAO.deleteSubing(vdto.getMember_no());
+			subedDAO.deleteSubed(vdto.getMember_no());
+		}*/
 		
 		//취소는 안만들어 놨다.
 		
@@ -376,8 +378,8 @@ public class TftubeController {
 		Date today=new Date();//today				
 		Long today_day=today.getTime()/1000/3600/24;
 		
-		/*Date date=map.get(vdto.getVideo_hash());//video's date clicked information		
-*/
+		/*Date date=map.get(vdto.getVideo_hash());//video's date clicked information*/		
+
 		String ip=arg0.getRemoteAddr();	
 		
 		//?
