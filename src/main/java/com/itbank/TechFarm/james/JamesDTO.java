@@ -1,6 +1,9 @@
 package com.itbank.TechFarm.james;
 
+import java.util.Date;
+
 public class JamesDTO {
+	private int num;
 	private String id;
 	private String password;
 	
@@ -8,7 +11,16 @@ public class JamesDTO {
 	private String to;
 	private String subject;
 	private String text;
+	private String sentDate;
+	private String folder;
+	private String content;
 	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getId() {
 		return id;
 	}
@@ -45,6 +57,23 @@ public class JamesDTO {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
+	public String getSentDate() {
+		return sentDate;
+	}
+	public void setSentDate(String sentDate) {
+		this.sentDate = sentDate;
+	}
+	public String getFolder() {
+		return folder;
+	}
+	public void setFolder(String folder) {
+		this.folder = folder;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	
 }
