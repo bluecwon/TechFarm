@@ -241,6 +241,17 @@ io.sockets.on('connection', function(socket) {
         }
     });
     
+    socket.on('invite', function(inviteinfo){
+    	console.log('invite 이벤트를 받았습니다.');
+    	console.dir(JSON.stringify(inviteinfo));
+    	var inviteId=inviteinfo.inviteId;
+    	var roomId=inviteinfo.inviteRoom;
+    	var roomOwner=inviteinfo.inviteRoomOwner;
+    	var output={inviteRoom:roomId, inviteRoomOwner:roomOwner}
+    	console.log('클라이언트로 보낼 데이터 : ' + JSON.stringify(output));
+    	io.sockets.in(inviteId).emit('invite', output);
+    });
+    
 
     // 'room' 이벤트를 받았을 때의 처리
     socket.on('room', function(room) {

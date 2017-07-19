@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ include file="/resources/tfchat/header.jsp" %>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -30,7 +31,7 @@
                  }
                  socket.emit('login', output);
                  
-                 var roomId = $('#roomIdInput').val();
+                 /* var roomId = $('#roomIdInput').val();
                  var roomName = $('#roomNameInput').val();
                  var id = $('#idInput').val();
                  
@@ -42,7 +43,7 @@
                      return;
                  }
 
-                 socket.emit('room', output);
+                 socket.emit('room', output); */
                  
                  
 
@@ -50,7 +51,7 @@
                 $("#sendButton").bind('click', function(event) {
                 	
                 	// chattype 구분
-                	var chattype = $('#chattype option:selected').val();
+                	var chattype = $('#chattype').val();
 
                 	var sender = $('#senderInput').val();
                     var recepient = $('#recepientInput').val();
@@ -72,6 +73,7 @@
                     var roomId = $('#roomIdInput').val();
                     var roomName = $('#roomNameInput').val();
                     var id = $('#idInput').val();
+                    var inviteId=$('inviteId').val();
                     
                     var output = {command:'create', roomId:roomId, roomName:roomName, roomOwner:id};
                     console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
@@ -80,8 +82,32 @@
                         alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
                         return;
                     }
+                    
+                    var inviteinfo={command:'invite', roomId:roomId, inviteId:inviteId, roomOwner:id};
 
                     socket.emit('room', output);
+                    socket.emit('invite', inviteinfo);
+                });
+             	//초대하기 버튼 클릭시
+                $("#inviteButton").bind('click', function(event) {
+                    var roomId = $('#roomIdInput').val();
+                    var roomName = $('#roomNameInput').val();
+                    var id = $('#idInput').val();
+                    var inviteId=$('#inviteId').val();
+                    var inviteRoom=$('#roomIdInput').val();
+                    var inviteRoomOwner=$('#idInput').val();
+                    
+                    var output = {command:'create', roomId:roomId, roomName:roomName, roomOwner:id};
+                    console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
+                    var inviteinfo={inviteId:inviteId, inviteRoom:inviteRoom, inviteRoomOwner:inviteRoomOwner};
+                    console.log('서버로 보낼 데이터 : ' + JSON.stringify(inviteinfo));
+                    if (socket == undefined) {
+                        alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
+                        return;
+                    }
+
+                    socket.emit('room', output);
+                    socket.emit('invite', inviteinfo);
                 });
              	
              	// 방이름바꾸기 버튼 클릭 시 처리
@@ -163,6 +189,20 @@
 
                         println('<p>수신 메시지 : ' + message.sender + ', ' + message.recepient + ', ' + message.command + ', ' + message.data + '</p>');
                     });
+                    
+                    socket.on('invite', function(data) {
+                        console.log(JSON.stringify(data));
+                        var roomId=data.roomId;
+                        println(roomId);
+                        var output = {command:'join', roomId:roomId};
+                        console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
+
+                        if (socket == undefined) {
+                            alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
+                            return;
+                        }
+                        socket.emit('room', output);
+                    });
 
                     socket.on('response', function(response) {
                     	console.log(JSON.stringify(response));
@@ -193,7 +233,7 @@
                         	var idCount = data.ids.length;
                         	$("#idList").html('<p>접속자 리스트 ' + idCount + '명</p>');
                         	for (var i = 0; i < idCount; i++) {
-                        		$("#idList").append('<p>접속자 #' + i + ' : ' + data.ids[i]+'</p><input type="button" value="초대하기" id="invite">');
+                        		$("#idList").append('<p>접속자 #' + i + ' : ' + data.ids[i]+'</p>');
                         	}
                         }
                     });
@@ -213,35 +253,28 @@
         </script>
 	</head>
 <body>
-	<h3>tfchatmain</h3>
-	<br>
-    <br>
-    <div>
-		<input type="hidden" id="idInput" value="${sessionScope.memberDTO.id}" />
+	<h3>현재 접속인원</h3>
+	<input type="hidden" id="idInput" value="${sessionScope.memberDTO.id}" />
+	<input type="hidden" id="roomIdInput" value="${sessionScope.memberDTO.id}" />
+	<input type="hidden" id="roomNameInput" value="${sessionScope.memberDTO.id}" />
+	<div id="idresult">
+    <div id="idList">
+	</div>
+		<input type="text" id="inviteId"/>
+		<input type="button" id="inviteButton" value="초대하기"/>
 	</div>
     <br>
-   <div>
-		<input type="hidden" id="roomIdInput" value="${sessionScope.memberDTO.id}" />
-		<input type="hidden" id="roomNameInput" value="${sessionScope.memberDTO.id}" />
-
+   <!-- <div>
 		<input type="button" id="createRoomButton" value="방만들기" />
 		<input type="button" id="updateRoomButton" value="방이름바꾸기" />
 		<input type="button" id="deleteRoomButton" value="방없애기" />
-	</div>
-	<br>
-	<div id="idList">
-		
-	</div>
-	<div id="roomList">
-		
-	</div>
-    <br>
-    <div>
+	</div> -->
+   <!--  <div>
 		<input type="button" id="joinRoomButton" value="방입장하기" />
 		<input type="button" id="leaveRoomButton" value="방나가기" />
-	</div>
+	</div> -->
 	<br>
-    <div>
+    <%-- <div>
     	<div><span>보내는사람 아이디 :</span> <input type="text" id="senderInput" value="${sessionScope.memberDTO.id }" /></div>
 	    <div><span>받는사람 아이디 :</span> <input type="text" id="recepientInput" value="ALL" /></div>
 
@@ -253,12 +286,19 @@
 
 	    <div><span>메시지 데이터 :</span> <input type="text" id="dataInput" value="안녕!"/> </div>
 		<br>
-		<input type="button" id="sendButton" value="전송" />
-	</div>    
+		
+	</div> --%>    
         
-    <hr/>
+    <div id="chatresult">
+    <div id="result">
     <p>결과 : </p>
-    <div id="result"></div>
+    </div>
+    <input type="hidden" id="chattype" value="groupchat">
+		<input type="hidden" id="senderInput" value="${sessionScope.memberDTO.id }" />
+	    <input type="hidden" id="recepientInput" value="ALL" />
+    <input type="text" id="dataInput" value="안녕!"/>
+    <input type="button" id="sendButton" value="전송" />
+    </div>
         
 </body>
 </html>
