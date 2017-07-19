@@ -24,7 +24,11 @@ public class JamesController {
 		JamesDTO dto = new JamesDTO();
 		dto.setId(memberDTO.getId());
 		dto.setPassword(memberDTO.getPasswd());
-		dto.setFolder("INBOX");
+		String folder="INBOX";
+		if(request.getParameter("folder")!=null){
+			folder=request.getParameter("folder");
+		}
+		dto.setFolder(folder);
 		List<JamesDTO> listJames = jamesDAO.listJames(dto);
 		model.addAttribute("listJames", listJames);
 		return "james/listJames";
@@ -44,7 +48,7 @@ public class JamesController {
 		dto.setId(memberDTO.getId());
 		dto.setPassword(memberDTO.getPasswd());
 		int res = jamesDAO.sendJames(dto);
-		return "james/listJames";
+		return "redirect:listJames";
 	}
 	@RequestMapping(value="/getJames", method = RequestMethod.GET)
 	public String getJames(Model model, JamesDTO dto, HttpServletRequest request, HttpSession session){
@@ -53,7 +57,19 @@ public class JamesController {
 		dto.setPassword(memberDTO.getPasswd());
 		dto.setFolder("INBOX");
 		dto.setNum(Integer.parseInt(request.getParameter("num")));
-		JamesDTO jameDTO = jamesDAO.getJames(dto);
+		JamesDTO jamesDTO = jamesDAO.getJames(dto);
+		model.addAttribute("jamesDTO", jamesDTO);
 		return "james/getJames"; 
+	}
+	@RequestMapping(value="/deleteJames", method=RequestMethod.GET)
+	public String deleteJames(Model model, HttpServletRequest request, HttpSession session){
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
+		JamesDTO dto = new JamesDTO();
+		dto.setId(memberDTO.getId());
+		dto.setPassword(memberDTO.getPasswd());
+		dto.setFolder("INBOX");
+		dto.setNum(Integer.parseInt(request.getParameter("num")));
+		jamesDAO.deleteJames(dto);
+		return "redirect:listJames";
 	}
 }
