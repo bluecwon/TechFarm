@@ -17,8 +17,8 @@
          	// 문서 로딩 후 실행됨
             $(function() {
 			
-                 host = $('#hostInput').val();
-                 port = $('#portInput').val();
+                 host = '192.168.52.35';
+                 port = '3000';
                  connectToServer();
                  
                  var id = $('#idInput').val();
@@ -29,6 +29,22 @@
                      return;
                  }
                  socket.emit('login', output);
+                 
+                 var roomId = $('#roomIdInput').val();
+                 var roomName = $('#roomNameInput').val();
+                 var id = $('#idInput').val();
+                 
+                 var output = {command:'create', roomId:roomId, roomName:roomName, roomOwner:id};
+                 console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
+
+                 if (socket == undefined) {
+                     alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
+                     return;
+                 }
+
+                 socket.emit('room', output);
+                 
+                 
 
 				// 전송 버튼 클릭 시 처리
                 $("#sendButton").bind('click', function(event) {
@@ -167,6 +183,20 @@
                         	}
                         }
                     });
+                    // 현재 접속 아이디 받아오기
+                    socket.on('currentId', function(data) {
+                        console.log(JSON.stringify(data));
+
+                        println('<p>접속자 이벤트 : ' + data.command + '</p>');
+                        println('<p>접속자 리스트를 받았습니다.</p>');
+                        if (data.command == 'list') { // 방 리스트
+                        	var idCount = data.ids.length;
+                        	$("#idList").html('<p>접속자 리스트 ' + idCount + '명</p>');
+                        	for (var i = 0; i < idCount; i++) {
+                        		$("#idList").append('<p>접속자 #' + i + ' : ' + data.ids[i]+'</p><input type="button" value="초대하기" id="invite">');
+                        	}
+                        }
+                    });
 
                 });
 
@@ -183,26 +213,25 @@
         </script>
 	</head>
 <body>
-	<h3>채팅 클라이언트 05 : 그룹 채팅하기</h3>
+	<h3>tfchatmain</h3>
 	<br>
-    <div>
-        <input type="hidden" id="hostInput" value="52.79.140.54" />
-        <input type="hidden" id="portInput" value="3000" />
-    </div>
     <br>
     <div>
 		<input type="hidden" id="idInput" value="${sessionScope.memberDTO.id}" />
 	</div>
     <br>
-    <div>
-		<input type="text" id="roomIdInput" value="meeting01" />
-		<input type="text" id="roomNameInput" value="청춘들의대화" />
+   <div>
+		<input type="hidden" id="roomIdInput" value="${sessionScope.memberDTO.id}" />
+		<input type="hidden" id="roomNameInput" value="${sessionScope.memberDTO.id}" />
 
 		<input type="button" id="createRoomButton" value="방만들기" />
 		<input type="button" id="updateRoomButton" value="방이름바꾸기" />
 		<input type="button" id="deleteRoomButton" value="방없애기" />
 	</div>
 	<br>
+	<div id="idList">
+		
+	</div>
 	<div id="roomList">
 		
 	</div>
@@ -213,7 +242,7 @@
 	</div>
 	<br>
     <div>
-    	<div><span>보내는사람 아이디 :</span> <input type="text" id="senderInput" value="test01" /></div>
+    	<div><span>보내는사람 아이디 :</span> <input type="text" id="senderInput" value="${sessionScope.memberDTO.id }" /></div>
 	    <div><span>받는사람 아이디 :</span> <input type="text" id="recepientInput" value="ALL" /></div>
 
 	    <!-- command 선택 <select> 채팅, 그룹채팅 -->

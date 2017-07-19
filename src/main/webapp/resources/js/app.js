@@ -164,7 +164,7 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 
 // 로그인 아이디 매핑 (로그인 ID -> 소켓 ID)
 var login_ids = {};
-
+var idList = [];
 
 
 // socket.io 서버를 시작합니다.
@@ -194,6 +194,17 @@ io.sockets.on('connection', function(socket) {
 
         // 응답 메시지 전송
         sendResponse(socket, 'login', '200', '로그인되었습니다.');
+        
+        for(i=0;i<idList.length;i++){
+        	if(idList[i]==login.id){
+        		idList.pop(i);
+        	}
+        }
+        idList.push(login.id);
+        
+        var output = {command:'list', ids:idList};
+        console.log('클라이언트로 보낼 데이터 : ' + JSON.stringify(output));
+        io.sockets.emit('currentId', output);
     });
 
     
@@ -327,6 +338,7 @@ function getRoomList() {
     
     return roomList;
 }
+
 
 // 응답 메시지 전송 메소드
 function sendResponse(socket, command, code, message) {
