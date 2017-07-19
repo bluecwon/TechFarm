@@ -53,7 +53,7 @@ update tftube_video set unlikep=unlikep-1, unlike_status=0 where no=#{no}
 </update>
 
  <select id="listRecent_inf" parameterType="int" resultType="video_recentvideoDTO">
- select a.*,b.recent_no from tftube_video a join tftube_recentvideo b on a.video_name=b.video_name and b.member_no=#{member_no} order by b.recent_no desc limit 40;
+ select a.*,b.recent_no from tftube_video a join tftube_recentvideo b on b.member_no=#{member_no} and a.video_name=b.video_name order by b.recent_no desc limit 40;
  </select>	   
  
  <select id="listLike" resultType="videoDTO" parameterType="int">
