@@ -23,8 +23,8 @@
 						</c:when>
 						<c:otherwise>
 						<c:forEach var="listBoard" items="${listBoard}">
-						<tr class="list">
-						<td width="50%" class="boardlist"><a href="viewBoard?boardno=${boardno}">${listBoard.subject}</a></td>
+						<tr id="list">
+						<td width="50%" class="boardlist"><a href="viewBoard?no=${listBoard.no}">${listBoard.subject}</a><br>수정|삭제</td>
 						<td width="15%" class="boardlist">${optionDTO.nickname}(${listBoard.id})</td>		
 						<td width="10%" class="boardlist"><img src="resources/images/reply.jpg">&nbsp;${listBoard.reply} &nbsp;&nbsp;&nbsp;  <img src="resources/images/view.jpg">&nbsp;${listBoard.readcount}  </td>
 						<td width="15%" class="boardlist">${listBoard.reg_date}</td>

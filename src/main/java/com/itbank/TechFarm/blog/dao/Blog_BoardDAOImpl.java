@@ -44,4 +44,10 @@ public class Blog_BoardDAOImpl implements Blog_BoardDAO {
 		return BlogMapper.listBoard(boardno);
 	}
 
+	@Override
+	public Blog_BoardDTO getBoard(int no) {
+		// TODO Auto-generated method stub
+		return BlogMapper.getBoard(no);
+	}
+
 }

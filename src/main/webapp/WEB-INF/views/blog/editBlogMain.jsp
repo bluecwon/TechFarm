@@ -294,7 +294,7 @@
 <h1>게시판 관리</h1><br>
 *게시판은 각 사이드바에 속하며 사이드바가 없는 레이아웃을 선택시,<br> 게시판이 보이지 않을 수 있습니다.
 <div align="right">
-<a href="makeBoardTitle?id=${optionDTO.id}">게시판 추가</a>
+<a href="makeBoardTitle">게시판 추가</a>
 </div>
 <div>
 <table border="1" width="500px" >

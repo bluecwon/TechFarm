@@ -14,6 +14,9 @@ public interface Blog_BoardDAO {
 	public int editBoardTitle(Blog_MakeBoardDTO dto);
 	public List listBoard(int boardno);
 	public int insertboard(Blog_BoardDTO dto);
+	public Blog_BoardDTO getBoard(int no);
+	
+	
 	/*
 	public int deleteFile(int num);*/
 }

@@ -128,4 +128,11 @@ public class BlogMapper {
 	  session.close();
 	  return res;
   }
+  
+  public static Blog_BoardDTO getBoard(int no){
+	  SqlSession session = sqlMapper.openSession();
+	  Blog_BoardDTO dto = session.selectOne("getBoard", no);
+	  session.close();
+	  return dto;
+  }
 }

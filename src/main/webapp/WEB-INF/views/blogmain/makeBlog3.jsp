@@ -20,7 +20,6 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 		<input type="hidden" name="layout" value="${layout}">
 		<input type="hidden" name="id" value="${sessionScope.memberDTO.id}">
 		<input type="hidden" name="headerword" value="${headerword}">
-		<input type="hidden" name="mode" value="${mode}">
 			<table>
 				<tr>
 					<td>스킨</td>

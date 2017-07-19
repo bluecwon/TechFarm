@@ -66,15 +66,13 @@ public class BlogMainController {
 			
 			if(optionDTO == null){
 				mode = "membernoblog";
-				//mav.addObject("id", id);
-				session.setAttribute("id", id);
 			}
 			//mav.addObject("optionDTO", optionDTO);
 			session.setAttribute("optionDTO", optionDTO);
 		}else{
 			mode="guest";
 		}
-		mav.addObject("mode", mode);
+		session.setAttribute("membermode", mode);
 		return mav;
 	}
 		
@@ -82,8 +80,6 @@ public class BlogMainController {
 	public ModelAndView blogMake(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blogmain/makeBlog");
-		String mode = request.getParameter("mode");
-		mav.addObject("mode", mode);
 		return mav;
 	}
 	
@@ -97,7 +93,6 @@ public class BlogMainController {
 		String nickname = mr.getParameter("nickname");
 		String introduce = mr.getParameter("introduce");
 		String headerword = mr.getParameter("headerword");
-		String mode = mr.getParameter("mode");
 		
 	/*	MultipartFile mf = mr.getFile("profile");
 		String profile = mf.getOriginalFilename();
@@ -109,7 +104,6 @@ public class BlogMainController {
 		else{
 		mf.transferTo(file);
 		}*/
-		mav.addObject("mode",mode);
 		mav.addObject("blogname", blogname);
 		mav.addObject("nickname", nickname);
 		mav.addObject("introduce",introduce);
@@ -128,14 +122,12 @@ public class BlogMainController {
 		String introduce = request.getParameter("introduce");
 		String headerword = request.getParameter("headerword");
 		int layout = ServletRequestUtils.getIntParameter(request, "layout");
-		String mode = request.getParameter("mode");
 
 		mav.addObject("blogname", blogname);
 		mav.addObject("nickname", nickname);
 		mav.addObject("introduce",introduce);
 		mav.addObject("layout",layout);
 		mav.addObject("headerword",headerword);
-		mav.addObject("mode",mode);
 		
 		return mav;
 	}
@@ -144,7 +136,6 @@ public class BlogMainController {
 	public ModelAndView blogMakePro(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blogmain/makeBlogSuccess");
-		String mode = request.getParameter("mode");
 		Blog_OptionDTO dto = getBlogOption(request);
 		int res = optionDAO.makeBlog(dto);
 		HttpSession session = request.getSession();
@@ -170,7 +161,6 @@ public class BlogMainController {
 		hdcopyFile.close();
 		hdoriginFile.close();
 		
-		mav.addObject("mode",mode);
 		mav.addObject("id",dto.getId());
 		return mav;
 	}

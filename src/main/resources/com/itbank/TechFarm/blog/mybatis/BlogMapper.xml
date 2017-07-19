@@ -63,4 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   values(#{id},#{area},#{subject},#{content},#{file1},#{readcount},#{reply},#{open},#{boardno},#{title})
   </insert>
   
+  <select resultType="BlogBoardDTO" id="getBoard" parameterType="int">
+  select * from blog_board where no=#{no}
+  </select>
 </mapper>

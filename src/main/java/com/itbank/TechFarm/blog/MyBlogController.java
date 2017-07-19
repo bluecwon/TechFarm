@@ -48,8 +48,7 @@ public class MyBlogController {
 		Blog_OptionDTO dto = optionDAO.getBlog(id);
 		List<Blog_MakeBoardDTO> list = boardDAO.listBoardTitle(id);
 		session.setAttribute("list", list);
-		mav.addObject("list",list);
-		mav.addObject("optionDTO",dto);
+		session.setAttribute("optionDTO", dto);
 		return mav;
 	}
 	
@@ -58,15 +57,8 @@ public class MyBlogController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blog/editBlogMain");
 		String mode = request.getParameter("mode");
-		String id = request.getParameter("id");
-		Blog_OptionDTO dto = optionDAO.getBlog(id);
 		
-		if(mode.equals("board")){
-		List<Blog_MakeBoardDTO> list = boardDAO.listBoardTitle(id);
-		mav.addObject("list",list);
-		}
 		mav.addObject("mode",mode);
-		mav.addObject("optionDTO",dto);
 		return mav;
 	}
 	
@@ -75,8 +67,10 @@ public class MyBlogController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blog/editBlogMain");
 		String mode = request.getParameter("mode");
-		String id = request.getParameter("id");
-		Blog_OptionDTO dto = optionDAO.getBlog(id);
+		HttpSession session = request.getSession();
+		/*String id = request.getParameter("id");
+		Blog_OptionDTO dto = optionDAO.getBlog(id);*/
+		Blog_OptionDTO dto = (Blog_OptionDTO) session.getAttribute("optionDTO");
 		
 		if(mode.equals("profile")){//profile , introduce
 			MultipartHttpServletRequest mr = (MultipartHttpServletRequest)request;
@@ -85,7 +79,6 @@ public class MyBlogController {
 			String profile = mf.getOriginalFilename();
 			String introduce = mr.getParameter("introduce");
 			System.out.println(introduce);
-			HttpSession session = request.getSession();
 			String pfupPath = session.getServletContext().getRealPath("/resources/upload/"+dto.getId());
 			File file = new File(pfupPath,profile);
 			if(profile.trim().equals("")){
@@ -118,9 +111,8 @@ public class MyBlogController {
 			int res = optionDAO.editBlog_skin(dto);
 			
 			if(res>0){
-			HttpSession session = request.getSession();
-			String delpfPath = session.getServletContext().getRealPath("/resources/upload/"+id+originpf);
-			String delhdPath = session.getServletContext().getRealPath("/resources/upload/"+id+originhd);
+			String delpfPath = session.getServletContext().getRealPath("/resources/upload/"+dto.getId()+originpf);
+			String delhdPath = session.getServletContext().getRealPath("/resources/upload/"+dto.getId()+originhd);
 			File delpffile = new File(delpfPath);
 			File delhdfile = new File(delpfPath);
 			
@@ -148,7 +140,7 @@ public class MyBlogController {
 		}else if(mode.equals("blog")){//headerword
 			String headerword = request.getParameter("headerword");
 			if(headerword.trim().equals("")){
-				headerword="Welcome To "+id+" BLOG";
+				headerword="Welcome To "+dto.getId()+" BLOG";
 			}
 			System.out.println(headerword);
 			dto.setHeaderword(headerword);
@@ -156,7 +148,6 @@ public class MyBlogController {
 		}
 		
 		mav.addObject("mode",mode);
-		mav.addObject("optionDTO",dto);
 		return mav;
 	}
 	
@@ -217,12 +208,8 @@ private Blog_OptionDTO getBlogOption(HttpServletRequest arg0) throws Exception{
 	public ModelAndView makeBoardform(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blog/makeBoardTform");
-		String id = request.getParameter("id");
 		String mode = "board";
-		Blog_OptionDTO dto = optionDAO.getBlog(id);
-		
 		mav.addObject("mode",mode);
-		mav.addObject("optionDTO",dto);
 		
 		return mav;
 	}
@@ -241,8 +228,6 @@ private Blog_OptionDTO getBlogOption(HttpServletRequest arg0) throws Exception{
 		mbdto.setTitle(title);
 		mbdto.setSideno(sideno);
 		int res = boardDAO.makeBoard(mbdto);
-		
-		mav.addObject("id",id);
 		mav.addObject("mode",mode);
 		
 		return mav;
@@ -271,7 +256,6 @@ private Blog_OptionDTO getBlogOption(HttpServletRequest arg0) throws Exception{
 		makeBoardDTO.setSideno(sideno);
 		makeBoardDTO.setTitle(title);
 		int res = boardDAO.editBoardTitle(makeBoardDTO);
-		mav.addObject("id",makeBoardDTO.getId());
 		mav.addObject("mode",mode);
 		return mav;
 	}

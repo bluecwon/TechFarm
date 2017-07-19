@@ -81,7 +81,7 @@ $(function() {
 	
 	//list
 	$(document).ready(function(){
-		$('table.listBoard'>'tr.list'>'td.boardlist')
+		$('.listBoard > #list')
 		.bind('mouseover' , function () {$(this).addClass('gray');})
 		.bind('mouseout' , function () {$(this).removeClass('gray');})
 	});

@@ -17,7 +17,7 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 		<h3>1단계:블로그 기본설정</h3>
 		
 		<form action="blogMake2" method="post" enctype="multipart/form-data" name="makeblog">
-		<input type="hidden" name="mode" value="${mode}"> 
+		
 			<table>
 				<tr>
 					<td>제목</td>

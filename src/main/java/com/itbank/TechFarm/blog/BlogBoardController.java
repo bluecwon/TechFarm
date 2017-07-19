@@ -54,15 +54,12 @@ public class BlogBoardController {
 	public ModelAndView listBoard(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blog/listBoardMain");
-		String id = request.getParameter("id");
+		HttpSession session = request.getSession();
 		String title = request.getParameter("title");
 		int boardno = ServletRequestUtils.getIntParameter(request, "boardno");
 		List<Blog_BoardDTO> listBoard = boardDAO.listBoard(boardno);
-		List<Blog_MakeBoardDTO> list = boardDAO.listBoardTitle(id);
-		Blog_OptionDTO dto = optionDAO.getBlog(id);
-		mav.addObject("optionDTO",dto);
-		mav.addObject("listBoard",listBoard);
-		mav.addObject("list",list);
+		session.setAttribute("listBoard", listBoard);
+		
 		mav.addObject("title",title);
 		mav.addObject("boardno",boardno);
 		return mav;
@@ -123,20 +120,15 @@ public class BlogBoardController {
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 
 	public ModelAndView write(HttpServletRequest request) throws Exception {
-	  ModelAndView mav = new ModelAndView("blog/listBoardMain");
+	  ModelAndView mav = new ModelAndView("redirect:listBoard");
 	  
 	  Blog_BoardDTO dto = getBoardOption(request);
 	
 	  int res = boardDAO.insertboard(dto);
-	  Blog_OptionDTO optionDTO = optionDAO.getBlog(dto.getId());
-	  List<Blog_BoardDTO> listBoard = boardDAO.listBoard(dto.getBoardno());
-	  List<Blog_MakeBoardDTO> list = boardDAO.listBoardTitle(dto.getId());
 	  
-	  mav.addObject("optionDTO",optionDTO);
-	  mav.addObject("listBoard",listBoard);
-	  mav.addObject("list",list);
 	  mav.addObject("title",dto.getTitle());
 	  mav.addObject("boardno",dto.getBoardno());
+	 
 	  return mav;
 	}
 	
@@ -171,14 +163,17 @@ public class BlogBoardController {
 	@RequestMapping(value="/viewBoard")
 	public ModelAndView blogMake(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
+		String mode = "view";
+		int no = ServletRequestUtils.getIntParameter(request, "no");
+		mav.setViewName("blog/listBoardMain");
 		HttpSession session = request.getSession();
-		mav.setViewName("blog/myBlog");
-		String id = request.getParameter("id");
-		Blog_OptionDTO dto = optionDAO.getBlog(id);
-		List<Blog_MakeBoardDTO> list = boardDAO.listBoardTitle(id);
-		session.setAttribute("list", list);
-		mav.addObject("list",list);
-		mav.addObject("optionDTO",dto);
+		String upPath = session.getServletContext().getRealPath("/resources/upload/");
+		Blog_BoardDTO dto = boardDAO.getBoard(no);
+		
+		mav.addObject("boardDTO",dto);
+		mav.addObject("title",dto.getTitle());
+		mav.addObject("mode",mode);
+		mav.addObject("upPath",upPath);
 		return mav;
 		}	
 

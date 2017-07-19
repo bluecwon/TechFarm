@@ -24,7 +24,7 @@
 					</div>
 					<c:forEach var="dto" items="${list}">
 					<c:if test="${dto.sideno % 2 == 1}">
-					<a href="listBoard?boardno=${dto.boardno}&id=${dto.id}&title=${dto.title}">${dto.title}</a><br><br>
+					<a href="listBoard?boardno=${dto.boardno}&title=${dto.title}">${dto.title}</a><br><br>
 					</c:if>
 					</c:forEach>
 				</div>
