@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +16,7 @@
 <div id="2-2-1"><!-- start of 2-2-1 -->
 <video src="resources/tftube/advertise/soccer.mp4" autoplay
 controls poster="C:\Users\Public\Pictures\Sample Pictures\Chrysanthemum.jpg"
-width="600" height="450"></video>
+width="300" height="200"></video>
 
 
 <table border="3">
@@ -26,7 +26,10 @@ width="600" height="450"></video>
 <td>
 <a href="tftube_videoView?no=${dto.no}">
 <img src="resources/tftube/uploadImage/${dto.image}" width="196" height="100"><br>
-${dto.title}</a></td>
+${dto.title}</a><br>
+<a href="tftube_mychannel">${dto.channel}</a><br>
+${dto.readcount}회  ＊ ${dto.uploaddate}
+</td>
 <c:set var="count" value="${count=count+1}"/>
 <c:if test="${count%6==0}">
 </tr><tr>

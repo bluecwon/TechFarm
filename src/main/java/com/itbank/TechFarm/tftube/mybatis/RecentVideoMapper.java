@@ -47,5 +47,21 @@ public class RecentVideoMapper {
 		session.close();
 		return list;	
 	}
+	
+	public static int recent_delete_all(int member_no){
+		SqlSession session=sqlMapper.openSession();
+		int res=session.delete("recent_delete_all",member_no);
+		session.commit();
+		session.close();
+		return res;
+	}
+	
+	public static int recent_delete(int no){
+		SqlSession session=sqlMapper.openSession();
+		int res=session.delete("recent_delete",no);
+		session.commit();
+		session.close();
+		return res;
+	}
 
 }

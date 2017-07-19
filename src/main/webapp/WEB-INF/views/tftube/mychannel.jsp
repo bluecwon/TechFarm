@@ -57,7 +57,7 @@
 <c:choose>
 <c:when test="${subed_list.size()==0}">
 <tr><td>
-관심 동영상이 없습니다.
+구독한 채널이 존재하지 않습니다.
 </td></tr>
 </c:when>
 
@@ -73,7 +73,7 @@
 </td></tr>
 </table>
 
-
+<p>
 관심 동영상<p>
 <table></table>
 <c:choose>

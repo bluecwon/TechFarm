@@ -100,7 +100,7 @@ function move_login(){
 <!-- video -->
 <div id="2-2-1" style="overflow:auto;"> <!-- start of 2-1-1 -->
 <table>
-<tr><td><video src="resources/tftube/uploadvideo/${vdto.video_name}" autoplay  
+<tr><td><video src="resources/tftube/uploadVideo/${vdto.video_name}" autoplay  
 controls="controls" width="600" height="450"></video>
 </td></tr>
 <tr><td align="right">	조회수 ${readcount}회 <br></td></tr>

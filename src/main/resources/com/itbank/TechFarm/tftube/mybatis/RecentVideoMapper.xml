@@ -17,9 +17,18 @@
 
  
 <select id="listVideo_recent">
- select * from tftube_video a join tftube_recentvideo b on a.video_name=b.video_name
+ select a.*,b.no from tftube_video a join tftube_recentvideo b on a.video_name=b.video_name
  
 <!-- select c.name tfmember.member c join (select member_no from tftube_video a join tftube_recentvideo b on a.video_name=b.video_name)d on c.member_no=d.member_no -->  
 </select>
+
+
+<delete id="recent_delete_all" parameterType="int">
+delete from tftube_recentvideo where member_no=#{member_no}
+</delete>
+
+<delete id="recent_delete" parameterType="int">
+delete from tftube_recentvideo where no=#{no}
+</delete>
 
 </mapper>

@@ -35,22 +35,20 @@ public class RecentVideoController {
 								HttpServletResponse arg1) throws Exception {		
 		ModelAndView mv=new ModelAndView();
 		session=arg0.getSession();
-		MemberDTO memberDTO=null;
+		MemberDTO member=null;
 		
 		Object memberDTO_raw=session.getAttribute("memberDTO");
 		if(memberDTO_raw==null){		 
-		msg="로그인이 필요한 서비스입니다. 로그인 해주세요.";
-		url="login";
+		
 		mv.setViewName("tftube/message");
 		return mv;
 		}else{
-			memberDTO=(MemberDTO)memberDTO_raw;
+			member=(MemberDTO)memberDTO_raw;
 		}
 		
-		String ip=arg0.getRemoteAddr();		
-		int member_no=memberDTO.getNo();
+		String ip=arg0.getRemoteAddr();				
 		
-		List<VideoDTO> recent_list=videoDAO.listRecent_inf(member_no);
+		List<VideoDTO> recent_list=videoDAO.listRecent_inf(member.getNo());
 		mv.addObject("recent_list",recent_list);		
 		mv.setViewName("tftube/recentVideo");		
 		return mv;
@@ -85,5 +83,56 @@ public class RecentVideoController {
 				//end of RecentVideo insert 
 		mv.addObject("tftubevideoView");
 		return mv;
+	}
+	
+	@RequestMapping(value="/tftube_recentvideo_delete_all", method=RequestMethod.GET)
+	public ModelAndView tftube_recent_delall(HttpServletRequest arg0, 
+								HttpServletResponse arg1) throws Exception {
+		ModelAndView mv=new ModelAndView();
+		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
+		
+		if(member!=null){
+		recentvideoDAO.recent_delete_all(member.getNo());
+		mv.setViewName("tftube/recentVideo");
+		}else{
+			msg="로그인이 필요한 서비스 입니다. 로그인을 해주세요.";
+			url="login";
+			mv.addObject("msg",msg);			
+			mv.addObject("url",url);			
+			mv.setViewName("tftube/message");			
+		}		
+		return mv;		
+	}
+	
+	@RequestMapping(value="/tftube_recentvideo_delete", method=RequestMethod.GET)
+	public ModelAndView tftube_recent_del(HttpServletRequest arg0, 
+								HttpServletResponse arg1) throws Exception {
+		ModelAndView mv=new ModelAndView();
+		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
+		String no_raw=arg0.getParameter("no");
+		int no=0;
+		if(no_raw!=null){
+			no=Integer.parseInt(no_raw);			
+		}else{
+			msg="영상 정보가 존재 하지 않습니다. 메인 페이지로 이동합니다.";
+			url="tftube_main";
+			mv.addObject("msg",msg);
+			mv.addObject("url",url);
+			mv.setViewName("tftube/message");
+		}
+		System.out.println("내생각엔 recent_no:"+no);
+		if(member!=null){
+		recentvideoDAO.recent_delete(no);
+		mv.setViewName("tftube/recentVideo");
+		List<VideoDTO> recent_list=videoDAO.listRecent_inf(member.getNo());
+		mv.addObject("recent_list",recent_list);
+		}else{
+			msg="로그인이 필요한 서비스 입니다. 로그인을 해주세요.";
+			url="login";
+			mv.addObject("msg",msg);
+			mv.addObject("url",url);
+			mv.setViewName("tftube/message");			
+		}		
+		return mv;		
 	}
 }
