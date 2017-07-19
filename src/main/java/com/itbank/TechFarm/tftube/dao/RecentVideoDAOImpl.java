@@ -30,8 +30,8 @@ public class RecentVideoDAOImpl implements RecentVideoDAO{
 	}
 
 	@Override
-	public int recent_delete(int no) {
-		return RecentVideoMapper.recent_delete(no);
+	public int recent_delete(int recent_no) {
+		return RecentVideoMapper.recent_delete(recent_no);
 	}
 	
 	

@@ -3,6 +3,7 @@ package com.itbank.TechFarm.tftube.dao;
 import java.util.List;
 
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
+import com.itbank.TechFarm.tftube.dto.Video_RecentVideoDTO;
 import com.itbank.TechFarm.tftube.mybatis.ReplyMapper;
 import com.itbank.TechFarm.tftube.mybatis.VideoMapper;
 
@@ -63,7 +64,7 @@ public class VideoDAOImpl implements VideoDAO {
 
 
 	@Override
-	public List<VideoDTO> listRecent_inf(int member_no) {
+	public List<Video_RecentVideoDTO> listRecent_inf(int member_no) {
 		return VideoMapper.listRecent_inf(member_no);
 	}
 

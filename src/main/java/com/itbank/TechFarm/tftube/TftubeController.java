@@ -118,7 +118,7 @@ public class TftubeController {
 		upPath_video=session.getServletContext().getRealPath("/resources/tftube/uploadVideo");
 		
 		
-				
+		System.out.println("업비페뜨:"+upPath_video);		
 		session.setAttribute
 		("upPath_image",upPath_image);		
 		session.setAttribute
@@ -254,8 +254,9 @@ public class TftubeController {
 		int no=0;		
 		if(no_raw!=null){
 		no=Integer.parseInt(no_raw);}//tftube_video
-
-		VideoDTO vdto=videoDAO.getVideo(no);//a video's total information	
+		System.out.println("no:"+no);
+		VideoDTO vdto=videoDAO.getVideo(no);//a video's total information
+		System.out.println("vdto:"+vdto);
 		String video_name=vdto.getVideo_name();//video_name at present		
 		/*like*/		
 		//response
@@ -532,6 +533,7 @@ public class TftubeController {
 		if(res>0){
 			mv.setViewName("redirect:tftube_main");	
 			//delete file
+			System.out.println("삭제경로:"+upPath_video);			
 			File deletefile=new File(upPath_video,video_name);
 			File deleteimage=new File(upPath_image,vdto.getImage());
 			deletefile.delete();

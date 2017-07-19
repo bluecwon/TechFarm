@@ -5,6 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <%-- <select id="listRecent_inf" parameterType="int" resultType="video_recentvideoDTO">
+ select a.*,b.recent_no from tftube_video a join tftube_recentvideo b on a.video_name=b.video_name and b.member_no=#{member_no} order by b.recent_no desc limit 40;
+ </select> 
+ 정확한 이유는파악하지 못했다. 그러나 아직 video_name이 unique가 아니기 때문에 오류가 발생한다.
+  --%>	
 <%@ include file="main_top.jsp"%> 
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -24,11 +29,13 @@ function delete_recent(){
 <c:if test="${recent_list.size()==0}">
 시청한 동영상이 없습니다.
 </c:if>
-<a href="tftube_videoView?no=${recentVideo.no}">
-<img src="resourc\es/tftube/uploadImage/${recentVideo.image}" 
-width="400" height="250">
 
+<a href="tftube_videoView?no=${recentVideo.no}">
+<img src="resources/tftube/uploadImage/${recentVideo.image}" 
+width="400" height="250">
+비디오 일련번호:${recentVideo.no}
 </a>
+
 </div>
 <div class="imaj">
 ${recentVideo.title}<br>
@@ -39,7 +46,7 @@ ${recentVideo.description}
 
 <div class="titl">
 
-<a href="tftube_recentvideo_delete?no=${recentVideo.no}">삭제</a>
+<a href="tftube_recentvideo_delete?recent_no=${recentVideo.recent_no}">삭제</a>
 
 </div>
 </td>

@@ -1,17 +1,17 @@
 package com.itbank.TechFarm.tftube.dto;
 
 public class RecentVideoDTO {
-	private int no;
+	private int recent_no;
 	private int member_no;
 	private String video_name;
 	
-	public int getNo() {
-		return no;
-	}
-	public void setNo(int no) {
-		this.no = no;
-	}		
 	
+	public int getRecent_no() {
+		return recent_no;
+	}
+	public void setRecent_no(int recent_no) {
+		this.recent_no = recent_no;
+	}
 	public int getMember_no() {
 		return member_no;
 	}

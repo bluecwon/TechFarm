@@ -17,6 +17,7 @@ import com.itbank.TechFarm.tftube.dao.RecentVideoDAO;
 import com.itbank.TechFarm.tftube.dao.VideoDAO;
 import com.itbank.TechFarm.tftube.dto.RecentVideoDTO;
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
+import com.itbank.TechFarm.tftube.dto.Video_RecentVideoDTO;
 
 
 @Controller
@@ -48,13 +49,13 @@ public class RecentVideoController {
 		
 		String ip=arg0.getRemoteAddr();				
 		
-		List<VideoDTO> recent_list=videoDAO.listRecent_inf(member.getNo());
+		List<Video_RecentVideoDTO> recent_list=videoDAO.listRecent_inf(member.getNo());
 		mv.addObject("recent_list",recent_list);		
 		mv.setViewName("tftube/recentVideo");		
 		return mv;
 	}
-	
-	@RequestMapping(value="/tftube_recentvideo_insert", method=RequestMethod.GET)
+	//왜 만들었는지 이해 불가능한 코드
+	/*@RequestMapping(value="/tftube_recentvideo_insert", method=RequestMethod.GET)
 	public ModelAndView tftube_recentvideo_insert(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {		
 		ModelAndView mv=new ModelAndView();
@@ -83,7 +84,7 @@ public class RecentVideoController {
 				//end of RecentVideo insert 
 		mv.addObject("tftubevideoView");
 		return mv;
-	}
+	}*/
 	
 	@RequestMapping(value="/tftube_recentvideo_delete_all", method=RequestMethod.GET)
 	public ModelAndView tftube_recent_delall(HttpServletRequest arg0, 
@@ -109,10 +110,10 @@ public class RecentVideoController {
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
 		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
-		String no_raw=arg0.getParameter("no");
+		String recent_no_raw=arg0.getParameter("recent_no");
 		int no=0;
-		if(no_raw!=null){
-			no=Integer.parseInt(no_raw);			
+		if(recent_no_raw!=null){
+			no=Integer.parseInt(recent_no_raw);			
 		}else{
 			msg="영상 정보가 존재 하지 않습니다. 메인 페이지로 이동합니다.";
 			url="tftube_main";
@@ -124,7 +125,7 @@ public class RecentVideoController {
 		if(member!=null){
 		recentvideoDAO.recent_delete(no);
 		mv.setViewName("tftube/recentVideo");
-		List<VideoDTO> recent_list=videoDAO.listRecent_inf(member.getNo());
+		List<Video_RecentVideoDTO> recent_list=videoDAO.listRecent_inf(member.getNo());
 		mv.addObject("recent_list",recent_list);
 		}else{
 			msg="로그인이 필요한 서비스 입니다. 로그인을 해주세요.";

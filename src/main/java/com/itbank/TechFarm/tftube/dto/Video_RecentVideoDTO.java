@@ -1,7 +1,6 @@
 package com.itbank.TechFarm.tftube.dto;
 
-public class RecentVideoFormatDTO {
-	
+public class Video_RecentVideoDTO {
 	private int no;
 	private int member_no;	
 	private String title;
@@ -20,7 +19,6 @@ public class RecentVideoFormatDTO {
 	private int unlike_status;	
 	private String channel;	
 	private int recent_no;
-	
 	public int getNo() {
 		return no;
 	}
@@ -131,7 +129,4 @@ public class RecentVideoFormatDTO {
 	}
 	
 	
-	
-	
-
 }

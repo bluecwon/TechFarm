@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
+import com.itbank.TechFarm.tftube.dto.Video_RecentVideoDTO;
 
 public class VideoMapper {
 	private static SqlSessionFactory sqlMapper;
@@ -101,9 +102,9 @@ public class VideoMapper {
 		return res;
 	}
 	
-	public static List<VideoDTO> listRecent_inf(int member_no){
+	public static List<Video_RecentVideoDTO> listRecent_inf(int member_no){
 		SqlSession session=sqlMapper.openSession();
-		List<VideoDTO> list=session.selectList("listRecent_inf",member_no);
+		List<Video_RecentVideoDTO> list=session.selectList("listRecent_inf",member_no);
 		session.close();
 		return list;		
 	}

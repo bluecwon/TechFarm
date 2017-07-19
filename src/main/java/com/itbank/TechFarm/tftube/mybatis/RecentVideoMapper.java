@@ -56,9 +56,9 @@ public class RecentVideoMapper {
 		return res;
 	}
 	
-	public static int recent_delete(int no){
+	public static int recent_delete(int recent_no){
 		SqlSession session=sqlMapper.openSession();
-		int res=session.delete("recent_delete",no);
+		int res=session.delete("recent_delete",recent_no);
 		session.commit();
 		session.close();
 		return res;
