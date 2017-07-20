@@ -6,7 +6,6 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>TF chat</title>
-		
 		<script src="resources/js/jquery-3.1.1.min.js"></script>     
 		<script src="resources/js/socket.io.js"></script>
         
@@ -31,42 +30,11 @@
                  }
                  socket.emit('login', output);
                  
-                 /* var roomId = $('#roomIdInput').val();
-                 var roomName = $('#roomNameInput').val();
-                 var id = $('#idInput').val();
-                 
-                 var output = {command:'create', roomId:roomId, roomName:roomName, roomOwner:id};
-                 console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
-
-                 if (socket == undefined) {
-                     alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
-                     return;
-                 }
-
-                 socket.emit('room', output); */
-                 
-                 
 
 				// 전송 버튼 클릭 시 처리
                 $("#sendButton").bind('click', function(event) {
-                	
-                	// chattype 구분
-                	var chattype = $('#chattype').val();
-
-                	var sender = $('#senderInput').val();
-                    var recepient = $('#recepientInput').val();
-                    var data = $('#dataInput').val();
-
-                    var output = {sender:sender, recepient:recepient, command:chattype, type:'text', data:data};
-                    console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
-                	
-                    if (socket == undefined) {
-                        alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
-                        return;
-                    }
-
-                    socket.emit('message', output);
-                });
+	            	send();
+	          	});
 				
              	// 방만들기 버튼 클릭 시 처리
                 $("#createRoomButton").bind('click', function(event) {
@@ -108,6 +76,8 @@
 
                     socket.emit('room', output);
                     socket.emit('invite', inviteinfo);
+                    $('#recepientInput').val(roomId);
+                    
                 });
              	
              	// 방이름바꾸기 버튼 클릭 시 처리
@@ -172,6 +142,14 @@
                     socket.emit('room', output);
                 });
              	
+                $('#dataInput').keypress(function(event){
+        			var keycode = (event.keyCode ? event.keyCode : event.which);
+        			if(keycode == '13'){
+        				send();	
+        			}
+        			event.stopPropagation();
+        		});
+             	
             });
             
 			// 서버에 연결하는 함수 정의
@@ -184,15 +162,19 @@
                 socket.on('connect', function() {
                 	println('웹소켓 서버에 연결되었습니다. : ' + url);
 
-                    socket.on('message', function(message) {
-                        console.log(JSON.stringify(message));
+                	socket.on('message', function(message) {
+                    	console.log(JSON.stringify(message));
 
-                        println('<p>수신 메시지 : ' + message.sender + ', ' + message.recepient + ', ' + message.command + ', ' + message.data + '</p>');
+                    	println('<p>수신 메시지 : ' + message.sender + ', ' + message.recepient + ', ' + message.command + ', ' + message.data + '</p>');
+    	            	if(!('${sessionScope.memberDTO.id}'==message.sender)){
+    	            		addToDiscussion('other', message.sender, message.data);
+    	            	}
+                    	
                     });
                     
                     socket.on('invite', function(data) {
                         console.log(JSON.stringify(data));
-                        var roomId=data.roomId;
+                        var roomId=data.inviteRoom;
                         println(roomId);
                         var output = {command:'join', roomId:roomId};
                         console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
@@ -202,6 +184,7 @@
                             return;
                         }
                         socket.emit('room', output);
+                        $('#recepientInput').val(roomId);
                     });
 
                     socket.on('response', function(response) {
@@ -245,10 +228,50 @@
                 });
 
             }
+			
+            function addToDiscussion(writer, sender, msg) {
+    			println("addToDiscussion 호출됨 : " + writer + ", " + msg);
+    			if(sender=='system'){
+    				
+    			}else{
+    				var contents = "<li class='" + writer + "'>"
+        			 + "  <div class='messages'>"
+        			 +      sender + ": <br>"
+          		 	 + "    <p>" + msg + "</p>"
+        			 + "  </div>"
+        			 + "  <div class='time'>"
+        			 + "    <time datetime='2016-02-10 18:30'>18시 30분</time>"
+        			+ "  </div>"
+      			 	 + "</li>";
+   			   	println("추가할 HTML : " + contents);
+   			    $(".discussion").append(contents);
+    			}
+			    var maxScroll=document.getElementById('result').scrollHeight;
+			    $("#result").scrollTop(maxScroll);
+    		}
+            
+            function send(){
+            	var sender = $('#senderInput').val();
+            	var recepient = $('#recepientInput').val();
+            	var data = $('#dataInput').val();
+
+          		var output = {sender:sender, recepient:recepient, command:'groupchat', type:'text', data:data};
+            	console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
+
+           		if (socket == undefined) {
+             		alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
+           			return;
+             	}
+
+           		socket.emit('message', output);
+           		
+           		addToDiscussion('self', sender, data);
+           		$('#dataInput').val('');
+            }
             
 			function println(data) {
 				console.log(data);
-				$('#result').append('<p>' + data + '</p>');
+				// $('#result').append('<p>' + data + '</p>');
 			}
         </script>
 	</head>
@@ -257,6 +280,10 @@
 	<input type="hidden" id="idInput" value="${sessionScope.memberDTO.id}" />
 	<input type="hidden" id="roomIdInput" value="${sessionScope.memberDTO.id}" />
 	<input type="hidden" id="roomNameInput" value="${sessionScope.memberDTO.id}" />
+	<input type="hidden" id="senderInput" value="${sessionScope.memberDTO.id }" />
+	<input type="hidden" id="chattype" value="groupchat">
+	<input type="hidden" id="senderInput" value="${sessionScope.memberDTO.id }" />
+	<input type="hidden" id="recepientInput"/>
 	<div id="idresult">
     <div id="idList">
 	</div>
@@ -264,41 +291,16 @@
 		<input type="button" id="inviteButton" value="초대하기"/>
 	</div>
     <br>
-   <!-- <div>
-		<input type="button" id="createRoomButton" value="방만들기" />
-		<input type="button" id="updateRoomButton" value="방이름바꾸기" />
-		<input type="button" id="deleteRoomButton" value="방없애기" />
-	</div> -->
-   <!--  <div>
-		<input type="button" id="joinRoomButton" value="방입장하기" />
-		<input type="button" id="leaveRoomButton" value="방나가기" />
-	</div> -->
-	<br>
-    <%-- <div>
-    	<div><span>보내는사람 아이디 :</span> <input type="text" id="senderInput" value="${sessionScope.memberDTO.id }" /></div>
-	    <div><span>받는사람 아이디 :</span> <input type="text" id="recepientInput" value="ALL" /></div>
-
-	    <!-- command 선택 <select> 채팅, 그룹채팅 -->
-	    <select name="chattype" id="chattype">
-			<option value="chat">채팅</option>
-			<option value="groupchat" selected>그룹채팅</option>
-		</select>
-
-	    <div><span>메시지 데이터 :</span> <input type="text" id="dataInput" value="안녕!"/> </div>
-		<br>
-		
-	</div> --%>    
         
     <div id="chatresult">
-    <div id="result">
-    <p>결과 : </p>
-    </div>
-    <input type="hidden" id="chattype" value="groupchat">
-		<input type="hidden" id="senderInput" value="${sessionScope.memberDTO.id }" />
-	    <input type="hidden" id="recepientInput" value="ALL" />
-    <input type="text" id="dataInput" value="안녕!"/>
+    <div class="ui segment" id="result">	
+	  <ol class="discussion">
+	  </ol>
+	</div>
+	<input type="text" id="dataInput"/>
     <input type="button" id="sendButton" value="전송" />
-    </div>
+	</div>
+    
         
 </body>
 </html>
