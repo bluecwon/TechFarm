@@ -106,7 +106,7 @@
 		</tr>
 		<tr>
 			<td>파일첨부</td>
-			<td colspan="3"><input type=file name="file"></td>
+			<td colspan="3"><input type=file name="file1"></td>
 		</tr>
 		<tr>
 			<td>공개여부</td>

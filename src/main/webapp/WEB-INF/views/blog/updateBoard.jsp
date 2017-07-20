@@ -78,8 +78,8 @@
 <body>
 &nbsp;&nbsp;<h2>${title}</h2>
 <form action="updateBoard" method="post" id="insertBoardFrm" name="insertboard" enctype="multipart/form-data">
+<input type="hidden" name="no" value="${boardDTO.no}">
 <input type="hidden" name="boardno" value="${boardDTO.boardno}">
-<input type="hidden" name="id" value="${boardDTO.id}">
 <input type="hidden" name="title" value="${title}">
 	<table>
 		<tr>
@@ -95,7 +95,7 @@
 					<option value="int">지식.동향</option>
 				</select>
 				<select name="area" id="area">
-					<option value="${boardDTO.area}"></option>
+					<option value="none">==선택하세요==</option>
 				</select>
 			</td>
 		</tr>
@@ -106,7 +106,13 @@
 		</tr>
 		<tr>
 			<td>파일첨부</td>
-			<td colspan="3"><input type=file name="file"></td>
+			<td colspan="3">
+			<input type=file name="file1">&nbsp;&nbsp;
+			<c:if test="${boardDTO.file1!=''}">기존 첨부파일 : ${boardDTO.file1} 
+			<input type="radio" name="fileuse" value="0" checked>사용
+			<input type="radio" name="fileuse" value="1" >사용안함
+			</c:if>
+			</td>
 		</tr>
 		<tr>
 			<td>공개여부</td>

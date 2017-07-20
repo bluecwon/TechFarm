@@ -85,3 +85,53 @@ $(function() {
 		.bind('mouseover' , function () {$(this).addClass('gray');})
 		.bind('mouseout' , function () {$(this).removeClass('gray');})
 	});
+	
+	
+	
+	$(document).ready(function(){
+		var subMenuCount = 0;
+		$('div.subMenuDiv').mouseup(function(e){
+			if(subMenuCount==0){
+				if(e.which=='3'){
+					$(this).find('ul.subMenu').stop().slideDown(200);
+				}
+				subMenuCount = 1;
+			} else {
+				if(e.which=='3'){
+					$(this).find('ul.subMenu').stop().slideUp(200);
+				}
+				subMenuCount = 0;
+			}
+		});
+		
+		var subMenuCount1 = 0;
+		$('div.div_add').mouseup(function(e){
+			if(subMenuCount1==0){
+				if(e.which=='3'){
+					$(this).find('table.jjm494_add').stop().slideDown(200);
+				}
+				subMenuCount1 = 1;
+			} else {
+				if(e.which=='3'){
+					$(this).find('table.jjm494_add').stop().slideUp(200);
+				}
+				subMenuCount1 = 0;
+			}
+		});
+		
+		var subMenuCount2 = 0;
+		$('div.subMenuDiv_add').mouseup(function(e){
+			if(subMenuCount2==0){
+				if(e.which=='1'){
+					$(this).find('table.jjm494_subAdd').stop().slideDown(200);
+				}
+				subMenuCount2 = 1;
+			} else {
+				if(e.which=='1'){
+					$(this).find('table.jjm494_subAdd').stop().slideUp(200);
+				}
+				subMenuCount2 = 0;
+			}
+		});
+		
+	});

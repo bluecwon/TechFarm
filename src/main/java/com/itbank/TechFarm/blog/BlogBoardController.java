@@ -135,7 +135,7 @@ public class BlogBoardController {
 		private Blog_BoardDTO getBoardOption(HttpServletRequest arg0) throws Exception{
 		
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)arg0;
-		MultipartFile mf = mr.getFile("file");	
+		MultipartFile mf = mr.getFile("file1");	
 		String file1 = mf.getOriginalFilename();
 		
 		HttpSession session = arg0.getSession();
@@ -180,11 +180,14 @@ public class BlogBoardController {
 	@RequestMapping(value="/updateBoard" , method = RequestMethod.GET)
 	public ModelAndView updateBoard(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		String upPath = session.getServletContext().getRealPath("/resources/upload/");
 		int no = ServletRequestUtils.getIntParameter(request, "no");
 		String title = request.getParameter("title");
 		mav.setViewName("blog/updateBoard");
 		Blog_BoardDTO dto = boardDAO.getBoard(no);
 		
+		mav.addObject("upPath",upPath);
 		mav.addObject("boardDTO",dto);
 		mav.addObject("title",dto.getTitle());
 		return mav;
@@ -193,13 +196,50 @@ public class BlogBoardController {
 	@RequestMapping(value="/updateBoard" , method = RequestMethod.POST)
 	public ModelAndView updateBoardPro(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView("redirect:listBoard");
-		Blog_BoardDTO dto = getBoardOption(request);
-		int res = boardDAO.updateBoard(dto);
+		int fileuse = ServletRequestUtils.getIntParameter(request, "fileuse");
+		int no = ServletRequestUtils.getIntParameter(request, "no");
+		Blog_BoardDTO dto = boardDAO.getBoard(no);
+		String originfile1 = dto.getFile1();
+		dto = getBoardOptionUpdate(request,dto);
+
+		if(fileuse==1){
+			HttpSession session = request.getSession();
+			String delpfPath = session.getServletContext().getRealPath("/resources/upload/"+originfile1);
+			File delfile = new File(delpfPath);
+			delfile.delete();
+		}else{
+			dto.setFile1(originfile1);
+		}
 		
+		int res = boardDAO.updateBoard(dto);
 		mav.addObject("boardno",dto.getBoardno());
 		mav.addObject("title",dto.getTitle());
 		return mav;
 		}
+	
+		private Blog_BoardDTO getBoardOptionUpdate(HttpServletRequest arg0, Blog_BoardDTO dto) throws Exception{
+		
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)arg0;
+		MultipartFile mf = mr.getFile("file1");	
+		String file1 = mf.getOriginalFilename();
+		
+		HttpSession session = arg0.getSession();
+		String upPath = session.getServletContext().getRealPath("/resources/upload/");
+		File file = new File(upPath,file1);
+		
+		if(file1.trim().equals("")){}
+		else{
+			mf.transferTo(file);
+		}
+		
+			dto.setArea(Integer.parseInt(arg0.getParameter("area")));
+			dto.setSubject(arg0.getParameter("subject"));
+			dto.setContent(arg0.getParameter("content"));
+			dto.setFile1(file1);
+			dto.setOpen(Integer.parseInt(arg0.getParameter("open")));
+			
+		return dto;
+	}
 	
 	@RequestMapping(value="/deleteBoard")
 	public ModelAndView blogDelete(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -220,5 +260,26 @@ public class BlogBoardController {
 		mav.addObject("boardno",dto.getBoardno());
 		return mav;
 	}
+	
+	@RequestMapping(value="/fileDownload")
+	public ModelAndView fileDownload(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		String file1 = request.getParameter("file1");
+		
+		
+		
+		
+		int no = ServletRequestUtils.getIntParameter(request, "no");
+		mav.setViewName("blog/listBoardMain");
+		HttpSession session = request.getSession();
+		String upPath = session.getServletContext().getRealPath("/resources/upload/");
+		Blog_BoardDTO dto = boardDAO.getBoard(no);
+		
+		mav.addObject("boardDTO",dto);
+		mav.addObject("title",dto.getTitle());
+
+		mav.addObject("upPath",upPath);
+		return mav;
+		}
 
 }
