@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,10 +15,10 @@
 	</script>
 </head>
 <body>
-	<h2 align="center">메일함</h2>
-	<table>
-	<tr> 
-	<td >
+	<header>
+		<h1 align="center">메일함</h1>
+	</header>
+	<nav>
 		<div align="left">
 			<a href="sendJames">메일 쓰기</a>
 		</div>
@@ -26,7 +26,11 @@
 		<a href="listJames?folder=INBOX">받은편지함</a><br>
 		<a href="listJames?folder=Sent">보낸편지함</a><br>
 		<a href="listJames?folder=Trash">휴지통</a><br>
-	</td>
+	</nav>
+	<section>
+		<article>
+			<table>
+		<tr>
 		<td>
 			<div align="center">
 				<table>
@@ -49,8 +53,10 @@
 				</table>
 			</div>
 		</td>
-	</tr>
+		</tr>
 	</table>
-	
+		</article>
+	</section>
+	<footer></footer>
 </body>
 </html>

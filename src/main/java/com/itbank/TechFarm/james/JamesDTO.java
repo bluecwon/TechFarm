@@ -1,7 +1,5 @@
 package com.itbank.TechFarm.james;
 
-import java.util.Date;
-
 public class JamesDTO {
 	private int num;
 	private String id;
