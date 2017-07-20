@@ -5,6 +5,7 @@ table.jjm494 {
     border-top: 1px solid #ccc;
     border-left: 3px solid #369;
   margin : 20px 10px;
+  
 }
 table.jjm494 th {
     width: 147px;
@@ -24,9 +25,93 @@ table.jjm494 td {
     border-bottom: 1px solid #ccc;
 }
 
+#con {
+	display:flex;
+}
+#box-left {
+	border:1px solid; 
+	padding:10px; 
+	width:200px;  
+	word-break:break-all;
+	flex:1;
+}
+#box-center {
+	border:1px solid; 
+	padding:10px; 
+	width:200px;  
+	word-break:break-all;
+	text-align: center;
+	flex:3;
+}
+#box-right {
+	border:1px solid; 
+	padding:10px; 
+	width:200px;  
+	word-break:break-all;
+	text-align:right;
+	flex:1;
+}
+
+
+
+#tooltip{
+	position:absolute;
+	z-index:999;
+	color:white;
+}
+
+.topnav{
+	position: relative;
+	text-align:right;
+	/* margin-top:10px; */
+/* 	height:100%; */
+	cursor:pointer;
+}
+
+
+.topnav:hover{
+	color:#d3d3d3;
+}
+
+
+.header_info {
+	position: absolute;
+	right: 35px; top: 48px;
+	background: #c0c0c0;
+	display: none;
+	padding: 10px;
+	border: 1px solid #ccccff;
+	width:10%;
+	height:150px;
+	
+	z-index:8;
+	word-break:break-all;
+}
+
+.header_menu {
+	position: absolute;
+	right: 60px; top: 48px;
+	background: #c0c0c0;
+	display: none;
+	padding: 10px;
+	border: 1px solid #ccccff;
+	width:20%;
+	height:250px;
+	
+	z-index:8;
+}
+
+#img_handle:hover{
+	background: #dfdfdf;
+}
+
+
+
+
 /* UI Object */
 #wrap{
 	width:100%;
+	
 }
 #header{
 	width:100%;
@@ -72,6 +157,10 @@ div{
 	margin:0;
 	padding:10px;
 	background:#f7f7f7;
+	
+	background-image: url(note.jpg);
+	background-size:cover; 
+	height:auto;
 }
 #wrap{
 	border:1px solid #bdbdbd;
@@ -80,25 +169,27 @@ div{
 	width:auto;
 	margin-top:10px;
 	padding:10px;
+	height:10%;
 }
 #header,#container{
 	border:2px solid #bfbfbf;
-	background:#e5e5e5;
+	background:#e5e5e5; 
+	/* background: #e5e5e5;filter:alpha(opacity=10); opacity:0.9; -moz-opacity:0.9; */
 }
 #container{
 	position:relative;
 	padding-left:10px;
+	
+	/* background: #e5e5e5;filter:alpha(opacity=10); opacity:0.9; -moz-opacity:0.9; */
+	height:80%;
 }
 #content{
 	position:relative;
-	height:600px;
+/* 	height:600px; */
 	margin-top:10px;
 	border:1px solid #bdbdbd;
 	background:#fff;
 	text-align:center;
-	
-	background-image: url(note.jpg);
-	background-size:cover;
 }
 .aside{
 	left:190px;
@@ -113,6 +204,9 @@ div{
 	width:auto;
 	padding:10px;
 	border:2px solid #bfbfbf;
-	background:#e5e5e5;
+	/* background: #e5e5e5;filter:alpha(opacity=10); opacity:0.9; -moz-opacity:0.9; */
+	
+	background:#e5e5e5; 
+	height:10%;
 }
 /* //UI Object */

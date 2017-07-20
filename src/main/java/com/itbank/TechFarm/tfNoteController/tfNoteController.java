@@ -39,7 +39,10 @@ public class tfNoteController {
 	@RequestMapping(value="/tfNoteIndex")
 	public ModelAndView tfNoteIndex(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
+		String id = request.getParameter("id"); 
+		List result = noteDAO.listNote(id); 
 		mav.setViewName("tfNote/index");
+		mav.addObject("noteList", result);
 		return mav;
 	}
 	
@@ -53,17 +56,17 @@ public class tfNoteController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/note_insert", method=RequestMethod.GET)
+/*	@RequestMapping(value="/note_insert", method=RequestMethod.GET)
 	public ModelAndView insertFormNote(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
 		return new ModelAndView("tfNote/note/insert");
-	}
+	}*/
 	
 	@RequestMapping(value="/note_insert", method=RequestMethod.POST)
 	public ModelAndView insertProNote(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
 		NoteDTO dto = getNoteDTO(arg0);
 		int res = noteDAO.insertNote(dto);
 		String id = dto.getId();
-		return new ModelAndView("redirect:note_list?id="+id);
+		return new ModelAndView("redirect:tfNoteIndex?id="+id);
 	}
 	
 
@@ -74,11 +77,11 @@ public class tfNoteController {
 		String num = arg0.getParameter("num");
 		String id = arg0.getParameter("id");
 		int res = noteDAO.deleteNote(Integer.parseInt(num));
-		mav.setViewName("redirect:note_list?id="+id);
+		mav.setViewName("redirect:tfNoteIndex?id="+id);
 		return mav;
 	}
 	
-	@RequestMapping(value="/note_content")
+/*	@RequestMapping(value="/note_content")
 	public ModelAndView note_content(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		NoteDTO dto = new NoteDTO();
@@ -87,15 +90,15 @@ public class tfNoteController {
 		mav.setViewName("tfNote/note/content");
 		mav.addObject("dto",dto);
 		return mav;
-	}
+	}*/
 			
 
-	@RequestMapping(value="/note_update", method=RequestMethod.GET)
+/*	@RequestMapping(value="/note_update", method=RequestMethod.GET)
 	public ModelAndView updateFormNote(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
 		int num = Integer.parseInt(arg0.getParameter("num"));
 		NoteDTO dto = noteDAO.getNote(num);
 		return new ModelAndView("tfNote/note/update","noteDTO", dto);
-	}	
+	}	*/
 	
 	@RequestMapping(value="/note_update", method=RequestMethod.POST)
 	public ModelAndView updateProNote(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
@@ -103,7 +106,7 @@ public class tfNoteController {
 		dto.setNum(Integer.parseInt(arg0.getParameter("num")));
 		int res = noteDAO.updateNote(dto);
 		String id = dto.getId();
-		return new ModelAndView("redirect:note_list?id="+id);		
+		return new ModelAndView("redirect:tfNoteIndex?id="+id);		
 	}
 	
 }

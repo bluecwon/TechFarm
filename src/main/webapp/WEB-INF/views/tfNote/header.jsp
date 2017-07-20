@@ -31,6 +31,12 @@
 					location.href=href;
 				}
 			};
+			function insert(){
+				document.frm.submit();
+			};
+			function update(){
+				document.f.submit();
+			};
 		</script>
 		<title>노트</title>
 	</head>
@@ -40,17 +46,17 @@
 	
 	<!--header -->
 	<div id="header">
-		<div align="right">
-			<div class="topnav">
+		<!-- <div align="right"> -->
+			<div class="topnav" align="right">
 	  			<a rel="tooltip" title="메뉴"><img id="menu" src="resources/home/imgs/menu.png" width="25" height="25"></a>
 	  			<c:if test="${sessionScope.memberDTO eq null}">
 	  			<a rel="tooltip" title="로그인" href="login">
-	  				<img src="resources/home/imgs/login.png" width="25" height="25">
+	  				<img src="resources/home/imgs/login.png" width="15px" height="15px">
 	  			</a>
 	  			</c:if>
 	  			<c:if test="${sessionScope.memberDTO ne null}">
 	  				<abbr title="정보보기">
-	  				<img id="myinfo" src="resources/home/imgs/profile.png" width="30" height="30">
+	  				<img id="myinfo" src="resources/home/imgs/profile.png" width="25px" height="25px">
 	  				</abbr>
 	  			</c:if>
 			</div>
@@ -87,22 +93,18 @@
 				<a id="close2">닫기</a>
 			</div>
 			
-		</div>
+		<!-- </div> -->
 	</div>
 	<!--//header -->
 	
 	<!--container -->
 	<div id="container">
-		<p>노트</p>
+		<p>${sessionScope.memberDTO.name}님의 노트</p>
 		
 		<!--aside -->
 		<div class="aside">
 			사용자 ID : ${sessionScope.memberDTO.id} <br>
 			사용자 이름 : ${sessionScope.memberDTO.name} <br>
-			<a href="note_list?id=${sessionScope.memberDTO.id}">내 노트 보기</a> <br>
-			<a href="note_insert">
-				<img src="resources/tfNote/plus.jpg" style="width:100px; height:50px;">
-			</a>
 		</div>
 		<!--//aside -->
 
