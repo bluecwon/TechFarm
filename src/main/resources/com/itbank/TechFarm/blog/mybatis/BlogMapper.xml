@@ -66,4 +66,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <select resultType="BlogBoardDTO" id="getBoard" parameterType="int">
   select * from blog_board where no=#{no}
   </select>
+  
+  <update id="updateBoard" parameterType="BlogBoardDTO">
+  update blog_board set area=#{area},subject=#{subject},content=#{content},file1=#{file1},open=#{open} where no=#{no}
+  </update>
+  
+  <delete parameterType="int" id="deleteBoard">
+  delete from blog_board where no=#{no}
+  </delete>
+  
+  
 </mapper>

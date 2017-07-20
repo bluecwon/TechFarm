@@ -13,6 +13,12 @@
 
 <script type="text/javascript" charset="utf-8">
 sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+function checkDelBoard(no){
+	 var isDel = window.confirm("삭제한 게시글은 복구할 수 없습니다. 정말로 삭제하시겠습니까?")
+	 if(isDel){
+		 location.href="deleteBoard?no="+no
+	 }
+}
 </script>
 
 </head>

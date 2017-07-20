@@ -50,4 +50,16 @@ public class Blog_BoardDAOImpl implements Blog_BoardDAO {
 		return BlogMapper.getBoard(no);
 	}
 
+	@Override
+	public int updateBoard(Blog_BoardDTO dto) {
+		// TODO Auto-generated method stub
+		return BlogMapper.updateBoard(dto);
+	}
+
+	@Override
+	public int deleteBoard(int no) {
+		// TODO Auto-generated method stub
+		return BlogMapper.deleteBoard(no);
+	}
+
 }

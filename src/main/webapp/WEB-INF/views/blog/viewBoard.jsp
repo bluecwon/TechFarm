@@ -23,7 +23,11 @@
 							<td width="100%" height="500" colspan="3" valign="top" id="view">${boardDTO.content}</td>
 						</tr>
 						<tr>
-							<td colspan="3" align="right" id="view"> 목록&nbsp;&nbsp;수정</td>
+							<td colspan="3" align="right" id="view"> 
+							<a href="listBoard?title=${title}&boardno=${boardDTO.boardno}">목록</a>&nbsp;&nbsp;
+							<a href="updateBoard?title=${title}&no=${boardDTO.no}">수정</a>&nbsp;&nbsp;
+							<a href="javascript:checkDelBoard('${boardDTO.no}');">삭제</a>&nbsp;&nbsp;
+							</td>
 						</tr>
 						<tr>
 							<td width="10%" align="center">댓글</td> 

@@ -135,4 +135,21 @@ public class BlogMapper {
 	  session.close();
 	  return dto;
   }
+  
+  public static int updateBoard(Blog_BoardDTO dto){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.update("updateBoard",dto);
+	  session.commit();
+	  session.close();
+	  return res;
+  }
+  
+  public static int deleteBoard(int no){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.delete("deleteBoard",no);
+	  session.commit();
+	  session.close();
+	return res;
+	  
+  }
 }
