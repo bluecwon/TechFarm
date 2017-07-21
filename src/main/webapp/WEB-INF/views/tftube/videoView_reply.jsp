@@ -36,7 +36,7 @@ $(function(){
 </c:when>
 <c:otherwise>
 <tr><td>
-<form name="f1" method="post" action=tftube_reply_insert>
+<form name="f1" method="post" action="tftube_reply_insert">
 <textArea name="content"></textArea>
 <input type="hidden" name="video_name" value="${vdto.video_name}">
 <input type="hidden" name="no" value="${vdto.no}">

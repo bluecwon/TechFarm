@@ -22,9 +22,9 @@ $("#but").click(function(){
 
 
 
-<div id="1"><!-- start of 1 -->
+<div id="1" style="width=100%"><!-- start of 1 -->
 <Button id="but">펼치기</Button><a href="tftube_main">TFtube				</a>			
-검색	<input type="text" name="search" maxlength="200"> <input type="button" value="검색" width="900">
+검색	<input type="text" name="search" size="20" style="width=100%"> <input type="button" value="검색" width="900">
 <c:choose>
 <c:when test="${memberDTO==null}"><a href="login">업로드</a>	
 		<a href="login">로그인</a>

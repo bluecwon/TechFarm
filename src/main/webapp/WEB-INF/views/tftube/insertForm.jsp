@@ -15,12 +15,12 @@
 <form name="f" method="post" enctype="multipart/form-data" action="tftube_video_insert">
 
 <table>
-<tr><td>파일: <input type="file" id="filename" name="filename" accept="video/*" >
-<p id="file_check"></p></td></tr>
-<tr><td>제목: <input type="text" id="title" name="title">
-<p id="title_check"></p></td></tr>
-<tr><td>설명: <input type="text" id="description" name="description">
-<p id="description_check"></p></td></tr>
+<tr><td>파일: <input type="file" id="video" name="filename" accept="video/*" >
+<font color="red"><p id="video_check"></p></font></td></tr>
+<tr><td>제목: <input type="text" name="title" id="title" >
+<font color="red"><p id="title_check"></p></font></td></tr>
+<tr><td>설명: <input type="text" name="description" id="description">
+<font color="red"><p id="description_check"></p></font></td></tr>
 <tr><td>카테고리 
 <select name="category">
 <option value="movie" selected>영화</option>
@@ -49,52 +49,74 @@
 
 
 
-<tr><td>미리보기 이미지:<input type="file" id="image" name="image">
-<p id="image_check"></p>
-<button type="submit" onClick="check_file()">전송</button>
-<!-- <input type="submit" value="전송"> -->
+<tr><td>미리보기 이미지:<input type="file" name="image" id="image">
+<font color="red"><p id="image_check"></p></font>
+<input type="button" onClick="check_file()" value="전송">
 <input type="reset" value="취소">
 </td></tr>
 </table>
 </form> 
 
-<article>
+<!-- <article> -->
   <p id="status"><!-- File API &amp; FileReader API not supported --></p>   
   <div id="holder"></div>
-</article>
+  </div> <!-- end of 2-2-1 -->
+<!-- </article> -->
 
 <script>
+var video_check=document.getElementById("video_check");
+var title_check=document.getElementById("title_check");
+var description_check=document.getElementById("description_check");
+var image_check=document.getElementById("image_check"); 
 
-function check_file(){
-	
-	var image=document.getElementById("image");
-	var file=document.getElementById("filename");
-	var title=document.getElementById("title");
-	var description=document.getElementById("description");
-	
-	var file_check=document.getElementById('file_check');
-	var title_check=document.getElementById('title_check');;
-	var description_check=document.getElementById('description_check');;
-	var image_check=document.getElementById('image_check');;
-	
+/*  video.onchange=function(){
 	if(!(file.substring(file.length()-3, file.length()).equals("mp4"))){
-		file_check.innerHTML = 'mp4 동영상만 업로드 가능 합니다';
-		
+		video_check.innerHTML = 'mp4 동영상만 업로드 가능 합니다';		
 	}else if(file==null){
-		file_check.innerHTML = '업로드 하실 동영상을 선택하세요.'; 	
+		video_check.innerHTML = '업로드 하실 동영상을 선택하세요.'; 	
 	}
-	if(title==null){
+};  */
+ 
+ function check_file(){	
+	var image=document.getElementById("image").value;//이것만 다르다.
+	var video=document.getElementById("video").value;//이것만 다르다.
+	var title=document.getElementById("title").value;
+	var description=document.getElementById("description").value;
+	/* alert(image); alert(video); */
+	if(title==""){		
 		title_check.innerHTML = '제목을 입력해주세요.'; 	
+	}else{
+		title_check.innerHTML ="";		
 	}
-	if(description==null){
+	
+	if(video==""){		
+	 	video_check.innerHTML = '업로드 하실 동영상을 선택하세요.';	 	
+	}/* else if(!(video.substring(video.length()-2, video.length()).equals("mp4"))){		
+		   video_check.innerHTML = 'mp4 동영상만 업로드 가능 합니다'; 	
+	} */else{
+		video_check.innerHTML = "";
+	} 
+
+	if(description==""){			
 		description_check.innerHTML = '내용을 입력해주세요.'; 	
-	}	
-	if(image==null){
+	}else{
+		description_check.innerHTML ="";
+		
+	}
+	if(image==""){		
 		image_check.innerHTML = '미리보기 이미지를 선택하세요.'; 	
-	}	
-	if(file==null||title==null||description==null||image==null){return;}
-	document.f.summit();
-}
+	}else{
+		image_check.innerHTML ="";
+		
+	}
+	
+	if(video==""||title==""||description==""||image==""){			
+		return;
+	}else{		
+		document.f.submit();
+	}
+};
+
 /* present image */
  var upload=document.getElementById('image'), 
  /* var upload = document.getElementsByTagName('input')[3], */ 
@@ -107,18 +129,37 @@ if (typeof window.FileReader === 'undefined') {
   state.className = 'success';
   state.innerHTML = ''/* 'File API & FileReader available' */;
 }
- 
-upload.onchange = function (e) {
-  e.preventDefault();
+/* file.onchange = function (e) {//input text 내용 변경 감지
+	  e.preventDefault();
+
+	  var file = upload.files[0],
+	   reader = new FileReader();
+	  reader.onload = function (event) {
+	    var img = new Image();
+	    img.src = event.target.result;    
+	    img.width = 200;
+	    img.height=160;
+	        
+	    holder.innerHTML = '';
+	    holder.appendChild(img);
+	  };
+	  reader.readAsDataURL(file);
+	  return false;
+	}; */
+
+upload.onchange = function (e) {//input text 내용 변경 감지
+  e.preventDefault();//변경 되는걸(?) 막음.
 
   var file = upload.files[0],
-      reader = new FileReader();
+   reader = new FileReader();
+  
+  //onload dom+모든 리소스 호출후 실행
+  //$() dom이 호출되면 실행
   reader.onload = function (event) {
     var img = new Image();
-    img.src = event.target.result;
-    
-    img.width = 200;
-    img.height=160;
+    img.src = event.target.result;    
+    img.width  = 200;
+    img.height = 160;
         
     holder.innerHTML = '';
     holder.appendChild(img);

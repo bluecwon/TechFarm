@@ -7,8 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<c:set var="like_status" value="${like_status}"/><!-- 컨트롤러에서받아옴 -->
-<c:set var="unlike_status" value="${unlike_status}"/>
+<%-- <c:set var="like_status" value="${like_status}"/><!-- 컨트롤러에서받아옴 -->
+<c:set var="unlike_status" value="${unlike_status}"/> --%>
 <script src="resources/js/jquery-1.9.0.js" type="text/javascript"></script>
 <!-- <script type="text/javascript">
 var like_status=${like_status};
@@ -98,7 +98,7 @@ function move_login(){
 </head>
 <body>
 <!-- video -->
-<div id="2-2-1" style="overflow:auto;"> <!-- start of 2-1-1 -->
+<div id="2-2" style="overflow:auto;"> <!-- start of 2-2 -->
 <table>
 <tr><td><video src="resources/tftube/uploadVideo/${vdto.video_name}" autoplay  
 controls="controls" width="600" height="450"></video>
@@ -179,7 +179,8 @@ controls="controls" width="600" height="450"></video>
 		</c:if>
 		</tr>
 		</table> --%>
- </div><!-- end of 2-2-1 -->
+ </div><!-- end of 2-2-->
+ </div> <!-- end of 2 -->
 </body>
 <%@ include file="main_bottom.jsp"%>
 <style>

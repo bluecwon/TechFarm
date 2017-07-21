@@ -2,8 +2,10 @@ package com.itbank.TechFarm.tftube.dao;
 
 import java.util.List;
 
+import com.itbank.TechFarm.tftube.dto.LikeVideoDTO;
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
 import com.itbank.TechFarm.tftube.dto.Video_RecentVideoDTO;
+import com.itbank.TechFarm.tftube.mybatis.LikeVideoMapper;
 import com.itbank.TechFarm.tftube.mybatis.ReplyMapper;
 import com.itbank.TechFarm.tftube.mybatis.VideoMapper;
 
@@ -38,7 +40,7 @@ public class VideoDAOImpl implements VideoDAO {
 	}
 
 
-	@Override
+	/*@Override
 	public int click_like(int no) {
 		return VideoMapper.click_like(no);
 	}
@@ -61,7 +63,7 @@ public class VideoDAOImpl implements VideoDAO {
 	public int cancel_unlike(int no) {
 		return VideoMapper.cancel_unlike(no);
 	}
-
+*/
 
 	@Override
 	public List<Video_RecentVideoDTO> listRecent_inf(int member_no) {
@@ -79,6 +81,16 @@ public class VideoDAOImpl implements VideoDAO {
 		return VideoMapper.listLike(member_no);
 		
 	}
+
+	@Override
+	public int updateLike(VideoDTO dto) {
+		return VideoMapper.updateLike(dto);
+	}
+
+	
+
+	
+	
 	
 	
 	

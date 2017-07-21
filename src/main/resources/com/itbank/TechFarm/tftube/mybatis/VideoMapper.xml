@@ -8,8 +8,8 @@
 	
 <insert id="insertVideo" parameterType="videoDTO" useGeneratedKeys="true">
 insert into tftube_video
-(member_no,title,description,open,video_name,video_size,readcount,image,likep,unlikep,video_hash,image_hash,like_status,unlike_status,channel) values
-(#{member_no}, #{title},#{description},#{open},#{video_name},#{video_size},0,#{image},0,0,#{video_hash},#{image_hash},0,0,#{channel}) 
+(member_no,title,description,open,video_name,readcount,image,likep,unlikep,channel,category) values
+(#{member_no},#{title},#{description},#{open},#{video_name},0,#{image},0,0,#{channel},#{category}) 
 </insert>
 
 <delete id="deleteVideo" parameterType="int">
@@ -36,7 +36,7 @@ select * from tftube_video where no=#{no} order by no desc
 select * from tftube_video where member_no=#{member_no} order by no desc
 </select> 
 
-<update id="click_like" parameterType="int">
+<!-- <update id="click_like" parameterType="int">
 update tftube_video set likep=likep+1 , like_status=1 where no=#{no}
 </update>
 
@@ -50,16 +50,14 @@ update tftube_video set unlikep=unlikep+1, unlike_status=1 where no=#{no}
 
 <update id="cancel_unlike" parameterType="int">
 update tftube_video set unlikep=unlikep-1, unlike_status=0 where no=#{no}
-</update>
+</update> -->
 
  <select id="listRecent_inf" parameterType="int" resultType="video_recentvideoDTO">
- select a.*,b.recent_no from tftube_video a join tftube_recentvideo b on b.member_no=#{member_no} and a.video_name=b.video_name order by b.recent_no desc limit 40;
- </select>	   
- 
- <select id="listLike" resultType="videoDTO" parameterType="int">
- select * from tftube_video where like_status=1 and member_no=#{member_no}
+ select a.* from tftube_recentvideo a join tftube_video b on a.video_name=b.video_name where a.member_no=#{member_no};
  </select> 
-
-
-
+ 
+<!-- update -->
+<update id="updateLike" parameterType="videoDTO">
+update tftube_video set likep=#{likep} where no=#{no}
+</update> 
 </mapper>	

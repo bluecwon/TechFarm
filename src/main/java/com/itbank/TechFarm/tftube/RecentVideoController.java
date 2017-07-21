@@ -40,9 +40,12 @@ public class RecentVideoController {
 		
 		Object memberDTO_raw=session.getAttribute("memberDTO");
 		if(memberDTO_raw==null){		 
-		
-		mv.setViewName("tftube/message");
-		return mv;
+			msg="로그인이 필요한 서비스 입니다. 로그인을 해주세요.";
+			url="login";
+			mv.addObject("msg",msg);			
+			mv.addObject("url",url);			
+			mv.setViewName("tftube/message");
+			return mv;
 		}else{
 			member=(MemberDTO)memberDTO_raw;
 		}
@@ -55,7 +58,7 @@ public class RecentVideoController {
 		return mv;
 	}
 	//왜 만들었는지 이해 불가능한 코드
-	/*@RequestMapping(value="/tftube_recentvideo_insert", method=RequestMethod.GET)
+	@RequestMapping(value="/tftube_recentvideo_insert", method=RequestMethod.GET)
 	public ModelAndView tftube_recentvideo_insert(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {		
 		ModelAndView mv=new ModelAndView();
@@ -84,7 +87,7 @@ public class RecentVideoController {
 				//end of RecentVideo insert 
 		mv.addObject("tftubevideoView");
 		return mv;
-	}*/
+	}
 	
 	@RequestMapping(value="/tftube_recentvideo_delete_all", method=RequestMethod.GET)
 	public ModelAndView tftube_recent_delall(HttpServletRequest arg0, 

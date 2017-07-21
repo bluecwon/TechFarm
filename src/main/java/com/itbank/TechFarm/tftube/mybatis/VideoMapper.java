@@ -70,7 +70,7 @@ public class VideoMapper {
   		return res;
   	}
 	
-	public static int click_like(int no){
+	/*public static int click_like(int no){
 		SqlSession session=sqlMapper.openSession();		
   		int res=session.update("click_like",no);  		
   		session.commit();
@@ -100,7 +100,7 @@ public class VideoMapper {
   		session.commit();
   		session.close();
 		return res;
-	}
+	}*/
 	
 	public static List<Video_RecentVideoDTO> listRecent_inf(int member_no){
 		SqlSession session=sqlMapper.openSession();
@@ -121,11 +121,14 @@ public class VideoMapper {
 		SqlSession session=sqlMapper.openSession();
 		List<VideoDTO> list=session.selectList("listLike",member_no);
 		session.close();
-		return list;
-		
+		return list;		
 	}
 	
-	
-	
-	
+	public static int updateLike(VideoDTO dto){
+		SqlSession session=sqlMapper.openSession();
+		int res=session.update("updateLike",dto);
+		session.commit();
+		session.close();
+		return res;
+	}
 }
