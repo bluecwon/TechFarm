@@ -16,6 +16,8 @@ public class ContactsDTO {
 	private String website;
 	private String relationship;
 	
+	private String upPath;
+	
 	public int getNo() {
 		return no;
 	}
@@ -94,7 +96,12 @@ public class ContactsDTO {
 	public void setRelationship(String relationship) {
 		this.relationship = relationship;
 	}
-	
+	public String getUpPath() {
+		return upPath;
+	}
+	public void setUpPath(String upPath) {
+		this.upPath = upPath;
+	}
 	
 	
 }
