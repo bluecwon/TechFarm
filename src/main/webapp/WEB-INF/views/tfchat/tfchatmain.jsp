@@ -232,7 +232,9 @@
             function addToDiscussion(writer, sender, msg) {
     			println("addToDiscussion 호출됨 : " + writer + ", " + msg);
     			if(sender=='system'){
-    				
+    				var contents = "<div align='center'><p>-------"+msg+"-------<p></div>";
+    				println("추가할 HTML : " + contents);
+       			    $(".discussion").append(contents);
     			}else{
     				var contents = "<li class='" + writer + "'>"
         			 + "  <div class='messages'>"
@@ -282,7 +284,6 @@
 	<input type="hidden" id="roomNameInput" value="${sessionScope.memberDTO.id}" />
 	<input type="hidden" id="senderInput" value="${sessionScope.memberDTO.id }" />
 	<input type="hidden" id="chattype" value="groupchat">
-	<input type="hidden" id="senderInput" value="${sessionScope.memberDTO.id }" />
 	<input type="hidden" id="recepientInput"/>
 	<div id="idresult">
     <div id="idList">

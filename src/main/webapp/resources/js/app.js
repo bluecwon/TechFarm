@@ -250,6 +250,9 @@ io.sockets.on('connection', function(socket) {
     	var output={inviteRoom:roomId, inviteRoomOwner:roomOwner}
     	console.log('클라이언트로 보낼 데이터 : ' + JSON.stringify(output)+inviteId);
     	io.sockets.connected[login_ids[inviteId]].emit('invite', output);
+    	var data=inviteId+'님이 입장했습니다.';
+    	var sysmessage = {sender:'system', recepient:roomId, command:'groupchat', type:'text', data:data};
+    	io.sockets.in(roomId).emit('message', sysmessage);
     });
     
 
@@ -294,13 +297,13 @@ io.sockets.on('connection', function(socket) {
         } else if (room.command === 'join') {  // 방에 입장하기 요청
 
             socket.join(room.roomId);
-         
+            var data=room.roomId+'방에 초대되었습니다.';
+            var sysmessage = {sender:'system', recepient:room.roomId, command:'groupchat', type:'text', data:data};
+            socket.emit('message',sysmessage);
             // 응답 메시지 전송
             sendResponse(socket, 'room', '200', '방에 입장했습니다.');
         } else if (room.command === 'leave') {  // 방 나가기 요청
-
             socket.leave(room.roomId);
-         
             // 응답 메시지 전송
             sendResponse(socket, 'room', '200', '방에서 나갔습니다.');
         }
