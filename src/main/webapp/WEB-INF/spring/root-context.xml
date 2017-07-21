@@ -25,6 +25,11 @@
 	<!-- tfcontacts -->
 	<bean class="com.itbank.TechFarm.contacts.ContactsDAOImpl" id="contactsDAO"/>
 	<!-- messagesource -->
+	
+	<!-- start tfNote DAO -->
+	<bean class="com.itbank.TechFarm.tfNoteDAO.NoteDAOImpl" id="noteDAO"/>
+	<!-- end tfNote DAO -->
+	
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basenames">
