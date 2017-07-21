@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itbank.TechFarm.james.JamesUser;
 import com.itbank.TechFarm.login.member.MemberDAO;
 import com.itbank.TechFarm.login.member.MemberDTO;
 
@@ -24,6 +25,9 @@ import com.itbank.TechFarm.login.member.MemberDTO;
 public class LoginController {
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	@Autowired
+	private JamesUser jamesUser;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request, HttpSession session, Model model) {
@@ -72,6 +76,7 @@ public class LoginController {
 		}
 		int res=memberDAO.insertMember(dto);
 		if(res==1){
+			jamesUser.addUser(dto.getId(), dto.getPasswd());
 			return "redirect:login";
 		}else{
 			return "redirect:createAccount";

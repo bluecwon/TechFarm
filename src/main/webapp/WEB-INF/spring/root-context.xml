@@ -26,6 +26,7 @@
 	<bean class="com.itbank.TechFarm.contacts.ContactsDAOImpl" id="contactsDAO"/>
 	<!-- james -->
 	<bean class="com.itbank.TechFarm.james.JamesDAOImpl" id="jamesDAO"/>
+	<bean class="com.itbank.TechFarm.james.JamesUser" id="jamesUser"/>
 	<!-- messagesource -->
 	
 	<!-- start tfNote DAO -->

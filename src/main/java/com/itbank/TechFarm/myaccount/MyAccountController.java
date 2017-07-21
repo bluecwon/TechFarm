@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.itbank.TechFarm.james.JamesUser;
 import com.itbank.TechFarm.login.member.MemberDAO;
 import com.itbank.TechFarm.login.member.MemberDTO;
 
@@ -20,6 +21,9 @@ import com.itbank.TechFarm.login.member.MemberDTO;
 public class MyAccountController {
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	@Autowired
+	private JamesUser jamesUser;
 	
 	@RequestMapping(value = "/myAccount", method = RequestMethod.GET)
 	public String myAccount(HttpServletRequest request, HttpServletResponse response) {
@@ -56,6 +60,7 @@ public class MyAccountController {
 			MemberDTO dto=(MemberDTO)session.getAttribute("memberDTO");
 			dto.setPasswd(passwd);
 			int res=memberDAO.editPw(dto);
+			jamesUser.setPassword(dto.getId(), passwd);
 		}else{
 			model.addAttribute("cid", 1);
 			return "myaccount/editPw";
@@ -99,6 +104,7 @@ public class MyAccountController {
 		MemberDTO dto=(MemberDTO)session.getAttribute("memberDTO");
 		int res=memberDAO.deleteMember(dto.getNo());
 		if(res==1){
+			jamesUser.deleteUser(dto.getId());
 			session.invalidate();
 			return "home";
 		}else{
