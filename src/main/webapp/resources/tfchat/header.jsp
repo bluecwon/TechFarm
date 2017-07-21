@@ -1,14 +1,13 @@
 <%@page import="com.mysql.jdbc.interceptors.SessionAssociationInterceptor"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 <html>
 	<head>
 		<meta charset="utf-8"/>
 		<title>TF HOME</title>
-		<link type="text/css" href="resources/home/style.css" rel="stylesheet" />
+		<link type="text/css" href="resources/tfchat/style.css" rel="stylesheet" />
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
@@ -37,6 +36,9 @@
 	<body>
 		<div id="header" align="right">
 			<div class="topnav">
+			<div class="title">
+				TF CHAT
+			</div>
 	  			<a rel="tooltip" title="메뉴"><img id="menu" src="resources/home/imgs/menu.png" width="25" height="25"></a>&nbsp&nbsp&nbsp&nbsp
 	  			<c:if test="${sessionScope.memberDTO eq null}">
 	  			<a rel="tooltip" title="로그인" href="login">
@@ -48,22 +50,22 @@
 	  				<img id="myinfo" src="resources/home/imgs/profile.png" width="30" height="30">
 	  				</abbr>
 	  			</c:if>
-	  			&nbsp&nbsp&nbsp&nbsp&nbsp 
+	  			
 			</div>
 			<div class="header_menu" align="center">
 			<table>
 				<tr>
 					<td align="center"><a href="#" onclick="check('myAccount');"><img id="img_handle" src="resources/home/imgs/account.png" width="40%" height="35%"></a><br>내계정</td>
-					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/search.png" width="40%" height="35%"></a><br>검색</td>
-					<td align="center"><a href="#" onclick="check('listJames');"><img id="img_handle" src="resources/home/imgs/mail.png" width="40%" height="35%"></a><br>메일</td>
+					<td align="center"><a href="home"><img id="img_handle" src="resources/home/imgs/search.png" width="40%" height="35%"></a><br>검색</td>
+					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/mail.png" width="40%" height="35%"></a><br>메일</td>
 				</tr>
 				<tr>
-					<td align="center"><a href="tfPlusIndex?id=${sessionScope.memberDTO.id}"><img id="img_handle" src="resources/home/imgs/social.png" width="40%" height="35%"></a><br>SNS</td>
+					<td align="center"><a href="#" onclick="check('tfPlusIndex');"><img id="img_handle" src="resources/home/imgs/social.png" width="40%" height="35%"></a><br>SNS</td>
 					<td align="center"><a href="tftube_main"><img id="img_handle" src="resources/home/imgs/utube.png" width="40%" height="35%"></a><br>영상</td>
-					<td align="center"><a href="blogmain"><img id="img_handle" src="resources/home/imgs/document.png" width="40%" height="35%"></a><br>블로그</td>
+					<td align="center"><a href="blogmain.do"><img id="img_handle" src="resources/home/imgs/document.png" width="40%" height="35%"></a><br>블로그</td>
 				</tr>
 				<tr>
-					<td align="center"><a href="tfNoteIndex?id=${sessionScope.memberDTO.id}"><img id="img_handle" src="resources/home/imgs/memo.png" width="40%" height="35%"></a><br>메모</td>
+					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/memo.png" width="40%" height="35%"></a><br>메모</td>
 					<td align="center"><a href="#" onclick="check('tfchat_main');"><img id="img_handle" src="resources/home/imgs/chatting.png" width="40%" height="35%"></a><br>채팅</td>
 					<td align="center"><a href="#" onclick="check('listContacts');"><img id="img_handle" src="resources/home/imgs/calendar.png" width="40%" height="35%"></a><br>연락처</td>
 				</tr>
