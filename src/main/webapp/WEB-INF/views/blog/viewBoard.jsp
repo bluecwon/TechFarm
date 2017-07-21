@@ -15,8 +15,14 @@
 							<td width="20%" class="view" align="center" id="view">${optionDTO.nickname}(${optionDTO.id})</td>
 						</tr>
 						<c:if test="${boardDTO.file1 != ''}">
-						<tr>
-							<td width="100%" colspan="3" align="center"><a href="fileDownload?fil1=${boardDTO.file1}">${boardDTO.file1}</a>
+						<tr>	
+							<td width="100%" colspan="3" align="center">
+							<form action="fileDownload">
+							<input type="hidden" name="upPath" value="${upPath}">
+							<input type="hidden" name="file1" value="${boardDTO.file1}">
+							첨부파일 : ${boardDTO.file1} &nbsp;&nbsp; <input type="submit" value="다운로드">
+							</form>
+							</td>
 						</tr>
 						</c:if>
 						<tr>
@@ -94,7 +100,7 @@
 																		        	<c:if test="${myProfileDTO == null}">
 																		        		<img src="resources/tfPlus/images/default/basicImg.JPG" style="width:25px; height:15px;">
 																		        	</c:if>
-																					<spen style="font-size:10px">${sessionScope.memberDTO.name}</spen>
+																					<span style="font-size:10px">${sessionScope.memberDTO.name}</span>
 																				</th>
 																				<td>
 																					<input name="profileAddContents" type="text" class="form-poshytip" title="내용을 입력하세요" style="background-color:#e2e2e2;"/>
@@ -166,10 +172,6 @@
 										<!-- 댓글 끝 -->
 										
 									</div>
-							
-							
-							
-							
 							</td>
 						</tr>
 					</table>			

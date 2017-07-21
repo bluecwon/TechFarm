@@ -1,15 +1,22 @@
 package com.itbank.TechFarm.blog;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -24,13 +31,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import com.itbank.TechFarm.blog.dao.Blog_BoardDAO;
 import com.itbank.TechFarm.blog.dao.Blog_OptionDAO;
@@ -167,7 +177,7 @@ public class BlogBoardController {
 		int no = ServletRequestUtils.getIntParameter(request, "no");
 		mav.setViewName("blog/listBoardMain");
 		HttpSession session = request.getSession();
-		String upPath = session.getServletContext().getRealPath("/resources/upload/");
+		String upPath = session.getServletContext().getRealPath("/resources/upload");
 		Blog_BoardDTO dto = boardDAO.getBoard(no);
 		
 		mav.addObject("boardDTO",dto);
@@ -261,25 +271,4 @@ public class BlogBoardController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/fileDownload")
-	public ModelAndView fileDownload(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		ModelAndView mav = new ModelAndView();
-		String file1 = request.getParameter("file1");
-		
-		
-		
-		
-		int no = ServletRequestUtils.getIntParameter(request, "no");
-		mav.setViewName("blog/listBoardMain");
-		HttpSession session = request.getSession();
-		String upPath = session.getServletContext().getRealPath("/resources/upload/");
-		Blog_BoardDTO dto = boardDAO.getBoard(no);
-		
-		mav.addObject("boardDTO",dto);
-		mav.addObject("title",dto.getTitle());
-
-		mav.addObject("upPath",upPath);
-		return mav;
-		}
-
 }
