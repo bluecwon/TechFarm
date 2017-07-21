@@ -1,63 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@page import="java.util.Date"%>
+<!DOCTYPE html>
 <html>
-<link rel="stylesheet" type="text/css" href="resources/tftube/style.css">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script src="resources/js/jquery-1.9.0.js" type="text/javascript"></script>
-<script type="text/javascript">
-$(function(){
-
-$("#but").click(function(){	
-	$(".top").slideToggle('fast');
-});
-}
-)
-</script>
-</head>
-<body>
-
-
-
-<div id="1" style="width=100%"><!-- start of 1 -->
-<Button id="but">펼치기</Button><a href="tftube_main">TFtube				</a>			
-검색	<input type="text" name="search" size="20" style="width=100%"> <input type="button" value="검색" width="900">
-<c:choose>
-<c:when test="${memberDTO==null}"><a href="login">업로드</a>	
-		<a href="login">로그인</a>
-</c:when>
-<c:otherwise>
-<a href="tftube_video_insert">업로드</a> 
-</c:otherwise></c:choose>	
-</div><!-- start of 2 -->
-
-
-<!-- start of 2 -->
-<div id="2">
-<!-- stsrt of 2-1-->
-<div id="2-1" class="top" style="float: left;">
-<table>
-<tr><td><a href="tftube_main">홈</a><br>
-인기<br>
-<c:if test="${memberDTO!=null}">
-<a href="tftube_mychannel">내 채널</a><br>
-<a href="tftube_recentvideo_listRecent_member_no">최근 본 동영상</a><br>
-<a href="likeVideo_list">관심 동영상</a>
-</c:if>
-<p>
-음악<br>
-스포츠<br>
-게임<br>
-영화<br>
-TV프로그램<br>
-뉴스<br>
-실시간<br>
-</td>
-
-</table>
-</div><!-- end of 2 -1-->
-</body>
-</html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="resources/tftube/cssU.css"/>
+		<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+		<title>Insert title here</title>
+		
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+	    <script type="text/javascript">
+	        $(document).ready(function() {
+	            $("#wideView").click(function() {
+	                $("#content").toggleClass("wide");
+	                $(this).toggleClass("wide");
+	            });
+	            $("#menu").click(function() { 
+					$("#header").find(".header_menu").slideDown('normal').show();
+				});
+				$("#close").click(function() {
+					$("#header").find(".header_menu").slideUp('fast').show();  
+				});
+				$("#myinfo").click(function() { 
+					$("#header").find(".header_info").slideDown('normal').show();
+				});
+				$("#close2").click(function() {
+					$("#header").find(".header_info").slideUp('fast').show();  
+				});
+	        });
+	    </script>
+	</head>
+	<body>
+	    <div id="header">
+			<div class="topnav" align="right">
+	  			<a rel="tooltip" title="메뉴"><img id="menu" src="resources/home/imgs/menu.png" width="25" height="25"></a>
+	  			<c:if test="${sessionScope.memberDTO eq null}">
+	  			<a rel="tooltip" title="로그인" href="login">
+	  				<img src="resources/home/imgs/login.png" width="15px" height="15px">
+	  			</a>
+	  			</c:if>
+	  			<c:if test="${sessionScope.memberDTO ne null}">
+	  				<abbr title="정보보기">
+	  				<img id="myinfo" src="resources/home/imgs/profile.png" width="25px" height="25px">
+	  				</abbr>
+	  			</c:if>
+			</div>
+			<div class="header_menu" align="center">
+			<table>
+				<tr>
+					<td align="center"><a href="#" onclick="check('myAccount');"><img id="img_handle" src="resources/home/imgs/account.png" width="40%" height="35%"></a><br>내계정</td>
+					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/search.png" width="40%" height="35%"></a><br>검색</td>
+					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/mail.png" width="40%" height="35%"></a><br>메일</td>
+				</tr>
+				<tr>
+					<td align="center"><a href="tfPlusIndex?id=${sessionScope.memberDTO.id}"><img id="img_handle" src="resources/home/imgs/social.png" width="40%" height="35%"></a><br>SNS</td>
+					<td align="center"><a href="tftube_main"><img id="img_handle" src="resources/home/imgs/utube.png" width="40%" height="35%"></a><br>영상</td>
+					<td align="center"><a href="blogmain.do"><img id="img_handle" src="resources/home/imgs/document.png" width="40%" height="35%"></a><br>블로그</td>
+				</tr>
+				<tr>
+					<td align="center"><a href="tfNoteIndex?id=${sessionScope.memberDTO.id}"><img id="img_handle" src="resources/home/imgs/memo.png" width="40%" height="35%"></a><br>메모</td>
+					<td align="center"><a href="chatting"><img id="img_handle" src="resources/home/imgs/chatting.png" width="40%" height="35%"></a><br>채팅</td>
+					<td align="center"><a href="#" onclick="check('listContacts');"><img id="img_handle" src="resources/home/imgs/calendar.png" width="40%" height="35%"></a><br>연락처</td>
+				</tr>
+				<tr>
+					<td>
+				</tr>
+				<tr>
+					<td align="center" colspan="3" id="close"><img id="img_handle" src="resources/home/imgs/close.png" width="10%" height="20%"></td>
+				</tr>
+			</table>			
+			</div>
+			<div class="header_info" align="center">
+				${sessionScope.memberDTO.name}님 환영합니다.<br>
+				${sessionScope.memberDTO.id}<br>
+				${sessionScope.memberDTO.email}<br>
+				<a href="logout">로그아웃</a><br>
+				<a id="close2">닫기</a>
+			</div>
+	        <br />
+	        <h2>유튜브</h2>
+	    </div>
+	    
+	    <div id="main">
