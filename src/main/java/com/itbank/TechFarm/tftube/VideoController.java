@@ -267,6 +267,15 @@ public class VideoController {
 		
 		//like 2차원 코딩이 필요할듯.       
 		//no member_no video_name like status unlike
+		if(member==null){
+			
+			msg="로그인이 필요한 서비스 입니다. 로그인을 해주세요.";
+			url="login";
+			mv.addObject("msg",msg);
+			mv.addObject("url",url);
+			mv.setViewName("tftube/message");
+			return mv;
+		}
 		int member_no=member.getNo();
 		//클릭할때마다 다른 값이들어오긴함.		
 		
@@ -289,13 +298,13 @@ public class VideoController {
 		int res=0;		
 		//when like_disabled
 		if(like_status==1){
-		res=likevideoDAO.like_insert(lvdto_insert);}
-		else if(like_status==0){
+		res=likevideoDAO.like_insert(lvdto_insert);
+		}else if(like_status==0){
 		//when like
 		res=likevideoDAO.like_delete(member_no,no);}		
 		
 		//좋아요 갯수 세기-제대로 한거 맞니?
-		int count=likevideoDAO.likecount_member(member_no);	
+		int count=likevideoDAO.likecount_member(member_no);		
 		
 		//좋아요 갯수 업데이트 dto.get
 		VideoDTO vdto_like=new VideoDTO();
