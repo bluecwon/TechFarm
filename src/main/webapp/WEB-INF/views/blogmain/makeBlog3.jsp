@@ -13,12 +13,13 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 	<article>
 		<h1>블로그 만들기<img src="resources/images/2step.jpg" align="right" width="150" height="50"></h1>
 		<h2>3단계:블로그 꾸미기</h2>
-		<form action="blogMakePro.blog" method="post" enctype="multipart/form-data">
+		<form action="blogMakePro" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="blogname" value="${blogname}">
 		<input type="hidden" name="nickname" value="${nickname}">
 		<input type="hidden" name="introduce" value="${introduce}">
 		<input type="hidden" name="layout" value="${layout}">
-		<input type="hidden" name="id" value="${id}">
+		<input type="hidden" name="id" value="${sessionScope.memberDTO.id}">
+		<input type="hidden" name="headerword" value="${headerword}">
 			<table>
 				<tr>
 					<td>스킨</td>
@@ -74,13 +75,6 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 							<td width="20%"><input type="radio" name="skin" value="skin26"></td>
 							<td width="20%"><input type="radio" name="skin" value="skin27"></td>
 							<td width="20%"><input type="radio" name="skin" value="skin28"></td>
-						</tr>
-						<tr>
-							<td>패턴</td>
-							<td width="20%"><input type="radio" name="skin" value="skin29"></td>
-							<td width="20%"><input type="radio" name="skin" value="skin30"></td>
-							<td width="20%"><input type="radio" name="skin" value="skin31"></td>
-							<td width="20%"><input type="radio" name="skin" value="skin32"></td>
 						</tr>	
 					</table>
 					</div>

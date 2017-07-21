@@ -18,4 +18,62 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   select * from blog_option where id=#{id}
   </select>
   
+  <delete parameterType="String" id="deleteBlog">
+  delete from blog_option where id=#{id}
+  </delete>
+  
+  <insert id="makeBoard" parameterType="BlogMakeBoardDTO" useGeneratedKeys="true">
+  insert into blog_makeboard (sideno,id,title) values(#{sideno},#{id},#{title})
+  </insert>
+  
+  <select resultType="BlogMakeBoardDTO" id="listBoardTitle" parameterType="String">
+  select * from blog_makeboard where id=#{id}
+  </select>
+  
+  <update id="editBlog_pf_int" parameterType="BlogOptionDTO">
+  update blog_option set profile=#{profile},introduce=#{introduce} where id=#{id}
+  </update>
+  
+  <update id="editBlog_layout" parameterType="BlogOptionDTO">
+  update blog_option set layout=#{layout} where id=#{id}
+  </update>
+  
+  <update id="editBlog_skin" parameterType="BlogOptionDTO">
+  update blog_option set profile=#{profile},header=#{header} where id=#{id}
+  </update>
+  
+  <update id="editBlog_headerword" parameterType="BlogOptionDTO">
+  update blog_option set headerword=#{headerword} where id=#{id}
+  </update>
+  
+  <select resultType="BlogMakeBoardDTO" id="getBoardT" parameterType="int">
+  select * from blog_makeboard where boardno=#{boardno}
+  </select>
+  
+  <update id="editBoardT" parameterType="BlogMakeBoardDTO">
+  update blog_makeboard set sideno=#{sideno},title=#{title} where boardno=#{boardno}
+  </update>
+  
+  <select resultType="BlogBoardDTO" id="listBoard" parameterType="int">
+  select * from blog_board where boardno=#{boardno}
+  </select>
+  
+  <insert id="insertBoard" parameterType="BlogBoardDTO" useGeneratedKeys="true">
+  insert into blog_board (id,area,subject,content,file1,readcount,reply,open,boardno,title) 
+  values(#{id},#{area},#{subject},#{content},#{file1},#{readcount},#{reply},#{open},#{boardno},#{title})
+  </insert>
+  
+  <select resultType="BlogBoardDTO" id="getBoard" parameterType="int">
+  select * from blog_board where no=#{no}
+  </select>
+  
+  <update id="updateBoard" parameterType="BlogBoardDTO">
+  update blog_board set area=#{area},subject=#{subject},content=#{content},file1=#{file1},open=#{open} where no=#{no}
+  </update>
+  
+  <delete parameterType="int" id="deleteBoard">
+  delete from blog_board where no=#{no}
+  </delete>
+  
+  
 </mapper>

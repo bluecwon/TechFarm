@@ -6,8 +6,9 @@
 <section>
 	<article>
 		<h2>블로그 만들기 성공!<img src="resources/images/1step.jpg" align="right" width="150" height="50"></h2>
-		<input type="button" value="내 블로그 보러가기">
-		<input type="button" value="블로그 홈">
+		<input type="button" value="내 블로그 보러가기" onclick="location.href='myBlog?id=${id}'">
+		<input type="button" value="블로그 홈" onclick="location.href='blogStart'">
 	</article>  
 </section>
+<%@ include file="aside.jsp"%>
 <%@ include file="footer.jsp"%>

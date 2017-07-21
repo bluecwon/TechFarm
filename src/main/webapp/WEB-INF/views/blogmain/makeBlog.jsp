@@ -16,12 +16,12 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 		<h2>블로그 만들기<img src="resources/images/1step.jpg" align="right" width="150" height="50"></h2>
 		<h3>1단계:블로그 기본설정</h3>
 		
-		<form action="blogMake2.blog" method="post" enctype="multipart/form-data" name="makeblog">
-		<input type="hidden" name="id" value="${id}"> 
+		<form action="blogMake2" method="post" enctype="multipart/form-data" name="makeblog">
+		
 			<table>
 				<tr>
 					<td>제목</td>
-					<td><input type="text" name="blogname" value="${id}님의 블로그" maxlength="30"></td>
+					<td><input type="text" name="blogname" value="${sessionScope.memberDTO.id} BLOG" maxlength="30"></td>
 					<td>한글,영문,숫자 혼용가능 (30자 이내)</td>
 				</tr>
 				<tr>

@@ -39,9 +39,9 @@ $(document).ready(function(){
 </head>
 <body>
 <div id="main" align="center" valign="center">
-<h1>Farm 블로그에 오신걸 환영합니다.</h1>
-<h2>A safe place for all your files</h2>
-<img src="resources/images/Enter.png" onclick="location.href='blogStart.blog'" style="cursor:pointer;" width="200" height="100"/>
+<h1>내 관심사를 내 스타일대로</h1>
+<h2>독특하고 멋진 블로그를 만들어 보세요. 무료로 손쉽게 만들 수 있습니다.</h2>
+<img src="resources/images/Enter.png" onclick="location.href='blogStart'" style="cursor:pointer;" width="200" height="100"/>
 </div>
 </body>
 </html>
