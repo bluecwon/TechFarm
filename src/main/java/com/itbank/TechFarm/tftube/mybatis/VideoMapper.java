@@ -70,6 +70,23 @@ public class VideoMapper {
   		return res;
   	}
 	
+	public static int likecount(int member_no){
+		SqlSession session=sqlMapper.openSession();
+		int res=session.selectOne("likecount",member_no);
+		session.close();
+		return res;		
+	}
+	
+	public static int unlikecount(int member_no){
+		SqlSession session=sqlMapper.openSession();
+		int res=session.selectOne("unlikecount",member_no);
+		session.close();
+		return res;	
+		
+	}
+	
+
+	
 	/*public static int click_like(int no){
 		SqlSession session=sqlMapper.openSession();		
   		int res=session.update("click_like",no);  		

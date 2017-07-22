@@ -1,18 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
-
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 <%@include file="main_top.jsp"%>
 <div id="2-2-1"><!-- start of 2-2-1 -->
-
-
 업로드한 동영상<p>
 <table>
 <c:choose>
@@ -30,8 +20,6 @@
 </c:forEach>
 </c:otherwise>
 </c:choose>
-
-
 
 구독채널<p>
 <table>
@@ -103,6 +91,5 @@
 <p>
 <p>
 <%@include file="main_bottom.jsp" %>
-</body>
 
-</html>
+

@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
+
  <%-- <select id="listRecent_inf" parameterType="int" resultType="video_recentvideoDTO">
  select a.*,b.recent_no from tftube_video a join tftube_recentvideo b on a.video_name=b.video_name and b.member_no=#{member_no} order by b.recent_no desc limit 40;
  </select> 
@@ -12,7 +8,7 @@
   --%>	
 <%@ include file="main_top.jsp"%> 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
 <script type="text/javascript">
 function delete_recent(){
 	location.href="tftube_recentvideo_delete";
@@ -55,5 +51,4 @@ ${recentVideo.description}
 </table>
 </div>
 <%@ include file="main_bottom.jsp"%> 
-</body>
-</html>
+

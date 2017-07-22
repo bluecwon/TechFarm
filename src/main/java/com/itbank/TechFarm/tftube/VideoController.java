@@ -97,11 +97,12 @@ public class VideoController {
 		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
 		if(member!=null){
 		mv.setViewName("tftube/insertForm");}
-		else{	msg="로그인이 필요한 서비스 입니다. 로그인을 해주세요.";
-				url="login";
-				mv.addObject("msg",msg);
-				mv.addObject("url",url);
-				mv.setViewName("tftube/message");	
+		else{	
+			msg="로그인이 필요한 서비스 입니다. 로그인을 해주세요.";
+			url="login";
+			mv.addObject("msg",msg);
+			mv.addObject("url",url);
+			mv.setViewName("tftube/message");				
 		}	
 		return mv;		
 	}
@@ -234,7 +235,10 @@ public class VideoController {
 				
 		//request no,like_status,unlike_status
 		String no_raw=arg0.getParameter("no");//no of video
+		
+		/**like**/
 		//두 값들이 혹시나 0이 들어 오진 않는가?
+		
 		String like_status_raw=arg0.getParameter("like_status");//like unlike 둘중 하나만 들어온다.
 		String unlike_status_raw=arg0.getParameter("unlike_status");
 		//새로 고침 했을때, 주소직접접근, main에서 넘어올때(except like button)
@@ -265,10 +269,9 @@ public class VideoController {
 		
 		//지금 이 비디오에 이 아이디에 좋아요
 		
-		//like 2차원 코딩이 필요할듯.       
+
 		//no member_no video_name like status unlike
-		if(member==null){
-			
+		if(member==null){			
 			msg="로그인이 필요한 서비스 입니다. 로그인을 해주세요.";
 			url="login";
 			mv.addObject("msg",msg);
@@ -280,15 +283,9 @@ public class VideoController {
 		//클릭할때마다 다른 값이들어오긴함.		
 		
 		//현재 회원이 좋아요 누른 동영상 조회 
-		LikeVideoDTO lvdto_list=likevideoDAO.likevideo_list(member_no,no);
+		//LikeVideoDTO lvdto_list=likevideoDAO.likevideo_list(member_no,no);
 		//단, lvdto가 null인 경우도 있다.생각해보면 좋아요를 누르지 않으면 데이터가 없다.
-		if(lvdto_list==null){//이게 싫으면 모든 사용자들에게 자동으로 0-개 비효율			
-			mv.addObject("like_status",0);
-			//mv.addObject("unlike_status",0);
-		}else{
-			mv.addObject("like_status",1);
-			//mv.addObject("unlike_status",1);	
-			}		
+					  
 		
 		//insert준비
 
@@ -298,32 +295,48 @@ public class VideoController {
 		int res=0;		
 		//when like_disabled
 		if(like_status==1){
-		res=likevideoDAO.like_insert(lvdto_insert);
+		res=likevideoDAO.like_insert(lvdto_insert);//왜이걸 다르다고 생각했을꼬
 		}else if(like_status==0){
 		//when like
-		res=likevideoDAO.like_delete(member_no,no);}		
+		res=likevideoDAO.like_delete(member_no,no);}
+		
+		if(unlike_status==1){			
+		res=likevideoDAO.unlike_insert(lvdto_insert);}
+		else if(unlike_status==0){//when like			
+		res=likevideoDAO.unlike_delete(member_no,no);}	
 		
 		//좋아요 갯수 세기-제대로 한거 맞니?
-		int count=likevideoDAO.likecount_member(member_no);		
+		int count_like=likevideoDAO.likecount(no);
+		int count_unlike=likevideoDAO.unlikecount(no);		
 		
-		//좋아요 갯수 업데이트 dto.get
-		VideoDTO vdto_like=new VideoDTO();
-		vdto_like.setLikep(count);
-		vdto_like.setNo(no);
-		int res_update_like=videoDAO.updateLike(vdto_like);
+		//좋아요,싫어요 갯수 업데이트 dto.get
+		VideoDTO vdto_blike=new VideoDTO();
+		vdto_blike.setLikep(count_like);
+		vdto_blike.setUnlikep(count_unlike);
+		vdto_blike.setNo(no);
+		int res_update_like=videoDAO.updateLike(vdto_blike);
 		
 		if(res_update_like>0){
-		mv.addObject("likep",count);
-		mv.setViewName("tftube/videoView");
-		}
+		mv.addObject("likep",count_like);
+		mv.addObject("unlikep",count_unlike);
 		
-		else{
+		mv.addObject("like_status",like_status);
+		mv.addObject("unlike_status",unlike_status);
+		mv.setViewName("tftube/videoView");
+		}else{
 			msg="좋아요 갱신에 실패하였습니다.";
 			url="videoView";
 			mv.addObject("msg",msg);
 			mv.addObject("url",url);
 			mv.setViewName("tftube/message");			
-		}
+		}		
+		/**end of like**/
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -382,55 +395,91 @@ public class VideoController {
 		mv.addObject("vdto",vdto);//consider of like only
 		//end of like
 */		
-		//*sub*구독
+		//*sub*구독		
+		//response(main->video.view)		
+		//db에서 subing_member_no 꺼냄
+		//no channel member_no subing_member_no
+		//no(vdto)->member_no와 연결가능
+		//여기 있는 애들 
 		
-		//response
-		/*int cu_member_no=0;
-		int subing_member=0;
-		int saved_subing_member=0;*/
+		/*subscribe*/
+		int current_video_member=vdto.getMember_no();		
+		//db에 지금 접속한 애가 이 영상 주인을 팔로우 했냐?
+		SubingDTO search_dto=new SubingDTO();
+		search_dto.setMember_no(member_no);
+		search_dto.setSubing_member_no(vdto.getMember_no());
 		
-		//현재 로그인한 회원 정보
-		//MemberDTO cu_member=(MemberDTO)session.getAttribute("memberDTO");
+		//not null -> 팔로우 null 안함
 		
-		/*List<SubingDTO> saved_subing_member=null;
-		//현재 로그인한 회원의 구독 목록
-		if(cu_member!=null){//로그인 된 상태라면
-		 saved_subing_member=subingDAO.get_subing_member(cu_member.getNo());
-		 
-		 //													현재 로그인회원의 구독목록
-		 }
-		System.out.print("내가 구독 누른 인간:");
-		System.out.print(saved_subing_member);
-		
-		if(saved_subing_member!=null){//구독 목록이 있다면
-		for(SubingDTO dto:saved_subing_member){			
-		if(vdto.getMember_no()==dto.getMember_no()){	//게시판 작성자의 이름과 목록중에 같은 것 		
-			mv.addObject("subing_status",1);//목록에 현재 비디오를 등록한 사람이 포함 되어 있다면 1 아니면 0
-			break;
-		}else{
-			mv.addObject("subing_status",0);
-		}
-		}
-		}else{
-			mv.addObject("subing_status",0);			
-		}
-		
-		if(saved_subing_member_raw.size()==0){
-			saved_subing_member=saved_subing_member_raw.getSubing_member_no();//0일 가능성 잇다.				
-		};
-		
-		if(saved_subing_member!=0){//구독했다.
+		//같은 경우
+		if(member_no==current_video_member){
+			mv.addObject("subing_status",2);
+		}else if(subingDAO.select_subing(search_dto)!=null){			
 			mv.addObject("subing_status",1);
-		}else{//구독하지 않았다.
+		}else{
 			mv.addObject("subing_status",0);
+		}
 		
 		
-		//end of response
+				
+	/*	SubingDTO sdto=new SubingDTO();
+		if(member_no!=vdto.getMember_no()){
+			sdto.setMember_no(member_no);
+			sdto.setSubing_member_no(vdto.getMember_no());
+			
+		}
+		// if문을 거치지 않으면 sdto는 null		
+		List<SubingDTO> subing=subingDAO(member_no);
+		mv.addObject("subing_status",subing_status);*/
+		
+		//적절한 버튼 나타남
+		
+		//request
+		
+		String req_subing_status_raw=arg0.getParameter("subing_status");
+		int req_subing_status=0;//initialize(check)
+		String channel=mychannelDAO.getChannel(member_no).getChannel();
+		//버튼을 누르지 않으면 구독 구독중 실행 하지 않는다.
+		if(req_subing_status_raw!=null){
+		req_subing_status=Integer.parseInt(req_subing_status_raw);
+	
+		SubingDTO sidto=new SubingDTO();
+		
+
+		sidto.setChannel(channel);
+		sidto.setMember_no(member_no);
+		sidto.setSubing_member_no(vdto.getMember_no());
+	
+		//sddto.setChannel(channel);
+		//sddto.setMember_no(vdto.getMember_no());
+		//sddto.setSubed_member_no(member_no);
+	
+		if(req_subing_status==1){//구독이벤트			
+			//그냥 순서만 바꾸는거면 굳이 따로 나눌 필요가 있나 싶다.			
+			subingDAO.insertSubing(sidto);
+			mv.addObject("subing_status",1);
+			//subedDAO.insertSubed(sddto);						
+		}else{
+			subingDAO.deleteSubing(sidto);//내 아이디 vdto
+			mv.addObject("subing_status",0);
+			//내 아이디, vdto.delete
+			//subedDAO.deleteSubed(sddto);
+		}
+		//조회하는 변수를 서로 다르게 준다면 
+		}//end of null
+		
+		/*end of subscribe*/
+		
+
+		
+		
+		
+
 		
 		
 		//request
 	
-		String subing_member_no_raw=arg0.getParameter("subing_member_no");//이 비디오의 작성자 
+		/*String subing_member_no_raw=arg0.getParameter("subing_member_no");//이 비디오의 작성자 
 		//필요하다면 따로 보내준다.
 		//disabled인 상태에서 구독이 되도록 한다
 		//평소에 null 누르면 값이 들어옴
@@ -455,12 +504,12 @@ public class VideoController {
 		}else if(subing_member_no_raw!=null&&mode.equals("cancel")){			
 			subingDAO.deleteSubing(vdto.getMember_no());
 			subedDAO.deleteSubed(vdto.getMember_no());
-		}*/
+		}
 		
 		//취소는 안만들어 놨다.
 		
 		//처음에는 무조건 null(언제 값을 보내 주는가?) 
-		/*String subing_status_raw=arg0.getParameter("subing_status");//이게 뭐냐?
+		String subing_status_raw=arg0.getParameter("subing_status");//이게 뭐냐?
 		int subing_status=0;
 		if(subing_status_raw!=null){//값을 보내주면 db에 최종적으로 값을 넣는다. 
 			subing_status=Integer.parseInt(subing_status_raw);

@@ -6,7 +6,7 @@
 
 <mapper namespace="com.itbank.TechFarm.tftube.mybatis.LikeVideoMapper">
 
-<!-- 찬성 -->
+
 <select id="likevideo_list" parameterType="java.util.HashMap" resultType="likevideoDTO">
 select * from tftube_like where member_no=#{member_no} and video_no=#{video_no}
 </select>
@@ -16,9 +16,18 @@ select * from tftube_like where member_no=#{member_no} and video_no=#{video_no}
 insert into tftube_like(member_no,video_no,like_status)values(#{member_no},#{video_no},1)
 </insert>
 
-<!-- 조금 있다 보구 -->
+<!-- Supposed to pratice. there is a need to implements by the other method --> 
 <delete id="like_delete" parameterType="java.util.HashMap">
 delete from tftube_like where member_no=#{member_no} and video_no=#{video_no}
+</delete>
+
+<insert id="unlike_insert" parameterType="likevideoDTO">
+insert into tftube_unlike(member_no,video_no,unlike_status)values(#{member_no},#{video_no},1)
+</insert>
+
+<!-- 조금 있다 보구 -->
+<delete id="unlike_delete" parameterType="java.util.HashMap">
+delete from tftube_unlike where member_no=#{member_no} and video_no=#{video_no}
 </delete>
 
 
@@ -29,12 +38,21 @@ set like_status=1
 where member_no=#{member_no} and video_no=#{video_no}
 </insert>  -->
 
-<insert id="unlike_insert" parameterType="likevideoDTO">
-insert into tftube_unlike(video_no,unlike_status)values(#{video_no},#{like_status},#{unlike_status})
-</insert>
 
-<select id="likecount_member" parameterType="int" resultType="int">
-select count(*) from tftube_like where member_no=#{member_no} and like_status=1
+<!-- <select id="likecount_member" parameterType="java.util.HashMap" resultType="int">
+select count(*) from tftube_like where member_no=#{member_no} and video_no=#{video_no} and like_status=1
+</select>
+
+<select id="unlikecount_member" parameterType="java.util.HashMap" resultType="int">
+select count(*) from tftube_unlike where member_no=#{member_no} and video_no=#{video_no} and unlike_status=1
+</select>
+ -->
+<select id="likecount" parameterType="int" resultType="int">
+select count(*) from tftube_like where video_no=#{video_no} and like_status=1
+</select>
+
+<select id="unlikecount" parameterType="int" resultType="int">
+select count(*) from tftube_unlike where video_no=#{video_no} and unlike_status=1
 </select>
 
 

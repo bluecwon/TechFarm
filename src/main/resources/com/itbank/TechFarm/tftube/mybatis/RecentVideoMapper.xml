@@ -5,7 +5,6 @@
 
 <mapper namespace="com.itbank.TechFarm.tftube.mybatis.RecentVideoMapper">
 
-
  <insert id="insertRecent" parameterType="recentVideoDTO" useGeneratedKeys="true">
  insert into tftube_recentvideo(member_no,video_name) values(#{member_no},#{video_name})
  </insert>
@@ -14,11 +13,8 @@
  select * from tftube_recentvideo where member_no=#{member_no} order by no desc 
  </select>
  
-
- 
 <select id="listVideo_recent">
- select a.*,b.no from tftube_video a join tftube_recentvideo b on a.video_name=b.video_name
- 
+ select a.*,b.no from tftube_video a join tftube_recentvideo b on a.video_name=b.video_name 
 <!-- select c.name tfmember.member c join (select member_no from tftube_video a join tftube_recentvideo b on a.video_name=b.video_name)d on c.member_no=d.member_no -->  
 </select>
 

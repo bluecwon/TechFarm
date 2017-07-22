@@ -3,27 +3,23 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html>
-<head>
 <c:set var="like_status" value="${like_status}"/><!-- 컨트롤러에서받아옴 -->
 <c:set var="unlike_status" value="${unlike_status}"/>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
-<script src="resources/js/jquery-1.9.0.js" type="text/javascript"></script>
+좋아요상태:<c:out value="${like_status}"/><br>
+시러요상태:<c:out value="${unlike_status}"/><br>
+비디오일렬:<c:out value="${vdto.no}"/><br>
+<script src="resources/js/jquery-1.9.0.js"></script>
 <script type="text/javascript">
 var like_status=${like_status};
 var unlike_status=${unlike_status};
 var no=${vdto.no};
 
-
-$(function(){//not fucntion
+$(function(){	
 	if(like_status==0){
 	$("#like").hide();
 	$("#like_disabled").show();
-	}	
-	else{	
-	$("#like_disabled").hide();
+	}else{ 	
+	$("#like_disabled").hide();//like status==0 첫따봉후에
 	$("#like").show();
 	}
 	
@@ -36,6 +32,7 @@ $(function(){//not fucntion
 	$("#unlike").show();
 	}
 });
+
 	function likes()
 	{like_status--;	
 	//1.값은 계속 올라감, 2. 이사이트로 이동자체를 안하느 것일수도. 
@@ -47,12 +44,9 @@ $(function(){//not fucntion
 	function unlikes()
 	{unlike_status--;location.href="tftube_videoView?no="+no+"&unlike_status="+unlike_status;}
 	function unlikes_disabled()
-	{unlike_status++;location.href="tftube_videoView?no="+no+"&unlike_status="+unlike_status;}	
-	
+	{unlike_status++;location.href="tftube_videoView?no="+no+"&unlike_status="+unlike_status;}
 </script>
 
-</head>
-<body>
 <c:choose>
 
 <c:when test="${memberDTO!=null}">
@@ -61,7 +55,7 @@ $(function(){//not fucntion
 <fmt:formatNumber value="${likep}" pattern="#,##0"/>
 <button id="unlike_disabled" onclick="unlikes_disabled()">unlike</button>
 <button id="unlike" onclick="unlikes()" >unlike</button>
-<fmt:formatNumber value="${vdto.unlikep}" pattern="#,##0"/>
+<fmt:formatNumber value="${unlikep}" pattern="#,##0"/>
 </c:when>
 
 <c:otherwise>
@@ -70,5 +64,4 @@ $(function(){//not fucntion
 </c:otherwise>
 
 </c:choose>
-</body>
-</html>
+

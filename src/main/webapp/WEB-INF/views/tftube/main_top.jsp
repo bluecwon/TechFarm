@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
 <html>
 <link rel="stylesheet" type="text/css" href="resources/tftube/style.css">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>TFtube에 오신걸 환영합니다.</title>
 <script src="resources/js/jquery-1.9.0.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
-
 $("#but").click(function(){	
 	$(".top").slideToggle('fast');
 });
@@ -19,9 +19,6 @@ $("#but").click(function(){
 </script>
 </head>
 <body>
-
-
-
 <div id="1" style="width=100%"><!-- start of 1 -->
 <Button id="but">펼치기</Button><a href="tftube_main">TFtube				</a>			
 검색	<input type="text" name="search" size="20" style="width=100%"> <input type="button" value="검색" width="900">

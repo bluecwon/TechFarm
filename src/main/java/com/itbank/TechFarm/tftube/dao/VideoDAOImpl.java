@@ -15,7 +15,6 @@ public class VideoDAOImpl implements VideoDAO {
 		return VideoMapper.insertVideo(dto);
 	}
 	
-
 	@Override
 	public List<VideoDTO> listVideo() {			
 		return VideoMapper.listVideo();

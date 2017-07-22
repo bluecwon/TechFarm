@@ -18,9 +18,16 @@ public class SubingDAOImpl implements SubingDAO{
 	}
 
 	@Override
-	public int deleteSubing(int subing_member_no) {
-		return SubingMapper.deleteSubing(subing_member_no);
+	public int deleteSubing(SubingDTO dto) {
+		return SubingMapper.deleteSubing(dto);
 	}
+
+	@Override
+	public SubingDTO select_subing(SubingDTO dto) {
+		return SubingMapper.select_subing(dto);
+	}
+	
+	
 
 	
 	

@@ -4,6 +4,9 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 
 <mapper namespace="com.itbank.TechFarm.tftube.mybatis.MyChannelMapper">
+
+
+
 <insert id="insertChannel" parameterType="memberDTO" useGeneratedKeys="true"> 
 insert into tftube_mychannel(member_no,channel) values(#{no},#{name}) 
 </insert>

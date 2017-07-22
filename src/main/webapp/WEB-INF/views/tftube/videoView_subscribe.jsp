@@ -2,19 +2,18 @@
     pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<script src="resources/js/jquery-1.9.0.js"></script>
+글쓴이:${vdto.member_no}
+구독상태:${subing_status}
 <script type="text/javascript">
 var subing_member_no=${vdto.member_no}//비디오 작성자-무조건 있다 
 var subing_status=${subing_status} 
 function subing(){
-	location.href="subChannel?subed_member_no="+subing_member_no+"&no="+${vdto.no}+"&mode=cancel";	
+	location.href="tftube_videoView?subing_status=0&no="+${vdto.no};	
 }
 
 function subing_disabled(){
-	location.href="subChannel?subing_member_no="+subing_member_no+"&no="+${vdto.no}+"&mode=injection";	
+	location.href="tftube_videoView?subing_status=1&no="+${vdto.no};	
 }  
 
 function move_login(){
@@ -23,22 +22,18 @@ function move_login(){
 }
 
 $(function(){
-	if(subling_status==1){
-		$("#sub_disabled").hide();
-		$("#sub").show();
-		}	
-		else{	
-		$("#sub_disabled").show();
-		$("#sub").hide();
-		}  	
+	switch(subing_status){
+	
+	case 0:$("#sub").hide();$("#sub_disabled").show();break;
+	
+	case 1:$("#sub_disabled").hide();$("#sub").show();break;
+	
+	default: $("#sub_disabled").hide();$("#sub").hide();break;
+	}
 });
 
 
 </script>
-</head>
-<body>
-
 <button id="sub_disabled" onclick="subing_disabled()">구독</button>
-<button id="sub" onclick="subing()" >구독중</button>
-</body>
-</html>
+<button id="sub" onclick="subing()">구독중</button>
+

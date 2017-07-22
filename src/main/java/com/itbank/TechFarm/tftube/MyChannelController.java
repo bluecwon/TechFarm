@@ -32,7 +32,6 @@ public class MyChannelController {
 	@Autowired
 	private SubedDAO subedDAO;
 	
-	
 	String msg=null,url=null;
 	
 	

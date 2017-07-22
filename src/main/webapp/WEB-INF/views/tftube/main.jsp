@@ -1,15 +1,7 @@
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 <%@ include file="main_top.jsp"%>
 
 <div id="2-2" style="overflow: hidden;" align="center"> <!-- start of 2-2 -->
@@ -53,5 +45,4 @@ poster="이미지파일" : 동영상이 플레이 되기 전 대표로 보여줄
 </div><!-- end of 2-2 -->
 
 <%@ include file="main_bottom.jsp"%> 
-</body>
-</html>
+

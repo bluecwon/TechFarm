@@ -1,16 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%> 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    pageEncoding="UTF-8"%>
 <%@ include file="main_top.jsp"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 <%-- <c:set var="like_status" value="${like_status}"/><!-- 컨트롤러에서받아옴 -->
 <c:set var="unlike_status" value="${unlike_status}"/> --%>
-<script src="resources/js/jquery-1.9.0.js" type="text/javascript"></script>
-<!-- <script type="text/javascript">
+<!-- <script src="resources/js/jquery-1.9.0.js" type="text/javascript"></script>
+<script type="text/javascript">
 var like_status=${like_status};
 var unlike_status=${unlike_status};
 var no=${vdto.no};//현재 비디오 번호-무조건 있다.
@@ -88,15 +83,12 @@ function subing_disabled(){
 function move_login(){
 	alert("로그인이 필요한 서비스입니다. 로그인을 해주세요.");
 	location.href="login";
-} 
+}   
 
 //태그를 안붙여주면 잘 못찾는 것 같다.
 //하나씩만 열리도록 설정
-</script> 
- -->
-<title>Insert title here</title>
-</head>
-<body>
+</script>  -->
+
 <!-- video -->
 <div id="2-2" style="overflow:auto;"> <!-- start of 2-2 -->
 <table>
@@ -181,8 +173,8 @@ controls="controls" width="600" height="450"></video>
 		</table> --%>
  </div><!-- end of 2-2-->
  </div> <!-- end of 2 -->
-</body>
-<%@ include file="main_bottom.jsp"%>
+
+
 <style>
 #like_disabled{
    background-color: #D5D5D5;
@@ -234,4 +226,4 @@ background-color: #6799FF;
    cursor: pointer;
 } 
 </style>
-</html>
+<%@ include file="main_bottom.jsp"%>

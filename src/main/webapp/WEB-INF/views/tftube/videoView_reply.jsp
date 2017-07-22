@@ -3,8 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html>
-<head>
 <script src="resources/js/jquery-1.9.0.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
@@ -25,9 +23,6 @@ $(function(){
 });
 </script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 <table>
 <tr><td>댓글 ${r_size}개</td></tr>
 <c:choose>
@@ -106,5 +101,4 @@ ${rdto.content}<br>
 </c:forEach>
 </table>
 <!-- end of Reply List -->
-</body>
-</html>
+

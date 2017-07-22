@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
-</head>
-<body>
 <%@include file="main_top.jsp" %>
+<!-- <html lang="en"> -->
+
+<meta charset="UTF-8">
+
+
+
+
+
 <div id="2-2-1">
 <form name="f" method="post" enctype="multipart/form-data" action="tftube_video_insert">
 
@@ -171,5 +172,4 @@ upload.onchange = function (e) {//input text 내용 변경 감지
 </script>
 </div>
 <%@include file="main_bottom.jsp" %>
-</body>
-</html>
+
