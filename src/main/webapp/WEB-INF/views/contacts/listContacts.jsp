@@ -76,7 +76,15 @@
 					<c:forEach var = "dto" items="${listContacts }">
 						<tr>
 							<td><input type="checkbox" name="chk_contact" value="${dto.no }"></td>
-							<td><a href="getContact?no=${dto.no }"><img src="resources/contacts/upload/${dto.photo }" style="max-width: 30px; height: auto;"></a></td>
+							<td><a href="getContact?no=${dto.no }">
+								<c:if test="${!empty dto.photo }">
+									<img src="resources/contacts/upload/${dto.photo }" style="max-width: 30px; height: auto;">
+								</c:if>
+								<c:if test="${empty dto.photo }" >
+									<img src="resources/contacts/images/account.png" style="max-width: 30px; height: auto;">
+								</c:if>
+								</a>
+							</td>
 							<td><a href="getContact?no=${dto.no }">${dto.name }</a></td>
 							<td><a href="sendJames?to=${dto.email }">${dto.email }</a></td>
 							<td>${dto.phone }</td>

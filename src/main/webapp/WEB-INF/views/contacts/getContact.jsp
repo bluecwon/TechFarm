@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +65,14 @@
 	<section>
 		<table>
 				<tr>
-					<td>${dto.photo }<img src="resources/home/imgs/account.png" style="max-width: 60px; height: auto;"></td>
+					<td>
+						<c:if test="${!empty dto.photo }">
+							<img src="resources/contacts/upload/${dto.photo }" style="max-width: 60px; height: auto;">
+						</c:if>
+						<c:if test="${empty dto.photo }" >
+							<img src="resources/contacts/images/account.png" style="max-width: 60px; height: auto;">
+						</c:if>	
+					</td>
 					<td><h2>${dto.name }</h2>
 				</tr>
 				<tr>

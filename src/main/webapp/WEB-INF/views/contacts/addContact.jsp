@@ -20,7 +20,7 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="file" name="photo"></td>
+				<td colspan="2"><input type="file" name="photoMultipart"></td>
 			</tr>
 			<tr>
 				<td><img src="resources/contacts/images/company.png" style="max-width: 30px; height: auto;"></td>
@@ -29,7 +29,7 @@
 			</tr>
 			<tr>
 				<td><img src="resources/contacts/images/email.png" style="max-width: 30px; height: auto;"></td>
-				<td>Email : <input type="text" name="email"></td>
+				<td>Email : <input type="email" name="email"></td>
 				<td></td>
 			</tr>
 			<tr>

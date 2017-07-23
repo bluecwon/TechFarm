@@ -1,8 +1,11 @@
 package com.itbank.TechFarm.contacts;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ContactsDTO {
 	private int no;
 	private String id;
+	private MultipartFile photoMultipart;
 	private String photo;
 	private String name;
 	private String company;
@@ -29,6 +32,12 @@ public class ContactsDTO {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public MultipartFile getPhotoMultipart() {
+		return photoMultipart;
+	}
+	public void setPhotoMultipart(MultipartFile photoMultipart) {
+		this.photoMultipart = photoMultipart;
 	}
 	public String getPhoto() {
 		return photo;
