@@ -18,10 +18,10 @@
     		<p>
       		<textarea name="text" cols="100" rows="12" placeholder="내용을 입력해주세요" ></textarea>
     		</p>
-    		<input type="file" name="file" multiple><br>
+    		<input type="file" name="sendFile" multiple><br>
       		<input type="submit" value="메일 보내기" >
       		<input type="reset" value="취소">
-  </form>
+  		</form>
 	</section>
 	<footer></footer>
 </body>

@@ -4,14 +4,16 @@ import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
-import javax.mail.Address;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
@@ -21,13 +23,15 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 public class JamesDAOImpl implements JamesDAO{
 	//@Autowired
 	private JavaMailSender mailSender;
-	//@Autowired
+	@Autowired
 	private JamesPro jamesPro;
 	
 	String host="52.79.140.54";
@@ -37,7 +41,7 @@ public class JamesDAOImpl implements JamesDAO{
 	private List<JamesDTO> listJames; 
 	
 	@Override
-	public int sendJames(JamesDTO dto) {
+	public int sendJames(final JamesDTO dto) {
 		mailSender=MailConfig.mailSender(dto.getId()+"@"+host, dto.getPassword());
 		try{
 			MimeMessage message = mailSender.createMimeMessage();
@@ -47,6 +51,19 @@ public class JamesDAOImpl implements JamesDAO{
 			messageHelper.setTo(dto.getTo());
 			messageHelper.setSubject(dto.getSubject());
 			messageHelper.setText(dto.getText());
+			
+			//첨부파일 보내기 
+			String attachName = dto.getSendFile().getOriginalFilename();
+			if (!dto.getSendFile().equals("")) {
+				 
+                messageHelper.addAttachment(attachName, new InputStreamSource() {
+                     
+                    @Override
+                    public InputStream getInputStream() throws IOException {
+                        return dto.getSendFile().getInputStream();
+                    }
+                });
+            }
 			
 			mailSender.send(message);
 		}catch(Exception e){
@@ -190,8 +207,10 @@ public class JamesDAOImpl implements JamesDAO{
 	            if (result == -1)
 	            	break;
 	         }
+	         x.close();
 	         FileOutputStream f2 = new FileOutputStream("/tmp/image.jpg");
 	         f2.write(bArray);
+	         f2.close();
 	      } 
 	      else if (part.getContentType().contains("image/")) {
 	         System.out.println("content type" + part.getContentType());
@@ -205,6 +224,7 @@ public class JamesDAOImpl implements JamesDAO{
 	         while ((bytesRead = test.read(buffer)) != -1) {
 	            output.write(buffer, 0, bytesRead);
 	         }
+	         output.close();
 	      } 
 	      else {
 	         Object object = part.getContent();
