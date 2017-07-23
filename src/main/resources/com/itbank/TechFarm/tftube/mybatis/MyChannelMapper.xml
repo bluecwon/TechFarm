@@ -15,4 +15,5 @@ insert into tftube_mychannel(member_no,channel) values(#{no},#{name})
 select * from tftube_mychannel where member_no=#{no}
 </select>
 
+
 </mapper>

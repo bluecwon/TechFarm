@@ -22,12 +22,9 @@ function move_login(){
 }
 
 $(function(){
-	switch(subing_status){
-	
-	case 0:$("#sub").hide();$("#sub_disabled").show();break;
-	
-	case 1:$("#sub_disabled").hide();$("#sub").show();break;
-	
+	switch(subing_status){	
+	case 0:$("#sub").hide();$("#sub_disabled").show();break;	
+	case 1:$("#sub_disabled").hide();$("#sub").show();break;	
 	default: $("#sub_disabled").hide();$("#sub").hide();break;
 	}
 });

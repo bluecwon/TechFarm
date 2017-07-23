@@ -48,7 +48,7 @@ import com.itbank.TechFarm.tftube.dao.LikeVideoDAO;
 import com.itbank.TechFarm.tftube.dao.MyChannelDAO;
 import com.itbank.TechFarm.tftube.dao.RecentVideoDAO;
 import com.itbank.TechFarm.tftube.dao.ReplyDAO;
-import com.itbank.TechFarm.tftube.dao.SubedDAO;
+
 import com.itbank.TechFarm.tftube.dao.SubingDAO;
 import com.itbank.TechFarm.tftube.dao.VideoDAO;
 import com.itbank.TechFarm.tftube.dto.LikeVideoDTO;
@@ -76,8 +76,7 @@ public class VideoController {
 	private MyChannelDAO mychannelDAO;
 	@Autowired
 	private SubingDAO subingDAO;
-	@Autowired
-	private SubedDAO subedDAO;
+	
 	@Autowired
 	private LikeVideoDAO likevideoDAO;
 	
@@ -190,8 +189,10 @@ public class VideoController {
 		mf2.transferTo(original_image);
 		
 		String image_name=sha3.Digest_Sha3(original_image);
+		System.out.println("이미지hashcode"+image_name.length());
 		
-		String file_ex_image=original_image_name.substring(original_image_name.length()-4,original_video_name.length());
+		String file_ex_image=original_image_name.substring(original_image_name.length()-4,original_image_name.length());
+		System.out.println("확장자 출력:"+file_ex_image);
 		File image=new File(upPath_image,image_name+file_ex_image);
 		if(original_image.renameTo(image)){
 			System.out.println("성공하셨습니다.");
@@ -232,45 +233,6 @@ public class VideoController {
 		HttpSession session=arg0.getSession();		
 		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
 		
-				
-		//request no,like_status,unlike_status
-		String no_raw=arg0.getParameter("no");//no of video
-		
-		/**like**/
-		//두 값들이 혹시나 0이 들어 오진 않는가?
-		
-		String like_status_raw=arg0.getParameter("like_status");//like unlike 둘중 하나만 들어온다.
-		String unlike_status_raw=arg0.getParameter("unlike_status");
-		//새로 고침 했을때, 주소직접접근, main에서 넘어올때(except like button)
-		int like_status=0,unlike_status=0;
-		if(like_status_raw!=null){
-		like_status=Integer.parseInt(like_status_raw);}
-		if(unlike_status_raw!=null){
-		unlike_status=Integer.parseInt(unlike_status_raw);}
-		
-		//tftube_video
-		
-		System.out.println("like_status:"+like_status);
-		System.out.println("unlike_status:"+unlike_status);
-		
-		//videoView or main
-		int no=0;		//direct approach
-		if(no_raw!=null){no=Integer.parseInt(no_raw);}
-		else{
-			return new ModelAndView("redirect:tftube_main");}
-		
-		System.out.println("no:"+no);
-		
-		VideoDTO vdto=videoDAO.getVideo(no);//a video's total information
-		
-		
-		mv.addObject("vdto",vdto);
-		String video_name=vdto.getVideo_name();//video_name at present
-		
-		//지금 이 비디오에 이 아이디에 좋아요
-		
-
-		//no member_no video_name like status unlike
 		if(member==null){			
 			msg="로그인이 필요한 서비스 입니다. 로그인을 해주세요.";
 			url="login";
@@ -279,32 +241,74 @@ public class VideoController {
 			mv.setViewName("tftube/message");
 			return mv;
 		}
-		int member_no=member.getNo();
-		//클릭할때마다 다른 값이들어오긴함.		
+		int member_no=member.getNo();		
+		//request no,like_status,unlike_status
+		String no_raw=arg0.getParameter("no");//no of video
+		//videoView or main
+		int no=0;		//direct approach
+		if(no_raw!=null){no=Integer.parseInt(no_raw);}
+		else{
+			return new ModelAndView("redirect:tftube_main");}
 		
+		
+		/**like**/
+		//두 값들이 혹시나 0이 들어 오진 않는가?
+		
+		String like_status_req_raw=arg0.getParameter("like_status");//like unlike 둘중 하나만 들어온다.
+		String unlike_status_req_raw=arg0.getParameter("unlike_status");
+		//새로 고침 했을때, 주소직접접근, main에서 넘어올때(except like button)
+		//기존에 있던 like_status 값 들고오기.
+		int like_status_req=0;
+		int unlike_status_req=0;
+	
+		/*if(like_status==null)*/
+		//기존 계정이 가지고 있던 like_status 값.
+		//int like_status=0,unlike_status=0;		
+		
+		if(like_status_req_raw!=null){
+		like_status_req=Integer.parseInt(like_status_req_raw);}
+	
+		if(unlike_status_req_raw!=null){
+		unlike_status_req=Integer.parseInt(unlike_status_req_raw);}
+	
+		
+		int like_db=likevideoDAO.likevideo_list_status(member_no, no);
+		//결과가 뭐가 나올질 모르겠네(내생각 db 에있는값추출. 다만 1짜리 갯수
+		int unlike_db=likevideoDAO.likevideo_list_ustatus(member_no, no);
+	
+		//tftube_video
+		VideoDTO vdto=videoDAO.getVideo(no);//a video's total information		
+		mv.addObject("vdto",vdto);
+		String video_name=vdto.getVideo_name();//video_name at present
+		
+		//지금 이 비디오에 이 아이디에 좋아요
+		//no member_no video_name like status unlike	
 		//현재 회원이 좋아요 누른 동영상 조회 
 		//LikeVideoDTO lvdto_list=likevideoDAO.likevideo_list(member_no,no);
 		//단, lvdto가 null인 경우도 있다.생각해보면 좋아요를 누르지 않으면 데이터가 없다.
 					  
-		
+		  
 		//insert준비
 
 		LikeVideoDTO lvdto_insert=new LikeVideoDTO();		
 		lvdto_insert.setMember_no(member_no);
 		lvdto_insert.setVideo_no(no); 
-		int res=0;		
+		int res=0;
+		//like_db=0;
+		if(like_status_req!=like_db){
 		//when like_disabled
-		if(like_status==1){
+		if(like_status_req==1){
 		res=likevideoDAO.like_insert(lvdto_insert);//왜이걸 다르다고 생각했을꼬
-		}else if(like_status==0){
-		//when like
+		}else if(like_status_req==0){//when like
 		res=likevideoDAO.like_delete(member_no,no);}
-		
-		if(unlike_status==1){			
+		}//꺼림칙한 조건
+		 
+		if(unlike_status_req!=unlike_db){
+		if(unlike_status_req==1){			
 		res=likevideoDAO.unlike_insert(lvdto_insert);}
-		else if(unlike_status==0){//when like			
+		else if(unlike_status_req==0){//when like			
 		res=likevideoDAO.unlike_delete(member_no,no);}	
-		
+		}
 		//좋아요 갯수 세기-제대로 한거 맞니?
 		int count_like=likevideoDAO.likecount(no);
 		int count_unlike=likevideoDAO.unlikecount(no);		
@@ -320,8 +324,8 @@ public class VideoController {
 		mv.addObject("likep",count_like);
 		mv.addObject("unlikep",count_unlike);
 		
-		mv.addObject("like_status",like_status);
-		mv.addObject("unlike_status",unlike_status);
+		mv.addObject("like_status",like_status_req);
+		mv.addObject("unlike_status",unlike_status_req);
 		mv.setViewName("tftube/videoView");
 		}else{
 			msg="좋아요 갱신에 실패하였습니다.";
@@ -455,7 +459,7 @@ public class VideoController {
 		//sddto.setSubed_member_no(member_no);
 	
 		if(req_subing_status==1){//구독이벤트			
-			//그냥 순서만 바꾸는거면 굳이 따로 나눌 필요가 있나 싶다.			
+
 			subingDAO.insertSubing(sidto);
 			mv.addObject("subing_status",1);
 			//subedDAO.insertSubed(sddto);						
@@ -469,58 +473,7 @@ public class VideoController {
 		}//end of null
 		
 		/*end of subscribe*/
-		
-
-		
-		
-		
-
-		
-		
-		//request
-	
-		/*String subing_member_no_raw=arg0.getParameter("subing_member_no");//이 비디오의 작성자 
-		//필요하다면 따로 보내준다.
-		//disabled인 상태에서 구독이 되도록 한다
-		//평소에 null 누르면 값이 들어옴
-		//작성자이름으로 구분할듯.
-		String mode=arg0.getParameter("mode");
-		SubingDTO sidto=null;
-		SubedDTO sddto=null;
-		if(subing_member_no_raw!=null&&mode.equals("injection")){//구독 버튼을 눌렀을때
-			int subing_member_no=Integer.parseInt(subing_member_no_raw);
-		sidto=new SubingDTO();		
-		String cu_channel=mychannelDAO.getChannel(cu_member.getNo());//현재 로그인한 사람 정보,채널		
-		sidto.setChannel(cu_channel);//로그인 한 사람 채널
-		sidto.setMember_no(cu_member.getNo());	//현재 로그인한 사람 회원 번호
-		sidto.setSubing_member_no(subing_member_no);//비디오 작성자	
-		//다 읽어보진 않았지만 아마도 피구독 구독 값 설정중
-		sddto.setChannel(vdto.getChannel());//??
-		sddto.setMember_no(vdto.getMember_no());
-		sddto.setSubed_member_no(cu_member.getNo());
-		
-		subingDAO.insertSubing(sidto);//db에 넣기
-		subedDAO.insertSubed(sddto);//db에 넣기		
-		}else if(subing_member_no_raw!=null&&mode.equals("cancel")){			
-			subingDAO.deleteSubing(vdto.getMember_no());
-			subedDAO.deleteSubed(vdto.getMember_no());
-		}
-		
-		//취소는 안만들어 놨다.
-		
-		//처음에는 무조건 null(언제 값을 보내 주는가?) 
-		String subing_status_raw=arg0.getParameter("subing_status");//이게 뭐냐?
-		int subing_status=0;
-		if(subing_status_raw!=null){//값을 보내주면 db에 최종적으로 값을 넣는다. 
-			subing_status=Integer.parseInt(subing_status_raw);
-			if(subing_status==1){
-			int res=subingDAO.insertSubing(sidto);//db에 넣기
-			subedDAO.insertSubed(sddto);//db에 넣기
-			mv.addObject("subing_status",res);
-			}//subing 
-		}*/
-		
-		
+			
 		//?
 		session.setAttribute("video_no",no);//error and time lag
 		
@@ -570,7 +523,7 @@ public class VideoController {
 		member=(MemberDTO)member_object;
 		}
 		
-	/*	//RecentVideo insert 		
+	//RecentVideo insert 		
 		RecentVideoDTO recent_dto=new RecentVideoDTO();
 		
 		if(member_object!=null){
@@ -579,7 +532,7 @@ public class VideoController {
 		recentvideoDAO.insertRecent(recent_dto);
 		}
 		//end of RecentVideo insert 		
-*/		
+
 		
 		//ReplyList where=video		
 		/*List<ReplyDTO> r_list=replyDAO.replyList_by_video(video_name);*/

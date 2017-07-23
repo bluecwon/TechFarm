@@ -26,6 +26,13 @@ public class SubingDAOImpl implements SubingDAO{
 	public SubingDTO select_subing(SubingDTO dto) {
 		return SubingMapper.select_subing(dto);
 	}
+
+	@Override
+	public List<SubingDTO> get_subed_member(int subing_member_no) {
+		return SubingMapper.get_subed_member(subing_member_no);
+	}
+	
+	
 	
 	
 

@@ -62,7 +62,7 @@ $(function(){
 <!-- reply contents with reply information -->
 
 <div class = "titl"><!--empty space securement-->
-<a href="tftube_mychannel">${rdto.name}</a>  ${rdto.reg_date}<br> 
+<a href="tftube_mychannel?mem_no=${rdto.member_no}">${rdto.name}</a>  ${rdto.reg_date}<br> 
 
 ${rdto.content}<br>
 

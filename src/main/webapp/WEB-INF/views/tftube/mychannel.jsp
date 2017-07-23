@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@include file="main_top.jsp"%>
+<%@include file="top.jsp"%>
 <div id="2-2-1"><!-- start of 2-2-1 -->
 업로드한 동영상<p>
 <table>
@@ -32,50 +32,32 @@
 
 <c:otherwise>
 <c:forEach var="subingList" items="${subing_list}">
-<a href="resources/tftube/uploadVideo/${subingList.video_name}">
-<img src="resources/tftube/uploadImage/${subingList.image}"></a><br>
+<a href="mychannel?mem_no=${subingList.member_no}">${subingList.channel}</a>
+<br>
+
 </c:forEach>
 </c:otherwise>
 </c:choose>
 </td></tr>
 </table>
 
+
+
+<p>
 구독자 <p>
 <table>
 <c:choose>
 <c:when test="${subed_list.size()==0}">
-<tr><td>
-구독한 채널이 존재하지 않습니다.
-</td></tr>
-</c:when>
-
-<c:otherwise>
-<c:forEach var="subedList" items="${subed_list}">
-<tr><td>
-<a href="resources/tftube/uploadVideo/${subedList.video_name}">
-<img src="resources/tftube/uploadImage/${subedList.image}"></a>
-</td></tr>
-</c:forEach>
-</c:otherwise>
-</c:choose>
-</td></tr>
-</table>
-
-<p>
-관심 동영상<p>
-<table></table>
-<c:choose>
-<c:when test="${like_list.size()==0}">
 <tr><td>
 관심 동영상이 없습니다.
 </td></tr>
 </c:when>
 
 <c:otherwise>
-<c:forEach var="likeList" items="${like_list}">
-<tr><td>
-<a href="resources/tftube/uploadVideo/${likeList.video_name}">
-<img src="resources/tftube/uploadImage/${likeList.image}"></a><br>
+
+<c:forEach var="subedList" items="${subed_list}">
+<a href="mychannel?mem_no=${subedList.member_no}">${subedList.channel}</a>
+<br>
 </td></tr>
 </c:forEach>
 </c:otherwise>
@@ -90,6 +72,6 @@
 <p>
 <p>
 <p>
-<%@include file="main_bottom.jsp" %>
+<%@include file="bottom.jsp" %>
 
 

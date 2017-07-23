@@ -85,6 +85,8 @@ public class VideoMapper {
 		
 	}
 	
+	
+	
 
 	
 	/*public static int click_like(int no){

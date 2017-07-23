@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.TechFarm.login.member.MemberDTO;
 import com.itbank.TechFarm.tftube.dao.MyChannelDAO;
-import com.itbank.TechFarm.tftube.dao.SubedDAO;
+
 import com.itbank.TechFarm.tftube.dao.SubingDAO;
 import com.itbank.TechFarm.tftube.dao.VideoDAO;
 import com.itbank.TechFarm.tftube.dto.SubedDTO;
@@ -27,9 +27,6 @@ public class SubController {
 	
 	@Autowired
 	private SubingDAO subingDAO;
-	
-	@Autowired
-	private SubedDAO subedDAO;
 	
 	@Autowired
 	private VideoDAO videoDAO;
@@ -96,7 +93,7 @@ public class SubController {
 				//작성자이름으로 구분할듯.
 				String mode=arg0.getParameter("mode");
 				SubingDTO sidto=null;
-				SubedDTO sddto=null;
+				//SubedDTO sddto=null;
 				if(subing_member_no_raw!=null&&mode.equals("injection")){//구독 버튼을 눌렀을때
 					int subing_member_no=Integer.parseInt(subing_member_no_raw);
 				sidto=new SubingDTO();		
@@ -105,12 +102,12 @@ public class SubController {
 				sidto.setMember_no(cu_member.getNo());	//현재 로그인한 사람 회원 번호
 				sidto.setSubing_member_no(subing_member_no);//비디오 작성자	
 				//다 읽어보진 않았지만 아마도 피구독 구독 값 설정중
-				sddto.setChannel(vdto.getChannel());
-				sddto.setMember_no(vdto.getMember_no());
-				sddto.setSubed_member_no(cu_member.getNo());
+				//sddto.setChannel(vdto.getChannel());
+				//sddto.setMember_no(vdto.getMember_no());
+				//sddto.setSubed_member_no(cu_member.getNo());
 				
 				subingDAO.insertSubing(sidto);//db에 넣기
-				subedDAO.insertSubed(sddto);//db에 넣기		
+				//subedDAO.insertSubed(sddto);//db에 넣기		
 				}else if(subing_member_no_raw!=null&&mode.equals("cancel")){			
 					/*subingDAO.deleteSubing(vdto.getMember_no());
 					subedDAO.deleteSubed(vdto.getMember_no());*/

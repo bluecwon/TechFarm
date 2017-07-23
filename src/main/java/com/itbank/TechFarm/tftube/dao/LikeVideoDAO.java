@@ -19,6 +19,9 @@ public interface LikeVideoDAO {
 	*/
 	public int likecount(int member_no);
 	public int unlikecount(int member_no);
+	public List<VideoDTO> like_member_list(int member_no);
+	public int likevideo_list_status(int member_no,int video_no);
+	public int likevideo_list_ustatus(int member_no,int video_no);
 	
 	
 	

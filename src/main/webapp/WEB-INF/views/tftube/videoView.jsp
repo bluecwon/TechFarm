@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="main_top.jsp"%>
+<%@ include file="top.jsp"%>
 <!DOCTYPE html>
 <%-- <c:set var="like_status" value="${like_status}"/><!-- 컨트롤러에서받아옴 -->
 <c:set var="unlike_status" value="${unlike_status}"/> --%>
@@ -226,4 +226,4 @@ background-color: #6799FF;
    cursor: pointer;
 } 
 </style>
-<%@ include file="main_bottom.jsp"%>
+<%@ include file="bottom.jsp"%>

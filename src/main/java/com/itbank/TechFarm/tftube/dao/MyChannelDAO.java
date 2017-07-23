@@ -9,5 +9,5 @@ public interface MyChannelDAO {
 	
 	public int insertChannel(MemberDTO dto);
 	public MyChannelDTO getChannel(int member_no);
-
+	
 }

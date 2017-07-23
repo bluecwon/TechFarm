@@ -15,7 +15,7 @@
 	<bean id="recentvideoDAO" class="com.itbank.TechFarm.tftube.dao.RecentVideoDAOImpl"/>
 	<bean id="mychannelDAO" class="com.itbank.TechFarm.tftube.dao.MyChannelDAOImpl"/>
 	<bean id="subingDAO" class="com.itbank.TechFarm.tftube.dao.SubingDAOImpl"/>
-	<bean id="subedDAO" class="com.itbank.TechFarm.tftube.dao.SubedDAOImpl"/>
+	
 	<bean id="likevideoDAO" class="com.itbank.TechFarm.tftube.dao.LikeVideoDAOImpl"/>
 	
 	    

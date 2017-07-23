@@ -5,9 +5,7 @@
 <!DOCTYPE html>
 <c:set var="like_status" value="${like_status}"/><!-- 컨트롤러에서받아옴 -->
 <c:set var="unlike_status" value="${unlike_status}"/>
-좋아요상태:<c:out value="${like_status}"/><br>
-시러요상태:<c:out value="${unlike_status}"/><br>
-비디오일렬:<c:out value="${vdto.no}"/><br>
+
 <script src="resources/js/jquery-1.9.0.js"></script>
 <script type="text/javascript">
 var like_status=${like_status};
@@ -18,7 +16,7 @@ $(function(){
 	if(like_status==0){
 	$("#like").hide();
 	$("#like_disabled").show();
-	}else{ 	
+	}else if(like_status==1){ 	
 	$("#like_disabled").hide();//like status==0 첫따봉후에
 	$("#like").show();
 	}
@@ -27,7 +25,7 @@ $(function(){
 	$("#unlike").hide();
 	$("#unlike_disabled").show();	
 	}
-	else{	
+	else if(unlike_status==1) {	
 	$("#unlike_disabled").hide();
 	$("#unlike").show();
 	}

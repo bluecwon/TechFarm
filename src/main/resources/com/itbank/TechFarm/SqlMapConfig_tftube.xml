@@ -12,7 +12,7 @@
   	<typeAlias alias = "replyformat" type="com.itbank.TechFarm.tftube.dto.ReplyDTOFormat"/>
   	<typeAlias alias = "mychannelDTO" type="com.itbank.TechFarm.tftube.dto.MyChannelDTO"/>
   	<typeAlias alias = "subingDTO" type="com.itbank.TechFarm.tftube.dto.SubingDTO"/>
-  	<typeAlias alias = "subedDTO" type="com.itbank.TechFarm.tftube.dto.SubedDTO"/>
+  	
   	<typeAlias alias = "memberDTO" type="com.itbank.TechFarm.login.member.MemberDTO"/>
   	<typeAlias alias = "video_recentvideoDTO" type="com.itbank.TechFarm.tftube.dto.Video_RecentVideoDTO"/>
   	<typeAlias alias = "likevideoDTO" type="com.itbank.TechFarm.tftube.dto.LikeVideoDTO"/>
@@ -35,8 +35,7 @@
     <mapper resource="com/itbank/TechFarm/tftube/mybatis/ReplyMapper.xml"/>
     <mapper resource="com/itbank/TechFarm/tftube/mybatis/RecentVideoMapper.xml"/>
     <mapper resource="com/itbank/TechFarm/tftube/mybatis/MyChannelMapper.xml"/>
-    <mapper resource="com/itbank/TechFarm/tftube/mybatis/SubingMapper.xml"/>
-    <mapper resource="com/itbank/TechFarm/tftube/mybatis/SubedMapper.xml"/>
+    <mapper resource="com/itbank/TechFarm/tftube/mybatis/SubingMapper.xml"/>    
     <mapper resource="com/itbank/TechFarm/tftube/mybatis/LikeVideoMapper.xml"/>
   </mappers> 
 </configuration> 

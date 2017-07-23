@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ include file="main_top.jsp"%>
+<%@ include file="top.jsp"%>
 
 <div id="2-2" style="overflow: hidden;" align="center"> <!-- start of 2-2 -->
 <!-- <div id="2-2-1">start of 2-2-1 -->
@@ -45,4 +45,4 @@ poster="이미지파일" : 동영상이 플레이 되기 전 대표로 보여줄
 <!-- </div>end of 2-2-1 -->
 </div><!-- end of 2-2 -->
 
-<%@ include file="main_bottom.jsp"%> 
+<%@ include file="bottom.jsp"%> 

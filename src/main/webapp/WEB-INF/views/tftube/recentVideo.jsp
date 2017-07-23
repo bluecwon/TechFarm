@@ -6,7 +6,7 @@
  </select> 
  정확한 이유는파악하지 못했다. 그러나 아직 video_name이 unique가 아니기 때문에 오류가 발생한다.
   --%>	
-<%@ include file="main_top.jsp"%> 
+<%@ include file="top.jsp"%> 
 <meta charset="UTF-8">
 
 <script type="text/javascript">
@@ -21,14 +21,14 @@ function delete_recent(){
 <c:forEach var="recentVideo" items="${recent_list}">
 <tr>
 <td>
-<div class="imaj">
+<div style="float:left">
 <c:if test="${recent_list.size()==0}">
 시청한 동영상이 없습니다.
 </c:if>
 
 <a href="tftube_videoView?no=${recentVideo.no}">
 <img src="resources/tftube/uploadImage/${recentVideo.image}" 
-width="400" height="250">
+width="300" height="200">
 비디오 일련번호:${recentVideo.no}
 </a>
 
@@ -50,5 +50,5 @@ ${recentVideo.description}
 </c:forEach>
 </table>
 </div>
-<%@ include file="main_bottom.jsp"%> 
+<%@ include file="bottom.jsp"%> 
 

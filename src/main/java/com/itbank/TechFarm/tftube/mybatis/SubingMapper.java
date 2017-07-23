@@ -57,6 +57,15 @@ public class SubingMapper {
 	    	
 	    }
 	    
+	    public static List<SubingDTO> get_subed_member(int subing_member_no){
+	    	SqlSession session=sqlMapper.openSession();
+	    	List<SubingDTO> subingdto=session.selectList("get_subed_member",subing_member_no);
+			session.close();
+			return subingdto;	
+	    	
+	    	
+	    }
+	    
 	    
 	    
 	   

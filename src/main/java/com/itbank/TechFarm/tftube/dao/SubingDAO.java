@@ -10,6 +10,7 @@ public interface SubingDAO {
 	public List<SubingDTO> get_subing_member(int member_no);
 	public int deleteSubing(SubingDTO dto);
 	public SubingDTO select_subing(SubingDTO dto);
+	public List<SubingDTO> get_subed_member(int subing_member_no);
 	
 	
 }

@@ -3,14 +3,10 @@
 
 
 <!DOCTYPE html>
-<%@include file="main_top.jsp" %>
+<%@include file="top.jsp" %>
 <!-- <html lang="en"> -->
 
 <meta charset="UTF-8">
-
-
-
-
 
 <div id="2-2-1">
 <form name="f" method="post" enctype="multipart/form-data" action="tftube_video_insert">
@@ -171,5 +167,5 @@ upload.onchange = function (e) {//input text 내용 변경 감지
 
 </script>
 </div>
-<%@include file="main_bottom.jsp" %>
+<%@include file="bottom.jsp" %>
 

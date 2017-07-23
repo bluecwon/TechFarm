@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.itbank.TechFarm.tftube.dao.VideoDAO;
 import com.itbank.TechFarm.tftube.dto.LikeVideoDTO;
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
 
@@ -96,21 +97,42 @@ public class LikeVideoMapper {
 	 */
 
 	public static int likecount(int video_no) {
-
 		SqlSession session = sqlMapper.openSession();
 		int count = session.selectOne("likecount", video_no);
 		session.close();
 		return count;
-
 	}
 
 	public static int unlikecount(int video_no) {
 
-		SqlSession session = sqlMapper.openSession();
-
+		SqlSession session = sqlMapper.openSession();		
 		int count = session.selectOne("unlikecount", video_no);
 		session.close();
 		return count;
-
+	}
+	
+	public static List<VideoDTO> like_member_list(int member_no){
+		SqlSession session=sqlMapper.openSession();
+		List<VideoDTO> list=session.selectList("like_member_list",member_no);
+		session.close();
+		return list;		
+	}
+	
+	public static int likevideo_list_status(int member_no,int video_no){
+		SqlSession session=sqlMapper.openSession();
+		java.util.HashMap map = new java.util.HashMap();
+		map.put("member_no", member_no);
+		map.put("video_no", video_no);
+		int list_status = session.selectOne("likevideo_list_status",map);
+		return list_status;		
+	}
+	
+	public static int likevideo_list_ustatus(int member_no,int video_no){
+		SqlSession session=sqlMapper.openSession();
+		java.util.HashMap map = new java.util.HashMap();
+		map.put("member_no", member_no);
+		map.put("video_no", video_no);
+		int list_status = session.selectOne("likevideo_list_ustatus",map);
+		return list_status;		
 	}
 }

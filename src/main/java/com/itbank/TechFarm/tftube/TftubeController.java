@@ -48,7 +48,7 @@ import com.itbank.TechFarm.login.member.MemberDTO;
 import com.itbank.TechFarm.tftube.dao.MyChannelDAO;
 import com.itbank.TechFarm.tftube.dao.RecentVideoDAO;
 import com.itbank.TechFarm.tftube.dao.ReplyDAO;
-import com.itbank.TechFarm.tftube.dao.SubedDAO;
+
 import com.itbank.TechFarm.tftube.dao.SubingDAO;
 import com.itbank.TechFarm.tftube.dao.VideoDAO;
 import com.itbank.TechFarm.tftube.dto.RecentVideoDTO;
@@ -86,7 +86,7 @@ public class TftubeController {
 		String upPath_video=session.getServletContext().getRealPath("/resources/tftube/uploadVideo");
 		
 		
-		System.out.println("업비페뜨:"+upPath_video);		
+		System.out.println(upPath_video);		
 		
 		session.setAttribute
 		("list",list);		
