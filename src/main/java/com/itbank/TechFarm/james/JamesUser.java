@@ -41,8 +41,8 @@ public class JamesUser {
 	        MBeanServerConnection server = JMXConnectorFactory.connect(new JMXServiceURL(serverUrl)).getMBeanServerConnection();
 	        UsersRepositoryManagementMBean userBean =  MBeanServerInvocationHandler.newProxyInstance(server, new ObjectName(beanNameUser), UsersRepositoryManagementMBean.class, false);
 	        DomainListManagementMBean domainBean =  MBeanServerInvocationHandler.newProxyInstance(server, new ObjectName(beanNameDomain), DomainListManagementMBean.class, false);
-	        if(domainBean.containsDomain(host) && !userBean.verifyExists(id+"@"+host)){
-	            System.out.println("creating email : "+id+"@"+host );
+	        if(domainBean.containsDomain(host) && userBean.verifyExists(id+"@"+host)){
+	            System.out.println("setPassword : "+id+"@"+host );
 	            userBean.setPassword(id+"@"+host, password);
 	        }else{
 	            System.out.println("setPassword failed : domain does not exist!!");
@@ -57,8 +57,8 @@ public class JamesUser {
 	        MBeanServerConnection server = JMXConnectorFactory.connect(new JMXServiceURL(serverUrl)).getMBeanServerConnection();
 	        UsersRepositoryManagementMBean userBean =  MBeanServerInvocationHandler.newProxyInstance(server, new ObjectName(beanNameUser), UsersRepositoryManagementMBean.class, false);
 	        DomainListManagementMBean domainBean =  MBeanServerInvocationHandler.newProxyInstance(server, new ObjectName(beanNameDomain), DomainListManagementMBean.class, false);
-	        if(domainBean.containsDomain(host) && !userBean.verifyExists(id+"@"+host)){
-	            System.out.println("creating email : "+id+"@"+host );
+	        if(domainBean.containsDomain(host) && userBean.verifyExists(id+"@"+host)){
+	            System.out.println("deleteUser : "+id+"@"+host );
 	            userBean.deleteUser(id+"@"+host);
 	        }else{
 	            System.out.println("deleteUser failed : domain does not exist!!");
@@ -67,5 +67,17 @@ public class JamesUser {
 	    }catch (Exception e){
 	        System.out.println("Something went wrong");
 	    }
+	}
+	public String[] listUser(){
+	    try{
+	        MBeanServerConnection server = JMXConnectorFactory.connect(new JMXServiceURL(serverUrl)).getMBeanServerConnection();
+	        UsersRepositoryManagementMBean userBean =  MBeanServerInvocationHandler.newProxyInstance(server, new ObjectName(beanNameUser), UsersRepositoryManagementMBean.class, false);
+	        DomainListManagementMBean domainBean =  MBeanServerInvocationHandler.newProxyInstance(server, new ObjectName(beanNameDomain), DomainListManagementMBean.class, false);
+	        String[] listuser = userBean.listAllUsers();
+	        return listuser;
+	    }catch (Exception e){
+	        System.out.println("Something went wrong");
+	    }
+		return null;
 	}
 }
