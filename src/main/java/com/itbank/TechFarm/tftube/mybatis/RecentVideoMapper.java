@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.itbank.TechFarm.tftube.dto.RecentVideoDTO;
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
+import com.itbank.TechFarm.tftube.dto.Video_RecentVideoDTO;
 
 public class RecentVideoMapper {
 	
@@ -62,6 +63,15 @@ public class RecentVideoMapper {
 		session.commit();
 		session.close();
 		return res;
+	}
+	
+	public static List<Video_RecentVideoDTO> listVideo_recent(int member_no){
+		SqlSession session=sqlMapper.openSession();
+		List<Video_RecentVideoDTO> res=session.selectList("listVideo_recent",member_no);		
+		session.close();
+		return res;
+		
+		
 	}
 
 }

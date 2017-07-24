@@ -11,7 +11,6 @@
 관심 목록이 없습니다.
 </c:when>
 <c:otherwise>
-
 <c:forEach var="likeList" items="${like_all_list}">
 <div id="like-one-line">
 

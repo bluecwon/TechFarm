@@ -24,14 +24,14 @@
 <option value="animation">애니메이션</option>
 <option value="car">자동차</option>
 <option value="music">음악</option>
-<option value="sport">동물</option>
+<option value="animal">동물</option>
 <option value="sports">스포츠</option>
 <option value="travel/event">여행/이벤트</option>
 <option value="game">게임</option>
 <option value="blog/person">블로그/인물</option>
 <option value="comedy">코미디</option>
 <option value="entertainment">엔터테인먼트</option>
-<option value="news/">뉴스/정치</option>
+<option value="news/politics">뉴스/정치</option>
 <option value="nohow/style">노하우/스타일</option>
 <option value="education">교육</option>
 <option value="technology">과학기술</option>
@@ -88,9 +88,9 @@ var image_check=document.getElementById("image_check");
 	
 	if(video==""){		
 	 	video_check.innerHTML = '업로드 하실 동영상을 선택하세요.';	 	
-	}/* else if(!(video.substring(video.length()-2, video.length()).equals("mp4"))){		
-		   video_check.innerHTML = 'mp4 동영상만 업로드 가능 합니다'; 	
-	} */else{
+	}else if(! /\.mp4$/.test(video)){	
+		video_check.innerHTML = 'mp4 동영상만 업로드 가능 합니다'; 	
+	}else{
 		video_check.innerHTML = "";
 	} 
 
@@ -115,8 +115,7 @@ var image_check=document.getElementById("image_check");
 };
 
 /* present image */
- var upload=document.getElementById('image'), 
- /* var upload = document.getElementsByTagName('input')[3], */ 
+ var upload=document.getElementById('image'),  
     holder = document.getElementById('holder'),
     state = document.getElementById('status');
 

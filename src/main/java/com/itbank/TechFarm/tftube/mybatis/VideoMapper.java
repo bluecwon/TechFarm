@@ -81,45 +81,8 @@ public class VideoMapper {
 		SqlSession session=sqlMapper.openSession();
 		int res=session.selectOne("unlikecount",member_no);
 		session.close();
-		return res;	
-		
-	}
-	
-	
-	
-
-	
-	/*public static int click_like(int no){
-		SqlSession session=sqlMapper.openSession();		
-  		int res=session.update("click_like",no);  		
-  		session.commit();
-  		session.close();
-		return res;
-	}
-	
-	public static int click_unlike(int no){
-		SqlSession session=sqlMapper.openSession();
-  		int res=session.update("click_unlike",no); 
-  		session.commit();
-  		session.close();
-		return res;
-	}
-	
-	public static int cancel_like(int no){
-		SqlSession session=sqlMapper.openSession();
-  		int res=session.update("cancel_like",no); 
-  		session.commit();
-  		session.close();
-		return res;
-	}
-	
-	public static int cancel_unlike(int no){
-		SqlSession session=sqlMapper.openSession();
-  		int res=session.update("cancel_unlike",no); 
-  		session.commit();
-  		session.close();
-		return res;
-	}*/
+		return res;			
+	}	
 	
 	public static List<Video_RecentVideoDTO> listRecent_inf(int member_no){
 		SqlSession session=sqlMapper.openSession();
@@ -149,5 +112,12 @@ public class VideoMapper {
 		session.commit();
 		session.close();
 		return res;
+	}
+	
+	public static List<VideoDTO> listVideo_category(String category){
+		SqlSession session=sqlMapper.openSession();
+		List<VideoDTO> list=session.selectList("listVideo_category",category);
+		session.close();
+		return list;		
 	}
 }

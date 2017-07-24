@@ -52,7 +52,7 @@ public class RecentVideoController {
 		
 		String ip=arg0.getRemoteAddr();				
 		
-		List<Video_RecentVideoDTO> recent_list=videoDAO.listRecent_inf(member.getNo());
+		List<Video_RecentVideoDTO> recent_list=recentvideoDAO.listVideo_recent(member.getNo());
 		mv.addObject("recent_list",recent_list);		
 		mv.setViewName("tftube/recentVideo");		
 		return mv;

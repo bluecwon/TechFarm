@@ -1,7 +1,5 @@
 package com.itbank.TechFarm.tftube;
 
-
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -55,7 +53,7 @@ import com.itbank.TechFarm.tftube.dto.LikeVideoDTO;
 import com.itbank.TechFarm.tftube.dto.RecentVideoDTO;
 import com.itbank.TechFarm.tftube.dto.ReplyDTO;
 import com.itbank.TechFarm.tftube.dto.ReplyFormat;
-import com.itbank.TechFarm.tftube.dto.SubedDTO;
+
 import com.itbank.TechFarm.tftube.dto.SubingDTO;
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
 import com.itbank.TechFarm.tftube.java.Sha3;
@@ -75,11 +73,9 @@ public class VideoController {
 	@Autowired
 	private MyChannelDAO mychannelDAO;
 	@Autowired
-	private SubingDAO subingDAO;
-	
+	private SubingDAO subingDAO;	
 	@Autowired
-	private LikeVideoDAO likevideoDAO;
-	
+	private LikeVideoDAO likevideoDAO;	
 	
 	private String upPath_video=null;
 	private String upPath_image=null;
@@ -140,10 +136,8 @@ public class VideoController {
 			msg="only mp4 available";
 			url="tftube_video_insert";
 			return new ModelAndView("tftube/message");
-		}*/
-				
+		}*/				
 		
-		System.out.println(upPath_video);
 		//메인을 거치지 않으면 nullpoint Exception
 		//경로 설정
 		File upPath_video_file=new File(upPath_video);
@@ -159,22 +153,8 @@ public class VideoController {
 		mf.transferTo(original_video);
 		
 		Sha3 sha3=new Sha3();
-		String video_name=sha3.Digest_Sha3(original_video);
-		String file_ex_video=original_video_name.substring(original_video_name.length()-4,original_video_name.length());
-		File file=new File(upPath_video,video_name+file_ex_video);
-		if(original_video.renameTo(file)){
-			System.out.println("성공하셨습니다.");
-		};
+		String video_sha3=sha3.Digest_Sha3(original_video);
 		
-		
-		/*File file=new File(upPath_video,video_name+original_video_name);*/	
-		System.out.println("file:"+file);
-		/*if(filename.trim().equals("")){}
-		else{
-			이건 왜 했던거니?	
-		}		*/
-
-	
 		
 		MultipartFile mf2 = mr.getFile("image");
 		String original_image_name = mf2.getOriginalFilename();
@@ -188,26 +168,27 @@ public class VideoController {
 		
 		mf2.transferTo(original_image);
 		
-		String image_name=sha3.Digest_Sha3(original_image);
-		System.out.println("이미지hashcode"+image_name.length());
-		
-		String file_ex_image=original_image_name.substring(original_image_name.length()-4,original_image_name.length());
-		System.out.println("확장자 출력:"+file_ex_image);
-		File image=new File(upPath_image,image_name+file_ex_image);
-		if(original_image.renameTo(image)){
-			System.out.println("성공하셨습니다.");
-		};	
+		String image_sha3=sha3.Digest_Sha3(original_image);				
 		
 		
+		
+			
+		//sha3 까지 구하는 것만 여기서, 비교결과를 전송 insertform에 
+		//컨트롤러를 거쳐도 다시 원래 정보가 남아 있게 하려면 어찌해야함?
+		//문제 없으면 게시 mapping , 문제 있으면 messsage로 넘김
+		/*
 		MemberDTO memberdto=(MemberDTO)session.getAttribute("memberDTO");
 		dto.setDescription(ServletRequestUtils.getStringParameter(arg0, "description"));
 		dto.setMember_no(memberdto.getNo());
 		//when !login but insert
+		
 		dto.setVideo_name(video_name);
+		
 		dto.setOpen(ServletRequestUtils.getStringParameter(arg0, "open"));
 		dto.setTitle(ServletRequestUtils.getStringParameter(arg0, "title"));
-//		dto.setVideo_size((int)mf.getSize());	
-		dto.setImage(image_name);			
+
+		dto.setImage(image_name);		
+		
 		dto.setChannel(mychannelDAO.getChannel(memberdto.getNo()).getChannel());
 		dto.setCategory(arg0.getParameter("category"));		
 		
@@ -221,8 +202,24 @@ public class VideoController {
 			mv.setViewName("message");
 			mv.addObject("msg",msg);
 			mv.addObject("url",url);				
-		}		
+		}		*/
 		return mv;
+		
+		/*String file_ex_video=original_video_name.substring(original_video_name.length()-4,original_video_name.length());
+		String video_name=video_sha3+file_ex_video;
+		//여기 string과 특정폴더에 있는 파일들의 이름 비교.
+		
+		File file=new File(upPath_video,video_name);
+		original_video.renameTo(file);	
+		
+		String file_ex_image=original_image_name.substring(original_image_name.length()-4,original_image_name.length());	
+		
+		String image_name=image_sha3+file_ex_image;
+		File image=new File(upPath_image,image_name);
+		original_image.renameTo(image);
+		 
+		 
+		 */
 	}	
 	
 	

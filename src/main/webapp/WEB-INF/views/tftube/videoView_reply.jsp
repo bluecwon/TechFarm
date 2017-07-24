@@ -44,7 +44,7 @@ $(function(){
 </table>
 
 
-
+<div class="white">
 <!-- Reply list -->
 <table>
 <c:forEach var="rdto" items="${r_list}">
@@ -53,7 +53,7 @@ $(function(){
 <!-- empty space in front of reply_reply -->
 <c:if test="${rdto.re_level==1}">
 <div class = "imaj"><!-- float -->
-<img src="" width="80" height="80">
+<img src="resources/tftube/imgs/vaccum.jpg" width="60" height="60" style="border-style: none;">
 </div>
 </c:if>
 
@@ -100,5 +100,6 @@ ${rdto.content}<br>
 
 </c:forEach>
 </table>
+</div>
 <!-- end of Reply List -->
 

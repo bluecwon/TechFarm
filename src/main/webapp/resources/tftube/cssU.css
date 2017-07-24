@@ -6,6 +6,22 @@ body {
 	font-size:13px;
 }
 
+div.spacing{
+	margin-top:50px;
+	margin-left:50px;	
+}
+
+div.wider_spacing{
+	margin-top:50px;
+	margin-left:450px;	
+}
+
+div.white{
+	background-color:white;
+	
+}
+
+
 #header, #content, #comments, #sidebar, #footer { 
 	background-color:#ffffff; 
 	margin:10px 0px;
@@ -13,13 +29,13 @@ body {
     -webkit-border-radius:10px; 
     padding:30px;
 }
-#header h1 { 
+#header h1{ 
 	float:right; 
 	margin: 20px 0 0 0; 
 	font-size:36px; 
 	font-weight:bold;
 }
-#header h2 {
+#header h2{
 	font-size:16px; 
 	font-weight:normal; 
 	margin:0px; 
@@ -47,7 +63,7 @@ body {
 	width:540px; 
 	float:left;
 }
-#comments p span {
+ p span #comments{
 	display:block; 
 	font-size:16px; 
 	color:#B0232A;
@@ -96,7 +112,6 @@ body {
 	background-position:-30px -20px; 
 }
 
-
 /* click views */
 #content.wide { 
 	width:900px;
@@ -125,7 +140,15 @@ em {
 	font-size:10px;
 }
 
+td{
+	
+	bgcolor:white;
+}
 
+
+table{	
+	border-spacing:15px;
+}
 
 
 
@@ -209,4 +232,43 @@ em {
 
 #img_handle:hover{
 	background: #dfdfdf;
+}
+
+
+
+#like_disabled,#unlike_disabled{
+   background-color: #D5D5D5;
+   border: none;
+   color: white;
+   padding: 15px 32px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+   margin: 4px 2px;
+   cursor: pointer;   
+}
+
+#like,#unlike{
+background-color: #6799FF;
+   border: none;
+   color: white;
+   padding: 15px 32px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+   margin: 4px 2px;
+   cursor: pointer;
+}
+
+.imaj
+{
+    float: left;
+    margin-right: 10px;
+}
+
+.titl
+{
+  overflow: hidden;
 }

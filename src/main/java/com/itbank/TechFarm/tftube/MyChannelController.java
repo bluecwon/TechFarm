@@ -61,8 +61,8 @@ public class MyChannelController {
 		}
 		
 		//내 동영상 목록
-		List<VideoDTO> Video_by_member=videoDAO.listVideo_member_no(member_no);
-		mv.addObject("Video_by_member",Video_by_member);
+		List<VideoDTO> video_by_member=videoDAO.listVideo_member_no(member_no);
+		mv.addObject("video_by_member",video_by_member);
 		
 		//좋아요 표시한 동영상
 		/*List<VideoDTO> like_list=videoDAO.listLike(member_no);*/

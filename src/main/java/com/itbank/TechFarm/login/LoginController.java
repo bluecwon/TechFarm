@@ -52,7 +52,7 @@ public class LoginController {
 		MemberDTO dto=(MemberDTO)request.getSession().getAttribute("loginDTO");
 		if(dto.getPasswd().equals(passwd)){
 			MemberDTO info=memberDAO.getMember(dto.getId());
-			request.getSession().invalidate();
+			request.getSession().invalidate();			
 			request.getSession().setAttribute("memberDTO", info);
 			mav.setViewName("redirect:/");				
 			return mav;

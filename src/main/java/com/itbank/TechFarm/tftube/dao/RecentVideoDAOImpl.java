@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.itbank.TechFarm.tftube.dto.RecentVideoDTO;
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
+import com.itbank.TechFarm.tftube.dto.Video_RecentVideoDTO;
 import com.itbank.TechFarm.tftube.mybatis.RecentVideoMapper;
 
 public class RecentVideoDAOImpl implements RecentVideoDAO{
@@ -33,6 +34,13 @@ public class RecentVideoDAOImpl implements RecentVideoDAO{
 	public int recent_delete(int recent_no) {
 		return RecentVideoMapper.recent_delete(recent_no);
 	}
+
+	@Override
+	public List<Video_RecentVideoDTO> listVideo_recent(int member_no) {
+		return RecentVideoMapper.listVideo_recent(member_no);
+	}
+	
+	
 	
 	
 	

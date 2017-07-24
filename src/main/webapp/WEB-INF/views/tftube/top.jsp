@@ -5,7 +5,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" type="text/css" href="resources/tftube/style.css">
+<link rel="stylesheet" type="text/css" href="resources/tftube/cssU.css"/>
 <head>
 <meta charset="UTF-8">
 <title>TFtube에 오신걸 환영합니다.</title>
@@ -15,12 +15,30 @@ $(function(){
 $("#but").click(function(){	
 	$(".top").slideToggle('fast');
 });
+$("#wideView").click(function() {
+    $("#content").toggleClass("wide");
+    $(this).toggleClass("wide");
+});
+$("#menu").click(function() { 
+	$("#header").find(".header_menu").slideDown('normal').show();
+});
+$("#close").click(function() {
+	$("#header").find(".header_menu").slideUp('fast').show();  
+});
+$("#myinfo").click(function() { 
+	$("#header").find(".header_info").slideDown('normal').show();
+});
+$("#close2").click(function() {
+	$("#header").find(".header_info").slideUp('fast').show();  
+});
+
+
 }
 )
 </script>
 </head>
 <body>
-<div id="1" style="width=100%"><!-- start of 1 -->
+<div id="header" style="width=100%"><!-- start of 1 -->
 <Button id="but">펼치기</Button><a href="tftube_main">TFtube				</a>			
 검색	<input type="text" name="search" size="20" style="width=100%"> <input type="button" value="검색" width="900">
 <c:choose>

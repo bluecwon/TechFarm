@@ -3,8 +3,6 @@
 
 <!DOCTYPE html>
 <script src="resources/js/jquery-1.9.0.js"></script>
-글쓴이:${vdto.member_no}
-구독상태:${subing_status}
 <script type="text/javascript">
 var subing_member_no=${vdto.member_no}//비디오 작성자-무조건 있다 
 var subing_status=${subing_status} 

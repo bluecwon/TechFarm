@@ -22,20 +22,18 @@ function delete_recent(){
 <tr>
 <td>
 <div style="float:left">
+
 <c:if test="${recent_list.size()==0}">
 시청한 동영상이 없습니다.
 </c:if>
-
 <a href="tftube_videoView?no=${recentVideo.no}">
 <img src="resources/tftube/uploadImage/${recentVideo.image}" 
-width="300" height="200">
-비디오 일련번호:${recentVideo.no}
-</a>
-
+width="300" height="200"></a>
 </div>
-<div class="imaj">
+
+<div style="overflow:hidden" class="wider_spacing">
 ${recentVideo.title}<br>
-<a href="tftube_mychannel">${recentVideo.channel}</a><br><!-- probability of not working -->
+<a href="tftube_mychannel?mem_no=${recentVideo.member_no}">${recentVideo.channel}</a><br><!-- probability of not working -->
 <fmt:formatNumber value="${recentVideo.readcount}" pattern="#,##0"/>회<br>
 ${recentVideo.description}
 </div>
