@@ -36,6 +36,9 @@ body{
 .gray{background-color:#DCDCDC;}
 a{text-decoration:none; color:black;}
 #view{border-bottom: 2px solid #e8e8e3; padding-bottom: 12px;}
+#replyname{padding-left: 36px; padding-top: 12px;}
+#insertreply{padding-right: 36px; padding-bottom: 12px;}
+#span{color:#DCDCDC;}
 
 
 table.jjm494_add {

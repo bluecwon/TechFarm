@@ -5,10 +5,11 @@ public class Blog_BoardReplyDTO {
 	private int replyno;
 	private int no;
 	private String id;
-	private String content;
-	private int reg_date;
+	private String repcontent;
+	private String reg_date;
 	private int re_level;
 	private int re_step;
+	private String profile;
 	
 	public int getReplyno() {
 		return replyno;
@@ -28,16 +29,16 @@ public class Blog_BoardReplyDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getContent() {
-		return content;
+	public String getRepcontent() {
+		return repcontent;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setRepcontent(String repcontent) {
+		this.repcontent = repcontent;
 	}
-	public int getReg_date() {
+	public String getReg_date() {
 		return reg_date;
 	}
-	public void setReg_date(int reg_date) {
+	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
 	public int getRe_level() {
@@ -52,4 +53,11 @@ public class Blog_BoardReplyDTO {
 	public void setRe_step(int re_step) {
 		this.re_step = re_step;
 	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+	
 }

@@ -3,6 +3,7 @@ package com.itbank.TechFarm.blog.dao;
 import java.util.List;
 
 import com.itbank.TechFarm.blog.dto.Blog_BoardDTO;
+import com.itbank.TechFarm.blog.dto.Blog_BoardReplyDTO;
 import com.itbank.TechFarm.blog.dto.Blog_MakeBoardDTO;
 import com.itbank.TechFarm.blog.mybatis.BlogMapper;
 
@@ -60,6 +61,42 @@ public class Blog_BoardDAOImpl implements Blog_BoardDAO {
 	public int deleteBoard(int no) {
 		// TODO Auto-generated method stub
 		return BlogMapper.deleteBoard(no);
+	}
+
+	@Override
+	public int insertReply(Blog_BoardReplyDTO dto) {
+		// TODO Auto-generated method stub
+		return BlogMapper.insertReply(dto);
+	}
+
+	@Override
+	public int updateRe_step() {
+		// TODO Auto-generated method stub
+		return BlogMapper.updateRestep();
+	}
+
+	@Override
+	public int updateRere_step(int re_step) {
+		// TODO Auto-generated method stub
+		return BlogMapper.updateRerestep(re_step);
+	}
+
+	@Override
+	public int updateReadcount(int no) {
+		// TODO Auto-generated method stub
+		return BlogMapper.updateReadcount(no);
+	}
+
+	@Override
+	public int updateReplyNumber(int no) {
+		// TODO Auto-generated method stub
+		return BlogMapper.updateReplyNumber(no);
+	}
+
+	@Override
+	public List listReply(int no) {
+		// TODO Auto-generated method stub
+		return BlogMapper.listReply(no);
 	}
 
 }

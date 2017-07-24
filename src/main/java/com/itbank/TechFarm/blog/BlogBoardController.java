@@ -45,6 +45,7 @@ import org.springframework.web.servlet.View;
 import com.itbank.TechFarm.blog.dao.Blog_BoardDAO;
 import com.itbank.TechFarm.blog.dao.Blog_OptionDAO;
 import com.itbank.TechFarm.blog.dto.Blog_BoardDTO;
+import com.itbank.TechFarm.blog.dto.Blog_BoardReplyDTO;
 import com.itbank.TechFarm.blog.dto.Blog_MakeBoardDTO;
 import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
 
@@ -60,11 +61,13 @@ public class BlogBoardController {
 	@Autowired 
 	private Blog_OptionDAO optionDAO;
 	
+	HttpSession session = null;
+	
 	@RequestMapping(value="/listBoard")
 	public ModelAndView listBoard(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blog/listBoardMain");
-		HttpSession session = request.getSession();
+		session = request.getSession();
 		String title = request.getParameter("title");
 		int boardno = ServletRequestUtils.getIntParameter(request, "boardno");
 		List<Blog_BoardDTO> listBoard = boardDAO.listBoard(boardno);
@@ -99,7 +102,7 @@ public class BlogBoardController {
 	      // 파일명을 받는다 - 일반 원본파일명
 	      String oldName = request.getHeader("file-name");
 	      // 파일 기본경로 _ 상세경로
-	      HttpSession session = request.getSession();
+	      session = request.getSession();
 	      String filePath = session.getServletContext().getRealPath("/")+"resources"+File.separator+"upload"+File.separator;
 	      String saveName = sb.append(new SimpleDateFormat("yyyyMMddHHmmss")
 	                          .format(System.currentTimeMillis()))
@@ -148,7 +151,7 @@ public class BlogBoardController {
 		MultipartFile mf = mr.getFile("file1");	
 		String file1 = mf.getOriginalFilename();
 		
-		HttpSession session = arg0.getSession();
+		session = arg0.getSession();
 		String upPath = session.getServletContext().getRealPath("/resources/upload/");
 		File file = new File(upPath,file1);
 		
@@ -176,10 +179,15 @@ public class BlogBoardController {
 		String mode = "view";
 		int no = ServletRequestUtils.getIntParameter(request, "no");
 		mav.setViewName("blog/listBoardMain");
-		HttpSession session = request.getSession();
+		session = request.getSession();
 		String upPath = session.getServletContext().getRealPath("/resources/upload");
+		boardDAO.updateReadcount(no);
 		Blog_BoardDTO dto = boardDAO.getBoard(no);
 		
+		//reply
+		List<Blog_BoardReplyDTO> listReply = boardDAO.listReply(no);
+		
+		mav.addObject("listReply",listReply);
 		mav.addObject("boardDTO",dto);
 		mav.addObject("title",dto.getTitle());
 		mav.addObject("mode",mode);
@@ -190,7 +198,7 @@ public class BlogBoardController {
 	@RequestMapping(value="/updateBoard" , method = RequestMethod.GET)
 	public ModelAndView updateBoard(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
-		HttpSession session = request.getSession();
+		session = request.getSession();
 		String upPath = session.getServletContext().getRealPath("/resources/upload/");
 		int no = ServletRequestUtils.getIntParameter(request, "no");
 		String title = request.getParameter("title");
@@ -213,7 +221,7 @@ public class BlogBoardController {
 		dto = getBoardOptionUpdate(request,dto);
 
 		if(fileuse==1){
-			HttpSession session = request.getSession();
+			session = request.getSession();
 			String delpfPath = session.getServletContext().getRealPath("/resources/upload/"+originfile1);
 			File delfile = new File(delpfPath);
 			delfile.delete();
@@ -233,7 +241,7 @@ public class BlogBoardController {
 		MultipartFile mf = mr.getFile("file1");	
 		String file1 = mf.getOriginalFilename();
 		
-		HttpSession session = arg0.getSession();
+		session = arg0.getSession();
 		String upPath = session.getServletContext().getRealPath("/resources/upload/");
 		File file = new File(upPath,file1);
 		
@@ -271,4 +279,52 @@ public class BlogBoardController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/insertReply")
+	public ModelAndView insertReply(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	  ModelAndView mav = new ModelAndView("redirect:viewBoard");
+	  String id = request.getParameter("id");
+	  int no = ServletRequestUtils.getIntParameter(request, "no");
+	  String repcontent = request.getParameter("repcontent");
+	  Blog_BoardReplyDTO dto = new Blog_BoardReplyDTO();
+	  
+	  String re_step_raw = request.getParameter("re_step");
+		String re_level_raw = request.getParameter("re_level");
+	  int re_step = 0;
+	  int re_level = 0;
+	  
+	  if(re_step_raw != null){
+		  re_step = Integer.parseInt(re_step_raw);
+	  }
+	  if(re_level_raw != null){
+		  re_level = Integer.parseInt(re_level_raw);
+	  }
+	  
+	  int res = 0;
+	  String mode = request.getParameter("mode"); //댓글(reply), 대댓글 구분(rereply)
+	  Blog_OptionDTO optionDTO = optionDAO.getBlog(id);
+	  if(optionDTO == null){
+			dto.setProfile(null);
+		}else{
+			String profile = optionDTO.getProfile();
+			dto.setProfile(profile);
+		}
+	  
+	  dto.setId(id);
+	  dto.setRe_step(re_step);			
+	  dto.setRepcontent(repcontent);
+	  dto.setNo(no);
+	 
+	  if(mode.equals("reply")){		
+		  	dto.setRe_level(0);
+			res=boardDAO.insertReply(dto);
+			boardDAO.updateRe_step();
+		}else{	 
+			dto.setRe_level(1);
+			res=boardDAO.insertReply(dto);
+			boardDAO.updateRere_step(re_step);
+		}
+	  boardDAO.updateReplyNumber(no);
+	  mav.addObject("no",no);
+	  return mav;
+	}
 }
