@@ -22,18 +22,22 @@
 	<!-- tftube -->
 	<bean id="replyDAO" class="com.itbank.TechFarm.tftube.dao.ReplyDAOImpl"/>
 	<bean id="videoDAO" class="com.itbank.TechFarm.tftube.dao.VideoDAOImpl"/>
+	<bean id="recentvideoDAO" class="com.itbank.TechFarm.tftube.dao.RecentVideoDAOImpl"/>
+	<bean id="mychannelDAO" class="com.itbank.TechFarm.tftube.dao.MyChannelDAOImpl"/>
+	<bean id="subingDAO" class="com.itbank.TechFarm.tftube.dao.SubingDAOImpl"/>
+	<bean id="likevideoDAO" class="com.itbank.TechFarm.tftube.dao.LikeVideoDAOImpl"/>
 	<!-- tfcontacts -->
 	<bean class="com.itbank.TechFarm.contacts.ContactsDAOImpl" id="contactsDAO"/>
 	<!-- james -->
 	<bean class="com.itbank.TechFarm.james.JamesDAOImpl" id="jamesDAO"/>
 	<bean class="com.itbank.TechFarm.james.JamesUser" id="jamesUser"/>
 	<bean class="com.itbank.TechFarm.james.JamesPro" id="jamesPro"/>
-	<!-- messagesource -->
 	
 	<!-- start tfNote DAO -->
 	<bean class="com.itbank.TechFarm.tfNoteDAO.NoteDAOImpl" id="noteDAO"/>
 	<!-- end tfNote DAO -->
 	
+	<!-- messagesource -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basenames">

@@ -23,10 +23,8 @@ public class Sha3 {
 	            digestSHA3.update(space, 0, n);
 	            			//space,startpoint,num of byte for updating	            
 	        }
-	    }   
-	    	    
-	    fis.close();	  
-	    
+	    }   	    	    
+	    fis.close();	    
 	    return Hex.toHexString(digestSHA3.digest());
 	}
 }

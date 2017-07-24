@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com.itbank.TechFarm.tftube.mybatis.MyChannelMapper">
+
+
+
+<!-- <insert id="insertChannel" parameterType="memberDTO" useGeneratedKeys="true"> 
+insert into tftube_mychannel(member_no,channel) values(#{no},#{name}) 
+</insert> -->
+
+<!-- <select id="getChannel" parameterType="int" resultType="mychannelDTO">
+select * from tftube_mychannel where member_no=#{no}
+</select> -->
+
+
+</mapper>

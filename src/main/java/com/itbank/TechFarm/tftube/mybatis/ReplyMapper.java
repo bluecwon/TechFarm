@@ -9,12 +9,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.itbank.TechFarm.tftube.dto.ReplyDTO;
 
+import com.itbank.TechFarm.tftube.dto.ReplyDTO;
+import com.itbank.TechFarm.tftube.dto.ReplyFormat;
 
 
 public class ReplyMapper {
-
 	private static SqlSessionFactory sqlMapper;
 	static {
 		try {
@@ -34,9 +34,9 @@ public class ReplyMapper {
 		return res;
 	}
 
-  	public static List listReply(){
+  	public static List<ReplyDTO> listReply(){
   		SqlSession session = sqlMapper.openSession();  	
-  		List list = session.selectList("replyList");
+  		List<ReplyDTO> list = session.selectList("replyList");
   		session.close();
   		return list;
   	}
@@ -47,6 +47,82 @@ public class ReplyMapper {
   		session.close();
   		return list;
   	}
+  	
+  	public static String getName(){
+  		SqlSession session=sqlMapper.openSession();
+  		System.out.println("plist:"+session.selectList("getName"));
+  		List list=(List)session.selectList("getName");
+  		String name=null;
+  		if(list.size()==0){}
+  		else{name=(String)list.get(0);}
+  		session.close();
+  		return name;
+  	}
+  	
+  	public static int update_re_step(){
+  		SqlSession session=sqlMapper.openSession();
+  		int res=session.update("update_re_step");
+  		session.commit();
+  		session.close();
+  		return res;  		
+  	}
+  	
+  	public static int update_re_step_reply(){
+  		SqlSession session=sqlMapper.openSession();
+  		int res=session.update("update_re_step_reply");
+  		session.commit();
+  		session.close();
+  		return res;  		
+  	}
+  	
+  	public static int delete_reply(int no){
+  	SqlSession session=sqlMapper.openSession();
+  	int res=session.delete("deletereply",no);
+  	session.commit();
+  	session.close();
+  	return res;  	
+  	}
+  	
+
+  	public static List<ReplyFormat>getName_by_video(String video_name){
+  		SqlSession session=sqlMapper.openSession();
+  		List<ReplyFormat> list=session.selectList("getName_by_video",video_name);
+  		session.close();
+  		return list;
+  	}
+  	
+  	public static int delete_reply_video_name(String video_name){
+  		SqlSession session=sqlMapper.openSession();
+  	  	int res=session.delete("delete_reply_video_name",video_name);
+  	  	session.commit();
+  	  	session.close();
+  	  	return res; 
+  		
+  	}
+
+ /* 	public static List<ReplyDTO> getName_by_video(String video_name){
+
+  		SqlSession session=sqlMapper.openSession();
+  		List<ReplyFormat> list=session.selectList("getName_by_video",video_name);
+  		session.close();
+
+  		return list;
+  	}*/
+  	
+
+  	public static int reply_number(String video_name){
+  		SqlSession session=sqlMapper.openSession();
+  		int num=session.selectOne("reply_number",video_name);
+  		session.close();
+  		return num;  		
+
+  	}
+  	
+  	
+
+
+  	
+  	
   	
   	
   	/*

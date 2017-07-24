@@ -6,6 +6,8 @@ public class ReplyDTO {
 	private String reg_date;
 	private String content;
 	private String video_name;
+	private int re_step;
+	private int re_level;
 	
 	public int getNo() {
 		return no;
@@ -37,5 +39,16 @@ public class ReplyDTO {
 	public void setVideo_name(String video_name) {
 		this.video_name = video_name;
 	}
-	
+	public int getRe_step() {
+		return re_step;
+	}
+	public void setRe_step(int re_step) {
+		this.re_step = re_step;
+	}
+	public int getRe_level() {
+		return re_level;
+	}
+	public void setRe_level(int re_level) {
+		this.re_level = re_level;
+	}		
 }

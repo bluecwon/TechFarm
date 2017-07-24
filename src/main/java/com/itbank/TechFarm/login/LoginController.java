@@ -20,6 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.itbank.TechFarm.james.JamesUser;
 import com.itbank.TechFarm.login.member.MemberDAO;
 import com.itbank.TechFarm.login.member.MemberDTO;
+import com.itbank.TechFarm.tftube.dao.MyChannelDAO;
+
+
 
 @Controller
 public class LoginController {
@@ -28,6 +31,9 @@ public class LoginController {
 	
 	@Autowired
 	private JamesUser jamesUser;
+	
+	/*@Autowired
+	private MyChannelDAO mychannelDAO;*/
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request, HttpSession session, Model model) {
@@ -77,6 +83,9 @@ public class LoginController {
 		int res=memberDAO.insertMember(dto);
 		if(res==1){
 			jamesUser.addUser(dto.getId(), dto.getPasswd());
+			MemberDTO getdto=memberDAO.getMember(dto.getId());
+			dto.setNo(getdto.getNo());
+			/*mychannelDAO.insertChannel(dto);*/
 			return "redirect:login";
 		}else{
 			return "redirect:createAccount";

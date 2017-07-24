@@ -1,106 +1,93 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>    
-<%@ include file="main_top.jsp"%> 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ include file="top.jsp"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<script type="text/javascript">
-function goReply(){
-	document.f.action="tftube_reply_insert";
-	document.f.submit();	
-}
-</script>
-<title>Insert title here</title>
-</head>
-<body>
-<!-- /resources/tftube -->
-<video src="resources/tftube/uploadVideo/${vdto.video_name}" autoplay  
-poster="resources/tftube/uploadImage/${vdto.image}" controls="controls" width="600" height="450"></video>
-<br>
-<table>
-<tr><td>
-<c:if test="${vdto.member_no eq memberDTO.no}">
-<a href="tftube_video_edit">정보수정</a>								<a href="tftube_video_delete?no=${vdto.no}">삭제</a>
-</c:if>
-</td></tr>
- <tr><td> 
- <font size="18">${vdto.title}</font><br>
- <c:choose>
- <c:when test="${vdto.uploaddate.length()>=10}">
- 
- 게시일:${vdto.uploaddate.substring(0,10)}<!-- 게시일 --><br>
- </c:when>
- <c:otherwise>
- 게시일:${vdto.uploaddate}<br>
- </c:otherwise>
- </c:choose>
- ${vdto.description}<!-- 간략히 버튼 추가 --><p> 
- </td></tr>
- </table>
-댓글 <!-- 댓글갯수 --><br>
-<c:choose>
-<c:when test="${memberDTO==null}">
-로그인이 필요한 서비스 입니다. <a href="login">로그인</a>을 해주세요.
-</c:when>
-<c:otherwise>
-<form name="f">
-<textArea name="content"></textArea><!--클릭시 로그인창 열리는 방법찾기 -->
-<input type="hidden" name="video_name" value="${vdto.video_name}">
-<c:if test="${memberDTO!=null}">
-<input type="button" value="입력" onClick="javascript:goReply()">
-</c:if>
-</form>
-</c:otherwise></c:choose>
+<!-- video -->
+<div id="2-2" style="overflow:auto;"> <!-- start of 2-2 -->
 
 <table>
- <c:forEach var="rdto" items="${r_list}">
-<tr>
-<td>
-${rdto.member_no}   ${rdto.reg_date}<br><!-- id sysdate-reg_date 아니면 java에서 변환 -->
-${rdto.content}<br> 
-<!--답글이 존재한다면 답글:답글갯수 -->
-</tr>
-</c:forEach>
+<tr><td colspan="2"><video src="resources/tftube/uploadVideo/${vdto.video_name}" autoplay  
+controls="controls" width="700" height="450"></video>
+</td></tr>
 </table>
-	<%-- <a href="board_insert.do">글쓰기</a>
-	<table border="1">	
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>등록자</th>
-			<th>등록일</th>	
-			<th>조회</th>
-			<th>IP</th>
-			<th>파일</th>		
-		</tr>
-		
-		<c:forEach var="dto" items="${boardList}">
-		<tr>
-			<td>${number=number-1}</td>
-			<td><a href="board_content.do?num=${dto.num}&mode=content">${dto.subject}</a></td>
-			<td>${dto.writer}</td>
-			<td>${dto.reg_date}</td>
-			<td>${dto.readcount}</td>
-			<td>${dto.ip}</td>
-			<td>${dto.filename}</td>			
-		</tr>		
-		</c:forEach>	
-		
-		<tr>
-		<c:if test="${startPage>pageBlock}">
-				[<a href="board_list.do?pageNum=${startPage-pageBlock}">이전</a>]
-		</c:if>
-		<c:forEach var="i" begin="${startPage}" end="${endPage}">		
-				[<a href="board_list.do?pageNum=${i}">${i}</a>] 
-		</c:forEach>
-		<c:if test="${endPage < pageCount}">
-				[<a href="board_list.do?pageNum=${startPage+pageBlock}">다음</a>]
-		</c:if>
-		</tr>
-		</table> --%>
+
+<table>
+
+<tr><td width="550"><font size="10" style="font-weight: bold;">${vdto.title}</font><br></td></tr>
+<tr><td>작성자:<a href="tftube_mychannel">${vdto.channel}</a> </td></tr>
+<tr>
+<td align="left"><%@include file="videoView_subscribe.jsp" %>
+<td align="right">조회수:${readcount}회
+</tr>
+<tr><td align="left">
+<c:if test="${vdto.member_no eq memberDTO.no}">
+<a href="tftube_video_edit">정보수정</a> <a href="tftube_video_delete?no=${vdto.no}">삭제</a>
+</c:if></td>
+<td align="right"><%@include file="videoView_like.jsp" %> </td>
+</table>
+
+<br>
+
+<!-- information -->
+<div id="information"> 
+  게시일:${vdto.uploaddate.substring(0,10)}<p>	
+ ${vdto.description}<p> 
+</div>
+ <%@include file="videoView_reply.jsp"%>
+ </div><!-- end of 2-2-->
  
-</body>
-<%@ include file="main_bottom.jsp"%> 
-</html>
+ </div> <!-- end of 2 -->
+
+
+<style>
+#like_disabled{
+   background-color: #D5D5D5;
+   border: none;
+   color: white;
+   padding: 15px 32px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+   margin: 4px 2px;
+   cursor: pointer;   
+}
+#unlike_disabled{
+   background-color: #D5D5D5;
+   border: none;
+   color: white;
+   padding: 15px 32px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+   margin: 4px 2px;
+   cursor: pointer;   
+}
+
+#like{
+background-color: #6799FF;
+   border: none;
+   color: white;
+   padding: 15px 32px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+   margin: 4px 2px;
+   cursor: pointer;
+} 
+#unlike{
+background-color: #6799FF;
+   border: none;
+   color: white;
+   padding: 15px 32px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+   margin: 4px 2px;
+   cursor: pointer;
+} 
+</style>
+<%@ include file="bottom.jsp"%>
