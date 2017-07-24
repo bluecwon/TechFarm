@@ -54,16 +54,16 @@
 			<table>
 				<tr>
 					<td align="center"><a href="#" onclick="check('myAccount');"><img id="img_handle" src="resources/home/imgs/account.png" width="40%" height="35%"></a><br>내계정</td>
-					<td align="center"><a href="#"><img id="img_handle" src="resources/home/imgs/search.png" width="40%" height="35%"></a><br>검색</td>
+					<td align="center"><a href="home"><img id="img_handle" src="resources/home/imgs/search.png" width="40%" height="35%"></a><br>검색</td>
 					<td align="center"><a href="#" onclick="check('listJames');"><img id="img_handle" src="resources/home/imgs/mail.png" width="40%" height="35%"></a><br>메일</td>
 				</tr>
 				<tr>
-					<td align="center"><a href="tfPlusIndex?id=${sessionScope.memberDTO.id}"><img id="img_handle" src="resources/home/imgs/social.png" width="40%" height="35%"></a><br>SNS</td>
+					<td align="center"><a href="#" onclick="check('tfPlusIndex');"><img id="img_handle" src="resources/home/imgs/social.png" width="40%" height="35%"></a><br>SNS</td>
 					<td align="center"><a href="tftube_main"><img id="img_handle" src="resources/home/imgs/utube.png" width="40%" height="35%"></a><br>영상</td>
 					<td align="center"><a href="blogmain"><img id="img_handle" src="resources/home/imgs/document.png" width="40%" height="35%"></a><br>블로그</td>
 				</tr>
 				<tr>
-					<td align="center"><a href="tfNoteIndex?id=${sessionScope.memberDTO.id}"><img id="img_handle" src="resources/home/imgs/memo.png" width="40%" height="35%"></a><br>메모</td>
+					<td align="center"><a href="#" onclick="check('tfNoteIndex?id=${sessionScope.memberDTO.id}');"><img id="img_handle" src="resources/home/imgs/memo.png" width="40%" height="35%"></a><br>메모</td>
 					<td align="center"><a href="#" onclick="check('tfchat_main');"><img id="img_handle" src="resources/home/imgs/chatting.png" width="40%" height="35%"></a><br>채팅</td>
 					<td align="center"><a href="#" onclick="check('listContacts');"><img id="img_handle" src="resources/home/imgs/calendar.png" width="40%" height="35%"></a><br>연락처</td>
 				</tr>
@@ -71,7 +71,9 @@
 					<td>
 				</tr>
 				<tr>
-					<td align="center" colspan="3" id="close"><img id="img_handle" src="resources/home/imgs/close.png" width="10%" height="20%"></td>
+					<td align="center" colspan="3" id="close">
+						<img id="img_handle" src="resources/home/imgs/close.png" width="10%" height="20%">
+					</td>
 				</tr>
 			</table>			
 			</div>
