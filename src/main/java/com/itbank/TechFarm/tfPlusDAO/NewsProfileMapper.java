@@ -266,4 +266,19 @@ public class NewsProfileMapper {
 		return list;
 	}
 	
+	public static List tfPlusList(String profileId) {
+		SqlSession session = sqlMapper.openSession();
+		List list = session.selectList("tfPlusList",profileId);
+		session.close();
+		return list;
+	}
+	
+	public static NewsProfileDTO tfPlusNews(String profileId) {
+		SqlSession session = sqlMapper.openSession();
+		NewsProfileDTO dto = new NewsProfileDTO();
+		dto = session.selectOne("tfPlusNews",profileId);
+		session.close();
+		return dto;
+	}
+	
 }

@@ -6,6 +6,16 @@
 	
 <mapper namespace="com.itbank.TechFarm.tfPlus.NewsProfileMapper">
 
+	<select id="tfPlusList" resultType="newsProfileDTO" parameterType="String">
+		SELECT * FROM newsprofile 
+			WHERE profileId = #{profileId}
+	</select>
+	
+	<select id="tfPlusNews" resultType="newsProfileDTO" parameterType="String">
+		SELECT * FROM newsprofile
+			WHERE profileId = #{profileId} ORDER BY profileDate DESC limit 1;
+	</select>
+
 	<select id="newsGoodList" resultType="newsProfileDTO" parameterType="java.util.HashMap">
 		SELECT * FROM (
 			SELECT @NO:=@NO+1 AS ROWNUM, a.* FROM (
