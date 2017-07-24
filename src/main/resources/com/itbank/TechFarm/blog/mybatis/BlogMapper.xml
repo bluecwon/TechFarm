@@ -88,6 +88,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   update blog_board set reply = reply + 1 where no=#{no}
   </update>
   
+  <update id="minusReplyNumber" parameterType="int">	
+  update blog_board set reply = reply - 1 where no=#{no}
+  </update>
+  
   <update id="updateRestep">	
   update blog_boardreply set re_step = re_step + 1 
   </update>
@@ -100,5 +104,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   select * from blog_boardreply where no=#{no} order by re_step asc 
   </select>
   
+  <delete parameterType="int" id="deleteReply">
+  delete from blog_boardreply where replyno=#{replyno}
+  </delete>
   
 </mapper>

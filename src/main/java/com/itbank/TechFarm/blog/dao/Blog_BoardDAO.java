@@ -23,7 +23,9 @@ public interface Blog_BoardDAO {
 	public int updateRe_step();	
 	public int updateRere_step(int re_step);
 	public int updateReplyNumber(int no);
+	public int minusReplyNumber(int no);
 	public List listReply(int no);
+	public int deleteReply(int replyno);
 	/*
 	public int deleteFile(int num);*/
 }

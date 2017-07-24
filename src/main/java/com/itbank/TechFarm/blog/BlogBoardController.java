@@ -260,7 +260,7 @@ public class BlogBoardController {
 	}
 	
 	@RequestMapping(value="/deleteBoard")
-	public ModelAndView blogDelete(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ModelAndView deleteBoard(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView("redirect:listBoard");
 		int no = ServletRequestUtils.getIntParameter(request, "no");
 		Blog_BoardDTO dto = boardDAO.getBoard(no);
@@ -326,5 +326,16 @@ public class BlogBoardController {
 	  boardDAO.updateReplyNumber(no);
 	  mav.addObject("no",no);
 	  return mav;
+	}
+	
+	@RequestMapping(value="/deleteReply")
+	public ModelAndView deleteReply(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView("redirect:viewBoard");
+		int replyno = ServletRequestUtils.getIntParameter(request, "replyno");
+		int no = ServletRequestUtils.getIntParameter(request, "no");
+		int res = boardDAO.deleteReply(replyno);
+		boardDAO.minusReplyNumber(no);
+		mav.addObject("no",no);
+		return mav;
 	}
 }

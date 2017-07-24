@@ -49,13 +49,13 @@
 										<c:choose>
 										<c:when test="${membermode=='guest'}">
 										<td align="center" width="70%">
-										<textarea name="repcontent" rows="3" cols="100" maxlength="300" placeholder="로그인 후 댓글이용이 가능합니다." disabled></textarea>
+										<textarea name="repcontent" rows="3" cols="100" maxlength="100" placeholder="로그인 후 댓글이용이 가능합니다." disabled></textarea>
 										</td>
 										<td width="20%"><input type="button" value="등록" onclick="javascript:login();"></td>
 										</c:when>
 										<c:otherwise>
 										<td align="center" width="70%">
-										<textarea name="repcontent" rows="3" cols="100" maxlength="300"></textarea>
+										<textarea name="repcontent" rows="3" cols="100" maxlength="100"></textarea>
 										<td width="20%"><input type="submit" value="등록"></td>
 										</td>
 										</c:otherwise>
@@ -82,7 +82,7 @@
 								<tr>
 									<td>
 									<c:if test="${listReply.re_level==1}">
-									<img src="" width="100" height="70" align="left">
+									<img src="" width="100" height="80" align="left">
 									</c:if>
 									<c:choose>
 									<c:when test="${listReply.profile==null}">
@@ -97,7 +97,7 @@
 									${listReply.repcontent}<br>
 									<c:choose>
 									<c:when test="${listReply.id==sessionScope.memberDTO.id}">
-									댓글 &nbsp;<a href="javascript:checkDelReply('${listReply.replyno}');">삭제</a>
+									댓글 &nbsp;<a href="javascript:checkDelReply('${listReply.replyno}','${listReply.no}');">삭제</a>
 									</c:when>
 									<c:otherwise>
 									댓글
@@ -105,14 +105,13 @@
 									</c:choose>
 									<br>
 									<form action="insertReply">
-									<input type="hidden" name="no" value="${listReply.re_step}">
-									<input type="hidden" name="no" value="${boardDTO.no}">
+									<input type="hidden" name="re_step" value="${listReply.re_step}">
+									<input type="hidden" name="no" value="${listReply.no}">
 									<input type="hidden" name="id" value="${sessionScope.memberDTO.id}">
 									<input type="hidden" name="mode" value="rereply">
-									<input type="text" name="repcontent">
+									<input type="text" name="repcontent" maxlength="100">
 									<input type="submit" value="등록">
-									</form>
-									
+									</form>	
 								</tr>
 								</c:forEach>
 							</c:otherwise>

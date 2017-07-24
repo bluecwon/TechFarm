@@ -99,4 +99,16 @@ public class Blog_BoardDAOImpl implements Blog_BoardDAO {
 		return BlogMapper.listReply(no);
 	}
 
+	@Override
+	public int deleteReply(int replyno) {
+		// TODO Auto-generated method stub
+		return BlogMapper.deleteReply(replyno);
+	}
+
+	@Override
+	public int minusReplyNumber(int no) {
+		// TODO Auto-generated method stub
+		return BlogMapper.minusReplyNumber(no);
+	}
+
 }

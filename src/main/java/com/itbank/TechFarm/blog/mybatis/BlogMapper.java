@@ -186,6 +186,14 @@ public class BlogMapper {
 	  return res;
   }
   
+  public static int minusReplyNumber(int no){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.update("minusReplyNumber",no);
+	  session.commit();
+	  session.close();
+	  return res;
+  }
+  
   public static List<Blog_BoardReplyDTO> listReply(int no){
 	  SqlSession session = sqlMapper.openSession();
 	  List<Blog_BoardReplyDTO> list = (List)session.selectList("listReply",no);
@@ -196,6 +204,14 @@ public class BlogMapper {
   public static int updateReadcount(int no){
 	  SqlSession session = sqlMapper.openSession();
 	  int res = session.update("updateReadcount",no);
+	  session.commit();
+	  session.close();
+	  return res;
+  }
+  
+  public static int deleteReply(int replyno){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.delete("deleteReply",replyno);
 	  session.commit();
 	  session.close();
 	  return res;
