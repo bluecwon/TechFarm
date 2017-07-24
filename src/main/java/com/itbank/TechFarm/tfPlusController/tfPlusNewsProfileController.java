@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itbank.TechFarm.login.member.MemberDTO;
 import com.itbank.TechFarm.tfPlusDAO.MemberProfileDAO;
 import com.itbank.TechFarm.tfPlusDAO.MyNoticeDAO;
 import com.itbank.TechFarm.tfPlusDAO.MyProfileDAO;
@@ -42,13 +43,6 @@ public class tfPlusNewsProfileController {
 	private MyProfileDAO myProfileDAO;
 	@Autowired
 	private MyNoticeDAO myNoticeDAO;
-	
-	public tfPlusNewsProfileController(HttpServletRequest req){
-		HttpSession session = req.getSession();
-		String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents");
-		File dir = new File(upPathD);
-		if(!dir.exists()) dir.mkdirs();
-	}
 	
 	// ********************************************************************************************************* //
 	/* start News */
@@ -420,9 +414,11 @@ public class tfPlusNewsProfileController {
 	
 	/* main index*/
 	@RequestMapping(value="/tfPlusIndex")
-	public ModelAndView tfPlusIndex(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView tfPlusIndex(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		checkDir(request);
 		ModelAndView mav = new ModelAndView();
-		String id = request.getParameter("id");
+		MemberDTO memberDTO=(MemberDTO)session.getAttribute("memberDTO");
+		String id = memberDTO.getId();
 		List newsProfileList = newsProfileDAO.newsProfileTOP(6);
 		List memberProfileList = memberProfileDAO.memberProfileTOP(4);
 		MyProfileDTO dto = myProfileDAO.myProfilePhoto(id);
@@ -1151,6 +1147,13 @@ public class tfPlusNewsProfileController {
 		return mav;
 	}
 	/* end Member */
+	
+	public void checkDir(HttpServletRequest req){
+		HttpSession session = req.getSession();
+		String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents");
+		File dir = new File(upPathD);
+		if(!dir.exists()) dir.mkdirs();
+	}
 	
 }
 
