@@ -50,12 +50,17 @@ public class tfPlusNewsProfileController {
 		String filename = null;
 		String photo = req.getParameter("photo");
 		if(photo != null){
-			filename = photo;
+			filename = photo; 
 		} else {
 			MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
 			mf = mr.getFile("photo");
 			filename = mf.getOriginalFilename();
 			HttpSession session = req.getSession();
+			
+			String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/profile");
+			File dir = new File(upPathD);
+			if(!dir.exists()) dir.mkdirs();
+			
 			String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/profile");
 			File file = new File(upPath,filename);
 			if(file.exists()){
@@ -167,6 +172,11 @@ public class tfPlusNewsProfileController {
 			if(mf.getOriginalFilename() != "") {
 				filename = mf.getOriginalFilename();
 				HttpSession session = req.getSession();
+				
+				String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/profileBoard");
+				File dir = new File(upPathD);
+				if(!dir.exists()) dir.mkdirs();
+				
 				String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/profileBoard");
 				File file = new File(upPath,filename);
 				if(file.exists()){
@@ -205,6 +215,11 @@ public class tfPlusNewsProfileController {
 			mf = mr.getFile("photo");
 			filename = mf.getOriginalFilename();
 			HttpSession session = req.getSession();
+			
+			String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/memberProfile");
+			File dir = new File(upPathD);
+			if(!dir.exists()) dir.mkdirs();
+			
 			String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/memberProfile");
 			File file = new File(upPath,filename);
 			if(file.exists()){
@@ -238,6 +253,11 @@ public class tfPlusNewsProfileController {
 			if(mf.getOriginalFilename() != "") {
 				filename = mf.getOriginalFilename();
 				HttpSession session = req.getSession();
+				
+				String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/memberProfile");
+				File dir = new File(upPathD);
+				if(!dir.exists()) dir.mkdirs();
+				
 				String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/memberProfile");
 				File file = new File(upPath,filename);
 				if(file.exists()){
@@ -274,6 +294,11 @@ public class tfPlusNewsProfileController {
 			mf = mr.getFile("photo");
 			filename = mf.getOriginalFilename();
 			HttpSession session = req.getSession();
+			
+			String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/memberBoard");
+			File dir = new File(upPathD);
+			if(!dir.exists()) dir.mkdirs();
+			
 			String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/memberBoard");
 			File file = new File(upPath,filename);
 			if(file.exists()){
@@ -316,6 +341,11 @@ public class tfPlusNewsProfileController {
 			if(mf.getOriginalFilename() != "") {
 				filename = mf.getOriginalFilename();
 				HttpSession session = req.getSession();
+				
+				String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/memberBoard");
+				File dir = new File(upPathD);
+				if(!dir.exists()) dir.mkdirs();
+				
 				String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/memberBoard");
 				File file = new File(upPath,filename);
 				if(file.exists()){
@@ -354,6 +384,11 @@ public class tfPlusNewsProfileController {
 			mf = mr.getFile("photo");
 			filename = mf.getOriginalFilename();
 			HttpSession session = req.getSession();
+			
+			String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/myProfile");
+			File dir = new File(upPathD);
+			if(!dir.exists()) dir.mkdirs();
+			
 			String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/myProfile");
 			File file = new File(upPath,filename);
 			if(file.exists()){
