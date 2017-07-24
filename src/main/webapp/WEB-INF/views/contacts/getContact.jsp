@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<%@include file="header.jsp"%>
+	<div class="left">
+		<div class="left_content1">
+			<div align="center">
+	
 	<style>
 		[data-tooltip-text]:hover {
 			position: relative;
@@ -51,19 +51,12 @@
 			opacity: 1;
 		}
 	</style>
-</head>
-<body>
-	<header>
+
+
 		<h1>연락처 가져오기</h1>
-	</header>
-	<nav>
 			<span data-tooltip-text="연락처 수정"><a href="editContact?no=${dto.no }"><img src="resources/contacts/images/edit.png" style="max-width: 30px; height: auto;"></a></span>&nbsp
 			<span data-tooltip-text="연락처 삭제"><a href="deleteContact?no=${dto.no }"><img src="resources/contacts/images/delete.png" style="max-width: 30px; height: auto;"></a></span>
-			
-			
-	</nav>
-	<section>
-		<table>
+		<table class="jjm494">
 				<tr>
 					<td>
 						<c:if test="${!empty dto.photo }">
@@ -76,7 +69,7 @@
 					<td><h2>${dto.name }</h2>
 				</tr>
 				<tr>
-					<td><h3>Contact details</h3></td>
+					<td colspan="2" align="center"><h3>Contact details</h3></td>
 				</tr>
 				<tr>
 					<td><img src="resources/contacts/images/email.png" style="max-width: 30px; height: auto;"></td>
@@ -91,10 +84,11 @@
 					<td>${dto.notes }</td>
 				</tr>
 		</table>
-	</section>
-	<footer></footer>
 	
 	
 	
-</body>
-</html>
+			</div>
+		</div>
+	</div>
+	 
+<%@ include file="footer.jsp" %>

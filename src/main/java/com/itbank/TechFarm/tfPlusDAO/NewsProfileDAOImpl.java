@@ -179,5 +179,15 @@ public class NewsProfileDAOImpl implements NewsProfileDAO {
 	public List newsProfileOption(String option) {
 		return NewsProfileMapper.newsProfileOption(option);
 	}
+
+	@Override
+	public List tfPlusList(String profileId) {
+		return NewsProfileMapper.tfPlusList(profileId);
+	}
+
+	@Override
+	public NewsProfileDTO tfPlusNews(String profileId) {
+		return NewsProfileMapper.tfPlusNews(profileId);
+	}
 	
 }

@@ -1,5 +1,7 @@
 package com.itbank.TechFarm.myaccount;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.itbank.TechFarm.james.JamesUser;
 import com.itbank.TechFarm.login.member.MemberDAO;
 import com.itbank.TechFarm.login.member.MemberDTO;
+import com.itbank.TechFarm.tfPlusDAO.NewsProfileDAO;
+import com.itbank.TechFarm.tfPlusDTO.NewsProfileDTO;
 
 @Controller
 public class MyAccountController {
@@ -25,8 +29,17 @@ public class MyAccountController {
 	@Autowired
 	private JamesUser jamesUser;
 	
+	@Autowired
+	private NewsProfileDAO newsProfileDAO; 
+	
 	@RequestMapping(value = "/myAccount", method = RequestMethod.GET)
-	public String myAccount(HttpServletRequest request, HttpServletResponse response) {
+	public String myAccount(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
+		MemberDTO memberDTO=(MemberDTO)session.getAttribute("memberDTO");
+		String profileId = memberDTO.getId();
+		List list = newsProfileDAO.tfPlusList(profileId);
+		NewsProfileDTO newsProfileDTO = newsProfileDAO.tfPlusNews(profileId);
+		model.addAttribute("tfPlusSize", list.size());
+		model.addAttribute("tfPlusNews",newsProfileDTO);
 		return "myaccount/myaccountmain";
 	}
 	

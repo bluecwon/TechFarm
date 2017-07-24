@@ -33,11 +33,22 @@
 				</div>
 				<div id="menu2">tftube 정보
 					<table align="center">
+						<c:if test="${tfPlusSize == 0}">
+							<tr>
+								<td>작성된 프로필이 없습니다.</td>
+							</tr>
+						</c:if>
 						<tr>
-							<td>총 작성프로필 : </td>
+							<td>총 작성프로필 : ${tfPlusSize}</td>
 						</tr>
 						<tr>
-							<td>최근 작성프로필 정보 : </td>
+							<td>
+								최근 작성프로필 제목 : ${tfPlusNews.profileName}</br>
+								작성날짜 : ${tfPlusNews.profileDate}</br>
+								<a href="tfPlusNewsProfileBoardList?profileName=${tfPlusNews.profileName}&id=${tfPlusNews.profileId}&num=${tfPlusNews.profileNum}&my=true&myId=${sessionScope.memberDTO.id}"/>
+									<img src="resources/tfPlus/images/contents/profile/${tfPlusNews.photo}" style="width:200px; height:150px;">
+								</a>
+							</td>
 						</tr>
 					</table>
 				</div>

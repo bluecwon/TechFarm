@@ -1,21 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<header>
+<%@include file="header.jsp"%>
+	<div class="left">
+		<div class="left_content1">
+			<div align="center">
+	
 		<h1>연락처 수정</h1>
-	</header>
-	<nav></nav>
-	<section>
 		<form method="post" action="editContact" enctype="multipart/form-data">
 		<input type="hidden" id="no" name="no" value="${dto.no }">
-		<table>
+		<table class="jjm494">
 			<tr>
 				<td>
 					<c:if test="${!empty dto.photo }">
@@ -25,31 +19,27 @@
 						<img src="resources/contacts/images/account.png" style="max-width: 60px; height: auto;">
 					</c:if>
 				</td>
-				<td>Name : <input type="text" name = "name" value="${dto.name }"></td>
-				<td></td>
+				<td colspan="2">Name : <input type="text" name = "name" value="${dto.name }" class="jjm494_input"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="file" name="photo"></td>
+				<td colspan="3"><input type="file" name="photo"></td>
 			</tr>
 			<tr>
 				<td><img src="resources/contacts/images/company.png" style="max-width: 30px; height: auto;"></td>
-				<td>Compnay : <input type="text" name="company" value="${dto.company }"></td>
-				<td>Jobtitle : <input type="text" name="jobtitle" value="${dto.jobtitle }"></td>
+				<td>Compnay : <input type="text" name="company" value="${dto.company }" class="jjm494_input"></td>
+				<td>Jobtitle : <input type="text" name="jobtitle" value="${dto.jobtitle }" class="jjm494_input"></td>
 			</tr>
 			<tr>
 				<td><img src="resources/contacts/images/email.png" style="max-width: 30px; height: auto;"></td>
-				<td>Email : <input type="email" name="email" value="${dto.email }"></td>
-				<td></td>
+				<td colspan="2">Email : <input type="email" name="email" value="${dto.email }" class="jjm494_input"></td>
 			</tr>
 			<tr>
 				<td><img src="resources/contacts/images/phone.png" style="max-width: 30px; height: auto;"></td>
-				<td>Phone :  <input type="text" name="phone" value="${dto.phone }"></td>
-				<td></td>
+				<td colspan="2">Phone :  <input type="text" name="phone" value="${dto.phone }" class="jjm494_input"></td>
 			</tr>
 			<tr>
 				<td><img src="resources/contacts/images/notes.png" style="max-width: 30px; height: auto;"></td>
-				<td>Notes : <input type="text" name="notes" value="${dto.notes }"></td>
-				<td></td>
+				<td colspan="2">Notes : <input type="text" name="notes" value="${dto.notes }" class="jjm494_input"></td>
 			</tr>
 			<tr>
 				<td colspan="3" align="center">
@@ -59,7 +49,10 @@
 			</tr>
 		</table>
 		</form>
-	</section>
-	<footer></footer>
-</body>
-</html>
+	
+	
+			</div>
+		</div>
+	</div>
+	 
+<%@ include file="footer.jsp" %>

@@ -5,9 +5,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-		<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-		<link rel="stylesheet" type="text/css" href="resources/tfNote/tfNote_style.css">
-		<link rel="stylesheet" type="text/css" href="resources/tfNote/css.css" > 
+		<link rel="stylesheet" type="text/css" href="resources/contacts/css/cssCon.css" > 
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
@@ -44,9 +42,18 @@
 	
 <div id="wrap">
 	
-	<!--header -->
+	<div class="gnb">
+		<div class="gnb_center">
+			<ul>
+				<li>house</li>
+				<li>search</li>
+				<li>me</li>
+			</ul>
+		</div>
+	</div>
+	
+	<div id="container">
 	<div id="header">
-		<!-- <div align="right"> -->
 			<div class="topnav" align="right">
 	  			<a rel="tooltip" title="메뉴"><img id="menu" src="resources/home/imgs/menu.png" width="25" height="25"></a>
 	  			<c:if test="${sessionScope.memberDTO eq null}">
@@ -93,20 +100,16 @@
 				<a id="close2">닫기</a>
 			</div>
 			
-		<!-- </div> -->
 	</div>
-	<!--//header -->
+	</div>
+	
+	<div class="menu">
+	</div>
 	
 	<!--container -->
-	<div id="container">
+	<div class="left">
 		<p>${sessionScope.memberDTO.name}님의 노트</p>
 		
-		<!--aside -->
-		<div class="aside">
-			사용자 ID : ${sessionScope.memberDTO.id} <br>
-			사용자 이름 : ${sessionScope.memberDTO.name} <br>
-		</div>
-		<!--//aside -->
 
 		
 		

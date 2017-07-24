@@ -38,4 +38,6 @@ public interface NewsProfileDAO {
 	public int newsAddUpdateSub(int sql);
 	public int newsAddUpdateSub2();
 	public List newsProfileOption(String option);
+	public List tfPlusList(String profileId);
+	public NewsProfileDTO tfPlusNews(String profileId);
 }

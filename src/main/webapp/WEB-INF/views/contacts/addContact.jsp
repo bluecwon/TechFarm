@@ -1,46 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Contacts</title>
-</head>
-<body>
-	<header>
+<%@include file="header.jsp"%>
+	<div class="left">
+		<div class="left_content1">
+			<div align="center">
+	
+	
 		<h1>연락처 입력</h1>
-	</header>
-	<nav></nav>
-	<section>
 		<form method="post" action="addContact" enctype="multipart/form-data">
-		<table>
+
+		<table class="jjm494">
 			<tr>
-				<td><img src="resources/home/imgs/account.png" style="max-width: 60px; height: auto;"></td>
-				<td>Name : <input type="text" name = "name"></td>
-				<td></td>
+				<th><img src="resources/home/imgs/account.png" style="max-width: 60px; height: auto;"></th>
+				<td colspan="2">Name : <input type="text" name = "name" placeholder="Name" class="jjm494_input"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="file" name="photoMultipart"></td>
+				<td colspan="3"><input type="file" name="photoMultipart"></td>
 			</tr>
 			<tr>
-				<td><img src="resources/contacts/images/company.png" style="max-width: 30px; height: auto;"></td>
-				<td>Company : <input type="text" name="company"></td>
-				<td>Jobtitle : <input type="text" name="jobtitle"></td>
+				<th><img src="resources/contacts/images/company.png" style="max-width: 30px; height: auto;"></th>
+				<td>Company : <input type="text" name="company" placeholder="Company" class="jjm494_input"></td>
+				<td>Jobtitle : <input type="text" name="jobtitle" placeholder="Jobtitle" class="jjm494_input"></td>
 			</tr>
 			<tr>
-				<td><img src="resources/contacts/images/email.png" style="max-width: 30px; height: auto;"></td>
-				<td>Email : <input type="email" name="email"></td>
-				<td></td>
+				<th><img src="resources/contacts/images/email.png" style="max-width: 30px; height: auto;"></th>
+				<td colspan="2">Email : <input type="email" name="email" placeholder="Email" class="jjm494_input"></td>
 			</tr>
 			<tr>
-				<td><img src="resources/contacts/images/phone.png" style="max-width: 30px; height: auto;"></td>
-				<td>Phone :  <input type="text" name="phone"></td>
-				<td></td>
+				<th><img src="resources/contacts/images/phone.png" style="max-width: 30px; height: auto;"></th>
+				<td colspan="2">Phone :  <input type="text" name="phone" placeholder="Phone" class="jjm494_input"></td>
 			</tr>
 			<tr>
-				<td><img src="resources/contacts/images/notes.png" style="max-width: 30px; height: auto;"></td>
-				<td>Notes : <input type="text" name="notes"></td>
-				<td></td>
+				<th><img src="resources/contacts/images/notes.png" style="max-width: 30px; height: auto;"></th>
+				<td colspan="2">Notes : <input type="text" name="notes" placeholder="Notes" class="jjm494_input"></td>
 			</tr>
 			<tr>
 				<td colspan="3" align="center">
@@ -50,7 +43,10 @@
 			</tr>
 		</table>
 		</form>
-	</section>
-	<footer></footer>
-</body>
-</html>
+	
+	
+			</div>
+		</div>
+	</div>
+	 
+<%@ include file="footer.jsp" %>
