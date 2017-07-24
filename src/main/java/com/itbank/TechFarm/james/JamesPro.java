@@ -6,7 +6,7 @@ import javax.mail.Address;
 import javax.mail.Message;
 
 public class JamesPro {
-	public static JamesDTO writeEnvelope(Message message) throws Exception {
+	public JamesDTO writeEnvelope(Message message) throws Exception {
 	      System.out.println("This is the message envelope");
 	      System.out.println("---------------------------");
 	      Address[] address;

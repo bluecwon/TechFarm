@@ -27,6 +27,7 @@
 	<!-- james -->
 	<bean class="com.itbank.TechFarm.james.JamesDAOImpl" id="jamesDAO"/>
 	<bean class="com.itbank.TechFarm.james.JamesUser" id="jamesUser"/>
+	<bean class="com.itbank.TechFarm.james.JamesPro" id="jamesPro"/>
 	<!-- messagesource -->
 	
 	<!-- start tfNote DAO -->
@@ -42,4 +43,5 @@
 		</property>
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
+
 </beans>

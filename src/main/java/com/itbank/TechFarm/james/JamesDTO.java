@@ -1,5 +1,7 @@
 package com.itbank.TechFarm.james;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class JamesDTO {
 	private int num;
 	private String id;
@@ -12,6 +14,8 @@ public class JamesDTO {
 	private String sentDate;
 	private String folder;
 	private String content;
+	
+	private MultipartFile sendFile;
 	
 	public int getNum() {
 		return num;
@@ -72,6 +76,12 @@ public class JamesDTO {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public MultipartFile getSendFile() {
+		return sendFile;
+	}
+	public void setSendFile(MultipartFile sendFile) {
+		this.sendFile = sendFile;
 	}
 	
 }

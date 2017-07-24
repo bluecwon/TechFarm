@@ -5,7 +5,7 @@
 
 <mapper namespace="com.itbank.techfarm.contacts.ContactsMapper">
 	<select id = "listContacts" resultType = "contactsDTO">
-		select * from contacts where id=#{id}
+		select * from contacts where id=#{id} order by name asc;
 	</select>
   
   	<insert id="addContact" parameterType="contactsDTO" useGeneratedKeys="true">

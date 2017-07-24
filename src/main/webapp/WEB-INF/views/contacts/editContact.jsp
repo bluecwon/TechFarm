@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,13 +13,23 @@
 	</header>
 	<nav></nav>
 	<section>
-		<form method="post" action="editContact">
+		<form method="post" action="editContact" enctype="multipart/form-data">
 		<input type="hidden" id="no" name="no" value="${dto.no }">
 		<table>
 			<tr>
-				<td><img src="resources/home/imgs/account.png" style="max-width: 60px; height: auto;"></td>
+				<td>
+					<c:if test="${!empty dto.photo }">
+						<img src="resources/contacts/upload/${dto.photo }" style="max-width: 60px; height: auto;">
+					</c:if>
+					<c:if test="${empty dto.photo }" >
+						<img src="resources/contacts/images/account.png" style="max-width: 60px; height: auto;">
+					</c:if>
+				</td>
 				<td>Name : <input type="text" name = "name" value="${dto.name }"></td>
 				<td></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="file" name="photo"></td>
 			</tr>
 			<tr>
 				<td><img src="resources/contacts/images/company.png" style="max-width: 30px; height: auto;"></td>
@@ -27,7 +38,7 @@
 			</tr>
 			<tr>
 				<td><img src="resources/contacts/images/email.png" style="max-width: 30px; height: auto;"></td>
-				<td>Email : <input type="text" name="email" value="${dto.email }"></td>
+				<td>Email : <input type="email" name="email" value="${dto.email }"></td>
 				<td></td>
 			</tr>
 			<tr>
