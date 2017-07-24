@@ -43,6 +43,13 @@ public class tfPlusNewsProfileController {
 	@Autowired
 	private MyNoticeDAO myNoticeDAO;
 	
+	public tfPlusNewsProfileController(HttpServletRequest req){
+		HttpSession session = req.getSession();
+		String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents");
+		File dir = new File(upPathD);
+		if(!dir.exists()) dir.mkdirs();
+	}
+	
 	// ********************************************************************************************************* //
 	/* start News */
 	protected NewsProfileDTO makeNewsProfile(HttpServletRequest req) throws Exception {
