@@ -265,7 +265,7 @@ io.sockets.on('connection', function(socket) {
 
         	if (io.sockets.adapter.rooms[room.roomId]) { // 방이 이미 만들어져 있는 경우
         		console.log('방이 이미 만들어져 있습니다.');
-        		
+        		socket.join(room.roomId);
         	} else {
         		console.log('방을 새로 만듭니다.');
         		
