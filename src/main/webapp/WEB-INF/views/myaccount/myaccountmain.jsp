@@ -31,7 +31,16 @@
 						</tr>
 					</table>
 				</div>
-				<div id="menu2">tftube 정보</div>
+				<div id="menu2">tftube 정보
+					<table align="center">
+						<tr>
+							<td>총 작성프로필 : </td>
+						</tr>
+						<tr>
+							<td>최근 작성프로필 정보 : </td>
+						</tr>
+					</table>
+				</div>
 				<div id="menu3">tblog 정보</div>
 				<div id="menu4">tplus 정보</div>
 </div>
