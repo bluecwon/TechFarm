@@ -131,6 +131,11 @@ public class tfPlusNewsProfileController {
 			mf = mr.getFile("photo");
 			filename = mf.getOriginalFilename();
 			HttpSession session = req.getSession();
+			
+			String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/profileBoard");
+			File dir = new File(upPathD);
+			if(!dir.exists()) dir.mkdirs();
+			
 			String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/profileBoard");
 			File file = new File(upPath,filename);
 			if(file.exists()){
@@ -385,11 +390,7 @@ public class tfPlusNewsProfileController {
 			mf = mr.getFile("photo");
 			filename = mf.getOriginalFilename();
 			HttpSession session = req.getSession();
-			
-			String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/myProfile");
-			File dir = new File(upPathD);
-			if(!dir.exists()) dir.mkdirs();
-			
+			checkDir(req, "contents/myProfile");
 			String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/myProfile");
 			File file = new File(upPath,filename);
 			if(file.exists()){
@@ -415,7 +416,7 @@ public class tfPlusNewsProfileController {
 	/* main index*/
 	@RequestMapping(value="/tfPlusIndex")
 	public ModelAndView tfPlusIndex(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		checkDir(request);
+		checkDir(request,"contents");
 		ModelAndView mav = new ModelAndView();
 		MemberDTO memberDTO=(MemberDTO)session.getAttribute("memberDTO");
 		String id = memberDTO.getId();
@@ -1148,9 +1149,9 @@ public class tfPlusNewsProfileController {
 	}
 	/* end Member */
 	
-	public void checkDir(HttpServletRequest req){
+	public void checkDir(HttpServletRequest req,String msg){
 		HttpSession session = req.getSession();
-		String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents");
+		String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/"+msg);
 		File dir = new File(upPathD);
 		if(!dir.exists()) dir.mkdirs();
 	}
