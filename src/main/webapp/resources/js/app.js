@@ -265,7 +265,7 @@ io.sockets.on('connection', function(socket) {
 
         	if (io.sockets.adapter.rooms[room.roomId]) { // 방이 이미 만들어져 있는 경우
         		console.log('방이 이미 만들어져 있습니다.');
-        		
+        		socket.join(room.roomId);
         	} else {
         		console.log('방을 새로 만듭니다.');
         		
@@ -303,9 +303,19 @@ io.sockets.on('connection', function(socket) {
             // 응답 메시지 전송
             sendResponse(socket, 'room', '200', '방에 입장했습니다.');
         } else if (room.command === 'leave') {  // 방 나가기 요청
-            socket.leave(room.roomId);
-            // 응답 메시지 전송
-            sendResponse(socket, 'room', '200', '방에서 나갔습니다.');
+        	if(room.roomId===''){
+        		sendResponse(socket, 'room', '200', '방에 참여하지 않은 상태입니다.');
+        	}else{
+	            socket.leave(room.roomId);
+	            var data=room.roomId+'방에서 퇴장했습니다.';
+	            var sysmessage = {sender:'system', recepient:room.roomId, command:'groupchat', type:'text', data:data};
+	            socket.emit('message',sysmessage);
+	            var data2=room.leaveId+'님이 퇴장했습니다.';
+	            var sysmessage2 = {sender:'system', recepient:room.roomId, command:'groupchat', type:'text', data:data2};
+	            io.sockets.in(room.roomId).emit('message', sysmessage2);
+	            // 응답 메시지 전송
+	            sendResponse(socket, 'room', '200', '방에서 나갔습니다.');
+        	}
         }
 
         var roomList = getRoomList();

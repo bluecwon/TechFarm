@@ -36,32 +36,17 @@
 	            	send();
 	          	});
 				
-             	// 방만들기 버튼 클릭 시 처리
-                $("#createRoomButton").bind('click', function(event) {
-                    var roomId = $('#roomIdInput').val();
-                    var roomName = $('#roomNameInput').val();
-                    var id = $('#idInput').val();
-                    var inviteId=$('inviteId').val();
-                    
-                    var output = {command:'create', roomId:roomId, roomName:roomName, roomOwner:id};
-                    console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
-
-                    if (socket == undefined) {
-                        alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
-                        return;
-                    }
-                    
-                    var inviteinfo={command:'invite', roomId:roomId, inviteId:inviteId, roomOwner:id};
-
-                    socket.emit('room', output);
-                    socket.emit('invite', inviteinfo);
-                });
+             	
              	//초대하기 버튼 클릭시
                 $("#inviteButton").bind('click', function(event) {
+                	$('#roomIdInput').val('${sessionScope.memberDTO.id}');
                     var roomId = $('#roomIdInput').val();
                     var roomName = $('#roomNameInput').val();
                     var id = $('#idInput').val();
-                    var inviteId=$('#inviteId').val();
+                    var inviteId=[];
+                    if($('input[type="checkbox"]').is(':checked')){
+                    	inviteId.push($('input[type="checkbox"]:checked').val());
+                    }
                     var inviteRoom=$('#roomIdInput').val();
                     var inviteRoomOwner=$('#idInput').val();
                     
@@ -77,69 +62,27 @@
                     socket.emit('room', output);
                     socket.emit('invite', inviteinfo);
                     $('#recepientInput').val(roomId);
-                    
-                });
-             	
-             	// 방이름바꾸기 버튼 클릭 시 처리
-                $("#updateRoomButton").bind('click', function(event) {
-                    var roomId = $('#roomIdInput').val();
-                    var roomName = $('#roomNameInput').val();
-                    var id = $('#idInput').val();
-                    
-                    var output = {command:'update', roomId:roomId, roomName:roomName, roomOwner:id};
-                    console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
-
-                    if (socket == undefined) {
-                        alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
-                        return;
-                    }
-
-                    socket.emit('room', output);
-                });
-
-             	// 방없애기 버튼 클릭 시 처리
-                $("#deleteRoomButton").bind('click', function(event) {
-                    var roomId = $('#roomIdInput').val();
-                    
-                    var output = {command:'delete', roomId:roomId};
-                    console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
-
-                    if (socket == undefined) {
-                        alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
-                        return;
-                    }
-
-                    socket.emit('room', output);
-                });
-
-             	// 방입장하기 버튼 클릭 시 처리
-                $("#joinRoomButton").bind('click', function(event) {
-                    var roomId = $('#roomIdInput').val();
-
-                    var output = {command:'join', roomId:roomId};
-                    console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
-
-                    if (socket == undefined) {
-                        alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
-                        return;
-                    }
-
-                    socket.emit('room', output);
+                    $('#dataInput').removeAttr('disabled');
+                    $('#sendButton').removeAttr('disabled');
                 });
              	
              	// 방나가기 버튼 클릭 시 처리
                 $("#leaveRoomButton").bind('click', function(event) {
                     var roomId = $('#roomIdInput').val();
+                    var leaveId=$('#idInput').val();
 
-                    var output = {command:'leave', roomId:roomId};
+                    var output = {command:'leave', roomId:roomId, leaveId:leaveId};
                     console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
 
                     if (socket == undefined) {
                         alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
                         return;
                     }
-
                     socket.emit('room', output);
+                    $('#recepientInput').val('');
+                    $('#roomIdInput').val('');
+                    $('#dataInput').attr('disabled','disabled');
+                    $('#sendButton').attr('disabled','disabled');
                 });
              	
                 $('#dataInput').keypress(function(event){
@@ -184,7 +127,10 @@
                             return;
                         }
                         socket.emit('room', output);
+                        $('#roomIdInput').val(roomId);
                         $('#recepientInput').val(roomId);
+                        $('#dataInput').removeAttr('disabled');
+                        $('#sendButton').removeAttr('disabled');
                     });
 
                     socket.on('response', function(response) {
@@ -216,7 +162,8 @@
                         	var idCount = data.ids.length;
                         	$("#idList").html('<p>접속자 리스트 ' + idCount + '명</p>');
                         	for (var i = 0; i < idCount; i++) {
-                        		$("#idList").append('<p>접속자 #' + i + ' : ' + data.ids[i]+'</p>');
+                        		$("#idList").append('<input type="checkbox" name="chkId" value='+ data.ids[i]+'><font size="5">'+data.ids[i]+'</font><br>');
+                        		/* $("#idList").append('<p>접속자 #' + i + ' : ' + data.ids[i]+'</p>'); */
                         	}
                         }
                     });
@@ -236,13 +183,14 @@
     				println("추가할 HTML : " + contents);
        			    $(".discussion").append(contents);
     			}else{
+    				var time=currentTime();
     				var contents = "<li class='" + writer + "'>"
         			 + "  <div class='messages'>"
         			 +      sender + ": <br>"
           		 	 + "    <p>" + msg + "</p>"
         			 + "  </div>"
         			 + "  <div class='time'>"
-        			 + "    <time datetime='2016-02-10 18:30'>18시 30분</time>"
+        			 + "    <time datetime=''>"+time+"</time>"
         			+ "  </div>"
       			 	 + "</li>";
    			   	println("추가할 HTML : " + contents);
@@ -275,6 +223,11 @@
 				console.log(data);
 				// $('#result').append('<p>' + data + '</p>');
 			}
+			function currentTime(){
+				var time=new Date();
+				var currentTime=time.getHours()+'시 '+time.getMinutes()+'분';
+				return currentTime;
+			}
         </script>
 	</head>
 <body>
@@ -288,8 +241,7 @@
 	<div id="idresult">
     <div id="idList">
 	</div>
-		<input type="text" id="inviteId"/>
-		<input type="button" id="inviteButton" value="초대하기"/>
+		<input type="button" id="inviteButton" style="width:200px; height:50px; background:#ffffff URL('resources/tfchat/img/invite.jpg'); background-size:cover"/>
 	</div>
     <br>
         
@@ -298,8 +250,9 @@
 	  <ol class="discussion">
 	  </ol>
 	</div>
-	<input type="text" id="dataInput"/>
-    <input type="button" id="sendButton" value="전송" />
+	<input type="text" id="dataInput" disabled="disabled"/>
+    <input type="button" id="sendButton" value="전송" disabled="disabled"/>
+    <input type="button" id="leaveRoomButton" value="나가기" />
 	</div>
     
         
