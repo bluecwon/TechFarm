@@ -47,10 +47,11 @@ public class ContactsController {
 		dto.setId(memberDTO.getId());
 		String filename = dto.getPhotoMultipart().getOriginalFilename();
 		String upPath = session.getServletContext().getRealPath("/resources/contacts/upload");
+		File directory = new File(upPath);
+		if(!directory.exists()) directory.mkdirs();
 		if(!filename.isEmpty()){
 			UUID uuid = UUID.randomUUID();
 			String savedName = uuid.toString()+"_"+filename;
-			System.out.println(savedName);
 			File file = new File(upPath, savedName);
 			try{
 				dto.getPhotoMultipart().transferTo(file);
@@ -80,14 +81,18 @@ public class ContactsController {
 	}
 	@RequestMapping(value="/editContact", method = RequestMethod.POST)
 	public String editContactPro(ContactsDTO dto, HttpServletRequest request, HttpServletResponse response, HttpSession session){
-		dto.setNo(Integer.parseInt(request.getParameter("no")));
+		int no = Integer.parseInt(request.getParameter("no"));
+		dto.setNo(no);
 		
 		String filename = dto.getPhotoMultipart().getOriginalFilename();
 		String upPath = session.getServletContext().getRealPath("/resources/contacts/upload");
 		if(!filename.isEmpty()){
+			ContactsDTO contactsDTO = contactsDAO.getContact(no);
+			File file2 = new File(upPath, contactsDTO.getPhoto());
+			if(file2.exists()) file2.delete();
+			
 			UUID uuid = UUID.randomUUID();
 			String savedName = uuid.toString()+"_"+filename;
-			System.out.println(savedName);
 			File file = new File(upPath, savedName);
 			try{
 				dto.getPhotoMultipart().transferTo(file);
@@ -113,7 +118,6 @@ public class ContactsController {
 			if(file.exists()){
 				file.delete();
 			}
-			
 		}
 		return "redirect:listContacts";
 	}
