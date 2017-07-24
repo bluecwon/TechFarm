@@ -15,8 +15,14 @@
 							<td width="20%" class="view" align="center" id="view">${optionDTO.nickname}(${optionDTO.id})</td>
 						</tr>
 						<c:if test="${boardDTO.file1 != ''}">
-						<tr>
-							<td width="100%" colspan="3" align="center"><a href="fileDownload?fil1=${boardDTO.file1}">${boardDTO.file1}</a>
+						<tr>	
+							<td width="100%" colspan="3" align="right">
+							<form action="fileDownload">
+							<input type="hidden" name="upPath" value="${upPath}">
+							<input type="hidden" name="file1" value="${boardDTO.file1}">
+							첨부파일 : ${boardDTO.file1} &nbsp;&nbsp; <input type="submit" value="다운로드">
+							</form>
+							</td>
 						</tr>
 						</c:if>
 						<tr>
@@ -26,150 +32,91 @@
 							<td colspan="3" align="right" id="view"> 
 							<a href="listBoard?title=${title}&boardno=${boardDTO.boardno}">목록</a>&nbsp;&nbsp;
 							<a href="updateBoard?title=${title}&no=${boardDTO.no}">수정</a>&nbsp;&nbsp;
+							<c:if test="${boardDTO.id==sessionScope.memberDTO.id }">
 							<a href="javascript:checkDelBoard('${boardDTO.no}');">삭제</a>&nbsp;&nbsp;
+							</c:if>
 							</td>
 						</tr>
 						<tr>
-							<td width="10%" align="center">댓글</td> 
-							<c:choose>
-							<c:when test="${membermode=='guest'}">
-							<td width="70%"><input type="text" name="replycontent" disabled></td>
-							</c:when>
-							<c:otherwise>
-							<td width="70%"><input type="text" name="replycontent" ></td>
-							</c:otherwise>
-							</c:choose>
-							<td width="20%" align="center">등록</td>
+							<td colspan="3">
+							<form action="insertReply">
+							<input type="hidden" name="no" value="${boardDTO.no}">
+							<input type="hidden" name="id" value="${sessionScope.memberDTO.id}">
+							<input type="hidden" name="mode" value="reply">
+								<table>
+									<tr>
+										<th width="10%">댓글</th>
+										<c:choose>
+										<c:when test="${membermode=='guest'}">
+										<td align="center" width="70%">
+										<textarea name="repcontent" rows="3" cols="100" maxlength="100" placeholder="로그인 후 댓글이용이 가능합니다." disabled></textarea>
+										</td>
+										<td width="20%"><input type="button" value="등록" onclick="javascript:login();"></td>
+										</c:when>
+										<c:otherwise>
+										<td align="center" width="70%">
+										<textarea name="repcontent" rows="3" cols="100" maxlength="100"></textarea>
+										<td width="20%"><input type="submit" value="등록"></td>
+										</td>
+										</c:otherwise>
+										</c:choose>
+									</tr>
+								</table>
+							</form>	
+							</td>
 						</tr>
 						<tr>
 							<td colspan="3">
-							
-							
-							<div class="div_add">
-										<div class="meta">
-											<div class="comments"><a href="javascript:;">댓글 보기</a></div>
-											<div class="user">작성자 : ${dto.profileBoardId}</div>
-										</div>
-										
-										<!-- 댓글 -->
-										<table class="jjm494_add">
-											<c:set var="ch" value="0"/>
-											<c:forEach var="dto" items="${newsAddList}">
-												<c:choose>
-													<c:when test="${dto.profileBoardFK == profileBoardNum}">
-													<c:set var="ch" value="1"/>
-														<tr>
-															<th scope="row">
-																<c:set var="addCheck" value="0"/>
-																<c:forEach var="addDto" items="${myProfileAllList}">
-																	<c:if test="${dto.profileAddId == addDto.myId}">
-																		<c:if test="${dto.re_level > 0}">
-																		<c:forEach begin="1" end="${dto.re_level}">
-																			..
-																		</c:forEach>
-																		</c:if>
-																		<img id="img_size" src="${myProfileUpPath}/${addDto.photo}" style="width:50px; height:25px;"/>
-																		<c:set var="addCheck" value="1"/>
-																	</c:if>
-																</c:forEach>
-																<c:if test="${addCheck==0}">
-																	<img src="resources/tfPlus/images/default/basicImg.JPG" style="width:50px; height:25px;">
-																</c:if>
-																${dto.profileAddName}
-																<c:if test="${dto.profileAddId == sessionScope.memberDTO.id}"> <!--로그인아이디와 댓글주인이 같으면 댓글 삭제가능 -->
-																	<a href="tfPlusNewsAddDelete?addPK=${dto.profileAddPK}&profileName=${newsBoardName}&id=${newsprofileId}&my=${my}&myId=${sessionScope.memberDTO.id}">삭제</a>
-																</c:if>
-															</th>
-															<td>
-																<div class="subMenuDiv_add">
-																	${dto.profileAddContents}
-																	<a href="javascript:;">답글</a>
-																	<form name="f" action="tfPlusNewsProfileAddPro" method="post">
-																		<table class="jjm494_subAdd">
-																			<tr>
-																				<th scope="row">
-																		        	<c:if test="${myProfileDTO != null}">
-																		        		<img id="img_size" src="${myProfileUpPath}/${myProfileDTO.photo}" style="width:25px; height:15px;"/>
-																		        	</c:if>
-																		        	<c:if test="${myProfileDTO == null}">
-																		        		<img src="resources/tfPlus/images/default/basicImg.JPG" style="width:25px; height:15px;">
-																		        	</c:if>
-																					<spen style="font-size:10px">${sessionScope.memberDTO.name}</spen>
-																				</th>
-																				<td>
-																					<input name="profileAddContents" type="text" class="form-poshytip" title="내용을 입력하세요" style="background-color:#e2e2e2;"/>
-																					<input type="submit" value="등록">
-																					<!-- 히든으로 넘어갈 정보들 -->
-																						<input type="hidden" value="${sessionScope.memberDTO.id}" name="profileAddId" id="to" />
-																						<input type="hidden" value="${sessionScope.memberDTO.name}" name="profileBoardName" id="to" />
-																						<input type="hidden" value="${profileBoardNum}" name="profileBoardFK" id="to" />
-																						
-																						<input type="hidden" value="${newsBoardName}" name="profileName" id="to" />
-																						<input type="hidden" value="${newsprofileId}" name="id" id="to" />
-																						<input type="hidden" value="${num}" name="num" id="to" />
-																						<input type="hidden" value="${my}" name="my" id="to" />
-																						
-																						<input type="hidden" value="${dto.profileAddPK}" name="profileAddPK" id="to"/>
-																						<input type="hidden" value="${dto.re_step}" name="re_step" id="to"/>
-																						<input type="hidden" value="${dto.re_level}" name="re_level" id="to"/>
-																					<!-- 히든으로 넘어갈 정보들 -->
-																				</td>
-																			</tr>
-																		</table>
-																	</form>
-																</div>
-															</td>
-														</tr>
-													</c:when>
-												</c:choose>
-											</c:forEach>
-											<c:if test="${ch != 1}">
-												<tr>
-													<th></th>
-													<td>등록된 댓글이 하나도 없습니다.</td>
-												</tr>
-											</c:if>
-										</table>
-										
-										<form name="f" action="tfPlusNewsProfileAddPro" method="post">
-											<table class="jjm494_add">
-											    <tr>
-											        <th scope="row">
-											        	<c:if test="${myProfileDTO != null}">
-											        		<img id="img_size" src="${myProfileUpPath}/${myProfileDTO.photo}" style="width:50px; height:25px;"/>
-											        	</c:if>
-											        	<c:if test="${myProfileDTO == null}">
-											        		<img src="resources/tfPlus/images/default/basicImg.JPG" style="width:50px; height:25px;">
-											        	</c:if>
-											        	${sessionScope.memberDTO.name}
-											        </th>
-											        <td>
-											        	<input name="profileAddContents" type="text" class="form-poshytip" title="내용을 입력하세요." style="background-color:#e2e2e2;"/>
-											        	<input type="submit" value="등록"/>
-														<!-- 히든으로 넘어갈 정보들 -->
-															<input type="hidden" value="${sessionScope.memberDTO.id}" name="profileAddId" id="to" />
-															<input type="hidden" value="${sessionScope.memberDTO.name}" name="profileBoardName" id="to" />
-															<input type="hidden" value="${profileBoardNum}" name="profileBoardFK" id="to" />
-															
-															<input type="hidden" value="${newsBoardName}" name="profileName" id="to" />
-															<input type="hidden" value="${newsprofileId}" name="id" id="to" />
-															<input type="hidden" value="${num}" name="num" id="to" />
-															<input type="hidden" value="${my}" name="my" id="to" />
-															
-															<input type="hidden" value="0" name="re_step" id="to"/>
-															<input type="hidden" value="0" name="re_level" id="to"/>
-														<!-- 히든으로 넘어갈 정보들 -->
-													</td>
-											    </tr>
-											</table>
-										</form>
-										<!-- 댓글 끝 -->
-										
-									</div>
-							
-							
-							
-							
+							<div align="left">
+							&nbsp;&nbsp;&nbsp;&nbsp;댓글보기(댓글수)
+							</div>
+							<table id="listReply">
+							<c:choose>
+							<c:when test="${listReply.size()==0}">
+								<tr>
+									<th>등록된 댓글이 없습니다.</th>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="listReply" items="${listReply}">
+								<tr>
+									<td>
+									<c:if test="${listReply.re_level==1}">
+									<img src="" width="100" height="80" align="left">
+									</c:if>
+									<c:choose>
+									<c:when test="${listReply.profile==null}">
+									<img src="resources/images/guest.png" width="50" height="40">
+									</c:when>
+									<c:otherwise>
+									<img src="resources/upload/${sessionScope.memberDTO.id}/${listReply.profile}" width="50" height="50" align="left">
+									</c:otherwise>
+									</c:choose>
+									${listReply.id}  <span id="regdate">${listReply.reg_date}</span>
+									<br>
+									${listReply.repcontent}<br>
+									<c:choose>
+									<c:when test="${listReply.id==sessionScope.memberDTO.id}">
+									댓글 &nbsp;<a href="javascript:checkDelReply('${listReply.replyno}','${listReply.no}');">삭제</a>
+									</c:when>
+									<c:otherwise>
+									댓글
+									</c:otherwise>
+									</c:choose>
+									<br>
+									<form action="insertReply">
+									<input type="hidden" name="re_step" value="${listReply.re_step}">
+									<input type="hidden" name="no" value="${listReply.no}">
+									<input type="hidden" name="id" value="${sessionScope.memberDTO.id}">
+									<input type="hidden" name="mode" value="rereply">
+									<input type="text" name="repcontent" maxlength="100">
+									<input type="submit" value="등록">
+									</form>	
+								</tr>
+								</c:forEach>
+							</c:otherwise>
+							</c:choose>
+							</table>
 							</td>
 						</tr>
 					</table>			

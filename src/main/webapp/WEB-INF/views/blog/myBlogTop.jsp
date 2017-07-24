@@ -19,8 +19,19 @@ function checkDelBoard(no){
 		 location.href="deleteBoard?no="+no
 	 }
 }
+function checkDelReply(replyno,no){
+	 var isDel = window.confirm("삭제한 댓글은 복구할 수 없습니다. 정말로 삭제하시겠습니까?")
+	 if(isDel){
+		 location.href="deleteReply?replyno="+replyno+"&no="+no
+	 }
+}
+function login(){
+	 var login = window.confirm("로그인 후 가능한 서비스입니다. 로그인 페이지로 이동하시겠습니까?")
+	 if(login){
+		 location.href="login"
+	 }
+ }
 </script>
-
 </head>
 <body>
 	<table width="1900px" height="1900px">

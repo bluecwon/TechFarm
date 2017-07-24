@@ -8,6 +8,7 @@ private int area;
 private String subject;
 private String content;
 private String file1;
+private String savefile1;
 private String reg_date;
 private int readcount;
 private int reply;
@@ -55,6 +56,12 @@ public String getFile1() {
 }
 public void setFile1(String file1) {
 	this.file1 = file1;
+}
+public String getSavefile1() {
+	return savefile1;
+}
+public void setSavefile1(String savefile1) {
+	this.savefile1 = savefile1;
 }
 public String getReg_date() {
 	return reg_date;

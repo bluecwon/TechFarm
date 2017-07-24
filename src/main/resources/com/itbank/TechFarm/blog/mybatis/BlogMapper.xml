@@ -55,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </update>
   
   <select resultType="BlogBoardDTO" id="listBoard" parameterType="int">
-  select * from blog_board where boardno=#{boardno}
+  select * from blog_board where boardno=#{boardno} order by no asc
   </select>
   
   <insert id="insertBoard" parameterType="BlogBoardDTO" useGeneratedKeys="true">
@@ -67,6 +67,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   select * from blog_board where no=#{no}
   </select>
   
+  <update id="updateReadcount" parameterType="int">	
+  update blog_board set readcount = readcount + 1 where no=#{no}
+  </update>
+  
   <update id="updateBoard" parameterType="BlogBoardDTO">
   update blog_board set area=#{area},subject=#{subject},content=#{content},file1=#{file1},open=#{open} where no=#{no}
   </update>
@@ -75,5 +79,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   delete from blog_board where no=#{no}
   </delete>
   
+  <insert id="insertReply" parameterType="BlogReplyDTO" useGeneratedKeys="true">
+  insert into blog_boardreply (no,id,repcontent,re_level,re_step,profile) 
+  values(#{no},#{id},#{repcontent},#{re_level},#{re_step},#{profile})
+  </insert>
+  
+  <update id="updateReplyNumber" parameterType="int">	
+  update blog_board set reply = reply + 1 where no=#{no}
+  </update>
+  
+  <update id="minusReplyNumber" parameterType="int">	
+  update blog_board set reply = reply - 1 where no=#{no}
+  </update>
+  
+  <update id="updateRestep">	
+  update blog_boardreply set re_step = re_step + 1 
+  </update>
+  
+  <update parameterType="BlogReplyDTO" id="updateRerestep">	
+  update blog_boardreply set re_step = re_step + 1 where re_step > #{re_step} 
+  </update>
+  
+  <select parameterType="int" resultType="BlogReplyDTO" id="listReply"> 
+  select * from blog_boardreply where no=#{no} order by re_step asc 
+  </select>
+  
+  <delete parameterType="int" id="deleteReply">
+  delete from blog_boardreply where replyno=#{replyno}
+  </delete>
   
 </mapper>

@@ -80,7 +80,6 @@
  	}	
  	
  	function login(){
- 		
  		 var login = window.confirm("로그인 후 가능한 서비스입니다. 로그인 페이지로 이동하시겠습니까?")
  		 if(login){
  			 location.href="login"

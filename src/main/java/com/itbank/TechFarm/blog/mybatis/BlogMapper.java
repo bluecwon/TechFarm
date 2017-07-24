@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.itbank.TechFarm.blog.dto.Blog_BoardDTO;
+import com.itbank.TechFarm.blog.dto.Blog_BoardReplyDTO;
 import com.itbank.TechFarm.blog.dto.Blog_MakeBoardDTO;
 import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
 
@@ -152,4 +153,69 @@ public class BlogMapper {
 	return res;
 	  
   }
+  
+  public static int insertReply(Blog_BoardReplyDTO dto){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.insert("insertReply",dto);
+	  session.commit();
+	  session.close();
+	  return res;
+  }
+  
+  public static int updateRestep(){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.update("updateRestep");
+	  session.commit();
+	  session.close();
+	  return res;
+  }
+  
+  public static int updateRerestep(int re_step){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.update("updateRerestep",re_step);
+	  session.commit();
+	  session.close();
+	  return res;
+  }
+  
+  public static int updateReplyNumber(int no){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.update("updateReplyNumber",no);
+	  session.commit();
+	  session.close();
+	  return res;
+  }
+  
+  public static int minusReplyNumber(int no){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.update("minusReplyNumber",no);
+	  session.commit();
+	  session.close();
+	  return res;
+  }
+  
+  public static List<Blog_BoardReplyDTO> listReply(int no){
+	  SqlSession session = sqlMapper.openSession();
+	  List<Blog_BoardReplyDTO> list = (List)session.selectList("listReply",no);
+	  session.close();
+	  return list;
+  }
+  
+  public static int updateReadcount(int no){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.update("updateReadcount",no);
+	  session.commit();
+	  session.close();
+	  return res;
+  }
+  
+  public static int deleteReply(int replyno){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.delete("deleteReply",replyno);
+	  session.commit();
+	  session.close();
+	  return res;
+  }
+  
+  
 }
