@@ -1,13 +1,14 @@
 <%@page import="com.mysql.jdbc.interceptors.SessionAssociationInterceptor"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 <html>
 	<head>
 		<meta charset="utf-8"/>
 		<title>My Account</title>
-		<link type="text/css" href="resources/myaccount/style.css" rel="stylesheet" />
+		<link type="text/css" href="resources/myaccount/my_style.css" rel="stylesheet" />
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
@@ -35,7 +36,9 @@
 	<head>
 	<body>
 		<div id="header" align="right">
-		내 계정
+		<div align="center">
+			<h1>내 계정</h1>
+		</div>
 			<div class="topnav">
 	  			<a rel="tooltip" title="메뉴"><img id="menu" src="resources/home/imgs/menu.png" width="25" height="25"></a>&nbsp&nbsp&nbsp&nbsp
 	  			<c:if test="${sessionScope.memberDTO eq null}">
