@@ -1,40 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<%@include file="header.jsp"%>
+
 <script type="text/javascript">
 	function addtionalSearch(pnum){
 		document.s.action="search.naver?pagenum="+pnum;
 		document.s.submit();
-	}
+	};
 </script>
-<html5>
-<body>
-<b>검색결과 : ${total} <br>
-	검색시간 : ${time}</b>
+	<div class="left">
+		<div class="left_content1">
+		
+
 	<form name="s" method="post">
 		<input type="hidden" name="search" value="${search}">
 	</form>
-<c:forEach var="dto" items="${result}">
- <a href="${dto.link}">${dto.title}</a><br>
- ${dto.description}<br>
- <br>
-</c:forEach>
-<div align="center">
- <a href="javascript:addtionalSearch(0);">
- 1
- </a>
- <a href="javascript:addtionalSearch(1);">
- 2
- </a>
- <a href="javascript:addtionalSearch(2);">
- 3
- </a>
- <a href="javascript:addtionalSearch(3);">
- 4
- </a>
- <a href="javascript:addtionalSearch(4);">
- 5
- </a>
- </div>
-</body>
-</html5>
+			
+			<p>
+				검색결과 : ${total}</br>
+				검색시간 : ${time}
+			</p>
+			<c:forEach var="dto" items="${result}">
+			<table class="jjm494">
+				<tr>
+					<th>
+						 <a href="${dto.link}">${dto.title}</a>
+					</th>
+				</tr>
+				<tr>
+					<td>
+						${dto.description}
+					</td>
+				</tr>
+			</table>
+			</c:forEach>
+		
+
+		<div align="center">
+			<p class="paging">     
+			    <a href="javascript:addtionalSearch(0);" class="num">1</a> 
+			    <a href="javascript:addtionalSearch(1);" class="num">2</a>
+			    <a href="javascript:addtionalSearch(2);" class="num">3</a> 
+			    <a href="javascript:addtionalSearch(3);" class="num">4</a> 
+			    <a href="javascript:addtionalSearch(4);" class="num">5</a>  
+			</p>
+		 </div>
+ 
+ 
+		</div>
+	</div>
+	 
+<%@ include file="footer.jsp" %>
