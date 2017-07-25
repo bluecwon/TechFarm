@@ -272,7 +272,7 @@ public class NewsProfileMapper {
 		session.close();
 		return list;
 	}
-
+	
 	public static NewsProfileDTO tfPlusNews(String profileId) {
 		SqlSession session = sqlMapper.openSession();
 		NewsProfileDTO dto = new NewsProfileDTO();
