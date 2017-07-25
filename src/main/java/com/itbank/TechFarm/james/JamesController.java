@@ -33,7 +33,6 @@ public class JamesController {
 		
 		int count =0;
 		pageMaker.setPage(pageMaker.getPage());
-		System.out.println("현재페이지 : "+pageMaker.getPage());
 		count = listJames.size();
 		pageMaker.setCount(count);
 		model.addAttribute("pageMaker", pageMaker);

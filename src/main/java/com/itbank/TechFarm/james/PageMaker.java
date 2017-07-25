@@ -59,7 +59,6 @@ public class PageMaker {
 			return;
 		}
 		this.count = count;
-		System.out.println("총 컬럼 갯수 : "+count);
 		
 		calcPage();
 	}

@@ -67,7 +67,6 @@
 				<li><a href='listJames?page=${pageMaker.end +1}'>다음</a></li> 
 			</c:if> 
 		</ul>
-
 		</article>
 	</section>
 	<footer></footer>
