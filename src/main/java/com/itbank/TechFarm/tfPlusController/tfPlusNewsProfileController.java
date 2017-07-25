@@ -58,9 +58,7 @@ public class tfPlusNewsProfileController {
 			filename = mf.getOriginalFilename();
 			HttpSession session = req.getSession();
 			
-			String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/profile");
-			File dir = new File(upPathD);
-			if(!dir.exists()) dir.mkdirs();
+			checkDir(req, "contents/profile");
 			
 			String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/profile");
 			File file = new File(upPath,filename);
@@ -95,6 +93,9 @@ public class tfPlusNewsProfileController {
 			if(mf.getOriginalFilename() != "") {
 				filename = mf.getOriginalFilename();
 				HttpSession session = req.getSession();
+				
+				checkDir(req, "contents/profile");
+				
 				String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/profile");
 				File file = new File(upPath,filename);
 				if(file.exists()){
@@ -132,9 +133,7 @@ public class tfPlusNewsProfileController {
 			filename = mf.getOriginalFilename();
 			HttpSession session = req.getSession();
 			
-			String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/profileBoard");
-			File dir = new File(upPathD);
-			if(!dir.exists()) dir.mkdirs();
+			checkDir(req, "contents/profileBoard");
 			
 			String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/profileBoard");
 			File file = new File(upPath,filename);
@@ -179,9 +178,7 @@ public class tfPlusNewsProfileController {
 				filename = mf.getOriginalFilename();
 				HttpSession session = req.getSession();
 				
-				String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/profileBoard");
-				File dir = new File(upPathD);
-				if(!dir.exists()) dir.mkdirs();
+				checkDir(req, "contents/profileBoard");
 				
 				String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/profileBoard");
 				File file = new File(upPath,filename);
@@ -222,9 +219,7 @@ public class tfPlusNewsProfileController {
 			filename = mf.getOriginalFilename();
 			HttpSession session = req.getSession();
 			
-			String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/memberProfile");
-			File dir = new File(upPathD);
-			if(!dir.exists()) dir.mkdirs();
+			checkDir(req, "contents/memberProfile");
 			
 			String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/memberProfile");
 			File file = new File(upPath,filename);
@@ -260,9 +255,7 @@ public class tfPlusNewsProfileController {
 				filename = mf.getOriginalFilename();
 				HttpSession session = req.getSession();
 				
-				String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/memberProfile");
-				File dir = new File(upPathD);
-				if(!dir.exists()) dir.mkdirs();
+				checkDir(req, "contents/memberProfile");
 				
 				String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/memberProfile");
 				File file = new File(upPath,filename);
@@ -301,9 +294,7 @@ public class tfPlusNewsProfileController {
 			filename = mf.getOriginalFilename();
 			HttpSession session = req.getSession();
 			
-			String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/memberBoard");
-			File dir = new File(upPathD);
-			if(!dir.exists()) dir.mkdirs();
+			checkDir(req, "contents/memberBoard");
 			
 			String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/memberBoard");
 			File file = new File(upPath,filename);
@@ -348,9 +339,7 @@ public class tfPlusNewsProfileController {
 				filename = mf.getOriginalFilename();
 				HttpSession session = req.getSession();
 				
-				String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/memberBoard");
-				File dir = new File(upPathD);
-				if(!dir.exists()) dir.mkdirs();
+				checkDir(req, "contents/memberBoard");
 				
 				String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/memberBoard");
 				File file = new File(upPath,filename);
@@ -390,7 +379,9 @@ public class tfPlusNewsProfileController {
 			mf = mr.getFile("photo");
 			filename = mf.getOriginalFilename();
 			HttpSession session = req.getSession();
+			
 			checkDir(req, "contents/myProfile");
+			
 			String upPath = session.getServletContext().getRealPath("/resources/tfPlus/images/contents/myProfile");
 			File file = new File(upPath,filename);
 			if(file.exists()){
@@ -408,6 +399,13 @@ public class tfPlusNewsProfileController {
 		dto.setPhoto(filename);
 		dto.setMyId(req.getParameter("myId"));
 		return dto;
+	}
+	
+	public void checkDir(HttpServletRequest req,String msg){
+		HttpSession session = req.getSession();
+		String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/"+msg);
+		File dir = new File(upPathD);
+		if(!dir.exists()) dir.mkdirs();
 	}
 	/* end MyProfile */
 	// ************************************************************************************************** //
@@ -1149,12 +1147,6 @@ public class tfPlusNewsProfileController {
 	}
 	/* end Member */
 	
-	public void checkDir(HttpServletRequest req,String msg){
-		HttpSession session = req.getSession();
-		String upPathD = session.getServletContext().getRealPath("/resources/tfPlus/images/"+msg);
-		File dir = new File(upPathD);
-		if(!dir.exists()) dir.mkdirs();
-	}
 	
 }
 
