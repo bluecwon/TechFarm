@@ -19,7 +19,7 @@ public class JamesController {
 	private JamesDAO jamesDAO;
 	
 	@RequestMapping(value="/listJames", method = RequestMethod.GET)
-	public String listJames(Model model, HttpServletRequest request, HttpSession session){
+	public String listJames(PageMaker pageMaker, Model model, HttpServletRequest request, HttpSession session){
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
 		JamesDTO dto = new JamesDTO();
 		dto.setId(memberDTO.getId());
@@ -30,6 +30,13 @@ public class JamesController {
 		}
 		dto.setFolder(folder);
 		List<JamesDTO> listJames = jamesDAO.listJames(dto);
+		
+		int count =0;
+		pageMaker.setPage(pageMaker.getPage());
+		count = listJames.size();
+		pageMaker.setCount(count);
+		model.addAttribute("pageMaker", pageMaker);
+		
 		model.addAttribute("listJames", listJames);
 		return "james/listJames";
 	}

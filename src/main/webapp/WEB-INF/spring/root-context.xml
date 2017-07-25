@@ -16,9 +16,11 @@
 	<bean class="com.itbank.TechFarm.tfPlusDAO.MyProfileDAOImpl" id="myProfileDAO"/>
 	<bean class="com.itbank.TechFarm.tfPlusDAO.MyNoticeDAOImpl" id="myNoticeDAO"/>
 	<!-- end tfPlus DAO -->
+	
 	<!-- tfblog DAO-->
 	<bean class="com.itbank.TechFarm.blog.dao.Blog_OptionDAOImpl" id="Blog_OptionDAO"/>
 	<bean class="com.itbank.TechFarm.blog.dao.Blog_BoardDAOImpl" id="Blog_BoardDAO"/>
+	
 	<!-- tftube -->
 	<bean id="replyDAO" class="com.itbank.TechFarm.tftube.dao.ReplyDAOImpl"/>
 	<bean id="videoDAO" class="com.itbank.TechFarm.tftube.dao.VideoDAOImpl"/>
@@ -26,12 +28,16 @@
 	<bean id="mychannelDAO" class="com.itbank.TechFarm.tftube.dao.MyChannelDAOImpl"/>
 	<bean id="subingDAO" class="com.itbank.TechFarm.tftube.dao.SubingDAOImpl"/>
 	<bean id="likevideoDAO" class="com.itbank.TechFarm.tftube.dao.LikeVideoDAOImpl"/>
+	
 	<!-- tfcontacts -->
 	<bean class="com.itbank.TechFarm.contacts.ContactsDAOImpl" id="contactsDAO"/>
+	
 	<!-- james -->
 	<bean class="com.itbank.TechFarm.james.JamesDAOImpl" id="jamesDAO"/>
 	<bean class="com.itbank.TechFarm.james.JamesUser" id="jamesUser"/>
 	<bean class="com.itbank.TechFarm.james.JamesPro" id="jamesPro"/>
+	<bean class="com.itbank.TechFarm.james.MailConfig" id="mailConfig"/>
+	<context:property-placeholder location="classpath:com/itbank/TechFarm/host.properties"/>
 	
 	<!-- start tfNote DAO -->
 	<bean class="com.itbank.TechFarm.tfNoteDAO.NoteDAOImpl" id="noteDAO"/>

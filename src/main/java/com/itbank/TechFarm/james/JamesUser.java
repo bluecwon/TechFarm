@@ -8,12 +8,15 @@ import javax.management.remote.JMXServiceURL;
 
 import org.apache.james.domainlist.api.DomainListManagementMBean;
 import org.apache.james.user.api.UsersRepositoryManagementMBean;
+import org.springframework.beans.factory.annotation.Value;
 
 public class JamesUser {
+	@Value("${host}")
+	private String host;
+	
 	private String serverUrl;
 	private String beanNameUser;
 	private String beanNameDomain;
-	private String host = "52.79.140.54";
 	
 	public JamesUser(){
 		serverUrl = "service:jmx:rmi:///jndi/rmi://localhost:9999/jmxrmi";

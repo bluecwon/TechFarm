@@ -67,13 +67,9 @@
 					<td align="center" width="80px"><a href="#" onclick="check('tfchat_main');"><img id="img_handle" src="resources/home/imgs/chatting.png" width="50px" height="50px"></a><br>채팅</td>
 					<td align="center" width="80px"><a href="#" onclick="check('listContacts');"><img id="img_handle" src="resources/home/imgs/calendar.png" width="50px" height="50px"></a><br>연락처</td>
 				</tr>
-				<h></h>
-				<tr>
-					<td align="center" colspan="3" id="close">
-						<img id="img_handle" src="resources/home/imgs/close.png" width="10px" height="20px">
-					</td>
-				</tr>
-			</table>			
+			</table>
+			<hr>
+			<input type="button" id="close" value="Close"/>		
 			</div>
 			<div class="header_info" align="center">
 				${sessionScope.memberDTO.name}님 환영합니다.<br>
