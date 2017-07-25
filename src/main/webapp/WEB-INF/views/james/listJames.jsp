@@ -55,6 +55,19 @@
 		</td>
 		</tr>
 	</table>
+		<ul class="pageUL"> 
+			<c:if test="${pageMaker.prev}"> 
+				<li><a href='listJames?page=${pageMaker.start -1}'>이전</a></li> 
+			</c:if> 
+			<c:forEach begin="${pageMaker.start }" end="${pageMaker.end}" var="idx"> 
+				<li class='<c:out value="${idx == pageMaker.page?'current':''}"/>'> 
+					<a href='listJames?page=${idx}'>${idx}</a> 
+				</li> 
+			</c:forEach> <c:if test="${pageMaker.next }"> 
+				<li><a href='listJames?page=${pageMaker.end +1}'>다음</a></li> 
+			</c:if> 
+		</ul>
+
 		</article>
 	</section>
 	<footer></footer>
