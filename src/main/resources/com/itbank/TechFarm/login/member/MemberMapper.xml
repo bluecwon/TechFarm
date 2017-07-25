@@ -51,5 +51,9 @@
 	<insert id="deleteMember" parameterType="int">
 	    delete from member where no=#{no};
 	</insert>
+	
+	<select id="searchId" resultType="MemberDTO" parameterType="String">
+		select * from member where email=#{email}; 
+	</select>
   
 </mapper>

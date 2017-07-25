@@ -18,7 +18,7 @@
 <div class="main" align="center">
 	<img src="resources/home/imgs/name.png" width="600"><br>
 	<form name="f" action="search.naver" method="post">
-		<input class="search" type="text" name="search">
+		<input class="search" type="search" name="search">
 		<input class="enter" type="submit" value="검색">
 	</form>
 </div>

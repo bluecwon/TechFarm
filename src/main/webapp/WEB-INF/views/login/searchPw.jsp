@@ -7,10 +7,14 @@
 <html>
 <head>
 <link type="text/css" href="resources/login/style.css" rel="stylesheet"/>
-<title>Search For TF ID</title>
-	<script type="text/javascript">	
+<title>Search For TF PW</title>
+	<script type="text/javascript">
 		function checkForm(){
-			if(member.name.value==""){
+			if(member.id.value==""){
+				alert("아이디를 입력하세요")
+				member.id.focus()
+				return false;
+			}else if(member.name.value==""){
 				alert("이름를 입력하세요")
 				member.name.focus()
 				return false;
@@ -25,13 +29,15 @@
 <body>
 	<div class="createmain">
 		<table>
-			<spring:hasBindErrors name="inputInfo"/>
-			<form name="member" action="searchId" method="post" onsubmit="return checkForm()">
+			<form name="member" action="searchPw" method="post" onsubmit="return checkForm()">
 			<tr>
 				<td><img src="resources/home/imgs/name.png" width="200"></td>
 			</tr>
 			<tr>
-				<td><font size=5>ID 찾기</font></td>
+				<td><font size=5>PW 찾기</font></td>
+			</tr>
+			<tr>
+				<td>아이디<br><input id="id" type="text" name="id"></td>
 			</tr>
 			<tr>
 				<td>이름<br><input type="text" name="name">

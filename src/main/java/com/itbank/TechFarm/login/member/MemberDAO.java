@@ -10,4 +10,5 @@ public interface MemberDAO {
 	public int editMember(MemberDTO dto);
 	public int editPw(MemberDTO dto);
 	public int deleteMember(int no);
+	public MemberDTO searchId(String email);
 }

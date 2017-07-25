@@ -88,8 +88,10 @@ public class ContactsController {
 		String upPath = session.getServletContext().getRealPath("/resources/contacts/upload");
 		if(!filename.isEmpty()){
 			ContactsDTO contactsDTO = contactsDAO.getContact(no);
-			File file2 = new File(upPath, contactsDTO.getPhoto());
-			if(file2.exists()) file2.delete();
+			if(contactsDTO.getPhoto()!=null){
+				File file2 = new File(upPath, contactsDTO.getPhoto());
+				if(file2.exists()) file2.delete();
+			}
 			
 			UUID uuid = UUID.randomUUID();
 			String savedName = uuid.toString()+"_"+filename;

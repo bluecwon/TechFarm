@@ -76,4 +76,12 @@ public class MemberMapper {
 			session.close();
 			return res;
 	  }
+	  
+	  public static MemberDTO searchId(String email){
+		  SqlSession session = sqlMapper.openSession();
+			MemberDTO res=session.selectOne("searchId", email);
+			session.commit();
+			session.close();
+			return res;
+	  }
 }

@@ -45,6 +45,12 @@ public class MemberDAOImpl implements MemberDAO{
 		int res=MemberMapper.deleteMember(no);
 		return res;
 	}
+
+	@Override
+	public MemberDTO searchId(String email) {
+		MemberDTO res=MemberMapper.searchId(email);
+		return res;
+	}
 	
 	
 }
