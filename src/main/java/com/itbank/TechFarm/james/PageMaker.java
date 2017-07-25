@@ -1,6 +1,7 @@
 package com.itbank.TechFarm.james;
 
 public class PageMaker {
+	private int pageSize=10;
 	private int page;
 	private int count;
 	private int start;
@@ -63,11 +64,11 @@ public class PageMaker {
 		calcPage();
 	}
 	private void calcPage(){
-		int tempEnd = (int)(Math.ceil(page / 10.0)*10);
+		int tempEnd = (int)(Math.ceil(page / (float)pageSize)*pageSize);
 		
-		this.start = tempEnd - 9;
-		if(tempEnd *10 > this.count){
-			this.end = (int)Math.ceil(this.count/10.0);
+		this.start = tempEnd - (pageSize-1);
+		if(tempEnd *pageSize > this.count){
+			this.end = (int)Math.ceil(this.count/(float)pageSize);
 		}else{
 			this.end = tempEnd;
 		}
