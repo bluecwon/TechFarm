@@ -49,7 +49,7 @@
 			</tr>
 				<td><span>회원 가입시 입력했던 email 주소를 입력해주세요.</span></td>
 			<tr>
-				<td align="center"><input type="submit" value="ID 찾기"><input type="reset" value="다시작성"></td>
+				<td align="center"><input type="submit" value="PW 찾기"><input type="reset" value="다시작성"></td>
 			</tr>
 			</form>
 		</table>

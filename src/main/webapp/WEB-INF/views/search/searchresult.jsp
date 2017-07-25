@@ -16,16 +16,11 @@
 	<form name="s" method="post">
 		<input type="hidden" name="search" value="${search}">
 	</form>
-			
-			<p>
-				검색결과 : ${total}</br>
-				검색시간 : ${time}
-			</p>
 			<c:forEach var="dto" items="${result}">
 			<table class="jjm494">
 				<tr>
 					<th>
-						 <a href="${dto.link}">${dto.title}</a>
+						 <a href="#" onclick="window.open('${dto.link}')">${dto.title}</a>
 					</th>
 				</tr>
 				<tr>
@@ -35,8 +30,10 @@
 				</tr>
 			</table>
 			</c:forEach>
-		
-
+			<p>
+				검색결과 : ${total}</br>
+				검색시간 : ${time}
+			</p>
 		<div align="center">
 			<p class="paging">     
 			    <a href="javascript:addtionalSearch(0);" class="num">1</a> 
