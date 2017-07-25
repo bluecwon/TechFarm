@@ -13,8 +13,8 @@
 	<nav></nav>
 	<section>
 		<form action="sendJames" method="post" enctype="multipart/form-data">
-      		<input type="email" name="to" size="80" value="${to }" placeholder="상대의 이메일" ><br>
-      		<input type="text" name="subject" size="80" placeholder="제목을 입력해주세요" >
+      		<input type="email" name="to" value="${to }" placeholder="상대의 이메일" ><br>
+      		<input type="text" name="subject" placeholder="제목을 입력해주세요" >
     		<p>
       		<textarea name="text" cols="100" rows="12" placeholder="내용을 입력해주세요" ></textarea>
     		</p>

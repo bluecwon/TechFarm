@@ -22,6 +22,7 @@
 				$(".gnb_center").find(".header_info").slideUp('fast').show();  
 			});
 		});
+		/* 
 		function check(href){
 			if(${sessionScope.memberDTO == null}){
 				alert("먼저 로그인해주세요");
@@ -29,6 +30,7 @@
 				location.href=href;
 			}
 		};
+		 */
 		function insert(){
 			document.frm.submit();
 		};
@@ -98,7 +100,7 @@
 		
 		<div id="container">
 		<div id="header">
-			<h1>연락처 모음</h1>
+			<h1>연락처</h1>
 		</div>
 		<div class="menu">
 		</div>
