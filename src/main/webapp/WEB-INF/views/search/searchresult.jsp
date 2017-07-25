@@ -8,12 +8,18 @@
 		document.s.action="search.naver?pagenum="+pnum;
 		document.s.submit();
 	};
+	function changeTarget(num){
+		var target=document.getElementById('targetnum');
+		target.value=num;
+		document.s.submit();
+	}
 </script>
 	<div class="left">
 		<div class="left_content1">
 		
 
 	<form name="s" method="post">
+		<input type="hidden" id="targetnum" name="targetnum" value="0">
 		<input type="hidden" name="search" value="${search}">
 	</form>
 			<c:forEach var="dto" items="${result}">
@@ -34,6 +40,9 @@
 				검색결과 : ${total}</br>
 				검색시간 : ${time}
 			</p>
+			<input type="button" value="웹검색" onclick="javascript:changeTarget(0);">
+		<input type="button" value="뉴스" onclick="javascript:changeTarget(1);">
+		<input type="button" value="사전" onclick="javascript:changeTarget(2);">
 		<div align="center">
 			<p class="paging">     
 			    <a href="javascript:addtionalSearch(0);" class="num">1</a> 
