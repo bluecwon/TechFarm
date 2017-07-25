@@ -2,16 +2,14 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ include file="/resources/myaccount/header.jsp" %>
-
-<br><br><br><br><br><br><br><br><br> 
 <div id="main_my">
-
 <div id="main"><br><br>
 				<b>${sessionScope.memberDTO.name}</b>님 환영합니다.<br>
 				<b>한 곳</b>에서 <b>TechFarm</b>에 관한 계정을 관리할 수 있습니다.<br>
 				<br>
-				<div id="menu1">TechFarm 정보
-					<table align="center">
+				<br>
+				<div id="menu1" align="center">TechFarm 정보
+					<table>
 						<tr>
 							<td>[${sessionScope.memberDTO.name}]님</td>
 						</tr>
@@ -55,6 +53,7 @@
 				</div>
 				<div id="menu3">tblog 정보</div>
 				<div id="menu4">tplus 정보</div>
+</div>
 </div>
 </body>
 </html>

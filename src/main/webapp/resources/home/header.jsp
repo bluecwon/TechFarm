@@ -16,9 +16,9 @@
 					$("#header").find(".header_menu").slideDown('normal').show();
 				});
 				$("#close").click(function() {
-					$("#header").find(".header_menu").slideUp('fast').show();  
+					$("#header").find(".header_menu").slideUp('fast').show();
 				});
-				$("#myinfo").click(function() { 
+				$("#myinfo").click(function() {
 					$("#header").find(".header_info").slideDown('normal').show();
 				});
 				$("#close2").click(function() {
@@ -72,11 +72,16 @@
 			<input type="button" id="close" value="Close"/>		
 			</div>
 			<div class="header_info" align="center">
+				<div>
+					<img src="resources/home/imgs/account.png" width="50px" height="50px">
+				</div>
+				<div>
 				${sessionScope.memberDTO.name}님 환영합니다.<br>
 				${sessionScope.memberDTO.id}<br>
 				${sessionScope.memberDTO.email}<br>
 				<a href="logout">로그아웃</a><br>
-				<a id="close2">닫기</a>
+				</div>
+				<hr>
+				<input type="button" id="close2" value="Close"/>
 			</div>
-			
 		</div>

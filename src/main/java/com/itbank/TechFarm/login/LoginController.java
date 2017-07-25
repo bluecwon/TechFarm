@@ -92,4 +92,21 @@ public class LoginController {
 		}
 	}
 	
+	@RequestMapping(value = "/searchPw", method = RequestMethod.GET)
+	public String searchPw(HttpServletRequest request) {
+		System.out.println("왔음");
+		return "login/searchId";
+	}
+	
+	@RequestMapping(value = "/searchId", method = RequestMethod.GET)
+	public String searchId(HttpServletRequest request) {
+		return "login/searchId";
+	}
+	
+	@RequestMapping(value = "/searchId", method = RequestMethod.POST)
+	public String searchId2(HttpServletRequest request) {
+		
+		return "login/login";
+	}
+	
 }

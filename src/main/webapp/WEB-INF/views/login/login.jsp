@@ -23,6 +23,9 @@
 			<tr>
 				<form action="login" method="post">
 				<td><input class="idpass" type="text" name="id" autofocus></td>
+				<tr>
+				<td><font color="#004080"><a href="searchId">아이디가 기억 안나시나요?</a></font></td>
+			</tr>
 			</tr>
 			</c:if>
 			<c:if test="${cid==2}">
@@ -44,7 +47,7 @@
 			</tr>
 			</c:if>
 			<tr>
-				<td><font color="#004080">비밀번호가 기억 안나시나요?</font></td>
+				<td><font color="#004080"><a href="searchPw">비밀번호가 기억 안나시나요?</a></font></td>
 			</tr>
 			</c:if>
 			<tr>

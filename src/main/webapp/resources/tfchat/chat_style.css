@@ -14,12 +14,22 @@ body {
 	font-size:12px;
 }
 
+#viewtitle{
+	position: absolute;
+	left: 0%; 
+	padding: 10px;
+	font-size:25px;
+	width:200px;
+	height:150px;
+	z-index:5;
+}
+
 #header {
 	height:50px;
 	width:100%;
 	position: relative;
-	background:#9dceff;
-	border: 1px solid #ddd;
+	background:#ffffc1;
+	border: 1px solid #ffffc1;
 }
 
 #tooltip{
@@ -70,26 +80,27 @@ body {
 
 .header_info {
 	position: absolute;
-	right: 0%; top: 40px;
-	background: #c0c0c0;
+	right: 15px; top: 45px;
+	background: #ffff93;
 	display: none;
 	padding: 10px;
-	border: 1px solid #ccccff;
-	width:10%;
+	width:200px;
 	height:150px;
-	z-index:999;
+	z-index:500;
+	box-shadow: 5px 5px 15px 5px gray;
 }
 
 .header_menu {
 	position: absolute;
-	right: 0%; top: 40px;
-	background: #c0c0c0;
+	right: 15px; top: 45px;
+	background: #ffff93;
+	font-size:15px;
 	display: none;
 	padding: 10px;
-	border: 1px solid #ccccff;
-	width:20%;
-	height:250px;
-	z-index:999;
+	width:250px;
+	height:265px;
+	z-index:499;
+	box-shadow: 5px 5px 15px 5px gray;
 }
 
 #main_bottom{
@@ -107,6 +118,71 @@ body {
 #img_handle:hover{
 	background: #dfdfdf;
 }
+
+#main_my {
+	font-size:20px;
+	text-align:center;
+	z-index:1;
+}
+
+#menu1 {
+	position: absolute;
+	left: 8%;
+	background: #a6d2ff;
+	padding: 10px;
+	border: 1px solid #a6d2ff;
+	width:18%;
+	height:30%;
+	z-index:1;
+}
+
+#menu2 {
+	position: absolute;
+	left: 30%;
+	background: #a6d2ff;
+	padding: 10px;
+	border: 1px solid #a6d2ff;
+	width:18%;
+	height:30%;
+	z-index:1;
+}
+
+#menu3 {
+	position: absolute;
+	left: 52%;
+	background: #a6d2ff;
+	padding: 10px;
+	border: 1px solid #a6d2ff;
+	width:18%;
+	height:30%;
+	
+	z-index:1;
+}
+
+#menu4 {
+	position: absolute;
+	left: 74%;
+	background: #a6d2ff;
+	padding: 10px;
+	border: 1px solid #a6d2ff;
+	width:18%;
+	height:30%;
+	z-index:1;
+}
+
+.main{
+	width:100%;
+	height:80%;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
+	height:40px;
+	bottom:0;
+	margin-top:200px;
+	margin-bottom:auto;
+}
+
 .title{
 	position: absolute;
 	left: 1%;
@@ -212,10 +288,6 @@ body {
   	align-items: flex-end;
 }
 
-.other {
-	align-items: flex-end;
-}
-
 .self .messages {
   	order: 1;
   	border-bottom-right-radius: 0;
@@ -262,34 +334,3 @@ body {
 	width:450px; height:20px;
 	font-size:15px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

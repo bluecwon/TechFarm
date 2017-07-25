@@ -40,17 +40,43 @@ table.jjm494 td {
     width: 200px
 }
 
+#viewtitle{
+	position: absolute;
+	left: 0%; 
+	padding: 10px;
+	font-size:25px;
+	width:200px;
+	height:150px;
+	z-index:5;
+}
+
+#header {
+	height:50px;
+	width:100%;
+	position: relative;
+	background:#a5fea9;
+	border: 1px solid #a5fea9;
+}
+
 #tooltip{
 	position:absolute;
 	z-index:999;
 	color:white;
+	font-size:15px;
 }
+
+#tooltip .tipBody{
+	background-color: black;
+	padding: 8px;
+}
+
+
 
 .topnav{
 	position: relative;
 	text-align:right;
-	/* margin-top:10px; */
-/* 	height:100%; */
+	margin-top:10px;
+	height:100%;
 	cursor:pointer;
 }
 
@@ -59,38 +85,53 @@ table.jjm494 td {
 	color:#d3d3d3;
 }
 
+.navi_set{
+	float: right;
+	padding:10px;
+	position: relative;
+}
 
 .header_info {
 	position: absolute;
-	right: 15px; top: 25px;
-	background: #c0c0c0;
+	right: 15px; top: 45px;
+	background: #81fe87;
 	display: none;
 	padding: 10px;
-	border: 1px solid #ccccff;
-	width:10%;
+	font-size:10px;
+	width:200px;
 	height:150px;
-	
-	z-index:8;
-	word-break:break-all;
+	z-index:500;
+	box-shadow: 5px 5px 15px 5px gray;
 }
 
 .header_menu {
 	position: absolute;
-	right: 45px; top: 25px;
-	background: #c0c0c0;
+	right: 15px; top: 45px;
+	background: #81fe87;
+	font-size:15px;
 	display: none;
 	padding: 10px;
-	border: 1px solid #ccccff;
-	width:20%;
-	height:270px;
-	
-	z-index:8;
+	width:250px;
+	height:265px;
+	z-index:499;
+	box-shadow: 5px 5px 15px 5px gray;
 }
 
+#main_bottom{
+	bottom:0%;
+	width:100%;
+	height:50px;
+	position: absolute;
+	background:#ddd;
+	font-size:15px;
+	text-align:center;
+	vertical-align:middle;
+	border: 1px solid #ddd;
+	
+}
 #img_handle:hover{
 	background: #dfdfdf;
 }
-
 
 
 
@@ -142,12 +183,12 @@ a:hover,a:active,a:focus{
 	width:1000px;
 	margin:0 auto;
 }
-#header{
+#header1{
 	float:left;
 	width:1000px;
 	_border:1px solid blue;
 }
-#header h1{
+#header1 h1{
 	float:left;
 	margin-left:400px;
 	color:#00bf12;

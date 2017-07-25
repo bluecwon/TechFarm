@@ -26,7 +26,7 @@
 <table style="width: 100%; height: 100%;" border=0>
         <tr>
             <td style="vertical-align: middle;" align="center">
-                회사소개 googlePlus 브런치 Test
+               made by ITBank TechFarm team
             </td>
         </tr>
     </table>
