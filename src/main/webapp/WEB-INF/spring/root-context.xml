@@ -23,6 +23,8 @@
 	<!-- james -->
 	<bean class="com.itbank.TechFarm.james.JamesDAOImpl" id="jamesDAO"/>
 	<bean class="com.itbank.TechFarm.james.JamesPro" id="jamesPro"/>
+	<bean class="com.itbank.TechFarm.james.MailConfig" id="mailConfig"/>
+	<context:property-placeholder location="classpath:com/itbank/TechFarm/host.properties"/>
 	<!-- messagesource -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">

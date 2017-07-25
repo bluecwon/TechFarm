@@ -10,10 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import java.util.UUID;
 
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
@@ -24,6 +21,7 @@ import javax.mail.Store;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -33,8 +31,11 @@ public class JamesDAOImpl implements JamesDAO{
 	private JavaMailSender mailSender;
 	@Autowired
 	private JamesPro jamesPro;
+	@Autowired
+	private MailConfig mailConfig;
+	@Value("${host}")
+	private String host;
 	
-	String host="52.79.140.54";
 	String mailStoreType ="imap";
 	
 	private JamesDTO jamesDTO;
@@ -42,7 +43,7 @@ public class JamesDAOImpl implements JamesDAO{
 	
 	@Override
 	public int sendJames(final JamesDTO dto) {
-		mailSender=MailConfig.mailSender(dto.getId()+"@"+host, dto.getPassword());
+		mailSender=mailConfig.mailSender(dto.getId()+"@"+host, dto.getPassword());
 		try{
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
@@ -77,7 +78,7 @@ public class JamesDAOImpl implements JamesDAO{
 	@Override
 	public List<JamesDTO> listJames(JamesDTO dto) {
 		listJames = new ArrayList<JamesDTO>();
-		
+
 		try{
 			Properties properties = new Properties();
 			properties.put("mail.imap.host", host);
