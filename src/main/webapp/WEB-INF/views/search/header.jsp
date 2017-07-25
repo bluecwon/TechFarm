@@ -100,7 +100,7 @@
 		<div id="header">
 			<div align="center">
 				<form name="f" action="search.naver" method="post">
-					<input class="jjm494_input" type="text" name="search"/>
+					<input class="jjm494_input" type="text" name="search" value="검색을 입력해주세요" onfocus="this.value=''"/>
 					<input class="enter" type="submit" value="검색"/>
 				</form>
 			</div>
