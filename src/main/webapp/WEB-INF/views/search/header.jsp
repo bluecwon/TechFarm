@@ -100,9 +100,8 @@
 		<div id="header">
 			<div align="center">
 				<form name="f" action="search.naver" method="post">
-					<img src="resources/home/imgs/name.png" width="100px" height="50px"/>
-					<input class="search" type="text" name="search">
-					<input class="enter" type="submit" value="검색">
+					<input class="jjm494_input" type="text" name="search"/>
+					<input class="enter" type="submit" value="검색"/>
 				</form>
 			</div>
 		</div>

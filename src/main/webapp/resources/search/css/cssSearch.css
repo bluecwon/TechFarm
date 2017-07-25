@@ -26,6 +26,21 @@ table.jjm494 td {
 }
 
 
+.jjm494_input {
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    height: 25px;
+    padding: 5px 10px 5px 5px;
+    font-size: 15px;
+
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.02) 0%, rgba(255, 255, 255, 0.02) 50%);
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.02) 0%, rgba(255, 255, 255, 0.02) 50%);
+    background-image: linear-gradient(top, rgba(0, 0, 0, 0.02) 0%, rgba(255, 255, 255, 0.02) 50%);
+    width: 200px
+}
+
 /* paging */
 .paging {position:relative; width:100%; text-align:center; margin-top:10px; }
 .paging a{display:inline-block; background:url('./img/btn_bg.gif') no-repeat; color:#353e44; font-size:12px; font-weight:bold; width:26px; height:25px; line-height:27px; vertical-align:middle; margin-right:2px; border:1px solid #c8c8c8;}
