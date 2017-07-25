@@ -99,7 +99,7 @@
 	<div style="display:flex;">
 		<c:forEach var="dto" items="${noteList}">
 		<form name="f" method="post" action="note_update" onsubmit="return chkTitle();">
-			<div style="border:1px solid; padding:10px; width:220px;  word-break:break-all;flex:1;margin-left:5px; margin-right:5px;">
+			<div style="border:1px solid; padding:10px; width:220px;  word-break:break-all;flex:1;margin-left:5px; margin-right:5px; margin-bottom:20px; background:#408080;">
 				<div align="right">
 					<a href="#" onclick="javascript:update();">수정</a>
 					<a href="note_delete?num=${dto.num}&id=${dto.id}">
@@ -108,7 +108,7 @@
 				</div>
 				<p>제목 : <input type="text" name="title" value="${dto.title}"></p><br>
 				<p><textarea name="content" onKeyUp="chkContent(this, 4000)" rows="5" style="width:100%; height:100%;">${dto.content}</textarea></p>
-				<input type="text" name="cbyte" class=byte value="${dto.cbyte}" size="3" readOnly>/4,000Byte
+				<%-- <input type="text" name="cbyte" class=byte value="${dto.cbyte}" size="3" readOnly>/4,000Byte --%>
 				<input type="hidden" name="id" value="${dto.id}"/>
 				<input type="hidden" name="num" value="${dto.num}"/>
 			</div>

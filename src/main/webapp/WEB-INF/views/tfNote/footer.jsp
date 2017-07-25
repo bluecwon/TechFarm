@@ -4,11 +4,7 @@
 	</div>
 	<!--//container -->
 	
-	<!--footer -->
-	<div id="footer">
-		<p>노트 최하단 메뉴</p>
-	</div>
-	<!--//footer -->
+
 	
 </div>
 	</body>
