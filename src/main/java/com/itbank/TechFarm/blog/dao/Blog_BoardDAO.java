@@ -16,6 +16,7 @@ public interface Blog_BoardDAO {
 	public List listBoard(int boardno);
 	public int insertboard(Blog_BoardDTO dto);
 	public Blog_BoardDTO getBoard(int no);
+	public List listMyBoard(String id);
 	public int updateReadcount(int no);	
 	public int updateBoard(Blog_BoardDTO dto);
 	public int deleteBoard(int no);

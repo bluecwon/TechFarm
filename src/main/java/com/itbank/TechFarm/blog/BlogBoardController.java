@@ -48,6 +48,7 @@ import com.itbank.TechFarm.blog.dto.Blog_BoardDTO;
 import com.itbank.TechFarm.blog.dto.Blog_BoardReplyDTO;
 import com.itbank.TechFarm.blog.dto.Blog_MakeBoardDTO;
 import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
+import com.itbank.TechFarm.login.member.MemberDTO;
 
 
 @Controller
@@ -186,6 +187,16 @@ public class BlogBoardController {
 		List<Blog_MakeBoardDTO> list = boardDAO.listBoardTitle(dto.getId());
 		session.setAttribute("optionDTO", optionDTO);
 		session.setAttribute("list", list);
+		
+		String joinmode = request.getParameter("joinmode"); //외부에서 방문시에 방문수 올려주기
+		if(joinmode != null){
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
+		if(memberDTO != null){
+			if(!memberDTO.getId().equals(dto.getId())){
+				optionDAO.updateVisitornum(dto.getId());
+				}
+			}
+		}
 		
 		//reply
 		int pageSize = 9; 

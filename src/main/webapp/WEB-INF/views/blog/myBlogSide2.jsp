@@ -6,7 +6,9 @@
 			<div id="sidebar2">
 				<div id="board">
 					<div align="right">
+					<c:if test="${optionDTO.id.equals(sessionScope.memberDTO.id)}">
 					<a href="editBlog?mode=board&id=${optionDTO.id}">게시판 관리</a>&nbsp;&nbsp;<br><br>
+					</c:if>
 					</div>
 					<c:forEach var="dto" items="${list}">
 					<c:if test="${dto.sideno % 2 == 0}">

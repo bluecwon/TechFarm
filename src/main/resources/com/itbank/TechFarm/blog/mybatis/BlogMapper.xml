@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- Select with no parameters using the result map for Account class. -->
   
   <insert id="makeBlog" parameterType="BlogOptionDTO">
-  insert into blog_option values(#{id},#{blogname},#{layout},#{headerword},#{nickname},#{introduce},#{profile},#{background},#{header})
+  insert into blog_option values(#{id},#{blogname},#{layout},#{headerword},#{nickname},#{introduce},#{profile},#{background},#{header},#{visitornum})
   </insert>
   
   <select resultType="BlogOptionDTO" id="getBlog" parameterType="String">
@@ -25,6 +25,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <insert id="makeBoard" parameterType="BlogMakeBoardDTO" useGeneratedKeys="true">
   insert into blog_makeboard (sideno,id,title) values(#{sideno},#{id},#{title})
   </insert>
+  
+  <update id="updateVisitornum" parameterType="String">	
+  update blog_option set visitornum = visitornum + 1 where id=#{id}
+  </update>
   
   <select resultType="BlogMakeBoardDTO" id="listBoardTitle" parameterType="String">
   select * from blog_makeboard where id=#{id}
@@ -65,6 +69,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <select resultType="BlogBoardDTO" id="getBoard" parameterType="int">
   select * from blog_board where no=#{no}
+  </select>
+  
+  <select resultType="BlogBoardDTO" id="listMyBoard" parameterType="String">
+  select * from blog_board where id=#{id} order by no desc limit 5
   </select>
   
   <update id="updateReadcount" parameterType="int">	
@@ -141,6 +149,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <select parameterType="int" resultType="String" id="listAreaProfile">
   select profile from blog_option c join (select a.* from (select id from blog_board where area=#{area})a)b on c.id=b.id;
+  </select>
+
+  <select resultType="BlogOptionDTO" id="searchBlog" parameterType="hashMap">
+  select * from blog_option where ${search_option} like CONCAT('%',#{search_text},'%');
   </select>
   
 </mapper>

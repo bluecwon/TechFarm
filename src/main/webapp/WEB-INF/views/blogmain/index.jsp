@@ -18,7 +18,7 @@
 			<tr><th>제목</th><th>작성자</th><th>작성일</th></tr>
 			<c:forEach var="newlist" items="${newlist}" varStatus="status">
 			<tr align="center">
-			<td class="menu"><a href="viewBoard?no=${newlist.no}" class="deconone">${newlist.subject}</a></td>
+			<td class="menu"><a href="viewBoard?no=${newlist.no}&joinmode=newlist" class="deconone">${newlist.subject}</a></td>
 			<td class="menu" valign="middle" align="left">
 			<img src="resources/upload/${newlist.id}/${newprofile[status.index]}"  width="25" height="25" class="homemenu" align="left"/><font size="4">${newlist.id}</font>
 			</td>
@@ -35,7 +35,7 @@
 			<tr><th>제목</th><th>작성자</th><th width="50">조회수</th></tr>
 			<c:forEach var="hotlist" items="${hotlist}" varStatus="status">
 			<tr align="center">
-			<td class="menu"><a href="viewBoard?no=${hotlist.no}" class="deconone">${hotlist.subject}</a></td>
+			<td class="menu"><a href="viewBoard?no=${hotlist.no}&joinmode=hotlist" class="deconone">${hotlist.subject}</a></td>
 			<td class="menu">
 			<img src="resources/upload/${hotlist.id}/${hotprofile[status.index]}"  width="25" height="25" class="homemenu" align="left"/><font size="4">${hotlist.id}</font>
 			</td>

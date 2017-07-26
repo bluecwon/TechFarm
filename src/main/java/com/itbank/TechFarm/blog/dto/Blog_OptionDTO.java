@@ -10,6 +10,7 @@ private String introduce;
 private String profile;
 private String background;
 private String header;
+private int visitornum;
 
 public String getId() {
 	return id;
@@ -64,6 +65,12 @@ public String getIntroduce() {
 }
 public void setIntroduce(String introduce) {
 	this.introduce = introduce;
+}
+public int getVisitornum() {
+	return visitornum;
+}
+public void setVisitornum(int visitornum) {
+	this.visitornum = visitornum;
 }
 
 

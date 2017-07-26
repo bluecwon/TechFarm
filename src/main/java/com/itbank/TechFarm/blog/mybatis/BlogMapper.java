@@ -109,6 +109,13 @@ public class BlogMapper {
 	  return dto;
   }
   
+  public static List<Blog_BoardDTO> listMyBoard(String id){
+	  SqlSession session = sqlMapper.openSession();
+	  List<Blog_BoardDTO> list = session.selectList("listMyBoard", id);
+	  session.close();
+	  return list;
+  }
+  
   public static int editBoardT(Blog_MakeBoardDTO dto){
 	  SqlSession session = sqlMapper.openSession();
 	  int res = session.update("editBoardT",dto);
@@ -183,6 +190,14 @@ public class BlogMapper {
   public static int updateReplyNumber(int no){
 	  SqlSession session = sqlMapper.openSession();
 	  int res = session.update("updateReplyNumber",no);
+	  session.commit();
+	  session.close();
+	  return res;
+  }
+  
+  public static int updateVisitornum(String id){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.update("updateVisitornum",id);
 	  session.commit();
 	  session.close();
 	  return res;
@@ -282,6 +297,16 @@ public class BlogMapper {
   public static List<String> listAreaProfile(int area){
 	  SqlSession session = sqlMapper.openSession();
 	  List<String> list = (List)session.selectList("listAreaProfile",area);
+	  session.close();
+	  return list;
+  }
+  
+  public static List<Blog_OptionDTO> listSearchBlog(String search_option,String search_text){
+	  SqlSession session = sqlMapper.openSession();
+	  Map<String, Object> parameters = new HashMap<String, Object>();
+	  parameters.put("search_option", search_option);
+	  parameters.put("search_text", search_text);
+	  List<Blog_OptionDTO> list = (List)session.selectList("searchBlog",parameters);
 	  session.close();
 	  return list;
   }

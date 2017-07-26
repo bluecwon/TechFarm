@@ -24,12 +24,19 @@ String pfPath = config.getServletContext().getRealPath("/WEB-INF/blog/profile/")
 	<b>${sessionScope.memberDTO.id}</b>님  환영합니다.<br><br>
 	<input type="button" value="내 블로그" onclick="location.href='myBlog?id=${sessionScope.memberDTO.id}'">
 	</c:if>
-	</div>
-	<div class="blogsearch">
-		<select name="search">
-			<option value="블로그이름"></option>
-			<option value="아이디"></option>
-			<option value="블로그이름"></option>
+	<br><br><br>
+	<div class="blogsearch" align="center">
+		<h3>블로그 검색</h3>
+		<form action="searchblog">
+		<select name="search_option">
+			<option value="blogname">블로그이름</option>
+			<option value="id">아이디</option>
+			<option value="nickname">닉네임</option>
 		</select>
+		<input type="text" name="search_text">
+		<input type="submit" value="검색">
+		</form>
+	</div>
+	
 	</div>
 </aside> 

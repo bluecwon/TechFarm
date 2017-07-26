@@ -300,5 +300,20 @@ public class BlogMainController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/searchblog")
+	public ModelAndView searchblog(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("blogmain/searchBlog");
+		HttpSession session = request.getSession();
+		
+		String search_option = request.getParameter("search_option");
+		String search_text = request.getParameter("search_text");
+		
+		List<Blog_OptionDTO> searchlist = optionDAO.listSearchBlog(search_option, search_text);
+		mav.addObject("searchlist",searchlist);
+		mav.addObject("search_option",search_option);
+		mav.addObject("search_text",search_text);
+		return mav;
+	}
 	
 }
