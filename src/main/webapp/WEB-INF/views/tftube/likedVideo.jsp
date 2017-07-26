@@ -6,8 +6,9 @@
 <link rel="stylesheet" type="text/css" href="resources/tftube/style.css">
 
 <div> <!-- start of 2-2-1 -->
+<h2>관심 동영상</h2>
 <c:choose>
-<c:when test="${like_list.size()==0}">
+<c:when test="${like_all_list.size()==0}">
 관심 목록이 없습니다.
 </c:when>
 <c:otherwise>
@@ -16,7 +17,7 @@
 
 <div style="float:left"><!-- start of 2-2-1 -->
 <a href="tftube_videoView?no=${likeList.no}">
-<img src="resources/tftube/uploadImage/${likeList.image}" 
+<img src="resources/tftube/Image/${likeList.image}" 
 width="300" height="200"></a>
 </div>
 

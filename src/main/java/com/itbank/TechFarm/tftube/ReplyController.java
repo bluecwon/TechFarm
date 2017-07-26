@@ -1,10 +1,9 @@
 package com.itbank.TechFarm.tftube;
 
 
-import java.text.DecimalFormat;
+
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,21 +17,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.TechFarm.login.member.MemberDTO;
 import com.itbank.TechFarm.tftube.dao.ReplyDAO;
-import com.itbank.TechFarm.tftube.dao.VideoDAO;
-import com.itbank.TechFarm.tftube.dto.RecentVideoDTO;
 import com.itbank.TechFarm.tftube.dto.ReplyDTO;
-import com.itbank.TechFarm.tftube.dto.ReplyFormat;
 
-import com.itbank.TechFarm.tftube.dto.SubingDTO;
-import com.itbank.TechFarm.tftube.dto.VideoDTO;
+
+
+
 @Controller
 public class ReplyController {
 	
 	@Autowired
-	private ReplyDAO replyDAO;
-	@Autowired
-	private VideoDAO videoDAO;
-	
+	private ReplyDAO replyDAO;	
 
 	private HttpSession session=null;
 	private String msg=null, url=null;	

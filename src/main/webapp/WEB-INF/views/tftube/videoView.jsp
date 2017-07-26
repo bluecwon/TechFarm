@@ -6,7 +6,7 @@
 <div id="2-2" style="overflow:auto;"> <!-- start of 2-2 -->
 
 <table>
-<tr><td colspan="2"><video src="resources/tftube/uploadVideo/${vdto.video_name}" autoplay  
+<tr><td colspan="2"><video src="resources/tftube/Video/${vdto.video_name}" autoplay  
 controls="controls" width="700" height="450"></video>
 </td></tr>
 </table>

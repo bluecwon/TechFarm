@@ -5,7 +5,7 @@ private int like_no;
 private int member_no;
 private int video_no;
 private int like_status;
-private int unlike_status;
+
 
 public int getLike_no() {
 	return like_no;
@@ -32,11 +32,6 @@ public int getLike_status() {
 public void setLike_status(int like_status) {
 	this.like_status = like_status;
 }
-public int getUnlike_status() {
-	return unlike_status;
-}
-public void setUnlike_status(int unlike_status) {
-	this.unlike_status = unlike_status;
-}
+
 
 }

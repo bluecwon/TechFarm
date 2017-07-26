@@ -14,7 +14,7 @@ $(function(){
 	});
 	
 	 $("a.reply_button").click(function(){		
-	$(this).siblings().show('fast'); 	
+	 $(this).siblings().show('fast');	
 	});	
 	
 	$(".cancel").click(function(){ 		

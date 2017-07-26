@@ -2,30 +2,16 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@include file="top.jsp"%>
+
 <div class="spacing" id="2-2-1" ><!-- start of 2-2-1 -->
-업로드한 동영상<p>
-<%-- <table>
-<c:choose>
-<c:when test="${Video_by_member.size()==0}">
-<tr><td>
-재생 목록이 없습니다.
-</td></tr>
-</c:when>
-<c:otherwise>
-<c:forEach var="videoList" items="${video_by_member}">
-<tr><td>
-<a href="resources/tftube/uploadVideo/${videoList.video_name}">
-<img src="resources/tftube/uploadImage/${videoList.image}" width="300"
-height="200"></a><br>
-</td></tr>
-</c:forEach>
-</c:otherwise>
-</c:choose> --%>
+<h2>내 채널</h2><p>
+<font size="4">업로드한 동영상</font><p>
+
 
 <c:set var="count" value="0"/>
 <c:choose>
 <c:when test="${video_by_member.size()==0}">
-재생목록이 없습니다
+<p class="comment">재생목록이 없습니다</p>
 </c:when>
 <c:otherwise>
 <table>
@@ -33,7 +19,7 @@ height="200"></a><br>
 <c:forEach var="videoList" items="${video_by_member}"> 
 <td bgcolor="white">
 <a href="tftube_videoView?no=${videoList.no}">
-<img src="resources/tftube/uploadImage/${videoList.image}" width="196" height="100"><br>
+<img src="resources/tftube/Image/${videoList.image}" width="196" height="100"><br>
 ${videoList.title}</a><br>
 <a href="tftube_mychannel">${videoList.channel}</a><br>
 ${videoList.readcount}회  ＊ ${videoList.uploaddate}
@@ -52,7 +38,7 @@ ${videoList.readcount}회  ＊ ${videoList.uploaddate}
 
 
 
-구독채널<p>
+<font size="4">구독채널</font><p>
 <table>
 <c:choose>
 <c:when test="${subing_list.size()==0}">

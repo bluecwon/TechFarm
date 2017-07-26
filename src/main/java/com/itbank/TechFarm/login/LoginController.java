@@ -30,8 +30,8 @@ import com.itbank.TechFarm.tftube.dao.MyChannelDAO;
 @Controller
 public class LoginController {
 	@Autowired
-	private MemberDAO memberDAO;
-	
+	private MemberDAO memberDAO;	
+
 	@Autowired
 	private JamesUser jamesUser;
 	
@@ -94,9 +94,9 @@ public class LoginController {
 			jamesUser.addUser(dto.getId(), encodedPassword);
 			MemberDTO getdto=memberDAO.getMember(dto.getId());
 			dto.setNo(getdto.getNo());
+
 			model.addAttribute("msg", "회원가입을 축하합니다.");
 			model.addAttribute("url", "login");
-			
 		}else{
 			model.addAttribute("msg", "회원가입에 실패했습니다.");
 			model.addAttribute("url", "createAccount");
