@@ -4,7 +4,6 @@
 	<div class="left">
 		<div class="left_content1">
 			<div align="center">
-				<h1>연락처 수정</h1>
 				<form method="post" action="editContact" enctype="multipart/form-data">
 				<input type="hidden" name="no" value="${dto.no }">
 				<table class="jjm494">

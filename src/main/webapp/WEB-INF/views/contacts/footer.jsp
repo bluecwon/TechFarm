@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 	
-			<div id="footer">
-			</div>
+			<!-- <div id="footer">
+			</div> -->
 		</div>
 	</div>
 </body>

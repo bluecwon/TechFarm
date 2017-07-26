@@ -7,7 +7,6 @@
 			<div align="center">
 	
 	
-		<h1>연락처 입력</h1>
 		<form method="post" action="addContact" enctype="multipart/form-data">
 
 		<table class="jjm494">
