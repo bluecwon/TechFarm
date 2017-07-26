@@ -13,7 +13,7 @@
     	var badColor = "#ff6666";
     	function checkId(){
     		var id=document.getElementById('id');
-    	}
+    	};
 		function checkPasswd(){ // 비밀번호 형식 및 일치여부 확인 메소드
 			 var pass1 = document.getElementById('pwd1'); 
 		     var pass2 = document.getElementById('pwd2'); 
@@ -27,7 +27,7 @@
 		     }else{
 		    	 message.style.color = goodColor;
 		    	 message.innerHTML = "가능한 비밀번호입니다."
-		     }
+		     };
 		     
 		     var message = document.getElementById('sid2');
 		     if(pass1.value == pass2.value){ 
@@ -37,9 +37,9 @@
 		            message.style.color = badColor; 
 		            message.innerHTML = "패스워드가 일치하지 않습니다. 확인해주세요!";
 		            return false;
-		     }
+		     };
 		     return true;
-		}
+		};
 		function checkBirthDay(){ // 생일의 신뢰성 향상 메소드
 			var year=document.getElementById('year');
 			var month=document.getElementById('month');
@@ -62,7 +62,7 @@
 			message.style.color = goodColor;
 	    	message.innerHTML = "입력 가능합니다."
 	    	return true;
-		}
+		};
 		
 		function get_LastDay(year,month){ // 해당 년도와 월을 입력받아 마지막 날을 리턴하는 메소드
 			var Last_Mon=new Array(31,29,31,30,31,30,31,31,30,31,30,31) 
@@ -76,7 +76,7 @@
 			   Last_Mon[1]=28; // 윤년일 경우 28일로 치환
 		   }
 		   return Last_Mon[month];
-		}
+		};
 		
 		function checkForm(){
 			if(member.id.value==""){
@@ -113,7 +113,7 @@
 			var email=member.email1.value+"@"+member.email2.value;
 			member.email.value=email;
 			return true;
-		}
+		};
 	</script>
 </head>
 <body>
@@ -128,8 +128,13 @@
 				<td><font size=5>회원가입</font></td>
 			</tr>
 			<tr>
-				<td>아이디<br><input id="id" type="text" name="id" value="${inputInfo.id}"><input type="button" value="중복체크" onclick="checkid()">
-				<br><form:errors path="inputInfo.id"/></td>
+				<td>
+					<form name="fff" action="idCheck123" method="post">
+						아이디<br><input id="id" type="text" name="id" value="${inputInfo.id}"/>
+						<input type="submit" value="중복체크"/>
+					</form>
+					<br><form:errors path="inputInfo.id"/>
+				</td>
 			</tr>
 			<tr>
 				<td>비밀번호<br><input id="pwd1" type="password" name="passwd" value="${inputInfo.passwd}" onblur="checkPasswd()"><br>
