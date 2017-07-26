@@ -178,20 +178,51 @@ public class BlogBoardController {
 		ModelAndView mav = new ModelAndView();
 		String mode = "view";
 		int no = ServletRequestUtils.getIntParameter(request, "no");
-		mav.setViewName("blog/listBoardMain");
 		session = request.getSession();
 		String upPath = session.getServletContext().getRealPath("/resources/upload");
 		boardDAO.updateReadcount(no);
 		Blog_BoardDTO dto = boardDAO.getBoard(no);
+		Blog_OptionDTO optionDTO = optionDAO.getBlog(dto.getId());
+		List<Blog_MakeBoardDTO> list = boardDAO.listBoardTitle(dto.getId());
+		session.setAttribute("optionDTO", optionDTO);
+		session.setAttribute("list", list);
 		
 		//reply
-		List<Blog_BoardReplyDTO> listReply = boardDAO.listReply(no);
+		int pageSize = 9; 
+		String pageNum = request.getParameter("pageNum");
+		if (pageNum == null){
+			pageNum = "1";
+		}
 		
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = currentPage * pageSize - (pageSize - 1);
+		int endRow = startRow + pageSize - 1;
+		int countRow = boardDAO.replyNumber(no);  
+		
+		if (endRow>countRow) endRow = countRow;
+		int number = countRow - (currentPage-1) * pageSize;
+		
+		List<Blog_BoardReplyDTO> listReply = boardDAO.listReply(no,startRow,endRow);		
+		
+		if (countRow>0) {
+			int pageCount = countRow/pageSize + (countRow%pageSize==0 ? 0 : 1);
+			int pageBlock = 3;
+			int startPage = (currentPage-1)/pageBlock * pageBlock + 1;
+			int endPage = startPage + pageBlock - 1;
+			if (endPage>pageCount) endPage = pageCount;			
+			mav.addObject("startPage", startPage);
+			mav.addObject("endPage", endPage);
+			mav.addObject("pageBlock", pageBlock);
+			mav.addObject("pageCount", pageCount);			
+		}
+		
+		mav.addObject("no",no);
 		mav.addObject("listReply",listReply);
 		mav.addObject("boardDTO",dto);
 		mav.addObject("title",dto.getTitle());
 		mav.addObject("mode",mode);
 		mav.addObject("upPath",upPath);
+		mav.setViewName("blog/listBoardMain");
 		return mav;
 		}	
 	
@@ -288,7 +319,7 @@ public class BlogBoardController {
 	  Blog_BoardReplyDTO dto = new Blog_BoardReplyDTO();
 	  
 	  String re_step_raw = request.getParameter("re_step");
-		String re_level_raw = request.getParameter("re_level");
+	  String re_level_raw = request.getParameter("re_level");
 	  int re_step = 0;
 	  int re_level = 0;
 	  

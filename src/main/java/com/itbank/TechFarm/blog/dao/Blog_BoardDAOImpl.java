@@ -94,9 +94,9 @@ public class Blog_BoardDAOImpl implements Blog_BoardDAO {
 	}
 
 	@Override
-	public List listReply(int no) {
+	public List listReply(int no,int startRow,int endRow) {
 		// TODO Auto-generated method stub
-		return BlogMapper.listReply(no);
+		return BlogMapper.listReply(no,startRow,endRow);
 	}
 
 	@Override
@@ -110,5 +110,13 @@ public class Blog_BoardDAOImpl implements Blog_BoardDAO {
 		// TODO Auto-generated method stub
 		return BlogMapper.minusReplyNumber(no);
 	}
+
+	@Override
+	public int replyNumber(int no) {
+		// TODO Auto-generated method stub
+		return BlogMapper.replyNumber(no);
+	}
+
+	
 
 }

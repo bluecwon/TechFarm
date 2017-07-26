@@ -1,6 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" type="text/css" href="resources/css/myBlog.css">
+<script src="resources/js/jquery-1.9.0.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var subMenuCount = 0;
+				$('div.showReply').mouseup(function(e){
+					if(subMenuCount==0){
+						if(e.which=='1'){
+							$('table.listReply').stop().slideDown(200);
+						}
+						subMenuCount = 1;
+					} else {
+						if(e.which=='1'){
+							$('table.listReply').stop().slideUp(200);
+						}
+						subMenuCount = 0;
+					}
+				});
+				
+				var subMenuCount2 = 0;
+				$('td.listreplytd').mouseup(function(e){
+					if(subMenuCount2==0){
+						if(e.which=='1'){
+							$(this).find('span.rereply').stop().slideDown(200);
+						}
+						subMenuCount2 = 1;
+					} else {
+						if(e.which=='3'){
+							$(this).find('span.rereply').stop().slideUp(200);
+						}
+						subMenuCount2 = 0;
+					}
+				});
+			});
+</script>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <td height="700px" width="60%" valign="top" align="center">
 			<hr width="95%">
@@ -67,10 +102,10 @@
 						</tr>
 						<tr>
 							<td colspan="3">
-							<div align="left">
+							<div align="left" class="showReply">
 							&nbsp;&nbsp;&nbsp;&nbsp;댓글보기(댓글수)
 							</div>
-							<table id="listReply">
+							<table class="listReply">
 							<c:choose>
 							<c:when test="${listReply.size()==0}">
 								<tr>
@@ -80,7 +115,7 @@
 							<c:otherwise>
 								<c:forEach var="listReply" items="${listReply}">
 								<tr>
-									<td>
+									<td class="listreplytd">
 									<c:if test="${listReply.re_level==1}">
 									<img src="" width="100" height="80" align="left">
 									</c:if>
@@ -89,7 +124,7 @@
 									<img src="resources/images/guest.png" width="50" height="40">
 									</c:when>
 									<c:otherwise>
-									<img src="resources/upload/${sessionScope.memberDTO.id}/${listReply.profile}" width="50" height="50" align="left">
+									<img src="resources/upload/${optionDTO.id}/${listReply.profile}" width="50" height="50" align="left">
 									</c:otherwise>
 									</c:choose>
 									${listReply.id}  <span id="regdate">${listReply.reg_date}</span>
@@ -97,13 +132,14 @@
 									${listReply.repcontent}<br>
 									<c:choose>
 									<c:when test="${listReply.id==sessionScope.memberDTO.id}">
-									댓글 &nbsp;<a href="javascript:checkDelReply('${listReply.replyno}','${listReply.no}');">삭제</a>
+									<span class="insertrereply">댓글</span> &nbsp;<a href="javascript:checkDelReply('${listReply.replyno}','${listReply.no}');">삭제</a>
 									</c:when>
 									<c:otherwise>
-									댓글
+									<span class="insertrereply">댓글</span>
 									</c:otherwise>
 									</c:choose>
 									<br>
+									<span  class="rereply">
 									<form action="insertReply">
 									<input type="hidden" name="re_step" value="${listReply.re_step}">
 									<input type="hidden" name="no" value="${listReply.no}">
@@ -111,9 +147,24 @@
 									<input type="hidden" name="mode" value="rereply">
 									<input type="text" name="repcontent" maxlength="100">
 									<input type="submit" value="등록">
-									</form>	
+									</form>
+									</span>
+									</td>	
 								</tr>
 								</c:forEach>
+								<tr>
+									<td align="center">
+									<c:if test="${startPage > pageBlock}">
+									[<a href="viewBoard?pageNum=${startPage-pageBlock}&no=${no}">이전</a>]
+									</c:if>
+									<c:forEach var="i" begin="${startPage}" end="${endPage}">
+									[<a href="viewBoard?pageNum=${i}&no=${no}">${i}</a>]
+									</c:forEach>
+									<c:if test="${endPage < pageCount}">
+									[<a href="viewBoard?pageNum=${startPage+pageBlock}&no=${no}">다음</a>]
+									</c:if>
+									</td>
+								</tr>
 							</c:otherwise>
 							</c:choose>
 							</table>

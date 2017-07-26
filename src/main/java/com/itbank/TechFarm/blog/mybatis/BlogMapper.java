@@ -1,7 +1,9 @@
 package com.itbank.TechFarm.blog.mybatis;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -194,9 +196,20 @@ public class BlogMapper {
 	  return res;
   }
   
-  public static List<Blog_BoardReplyDTO> listReply(int no){
+  /*public static List<Blog_BoardReplyDTO> listReply(int no){
 	  SqlSession session = sqlMapper.openSession();
 	  List<Blog_BoardReplyDTO> list = (List)session.selectList("listReply",no);
+	  session.close();
+	  return list;
+  }*/
+  
+  public static List<Blog_BoardReplyDTO> listReply(int no,int startRow,int endRow){
+	  SqlSession session = sqlMapper.openSession();
+	  Map<String, Object> parameters = new HashMap<String, Object>();
+	  parameters.put("no", no);
+	  parameters.put("startRow", startRow);
+	  parameters.put("endRow", endRow);
+	  List<Blog_BoardReplyDTO> list = (List)session.selectList("listReply",parameters);
 	  session.close();
 	  return list;
   }
@@ -217,5 +230,60 @@ public class BlogMapper {
 	  return res;
   }
   
+  public static int replyNumber(int no){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.selectOne("replyNumber", no);
+	  session.close();
+	  return res;
+  }
+   
+  public static List<Blog_BoardDTO> listNewBoard(){
+	  SqlSession session = sqlMapper.openSession();
+	  List<Blog_BoardDTO> list = (List)session.selectList("listNewBoard");
+	  session.close();
+	  return list;
+  }
+  
+  public static List<Blog_BoardDTO> listHotBoard(){
+	  SqlSession session = sqlMapper.openSession();
+	  List<Blog_BoardDTO> list = (List)session.selectList("listHotBoard");
+	  session.close();
+	  return list;
+  }
+  
+  public static List<String> listHotProfile(){
+	  SqlSession session = sqlMapper.openSession();
+	  List<String> list = (List)session.selectList("listHotProfile");
+	  session.close();
+	  return list;
+  }
+  
+  public static List<String> listNewProfile(){
+	  SqlSession session = sqlMapper.openSession();
+	  List<String> list = (List)session.selectList("listNewProfile");
+	  session.close();
+	  return list;
+  }
+  
+  public static List<Blog_OptionDTO> listHotBlog(){
+	  SqlSession session = sqlMapper.openSession();
+	  List<Blog_OptionDTO> list = (List)session.selectList("listHotBlog");
+	  session.close();
+	  return list;
+  }
+  
+  public static List<Blog_BoardDTO> listAreaBoard(int area){
+	  SqlSession session = sqlMapper.openSession();
+	  List<Blog_BoardDTO> list = (List)session.selectList("listAreaBoard",area);
+	  session.close();
+	  return list;
+  }
+  
+  public static List<String> listAreaProfile(int area){
+	  SqlSession session = sqlMapper.openSession();
+	  List<String> list = (List)session.selectList("listAreaProfile",area);
+	  session.close();
+	  return list;
+  }
   
 }

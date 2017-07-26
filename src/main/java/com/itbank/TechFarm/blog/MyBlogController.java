@@ -194,14 +194,16 @@ private Blog_OptionDTO getBlogOption(HttpServletRequest arg0) throws Exception{
 			HttpSession session = request.getSession();
 			String delpfPath = session.getServletContext().getRealPath("/resources/upload/"+id);
 			File delfile = new File(delpfPath);
-			File[] innerFilelist = delfile.listFiles();
-			
-			for(File innerFile : innerFilelist){
-				innerFile.delete();
+			if(delfile.exists()){
+				File[] innerFilelist = delfile.listFiles();
+				for(File innerFile : innerFilelist){
+					innerFile.delete();
+				}
+				delfile.delete();
+			}else{
 			}
-			delfile.delete();
 		}
-		return new ModelAndView("redirect:blogStart.blog");
+		return new ModelAndView("redirect:blogStart");
 	}
 	
 	@RequestMapping(value="/makeBoardTitle", method=RequestMethod.GET)

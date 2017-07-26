@@ -3,8 +3,11 @@ package com.itbank.TechFarm.blog;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.sql.Array;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +27,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itbank.TechFarm.blog.dao.Blog_BoardDAO;
 import com.itbank.TechFarm.blog.dao.Blog_OptionDAO;
+import com.itbank.TechFarm.blog.dto.Blog_BoardDTO;
 import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
 import com.itbank.TechFarm.login.member.MemberDTO;
 
@@ -42,13 +47,43 @@ public class BlogMainController {
 	
 	@Autowired 
 	private Blog_OptionDAO optionDAO;
+	@Autowired
+	private Blog_BoardDAO boardDAO;
 	
 	
 	@RequestMapping(value = "/blogmain", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public  ModelAndView home(Locale locale, Model model,HttpServletRequest request) {
 		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		return "bloghome";
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
+		String mode = null;
+		if(memberDTO != null){
+			Blog_OptionDTO optionDTO =  optionDAO.getBlog(memberDTO.getId());
+			if(optionDTO != null){
+				 mode = "member";
+				 mav.setViewName("blogmain/index");
+				 List<Blog_BoardDTO> newlist = optionDAO.listNewBoard();
+				 List<Blog_BoardDTO> hotlist = optionDAO.listHotBoard();
+				 List<String> hotprofile = optionDAO.listHotProfile();
+				 List<String> newprofile = optionDAO.listNewProfile();
+				 List<Blog_OptionDTO> hotblog = optionDAO.listHotBlog();
+				 session.setAttribute("newlist", newlist);
+				 session.setAttribute("hotlist", hotlist);
+				 session.setAttribute("optionDTO", optionDTO);
+				 session.setAttribute("hotprofile", hotprofile);
+				 session.setAttribute("newprofile", newprofile);
+				 session.setAttribute("hotblog", hotblog);
+			}else{
+				 mode = "membernoblog";
+				 mav.setViewName("blogmain/bloghome");
+			}
+		}else{
+			mode = "guest";
+			mav.setViewName("blogmain/bloghome");
+		}
+		session.setAttribute("membermode", mode);
+		return mav;
 	}
 	
 	@RequestMapping(value="/blogStart")
@@ -57,13 +92,17 @@ public class BlogMainController {
 		mav.setViewName("blogmain/index");
 		HttpSession session = request.getSession();
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
+		List<Blog_BoardDTO> newlist = optionDAO.listNewBoard();
+		List<Blog_BoardDTO> hotlist = optionDAO.listHotBoard();
+		List<String> hotprofile = optionDAO.listHotProfile();
+		List<String> newprofile = optionDAO.listNewProfile();
+		List<Blog_OptionDTO> hotblog = optionDAO.listHotBlog();
 		String id = null;
 		String mode = null;
 		if(memberDTO != null){
 			mode="member";
 			id= memberDTO.getId();
 			Blog_OptionDTO optionDTO =  optionDAO.getBlog(id);
-			
 			if(optionDTO == null){
 				mode = "membernoblog";
 			}
@@ -72,6 +111,11 @@ public class BlogMainController {
 		}else{
 			mode="guest";
 		}
+		session.setAttribute("hotblog", hotblog);
+		session.setAttribute("newprofile", newprofile);
+		session.setAttribute("hotprofile", hotprofile);
+		session.setAttribute("hotlist", hotlist);
+		session.setAttribute("newlist", newlist);
 		session.setAttribute("membermode", mode);
 		return mav;
 	}
@@ -139,7 +183,12 @@ public class BlogMainController {
 		Blog_OptionDTO dto = getBlogOption(request);
 		int res = optionDAO.makeBlog(dto);
 		HttpSession session = request.getSession();
+		String basicPath = session.getServletContext().getRealPath("/resources/upload");
 		String upPath = session.getServletContext().getRealPath("/resources/upload/"+dto.getId());
+		File basicfolder = new File(basicPath);
+		if(!basicfolder.exists()){
+			basicfolder.mkdirs();
+		}
 		File mkfolder = new File(upPath);
 		if(!mkfolder.exists()){
 			mkfolder.mkdirs();
@@ -229,5 +278,27 @@ public class BlogMainController {
 	public ModelAndView blogMakeSuccess(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		return new ModelAndView("blogmain/makeBlogSuccess");
 	}
+	
+	@RequestMapping(value="/areasearch")
+	public ModelAndView areaSearch(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("blogmain/areaBoard");
+		HttpSession session = request.getSession();
+		String[] areaArr = {"문학·책","영화","미술·디자인","공연·전시","음악","드라마","스타·연예인","만화·애니","방송",
+				"일상·생각","육아·결혼","애완·반려동물","좋은글·이미지","패션·미용","인테리어·DIY","상품리뷰","원예·재배",
+				"게임","스포츠","사진","자동차","취미","국내여행","세계여행","맛집",
+				"IT·컴퓨터","사회·정치","건강·의학","비즈니스·경제","어학·외국어","교육·학문"}; 
+ 	
+		int area = ServletRequestUtils.getIntParameter(request, "area");
+		String areamode = areaArr[area];
+		List<Blog_BoardDTO> arealist = optionDAO.listAreaBoard(area);
+		List<String> areaprofile = optionDAO.listAreaProfile(area);
+	
+		mav.addObject("arealist",arealist);
+		session.setAttribute("areamode", areamode);
+		session.setAttribute("areaprofile", areaprofile);
+		return mav;
+	}
+	
 	
 }
