@@ -109,6 +109,13 @@ public class BlogMapper {
 	  return dto;
   }
   
+  public static List<Blog_BoardDTO> listMyBoard(String id){
+	  SqlSession session = sqlMapper.openSession();
+	  List<Blog_BoardDTO> list = session.selectList("listMyBoard", id);
+	  session.close();
+	  return list;
+  }
+  
   public static int editBoardT(Blog_MakeBoardDTO dto){
 	  SqlSession session = sqlMapper.openSession();
 	  int res = session.update("editBoardT",dto);

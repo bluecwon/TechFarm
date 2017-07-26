@@ -117,6 +117,12 @@ public class Blog_BoardDAOImpl implements Blog_BoardDAO {
 		return BlogMapper.replyNumber(no);
 	}
 
+	@Override
+	public List listMyBoard(String id) {
+		// TODO Auto-generated method stub
+		return BlogMapper.listMyBoard(id);
+	}
+
 	
 
 }

@@ -71,6 +71,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   select * from blog_board where no=#{no}
   </select>
   
+  <select resultType="BlogBoardDTO" id="listMyBoard" parameterType="String">
+  select * from blog_board where id=#{id} order by no desc limit 5
+  </select>
+  
   <update id="updateReadcount" parameterType="int">	
   update blog_board set readcount = readcount + 1 where no=#{no}
   </update>
