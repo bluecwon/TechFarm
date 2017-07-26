@@ -145,7 +145,7 @@
 	</head>
 	<body lang="en" onContextmenu="return false">
 	
-<div id="viewtitle">TF SNS</div>
+<div id="viewtitle">TF Plus</div>
 <div id="header1" align="right">
 			<div class="topnav">
 	  			<a rel="tooltip" title="메뉴"><img id="menu1" src="resources/home/imgs/menu_white.png" width="25" height="25"></a>&nbsp&nbsp&nbsp&nbsp

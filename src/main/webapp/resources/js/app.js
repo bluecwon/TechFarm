@@ -194,7 +194,7 @@ io.sockets.on('connection', function(socket) {
 
             // 응답 메시지 전송
             sendResponse(socket, 'login', '200', '로그인되었습니다.');
-            idList=login_ids.key();
+            idList=login_ids.keys();
             /*for(i=0;i<idList.length;i++){
             	if(idList[i]===login.id){
             		idList.remove(i);

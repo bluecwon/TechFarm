@@ -9,10 +9,16 @@
 <link type="text/css" href="resources/login/style_login.css" rel="stylesheet"/>
 <title>Welcome to TF</title>
 	<script type="text/javascript">
+		var sysmsg='${msg}';
+		var ckid=document.getElementById('id');
+		if(sysmsg != ''){
+			alert('${msg}');
+		}
 		var goodColor = "#66cc66";
     	var badColor = "#ff6666";
     	function checkId(){
     		var id=document.getElementById('id');
+    		location.href="idCheck123?id="+id.value;
     	};
 		function checkPasswd(){ // 비밀번호 형식 및 일치여부 확인 메소드
 			 var pass1 = document.getElementById('pwd1'); 
@@ -129,10 +135,8 @@
 			</tr>
 			<tr>
 				<td>
-					<form name="fff" action="idCheck123" method="post">
 						아이디<br><input id="id" type="text" name="id" value="${inputInfo.id}"/>
-						<input type="submit" value="중복체크"/>
-					</form>
+						<input type="button" value="중복체크" onclick="checkId();"/>
 					<br><form:errors path="inputInfo.id"/>
 				</td>
 			</tr>

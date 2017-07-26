@@ -172,16 +172,19 @@ public class LoginController {
 	
 	@RequestMapping(value="/idCheck123")
 	public String idCheck123(HttpServletRequest request, Model model) {
-		System.out.println("dwdqwdqwdqwd");
 		String id = request.getParameter("id");
-		MemberDTO res = memberDAO.getLogin(id); System.out.println("1=="+res.getEmail());
+		MemberDTO res = memberDAO.getLogin(id);
 		if(res==null){
+			MemberDTO inputInfo=new MemberDTO();
+			inputInfo.setId(id);
+			model.addAttribute("inputInfo", inputInfo);
 			model.addAttribute("msg","사용할수 있는 아이디입니다.");
+			model.addAttribute("check", "true");
 		} else if(res!=null){
 			model.addAttribute("msg","중복이 되는 아이디입니다.");
+			model.addAttribute("check", "false");
 		}
-		model.addAttribute("url","createAccount");
-		return "login/message";
+		return "login/createAccount";
 	}
 	
 }
