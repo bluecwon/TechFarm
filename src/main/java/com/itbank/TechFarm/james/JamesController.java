@@ -29,14 +29,13 @@ public class JamesController {
 			folder=request.getParameter("folder");
 		}
 		dto.setFolder(folder);
-		List<JamesDTO> listJames = jamesDAO.listJames(dto);
-		
+
 		int count =0;
 		pageMaker.setPage(pageMaker.getPage());
-		count = listJames.size();
-		pageMaker.setCount(count);
-		model.addAttribute("pageMaker", pageMaker);
+		pageMaker.setCount(jamesDAO.getCountJames(dto));
 		
+		List<JamesDTO> listJames = jamesDAO.listJames(dto, pageMaker);
+		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("listJames", listJames);
 		return "james/listJames";
 	}

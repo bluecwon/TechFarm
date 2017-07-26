@@ -36,6 +36,7 @@
 	<bean class="com.itbank.TechFarm.james.JamesDAOImpl" id="jamesDAO"/>
 	<bean class="com.itbank.TechFarm.james.JamesUser" id="jamesUser"/>
 	<bean class="com.itbank.TechFarm.james.JamesPro" id="jamesPro"/>
+	<bean class="com.itbank.TechFarm.james.JamesContent" id="jamesContent"/>
 	<bean class="com.itbank.TechFarm.james.MailConfig" id="mailConfig"/>
 	<bean class="com.itbank.TechFarm.james.SendIdentify" id="sendIdentify"/>
 	<context:property-placeholder location="classpath:com/itbank/TechFarm/host.properties"/>

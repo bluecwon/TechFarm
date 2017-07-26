@@ -63,7 +63,8 @@
 				<li class='<c:out value="${idx == pageMaker.page?'current':''}"/>'> 
 					<a href='listJames?page=${idx}'>${idx}</a> 
 				</li> 
-			</c:forEach> <c:if test="${pageMaker.next }"> 
+			</c:forEach> 
+			<c:if test="${pageMaker.next }"> 
 				<li><a href='listJames?page=${pageMaker.end +1}'>다음</a></li> 
 			</c:if> 
 		</ul>
