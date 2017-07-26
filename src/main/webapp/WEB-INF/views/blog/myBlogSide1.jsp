@@ -5,7 +5,9 @@
 <td rowspan="3"  height="100%" width="20%" valign="top" align="center" class="sidebar1">
 			<div id="sidebar1">
 				<div align="right">
+				<c:if test="${optionDTO.id.equals(sessionScope.memberDTO.id)}">
 				<a href="editBlog?mode=profile&id=${optionDTO.id}">프로필 관리</a>&nbsp;&nbsp;<br>
+				</c:if>
 				</div>
 				<div id=profile>
 				<img src="resources/upload/${optionDTO.id}/${optionDTO.profile}" width="300px" height="300px"><br>
@@ -20,7 +22,9 @@
 				</div>
 				<div id="board">
 					<div align="right">
+					<c:if test="${optionDTO.id.equals(sessionScope.memberDTO.id)}">
 					<a href="editBlog?mode=board&id=${optionDTO.id}">게시판 관리</a>&nbsp;&nbsp;<br><br>
+					</c:if>
 					</div>
 					<c:forEach var="dto" items="${list}">
 					<c:if test="${dto.sideno % 2 == 1}">

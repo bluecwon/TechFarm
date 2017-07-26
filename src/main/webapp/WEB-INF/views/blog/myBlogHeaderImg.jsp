@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <tr>
-			<td height="500px" width="60%" align="center" class="header" background="resources/upload/${optionDTO.id}/${optionDTO.header}">
+			<td height="600px" width="60%" align="center">
+			<img src="resources/upload/${optionDTO.id}/${optionDTO.header}"  style="position:relative; width:100%; height:100%; border:0;">
 			</td>
 </tr>
