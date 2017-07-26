@@ -22,6 +22,7 @@ import com.itbank.TechFarm.james.JamesUser;
 import com.itbank.TechFarm.james.SendIdentify;
 import com.itbank.TechFarm.login.member.MemberDAO;
 import com.itbank.TechFarm.login.member.MemberDTO;
+import com.itbank.TechFarm.login.security.PasswordSecurity;
 import com.itbank.TechFarm.tftube.dao.MyChannelDAO;
 
 
@@ -36,6 +37,9 @@ public class LoginController {
 	
 	@Autowired
 	private SendIdentify sendIdentify;
+	
+	@Autowired
+	private PasswordSecurity passwordSecurity;
 	
 	/*@Autowired
 	private MyChannelDAO mychannelDAO;*/
@@ -57,7 +61,7 @@ public class LoginController {
 	public String login2(Model model,HttpServletRequest request, HttpSession session) throws IOException {
 		String passwd=request.getParameter("passwd");
 		MemberDTO dto=(MemberDTO)session.getAttribute("loginDTO");
-		if(dto.getPasswd().equals(passwd)){
+		if(passwordSecurity.passwordConfirm(passwd, dto.getPasswd())){
 			MemberDTO info=memberDAO.getMember(dto.getId());
 			session.removeAttribute("loginDTO");
 			session.setAttribute("memberDTO", info);			
@@ -85,9 +89,12 @@ public class LoginController {
 		if(errors.hasErrors()){
 			return "login/createAccount";
 		}
+		String rawPassword = dto.getPasswd();
+		String encodedPassword = passwordSecurity.createPassword(dto.getPasswd());
+		dto.setPasswd(encodedPassword);
 		int res=memberDAO.insertMember(dto);
 		if(res==1){
-			jamesUser.addUser(dto.getId(), dto.getPasswd());
+			jamesUser.addUser(dto.getId(), rawPassword);
 			MemberDTO getdto=memberDAO.getMember(dto.getId());
 			dto.setNo(getdto.getNo());
 			model.addAttribute("msg", "회원가입을 축하합니다.");
