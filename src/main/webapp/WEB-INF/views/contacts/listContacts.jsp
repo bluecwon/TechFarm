@@ -5,10 +5,6 @@
 	<div class="left">
 		<div class="left_content1">
 			<div align="center">
-			
-				<span data-tooltip-text="연락처 등록">
-					<a href="addContact"><img src="resources/contacts/images/add.png" style="max-width: 50px; height: auto;"></a>
-				</span>
 				<table class="jjm494">
 					<c:choose>
 						<c:when test="${listContacts.size()==0 }">

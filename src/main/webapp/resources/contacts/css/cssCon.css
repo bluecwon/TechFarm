@@ -156,11 +156,9 @@ a:hover,a:active,a:focus{
 	text-decoration:none;
 }
 #wrap{
-	float:left;
 	width:100%;
 }
 .gnb{
-	float:left;
 	width:100%;
 	height:50px;
 	background:#fbfbfb;
@@ -173,42 +171,35 @@ a:hover,a:active,a:focus{
 	margin:5px auto;
 }
 .gnb_center ul{
-	float:left;
 }
 .gnb_center ul li{
-	float:left;
 	margin-right:10px;
 }
 #container{
-	width:1000px;
+	width:100%;
 	margin:0 auto;
 }
 #header1{
-	float:left;
-	width:1000px;
+	width:100%;
 	_border:1px solid blue;
 }
 #header1 h1{
-	float:left;
 	margin-left:400px;
 	color:#00bf12;
 	font-size:40px;
 }
 .menu{
-	float:left;
-	width:1000px;
+	width:100%;
 	height:40px;
 	background:#43b215;
 }
 .left{
-	float:left;
-	width:1000px;
+	width:100%;
 	height:700px;
 	_border:1px solid blue;
 }
 .left_content1{
-	float:left;
-	width:1000px;
+	width:100%;
 	height:700px;
 	margin-top:10px;
 	background:#edeef0;

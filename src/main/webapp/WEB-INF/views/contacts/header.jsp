@@ -5,7 +5,8 @@
 <head>
 	<meta charset="utf-8"/>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<link rel="stylesheet" type="text/css" href="resources/contacts/css/cssCon.css" > 
+	<link rel="stylesheet" type="text/css" href="resources/contacts/css/cssCon.css" >
+	<link rel="stylesheet" type="text/css" href="resources/contacts/css/tfcontacts.css" > 
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -98,12 +99,28 @@
 	<div id="wrap">
 		<div class="gnb">
 			<div class="gnb_center">
+			
 			</div>
 		</div>
-		
 		<div id="container">
+		</div>
 		<div id="header1">
-			<h1>연락처 모음</h1>
+		<table>
+			<tr>
+				<td>
+					<div align="left">
+						<span data-tooltip-text="연락처 등록">
+							<a href="addContact"><img src="resources/contacts/images/add.png" style="max-width: 50px; height: auto;"></a>
+						</span>
+					</div>
+				</td>
+				<td>
+					<h1>연락처</h1>
+				</td>
+			</tr>
+		</table>
+
+
 		</div>
 		<div class="menu">
 		</div>
