@@ -7,9 +7,22 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:annotation-config/>
-	<bean id="memberDAO" class="com.itbank.TechFarm.login.member.MemberDAOImpl" />
-	<bean id="multipartResolver"
-	class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	<bean class="com.itbank.TechFarm.login.member.MemberDAOImpl" id="memberDAO"/>
+	<bean class="com.itbank.TechFarm.login.security.PasswordSecurity" id="passwordSecurity"/>
+	<bean class="com.itbank.TechFarm.search.SearchNaver" id="sn"/>
+
+	<!-- start tfPlus DAO -->
+	<bean class="com.itbank.TechFarm.tfPlusDAO.NewsProfileDAOImpl" id="newsProfileDAO"/>
+	<bean class="com.itbank.TechFarm.tfPlusDAO.MemberProfileDAOImpl" id="memberProfileDAO"/>
+	<bean class="com.itbank.TechFarm.tfPlusDAO.MyProfileDAOImpl" id="myProfileDAO"/>
+	<bean class="com.itbank.TechFarm.tfPlusDAO.MyNoticeDAOImpl" id="myNoticeDAO"/>
+	<!-- end tfPlus DAO -->
+	
+	<!-- tfblog DAO-->
+	<bean class="com.itbank.TechFarm.blog.dao.Blog_OptionDAOImpl" id="Blog_OptionDAO"/>
+	<bean class="com.itbank.TechFarm.blog.dao.Blog_BoardDAOImpl" id="Blog_BoardDAO"/>
+	
+	<!-- tftube -->
 	<bean id="replyDAO" class="com.itbank.TechFarm.tftube.dao.ReplyDAOImpl"/>
 	<bean id="videoDAO" class="com.itbank.TechFarm.tftube.dao.VideoDAOImpl"/>
 	<bean id="recentvideoDAO" class="com.itbank.TechFarm.tftube.dao.RecentVideoDAOImpl"/>
@@ -17,6 +30,36 @@
 	<bean id="subingDAO" class="com.itbank.TechFarm.tftube.dao.SubingDAOImpl"/>	
 	<bean id="likevideoDAO" class="com.itbank.TechFarm.tftube.dao.LikeVideoDAOImpl"/>
 	<bean id="unlikevideoDAO" class="com.itbank.TechFarm.tftube.dao.UnlikeVideoDAOImpl"/>    
-	<bean id="searchDAO" class="com.itbank.TechFarm.tftube.dao.SearchDAOImpl"/>
-		
+	<bean id="searchDAO" class="com.itbank.TechFarm.tftube.dao.SearchTftubeDAOImpl"/>
+	
+	
+	
+	<!-- tfcontacts -->
+	<bean class="com.itbank.TechFarm.contacts.ContactsDAOImpl" id="contactsDAO"/>
+	
+	<!-- james -->
+	<bean class="com.itbank.TechFarm.james.JamesDAOImpl" id="jamesDAO"/>
+	<bean class="com.itbank.TechFarm.james.JamesUser" id="jamesUser"/>
+	<bean class="com.itbank.TechFarm.james.JamesPro" id="jamesPro"/>
+	<bean class="com.itbank.TechFarm.james.JamesContent" id="jamesContent"/>
+	<bean class="com.itbank.TechFarm.james.MailConfig" id="mailConfig"/>
+	<bean class="com.itbank.TechFarm.james.SendIdentify" id="sendIdentify"/>
+	<context:property-placeholder location="classpath:com/itbank/TechFarm/host.properties"/>
+	
+	<!-- start tfNote DAO -->
+	<bean class="com.itbank.TechFarm.tfNoteDAO.NoteDAOImpl" id="noteDAO"/>
+	<!-- end tfNote DAO -->
+	
+	<!-- messagesource -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>message.error</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+
 </beans>

@@ -9,9 +9,6 @@
 insert into tftube_mychannel(member_no,channel) values(#{member_no},#{channel})
 </insert>
 
-
-
-
 <select id="getChannel" parameterType="int" resultType="mychannelDTO">
 select * from tftube_mychannel where member_no=#{no}
 </select>

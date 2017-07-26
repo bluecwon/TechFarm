@@ -52,6 +52,7 @@ public class CategoryController {
 		
 		
 		List<VideoDTO> clist=null;
+
 		int count=1;
 		
 		for(int i=0;i<category_array.length;i++){

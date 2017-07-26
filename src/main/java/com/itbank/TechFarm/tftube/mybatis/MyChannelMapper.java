@@ -26,6 +26,7 @@ public class MyChannelMapper {
 		}
 	}
 	
+
 	public static int createChannel(MyChannelDTO dto){
 		SqlSession session=sqlMapper.openSession();
 		int res=session.insert("createChannel",dto);
@@ -34,13 +35,17 @@ public class MyChannelMapper {
 		return res;
 		
 	}
-
 	
 	public static MyChannelDTO getChannel(int member_no){
 		SqlSession session=sqlMapper.openSession();
 		MyChannelDTO list=session.selectOne("getChannel",member_no);
 		session.close();
 		return list;
+
 	}
+
+	
+	
+
 
 }

@@ -11,7 +11,7 @@
   	<typeAlias alias = "recentvideoDTO" type="com.itbank.TechFarm.tftube.dto.RecentVideoDTO"/>
   	<typeAlias alias = "replyformat" type="com.itbank.TechFarm.tftube.dto.ReplyDTOFormat"/>
   	<typeAlias alias = "mychannelDTO" type="com.itbank.TechFarm.tftube.dto.MyChannelDTO"/>
-  	<typeAlias alias = "subingDTO" type="com.itbank.TechFarm.tftube.dto.SubingDTO"/>  	
+	<typeAlias alias = "subingDTO" type="com.itbank.TechFarm.tftube.dto.SubingDTO"/>  	
   	<typeAlias alias = "MemberDTO" type="com.itbank.TechFarm.login.member.MemberDTO"/>
   	<typeAlias alias = "video_recentvideoDTO" type="com.itbank.TechFarm.tftube.dto.Video_RecentVideoDTO"/>
   	<typeAlias alias = "likevideoDTO" type="com.itbank.TechFarm.tftube.dto.LikeVideoDTO"/>

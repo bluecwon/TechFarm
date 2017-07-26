@@ -7,4 +7,8 @@ public interface MemberDAO {
 	public MemberDTO getLogin(String id);
 	public MemberDTO getMember(String id);
 	public MemberDTO getMember_by_no(int no);
+	public int editMember(MemberDTO dto);
+	public int editPw(MemberDTO dto);
+	public int deleteMember(int no);
+	public MemberDTO searchId(String email);
 }

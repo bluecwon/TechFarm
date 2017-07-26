@@ -3,6 +3,4 @@
 .project
 .springBeans
 target
-*.mp4
-
-
+src/main/resources/com/itbank/techfarm/db.properties

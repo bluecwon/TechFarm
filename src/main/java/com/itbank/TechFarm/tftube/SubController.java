@@ -97,9 +97,9 @@ public class SubController {
 				if(subing_member_no_raw!=null&&mode.equals("injection")){//구독 버튼을 눌렀을때
 					int subing_member_no=Integer.parseInt(subing_member_no_raw);
 				sidto=new SubingDTO();		
-				String cu_channel=(String)mychannelDAO.getChannel(cu_member.getNo()).getChannel();//현재 로그인한 사람 정보,채널		
-				sidto.setChannel(cu_channel);//로그인 한 사람 채널
-				sidto.setMember_no(cu_member.getNo());	//현재 로그인한 사람 회원 번호
+/*				String cu_channel=(String)mychannelDAO.getChannel(cu_member.getNo()).getChannel();//현재 로그인한 사람 정보,채널		
+*/				/*sidto.setChannel(cu_channel);//로그인 한 사람 채널
+*/				sidto.setMember_no(cu_member.getNo());	//현재 로그인한 사람 회원 번호
 				sidto.setSubing_member_no(subing_member_no);//비디오 작성자	
 				//다 읽어보진 않았지만 아마도 피구독 구독 값 설정중
 				//sddto.setChannel(vdto.getChannel());

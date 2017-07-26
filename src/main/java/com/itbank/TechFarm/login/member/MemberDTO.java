@@ -1,16 +1,43 @@
 package com.itbank.TechFarm.login.member;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class MemberDTO {
 	private int no;
+	@NotEmpty
+	@Length(min=4, max=15)
 	private String id;
+	@NotEmpty
+	@Pattern(regexp="^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,}$")
 	private String passwd;
+	@NotEmpty
 	private String name;
+	@NotEmpty
+	private String email1;
+	@NotEmpty
+	private String email2;
+	@Pattern(regexp="^(?=.*[@])(?=.*[.]).{6,}$")
 	private String email;
+	@NotNull
+	@Min(1900)
+	@Max(2016)
 	private int birthday_year;
+	@NotNull
+	@Min(1)
+	@Max(12)
 	private int birthday_month;
+	@NotNull
+	@Min(1)
+	@Max(31)
 	private int birthday_day;
 	private int sex;
-	private String joindate;	
+	private String joindate;
 	public int getNo() {
 		return no;
 	}
@@ -35,13 +62,24 @@ public class MemberDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getEmail1() {
+		return email1;
+	}
+	public void setEmail1(String email1) {
+		this.email1 = email1;
+	}
+	public String getEmail2() {
+		return email2;
+	}
+	public void setEmail2(String email2) {
+		this.email2 = email2;
+	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public int getBirthday_year() {
 		return birthday_year;
 	}

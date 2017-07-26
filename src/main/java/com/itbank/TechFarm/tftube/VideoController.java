@@ -537,7 +537,7 @@ public class VideoController {
 		
 		String req_subing_status_raw=arg0.getParameter("subing_status");
 		int req_subing_status=0;//initialize(check)
-		String channel=mychannelDAO.getChannel(member_no).getChannel();
+		/*String channel=mychannelDAO.getChannel(member_no).getChannel();*/
 		//버튼을 누르지 않으면 구독 구독중 실행 하지 않는다.
 		if(req_subing_status_raw!=null){
 		req_subing_status=Integer.parseInt(req_subing_status_raw);
@@ -545,7 +545,7 @@ public class VideoController {
 		SubingDTO sidto=new SubingDTO();
 		
 
-		sidto.setChannel(channel);
+		/*sidto.setChannel(channel);*/
 		sidto.setMember_no(member_no);
 		sidto.setSubing_member_no(vdto.getMember_no());
 	

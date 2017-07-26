@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<link type="text/css" href="resources/login/style.css" rel="stylesheet"/>
+<link type="text/css" href="resources/login/style_login.css" rel="stylesheet"/>
 <title>Login here</title>
 </head>
 <body>
@@ -22,7 +22,10 @@
 			</tr>
 			<tr>
 				<form action="login" method="post">
-				<td><input class="idpass" type="text" name="id"></td>
+				<td><input class="idpass" type="text" name="id" autofocus></td>
+				<tr>
+				<td><font color="#004080"><a href="searchId">아이디가 기억 안나시나요?</a></font></td>
+			</tr>
 			</tr>
 			</c:if>
 			<c:if test="${cid==2}">
@@ -36,7 +39,7 @@
 			</tr>
 			<tr>
 				<form action="login2" method="post">
-				<td><input class="idpass" type="password" name="passwd"></td>
+				<td><input class="idpass" type="password" name="passwd" autofocus></td>
 			</tr>
 			<c:if test="${cid==1&&cidd==3}">
 			<tr>
@@ -44,7 +47,7 @@
 			</tr>
 			</c:if>
 			<tr>
-				<td><font color="#004080">비밀번호가 기억 안나시나요?</font></td>
+				<td><font color="#004080"><a href="searchPw">비밀번호가 기억 안나시나요?</a></font></td>
 			</tr>
 			</c:if>
 			<tr>

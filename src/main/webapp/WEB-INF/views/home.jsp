@@ -18,7 +18,7 @@
 <div class="main" align="center">
 	<img src="resources/home/imgs/name.png" width="600"><br>
 	<form name="f" action="search.naver" method="post">
-		<input class="search" type="text" name="search">
+		<input class="search" type="search" name="search">
 		<input class="enter" type="submit" value="검색">
 	</form>
 </div>
@@ -26,7 +26,7 @@
 <table style="width: 100%; height: 100%;" border=0>
         <tr>
             <td style="vertical-align: middle;" align="center">
-                회사소개 googlePlus 브런치 Test
+               made by ITBank TechFarm team
             </td>
         </tr>
     </table>
