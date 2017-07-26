@@ -100,12 +100,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   update blog_boardreply set re_step = re_step + 1 where re_step > #{re_step} 
   </update>
   
-  <select parameterType="int" resultType="BlogReplyDTO" id="listReply"> 
-  select * from blog_boardreply where no=#{no} order by re_step asc 
+  <select parameterType="hashMap" resultType="BlogReplyDTO" id="listReply"> 
+  <!-- select * from blog_boardreply where no=#{no} order by re_step asc  -->
+  <!-- select * from (select rownum rn, A.* from (select * from blog_boardreply  where no=#{no} order by re_step asc)A)B where rn between startRow=#{startRow} and endRow=#{endRow} -->
+  SELECT * FROM (SELECT @NO:=@NO+1 AS ROWNUM, a.* FROM (SELECT * FROM blog_boardreply where no=#{no} order by re_step asc)a,
+  (SELECT @NO:=0)b)c WHERE c.ROWNUM BETWEEN #{startRow} AND #{endRow}
   </select>
   
   <delete parameterType="int" id="deleteReply">
   delete from blog_boardreply where replyno=#{replyno}
   </delete>
+  
+  <select parameterType="int" resultType="int" id="replyNumber"> 
+  select count(*) from blog_boardreply where no=#{no}
+  </select>
+  
+  <select resultType="BlogBoardDTO" id="listNewBoard">  
+  select * from blog_board order by no desc limit 10
+  </select>
+  
+  <select resultType="String" id="listNewProfile">
+  select profile from blog_option c join (select a.* from (select id from blog_board order by no desc limit 10)a)b on c.id=b.id;
+  </select>
+  
+  <select resultType="BlogBoardDTO" id="listHotBoard">  
+  select * from blog_board order by readcount desc limit 10
+  </select>
+  
+  <select resultType="String" id="listHotProfile">
+  select profile from blog_option c join (select a.* from (select id from blog_board order by readcount desc limit 10)a)b on c.id=b.id;
+  </select>
+
+  <select resultType="BlogOptionDTO" id="listHotBlog">  
+  select * from blog_option order by visitornum desc limit 5
+  </select>
+
+  <select parameterType="int" resultType="BlogBoardDTO" id="listAreaBoard">  
+  select * from blog_board where area=#{area}
+  </select>
+  
+  <select parameterType="int" resultType="String" id="listAreaProfile">
+  select profile from blog_option c join (select a.* from (select id from blog_board where area=#{area})a)b on c.id=b.id;
+  </select>
   
 </mapper>
