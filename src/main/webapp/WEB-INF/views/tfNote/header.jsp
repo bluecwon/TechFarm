@@ -22,6 +22,9 @@
 				$("#close2").click(function() {
 					$("#header").find(".header_info").slideUp('fast').show();  
 				});
+				$("#homebutton").click(function() {
+					location.href="home";  
+				});
 			});
 			function check(href){
 				if(${sessionScope.memberDTO == null}){
@@ -40,7 +43,7 @@
 		<title>노트</title>
 	</head>
 	<body>
-		<div id="viewtitle">TF Note</div>
+		<div id="viewtitle"><img id="homebutton" src="resources/home/imgs/name.png" width="100px" height="40px">Note</div>
 		<div id="header" align="right">
 			<div class="topnav">
 	  			<a rel="tooltip" title="메뉴"><img id="menu" src="resources/home/imgs/menu.png" width="25" height="25"></a>&nbsp&nbsp&nbsp&nbsp

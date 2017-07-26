@@ -238,6 +238,10 @@ body {
   	align-items: flex-end;
 }
 
+.other{
+	align-items: flex-end;
+}
+
 .self .messages {
   	order: 1;
   	border-bottom-right-radius: 0;
