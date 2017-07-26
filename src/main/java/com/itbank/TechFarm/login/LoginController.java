@@ -41,9 +41,6 @@ public class LoginController {
 	@Autowired
 	private PasswordSecurity passwordSecurity;
 	
-	/*@Autowired
-	private MyChannelDAO mychannelDAO;*/
-	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request, HttpSession session, Model model) {
 		String id=request.getParameter("id");
@@ -94,7 +91,7 @@ public class LoginController {
 		dto.setPasswd(encodedPassword);
 		int res=memberDAO.insertMember(dto);
 		if(res==1){
-			jamesUser.addUser(dto.getId(), rawPassword);
+			jamesUser.addUser(dto.getId(), encodedPassword);
 			MemberDTO getdto=memberDAO.getMember(dto.getId());
 			dto.setNo(getdto.getNo());
 			model.addAttribute("msg", "회원가입을 축하합니다.");

@@ -164,7 +164,6 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 
 // 로그인 아이디 매핑 (로그인 ID -> 소켓 ID)
 var login_ids = {};
-var idList = [];
 
 
 // socket.io 서버를 시작합니다.
@@ -194,13 +193,8 @@ io.sockets.on('connection', function(socket) {
 
             // 응답 메시지 전송
             sendResponse(socket, 'login', '200', '로그인되었습니다.');
-            idList=login_ids.keys();
-            /*for(i=0;i<idList.length;i++){
-            	if(idList[i]===login.id){
-            		idList.remove(i);
-            	}
-            }
-            idList.push(login.id);*/
+            var idList = [];
+            idList=Object.keys(login_ids);
             var output = {command:'list', ids:idList};
             console.log('클라이언트로 보낼 데이터 : ' + JSON.stringify(output));
             io.sockets.emit('currentId', output);
@@ -328,11 +322,10 @@ io.sockets.on('connection', function(socket) {
     
     socket.on('disconnect', function(){
     	console.log('disconnect 이벤트를 받았습니다.');
-    	for(i=0;i<idList.length;i++){
-        	if(idList[i]===socket.login_id){
-        		idList.pop(i);
-        	}
-        }
+    	console.log(socket.login_id);
+    	delete login_ids[socket.login_id];
+    	var idList = [];
+        idList=Object.keys(login_ids);
     	var output = {command:'list', ids:idList};
         console.log('클라이언트로 보낼 데이터 : ' + JSON.stringify(output));
         io.sockets.emit('currentId', output);
