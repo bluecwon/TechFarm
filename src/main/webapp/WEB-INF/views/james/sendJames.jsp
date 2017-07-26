@@ -1,28 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>메일 보내기</title>
-</head>
-<body>
-	<header>
-		<h1 align="center">메일 보내기</h1>
-	</header>
-	<nav></nav>
-	<section>
+<%@include file="header.jsp"%>
+	<div class="left">
+		<div class="left_content1">
+			<div align="center">
+			
+			
+		<h1 align="center" style="color:#ff8080;">메일 보내기</h1>
+
 		<form action="sendJames" method="post" enctype="multipart/form-data">
-      		<input type="email" name="to" value="${to }" placeholder="상대의 이메일" ><br>
-      		<input type="text" name="subject" placeholder="제목을 입력해주세요" >
-    		<p>
-      		<textarea name="text" cols="100" rows="12" placeholder="내용을 입력해주세요" ></textarea>
-    		</p>
-    		<input type="file" name="sendFile" multiple><br>
-      		<input type="submit" value="메일 보내기" >
-      		<input type="reset" value="취소">
+		<table class="jjm494">
+			<tr>
+				<td><input type="email" name="to" value="${to }" placeholder="상대의 이메일" ></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="subject" placeholder="제목을 입력해주세요" ></td>
+			</tr>
+			<tr>
+				<td>
+					<textarea name="text" cols="100" rows="12" placeholder="내용을 입력해주세요" ></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="file" name="sendFile" multiple></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" value="메일 보내기" >
+      				<input type="reset" value="취소">
+				</td>
+			</tr>
+      	</table>
   		</form>
-	</section>
-	<footer></footer>
-</body>
-</html> 
+
+
+			</div>
+		</div>
+	</div>
+	 
+<%@ include file="footer.jsp" %>
