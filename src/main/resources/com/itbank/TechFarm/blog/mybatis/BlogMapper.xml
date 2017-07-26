@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- Select with no parameters using the result map for Account class. -->
   
   <insert id="makeBlog" parameterType="BlogOptionDTO">
-  insert into blog_option values(#{id},#{blogname},#{layout},#{headerword},#{nickname},#{introduce},#{profile},#{background},#{header})
+  insert into blog_option values(#{id},#{blogname},#{layout},#{headerword},#{nickname},#{introduce},#{profile},#{background},#{header},#{visitornum})
   </insert>
   
   <select resultType="BlogOptionDTO" id="getBlog" parameterType="String">
