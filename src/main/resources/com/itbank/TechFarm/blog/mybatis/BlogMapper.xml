@@ -26,6 +26,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   insert into blog_makeboard (sideno,id,title) values(#{sideno},#{id},#{title})
   </insert>
   
+  <update id="updateVisitornum" parameterType="String">	
+  update blog_option set visitornum = visitornum + 1 where id=#{id}
+  </update>
+  
   <select resultType="BlogMakeBoardDTO" id="listBoardTitle" parameterType="String">
   select * from blog_makeboard where id=#{id}
   </select>
@@ -141,6 +145,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <select parameterType="int" resultType="String" id="listAreaProfile">
   select profile from blog_option c join (select a.* from (select id from blog_board where area=#{area})a)b on c.id=b.id;
+  </select>
+
+  <select resultType="BlogOptionDTO" id="searchBlog" parameterType="hashMap">
+  select * from blog_option where ${search_option} like CONCAT('%',#{search_text},'%');
   </select>
   
 </mapper>

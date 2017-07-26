@@ -91,4 +91,16 @@ public class Blog_OptionDAOImpl implements Blog_OptionDAO {
 		return BlogMapper.listAreaProfile(area);
 	}
 
+	@Override
+	public int updateVisitornum(String id) {
+		// TODO Auto-generated method stub
+		return BlogMapper.updateVisitornum(id);
+	}
+
+	@Override
+	public List listSearchBlog(String search_option, String search_text) {
+		// TODO Auto-generated method stub
+		return BlogMapper.listSearchBlog(search_option, search_text);
+	}
+
 }

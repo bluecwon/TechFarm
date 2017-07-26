@@ -130,8 +130,11 @@ p.hotblogheaderword{font: 15pt Helvetica,"Helvetica neue", Arial, sans-serif;
 	               color: white;}
 #hotblogheader{border-radius: 12px;}
 
-
-
+td.searchlist{padding-left: 48px; padding-right: 48px;}
+div.searchlistdiv{border-style: double; 
+	border-radius: 12px;
+	border-width: 6px; 
+	border-color: #b7b7b7;}
 
 
 

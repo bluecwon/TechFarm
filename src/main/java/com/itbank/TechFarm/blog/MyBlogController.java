@@ -27,6 +27,7 @@ import com.itbank.TechFarm.blog.dao.Blog_BoardDAO;
 import com.itbank.TechFarm.blog.dao.Blog_OptionDAO;
 import com.itbank.TechFarm.blog.dto.Blog_MakeBoardDTO;
 import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
+import com.itbank.TechFarm.login.member.MemberDTO;
 
 
 @Controller
@@ -46,6 +47,13 @@ public class MyBlogController {
 		mav.setViewName("blog/myBlog");
 		String id = request.getParameter("id");
 		Blog_OptionDTO dto = optionDAO.getBlog(id);
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
+		if(memberDTO != null){
+			if(!memberDTO.getId().equals(id)){
+				optionDAO.updateVisitornum(id);
+			}
+		}
+		
 		List<Blog_MakeBoardDTO> list = boardDAO.listBoardTitle(id);
 		session.setAttribute("list", list);
 		session.setAttribute("optionDTO", dto);

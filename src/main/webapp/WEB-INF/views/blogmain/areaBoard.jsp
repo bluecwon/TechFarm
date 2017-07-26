@@ -9,23 +9,33 @@
 	<article>
 	<table>
 		<tr>
-			<td valign="top" align="center"><h2>${areamode}게시판</h2></td>
+			<td valign="top" align="center"><h2>${areamode}게시판 >> </h2></td>
 			<td class="tdspace" align="center">
 				<table class="topbox" width="900px"  height="500px">
+				<c:choose>
+				<c:when test="${arealist.size()==0}">
 					<tr>
-					<th class="top" height="70px"><h2>프로필</h2></th>
-					<th class="top" ><h2>작성자</h2></th>
+						<th class="top" height="70px" colspan="5"><h2>등록된 게시글이 없습니다. 지금 등록 해보세요.</h2></th>
+					</tr>
+				</c:when>
+				<c:otherwise>
+					<tr>
+					<th class="top" height="70px" colspan="2"><h2>작성자</h2></th>
 					<th class="top" ><h2>글제목</h2></th>
 					<th class="top" ><h2>게시판</h2></th>
+					<th class="top" ><h2>작성일</h2></th>
 					</tr>	
 					<c:forEach var="arealist" items="${arealist}" varStatus="status">
 					<tr>
-					<th class="top"><img src="resources/upload/${arealist.id}/${areaprofile[status.index]}" width="60" height="60" class="homemenu"/></th>
-					<th class="top">${arealist.id}</th>
-					<th class="top"><a href="viewBoard?no=${arealist.no}" class="deconone">${arealist.subject}</a></th>
-					<th class="top">(${arealist.title})게시판</th>
+					<th class="top" align="right"><img src="resources/upload/${arealist.id}/${areaprofile[status.index]}" width="60" height="60" class="homemenu"/></th>
+					<th class="top" align="left"><font size="5 ">${arealist.id}</font></th>
+					<th class="top"><a href="viewBoard?no=${arealist.no}&joinmode=arealist" class="deconone"><font size="4 ">${arealist.subject}</font></a></th>
+					<th class="top">(${arealist.title})</th>
+					<td class="top" align="center">${arealist.reg_date}</td>
 					</tr>
 					</c:forEach>
+				</c:otherwise>	
+				</c:choose>
 				</table>
 			</td>
 		</tr>

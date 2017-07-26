@@ -188,6 +188,14 @@ public class BlogMapper {
 	  return res;
   }
   
+  public static int updateVisitornum(String id){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.update("updateVisitornum",id);
+	  session.commit();
+	  session.close();
+	  return res;
+  }
+  
   public static int minusReplyNumber(int no){
 	  SqlSession session = sqlMapper.openSession();
 	  int res = session.update("minusReplyNumber",no);
@@ -282,6 +290,16 @@ public class BlogMapper {
   public static List<String> listAreaProfile(int area){
 	  SqlSession session = sqlMapper.openSession();
 	  List<String> list = (List)session.selectList("listAreaProfile",area);
+	  session.close();
+	  return list;
+  }
+  
+  public static List<Blog_OptionDTO> listSearchBlog(String search_option,String search_text){
+	  SqlSession session = sqlMapper.openSession();
+	  Map<String, Object> parameters = new HashMap<String, Object>();
+	  parameters.put("search_option", search_option);
+	  parameters.put("search_text", search_text);
+	  List<Blog_OptionDTO> list = (List)session.selectList("searchBlog",parameters);
 	  session.close();
 	  return list;
   }
