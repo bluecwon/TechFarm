@@ -194,14 +194,13 @@ io.sockets.on('connection', function(socket) {
 
             // 응답 메시지 전송
             sendResponse(socket, 'login', '200', '로그인되었습니다.');
-            
-            for(i=0;i<idList.length;i++){
+            idList=login_ids.key();
+            /*for(i=0;i<idList.length;i++){
             	if(idList[i]===login.id){
             		idList.remove(i);
             	}
             }
-            idList.push(login.id);
-            
+            idList.push(login.id);*/
             var output = {command:'list', ids:idList};
             console.log('클라이언트로 보낼 데이터 : ' + JSON.stringify(output));
             io.sockets.emit('currentId', output);

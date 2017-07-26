@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.itbank.TechFarm.james.JamesUser;
 import com.itbank.TechFarm.login.member.MemberDAO;
 import com.itbank.TechFarm.login.member.MemberDTO;
+import com.itbank.TechFarm.login.security.PasswordSecurity;
 import com.itbank.TechFarm.tfPlusDAO.NewsProfileDAO;
 import com.itbank.TechFarm.tfPlusDTO.NewsProfileDTO;
 
@@ -30,7 +31,10 @@ public class MyAccountController {
 	private JamesUser jamesUser;
 	
 	@Autowired
-	private NewsProfileDAO newsProfileDAO; 
+	private NewsProfileDAO newsProfileDAO;
+	
+	@Autowired
+	private PasswordSecurity passwordSecurity;
 	
 	@RequestMapping(value = "/myAccount", method = RequestMethod.GET)
 	public String myAccount(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
@@ -57,7 +61,7 @@ public class MyAccountController {
 	public String checkCurrentPw(HttpServletRequest request, HttpSession session, Model model) {
 		String passwd=request.getParameter("currentpasswd");
 		MemberDTO dto=(MemberDTO)session.getAttribute("memberDTO");
-		if(dto.getPasswd().equals(passwd)){
+		if(passwordSecurity.passwordConfirm(passwd, dto.getPasswd())){
 			model.addAttribute("cid", 1);
 		}else{
 			model.addAttribute("cid", 2);
@@ -71,7 +75,7 @@ public class MyAccountController {
 		String checkpasswd=request.getParameter("checkpasswd");
 		if(checkpasswd.equals(passwd)){
 			MemberDTO dto=(MemberDTO)session.getAttribute("memberDTO");
-			dto.setPasswd(passwd);
+			dto.setPasswd(passwordSecurity.createPassword(passwd));
 			int res=memberDAO.editPw(dto);
 			jamesUser.setPassword(dto.getId(), passwd);
 		}else{
@@ -103,7 +107,7 @@ public class MyAccountController {
 	public String checkCurrentPwForDelete(HttpServletRequest request, HttpSession session, Model model) {
 		String passwd=request.getParameter("currentpasswd");
 		MemberDTO dto=(MemberDTO)session.getAttribute("memberDTO");
-		if(dto.getPasswd().equals(passwd)){
+		if(passwordSecurity.passwordConfirm(passwd, dto.getPasswd())){
 			model.addAttribute("cid", 1);
 			model.addAttribute("deletesentence", dto.getId()+"는 TechFarm을 탈퇴하겠습니다.");
 		}else{
