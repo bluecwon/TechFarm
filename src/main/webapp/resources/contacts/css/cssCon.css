@@ -46,7 +46,7 @@ table.jjm494 td {
 	padding: 10px;
 	font-size:25px;
 	width:200px;
-	height:150px;
+	height:50px;
 	z-index:5;
 }
 
@@ -97,7 +97,7 @@ table.jjm494 td {
 	background: #81fe87;
 	display: none;
 	padding: 10px;
-	font-size:10px;
+	font-size:12px;
 	width:200px;
 	height:150px;
 	z-index:500;
@@ -108,7 +108,7 @@ table.jjm494 td {
 	position: absolute;
 	right: 15px; top: 45px;
 	background: #81fe87;
-	font-size:15px;
+	font-size:50px;
 	display: none;
 	padding: 10px;
 	width:250px;

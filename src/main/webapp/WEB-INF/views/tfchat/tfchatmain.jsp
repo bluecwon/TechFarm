@@ -17,7 +17,7 @@
          	// 문서 로딩 후 실행됨
             $(function() {
 			
-                 host = '52.79.140.54';//192.168.52.35
+                 host = '192.168.52.35';//52.79.140.54
                  port = '3000';
                  connectToServer();
                  
@@ -92,6 +92,8 @@
         			}
         			event.stopPropagation();
         		});
+                
+                document.onunLoad
              	
             });
             
@@ -228,9 +230,20 @@
 				var currentTime=time.getHours()+'시 '+time.getMinutes()+'분';
 				return currentTime;
 			}
+			
+			function disconnect(){
+				var id = $('#idInput').val();
+				var output = {id:id};
+                console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
+                if (socket == undefined) {
+                    alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
+                    return;
+                }
+                socket.emit('disconnect');
+			}
         </script>
 	</head>
-<body>
+<body onunload="disconnect();">
 	<h3>현재 접속인원</h3>
 	<input type="hidden" id="idInput" value="${sessionScope.memberDTO.id}" />
 	<input type="hidden" id="roomIdInput" value="${sessionScope.memberDTO.id}" />

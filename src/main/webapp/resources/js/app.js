@@ -184,27 +184,28 @@ io.sockets.on('connection', function(socket) {
     socket.on('login', function(login) {
     	console.log('login 이벤트를 받았습니다.');
     	console.dir(login);
+    	if(login.id != ''){
+    		 // 기존 클라이언트 ID가 없으면 클라이언트 ID를 맵에 추가
+            console.log('접속한 소켓의 ID : ' + socket.id);
+            login_ids[login.id] = socket.id;
+            socket.login_id = login.id;
 
-        // 기존 클라이언트 ID가 없으면 클라이언트 ID를 맵에 추가
-        console.log('접속한 소켓의 ID : ' + socket.id);
-        login_ids[login.id] = socket.id;
-        socket.login_id = login.id;
+            console.log('접속한 클라이언트 ID 갯수 : %d', Object.keys(login_ids).length);
 
-        console.log('접속한 클라이언트 ID 갯수 : %d', Object.keys(login_ids).length);
-
-        // 응답 메시지 전송
-        sendResponse(socket, 'login', '200', '로그인되었습니다.');
-        
-        for(i=0;i<idList.length;i++){
-        	if(idList[i]==login.id){
-        		idList.pop(i);
-        	}
-        }
-        idList.push(login.id);
-        
-        var output = {command:'list', ids:idList};
-        console.log('클라이언트로 보낼 데이터 : ' + JSON.stringify(output));
-        io.sockets.emit('currentId', output);
+            // 응답 메시지 전송
+            sendResponse(socket, 'login', '200', '로그인되었습니다.');
+            
+            for(i=0;i<idList.length;i++){
+            	if(idList[i]===login.id){
+            		idList.remove(i);
+            	}
+            }
+            idList.push(login.id);
+            
+            var output = {command:'list', ids:idList};
+            console.log('클라이언트로 보낼 데이터 : ' + JSON.stringify(output));
+            io.sockets.emit('currentId', output);
+    	}
     });
 
     
@@ -324,6 +325,18 @@ io.sockets.on('connection', function(socket) {
         console.log('클라이언트로 보낼 데이터 : ' + JSON.stringify(output));
         
         io.sockets.emit('room', output);
+    });
+    
+    socket.on('disconnect', function(){
+    	console.log('disconnect 이벤트를 받았습니다.');
+    	for(i=0;i<idList.length;i++){
+        	if(idList[i]===socket.login_id){
+        		idList.pop(i);
+        	}
+        }
+    	var output = {command:'list', ids:idList};
+        console.log('클라이언트로 보낼 데이터 : ' + JSON.stringify(output));
+        io.sockets.emit('currentId', output);
     });
     
     

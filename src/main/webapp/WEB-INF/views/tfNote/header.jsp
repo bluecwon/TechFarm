@@ -6,7 +6,7 @@
 		<meta charset="utf-8"/>
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 		<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-		<link rel="stylesheet" type="text/css" href="resources/tfNote/css1.css" > 
+		<link rel="stylesheet" type="text/css" href="resources/tfNote/Notecss.css" > 
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
@@ -40,8 +40,7 @@
 		<title>노트</title>
 	</head>
 	<body>
-	
-	
+		<div id="viewtitle">TF Note</div>
 		<div id="header" align="right">
 			<div class="topnav">
 	  			<a rel="tooltip" title="메뉴"><img id="menu" src="resources/home/imgs/menu.png" width="25" height="25"></a>&nbsp&nbsp&nbsp&nbsp

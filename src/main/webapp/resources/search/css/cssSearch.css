@@ -65,8 +65,8 @@ table.jjm494 td {
 	height:50px;
 	width:100%;
 	position: relative;
-	background:#800080;
-	border: 1px solid #ddd;
+	background:#ffd0ff;
+	border: 1px solid #ffd0ff;
 }
 #tooltip{
 	position:absolute;
@@ -108,7 +108,7 @@ table.jjm494 td {
 .header_info {
 	position: absolute;
 	right: 15px; top: 45px;
-	background: #c0c0c0;
+	background: #ffb5ff;
 	display: none;
 	padding: 10px;
 	width:200px;
@@ -120,7 +120,7 @@ table.jjm494 td {
 .header_menu {
 	position: absolute;
 	right: 15px; top: 45px;
-	background: #c0c0c0;
+	background: #ffb5ff;
 	font-size:15px;
 	display: none;
 	padding: 10px;

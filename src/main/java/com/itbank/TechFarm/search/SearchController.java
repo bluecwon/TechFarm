@@ -30,6 +30,7 @@ public class SearchController {
 		List<Object> list=sn.search(target, query, String.valueOf(pageNum));
 		Object total=(Object)list.get(0);
 		Object time=(Object)list.get(1);
+		model.addAttribute("targetnum", targetNum);
 		model.addAttribute("result",list.subList(2, list.size()));
 		model.addAttribute("time", time);
 		model.addAttribute("total", total);

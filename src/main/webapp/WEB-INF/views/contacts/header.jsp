@@ -22,7 +22,6 @@
 				$("#header").find(".header_info").slideUp('fast').show();  
 			});
 		});
-		/* 
 		function check(href){
 			if(${sessionScope.memberDTO == null}){
 				alert("먼저 로그인해주세요");
@@ -30,7 +29,6 @@
 				location.href=href;
 			}
 		};
-		 */
 		function insert(){
 			document.frm.submit();
 		};

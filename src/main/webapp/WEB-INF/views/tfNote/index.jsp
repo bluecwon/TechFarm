@@ -99,7 +99,7 @@
 	<div style="display:flex;">
 		<c:forEach var="dto" items="${noteList}">
 		<form name="f" method="post" action="note_update" onsubmit="return chkTitle();">
-			<div style="border:1px solid; padding:10px; width:220px;  word-break:break-all;flex:1;margin-left:5px; margin-right:5px; margin-bottom:20px; background:#408080;">
+			<div style="border:1px solid; padding:10px; width:220px;  word-break:break-all;flex:1;margin-left:5px; margin-right:5px; margin-bottom:20px; background:#ffffac;">
 				<div align="right">
 					<a href="#" onclick="javascript:update();">수정</a>
 					<a href="note_delete?num=${dto.num}&id=${dto.id}">

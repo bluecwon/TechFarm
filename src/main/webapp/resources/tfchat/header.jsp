@@ -8,7 +8,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<title>My Account</title>
-		<link type="text/css" href="resources/tfchat/chat_style.css" rel="stylesheet" />
+		<link type="text/css" href="resources/tfchat/style_chat.css" rel="stylesheet" />
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){

@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link type="text/css" href="resources/login/style.css" rel="stylesheet"/>
+<link type="text/css" href="resources/login/style_login.css" rel="stylesheet"/>
 <title>Welcome to TF</title>
 	<script type="text/javascript">
 		var goodColor = "#66cc66";

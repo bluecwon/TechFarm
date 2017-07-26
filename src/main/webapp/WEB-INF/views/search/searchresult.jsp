@@ -19,7 +19,7 @@
 		
 
 	<form name="s" method="post">
-		<input type="hidden" id="targetnum" name="targetnum" value="0">
+		<input type="hidden" id="targetnum" name="targetnum" value="${targetnum}">
 		<input type="hidden" name="search" value="${search}">
 	</form>
 			<c:forEach var="dto" items="${result}">
