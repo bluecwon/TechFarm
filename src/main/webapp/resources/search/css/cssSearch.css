@@ -5,7 +5,6 @@ table.jjm494 {
     border-top: 1px solid #ccc;
     border-left: 3px solid #369;
   margin : 20px 10px;
-  
 }
 table.jjm494 th {
     width: 100%;
@@ -25,20 +24,18 @@ table.jjm494 td {
     border-bottom: 1px solid #ffffff;
 }
 
-
 .jjm494_input {
     border: 1px solid rgba(0, 0, 0, 0.16);
     height: 25px;
     padding: 5px 10px 5px 5px;
     font-size: 15px;
-
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
     background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.02) 0%, rgba(255, 255, 255, 0.02) 50%);
     background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.02) 0%, rgba(255, 255, 255, 0.02) 50%);
     background-image: linear-gradient(top, rgba(0, 0, 0, 0.02) 0%, rgba(255, 255, 255, 0.02) 50%);
-    width: 200px
+    width: 200px;
 }
 
 /* paging */
@@ -51,6 +48,7 @@ table.jjm494 td {
 .paging .btn_prev{background:url('./img/btn_prev.gif') no-repeat; margin-right:14px;}
 .paging .btn_next{background:url('./img/btn_next.gif') no-repeat; margin-left:14px;}
 .paging .btn_end{background:url('./img/btn_end.gif') no-repeat;}
+
 
 
 #viewtitle{
@@ -67,24 +65,19 @@ table.jjm494 td {
 	height:50px;
 	width:100%;
 	position: relative;
-	background:#ddd;
+	background:#800080;
 	border: 1px solid #ddd;
 }
-
 #tooltip{
 	position:absolute;
 	z-index:999;
 	color:white;
 	font-size:15px;
 }
-
 #tooltip .tipBody{
 	background-color: black;
 	padding: 8px;
 }
-
-
-
 .topnav{
 	position: relative;
 	text-align:right;
@@ -92,12 +85,9 @@ table.jjm494 td {
 	height:100%;
 	cursor:pointer;
 }
-
-
 .topnav:hover{
 	color:#d3d3d3;
 }
-
 .main{
 	width:100%;
 	height:80%;
@@ -110,13 +100,11 @@ table.jjm494 td {
 	margin-top:200px;
 	margin-bottom:auto;
 }
-
 .navi_set{
 	float: right;
 	padding:10px;
 	position: relative;
 }
-
 .header_info {
 	position: absolute;
 	right: 15px; top: 45px;
@@ -125,10 +113,10 @@ table.jjm494 td {
 	padding: 10px;
 	width:200px;
 	height:150px;
+	font-size:10px;
 	z-index:500;
 	box-shadow: 5px 5px 15px 5px gray;
 }
-
 .header_menu {
 	position: absolute;
 	right: 15px; top: 45px;
@@ -141,7 +129,6 @@ table.jjm494 td {
 	z-index:499;
 	box-shadow: 5px 5px 15px 5px gray;
 }
-
 #main_bottom{
 	bottom:0%;
 	width:100%;
@@ -157,6 +144,49 @@ table.jjm494 td {
 #img_handle:hover{
 	background: #dfdfdf;
 }
+
+
+/* #tooltip{
+	position:absolute;
+	z-index:999;
+	color:white;
+}
+.topnav{
+	position: relative;
+	text-align:right;
+	cursor:pointer;
+}
+.topnav:hover{
+	color:#d3d3d3;
+}
+.header_info {
+	position: absolute;
+	right: 15px; top: 25px;
+	background: #c0c0c0;
+	display: none;
+	padding: 10px;
+	border: 1px solid #ccccff;
+	width:10%;
+	height:150px;
+
+	z-index:8;
+	word-break:break-all;
+}
+.header_menu {
+	position: absolute;
+	right: 45px; top: 25px;
+	background: #c0c0c0;
+	display: none;
+	padding: 10px;
+	border: 1px solid #ccccff;
+	width:20%;
+	height:270px;
+	z-index:8;
+}
+#img_handle:hover{
+	background: #dfdfdf;
+} */
+
 
 
 
@@ -177,6 +207,7 @@ em,address{
 a{
 	text-decoration:none;
 }
+
 a:hover,a:active,a:focus{
 	text-decoration:none;
 }
@@ -210,7 +241,7 @@ a:hover,a:active,a:focus{
 	height:10%;
 	_border:1px solid blue;
 }
-#header h1{
+#header1 h1{
 	margin-left:400px;
 	color:#ff0080;
 	font-size:40px;
@@ -228,11 +259,7 @@ a:hover,a:active,a:focus{
 .left_content1{
 	width:100%;
 	height:auto;
-	text-align:left;
 	margin-top:10px;
 	background:#ffffff;
 }
-
-
-
 
