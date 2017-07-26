@@ -2,7 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ include file="main_top.jsp"%>
+<%-- <%@ incldue file="header.jsp"%> --%>
+<%@ include file="top.jsp"%>
 
 <div id="2-2" style="overflow: hidden;"> <!-- start of 2-2 -->
 <!-- <div id="2-2-1">start of 2-2-1 -->
@@ -23,9 +24,9 @@ width="300" height="200"></video>
 <table>
 <tr>
 <c:forEach var="dto" items="${list}"> 
-<td bgcolor="white">
+<td>
 <a href="tftube_videoView?no=${dto.no}">
-<img src="resources/tftube/uploadImage/${dto.image}" width="196" height="100"><br>
+<img src="resources/tftube/Image/${dto.image}" width="196" height="100"><br>
 ${dto.title}</a><br>
 <a href="tftube_mychannel">${dto.channel}</a><br>
 ${dto.readcount}회  ＊ ${dto.uploaddate}
@@ -46,9 +47,9 @@ ${dto.readcount}회  ＊ ${dto.uploaddate}
 <table>
 <tr>
 <c:forEach var="dto" items="${list_music}"> 
-<td bgcolor="white">
+<td>
 <a href="tftube_videoView?no=${dto.no}">
-<img src="resources/tftube/uploadImage/${dto.image}" width="196" height="100"><br>
+<img src="resources/tftube/Image/${dto.image}" width="196" height="100"><br>
 ${dto.title}</a><br>
 <a href="tftube_mychannel">${dto.channel}</a><br>
 ${dto.readcount}회  ＊ ${dto.uploaddate}
@@ -70,9 +71,9 @@ ${dto.readcount}회  ＊ ${dto.uploaddate}
 <table>
 <tr>
 <c:forEach var="sport_dto" items="${list_sport}"> 
-<td bgcolor="white">
+<td>
 <a href="tftube_videoView?no=${sport_dto.no}">
-<img src="resources/tftube/uploadImage/${sport_dto.image}" width="196" height="100"><br>
+<img src="resources/tftube/Image/${sport_dto.image}" width="196" height="100"><br>
 ${sport_dto.title}</a><br>
 <a href="tftube_mychannel">${sport_dto.channel}</a><br>
 ${sport_dto.readcount}회  ＊ ${sport_dto.uploaddate}
@@ -93,9 +94,9 @@ ${sport_dto.readcount}회  ＊ ${sport_dto.uploaddate}
 <table>
 <tr>
 <c:forEach var="game_dto" items="${list_game}"> 
-<td bgcolor="white">
+<td>
 <a href="tftube_videoView?no=${game_dto.no}">
-<img src="resources/tftube/uploadImage/${game_dto.image}" width="196" height="100"><br>
+<img src="resources/tftube/Image/${game_dto.image}" width="196" height="100"><br>
 ${game_dto.title}</a><br>
 <a href="tftube_mychannel">${game_dto.channel}</a><br>
 ${game_dto.readcount}회  ＊ ${game_dto.uploaddate}
@@ -116,9 +117,9 @@ ${game_dto.readcount}회  ＊ ${game_dto.uploaddate}
 <table>
 <tr>
 <c:forEach var="comedy_dto" items="${list_comedy}"> 
-<td bgcolor="white">
+<td>
 <a href="tftube_videoView?no=${comedy_dto.no}">
-<img src="resources/tftube/uploadImage/${comedy_dto.image}" width="196" height="100"><br>
+<img src="resources/tftube/Image/${comedy_dto.image}" width="196" height="100"><br>
 ${comedy_dto.title}</a><br>
 <a href="tftube_mychannel">${comedy_dto.channel}</a><br>
 ${comedy_dto.readcount}회  ＊ ${comedy_dto.uploaddate}
@@ -139,9 +140,9 @@ ${comedy_dto.readcount}회  ＊ ${comedy_dto.uploaddate}
 <table>
 <tr>
 <c:forEach var="movie_dto" items="${list_movie}"> 
-<td bgcolor="white">
+<td>
 <a href="tftube_videoView?no=${movie_dto.no}">
-<img src="resources/tftube/uploadImage/${movie_dto.image}" width="196" height="100"><br>
+<img src="resources/tftube/Image/${movie_dto.image}" width="196" height="100"><br>
 ${movie_dto.title}</a><br>
 <a href="tftube_mychannel">${movie_dto.channel}</a><br>
 ${movie_dto.readcount}회  ＊ ${movie_dto.uploaddate}
@@ -162,9 +163,9 @@ ${movie_dto.readcount}회  ＊ ${movie_dto.uploaddate}
 <table>
 <tr>
 <c:forEach var="news_dto" items="${list_news}"> 
-<td bgcolor="white">
+<td>
 <a href="tftube_videoView?no=${news_dto.no}">
-<img src="resources/tftube/uploadImage/${news_dto.image}" width="196" height="100"><br>
+<img src="resources/tftube/Image/${news_dto.image}" width="196" height="100"><br>
 ${news_dto.title}</a><br>
 <a href="tftube_mychannel">${news_dto.channel}</a><br>
 ${news_dto.readcount}회  ＊ ${news_dto.uploaddate}
@@ -185,9 +186,9 @@ ${news_dto.readcount}회  ＊ ${news_dto.uploaddate}
 <table>
 <tr>
 <c:forEach var="ani_dto" items="${list_ani}"> 
-<td bgcolor="white">
+<td>
 <a href="tftube_videoView?no=${ani_dto.no}">
-<img src="resources/tftube/uploadImage/${ani_dto.image}" width="196" height="100"><br>
+<img src="resources/tftube/Image/${ani_dto.image}" width="196" height="100"><br>
 ${ani_dto.title}</a><br>
 <a href="tftube_mychannel">${ani_dto.channel}</a><br>
 ${ani_dto.readcount}회  ＊ ${ani_dto.uploaddate}
@@ -218,4 +219,4 @@ poster="이미지파일" : 동영상이 플레이 되기 전 대표로 보여줄
 <!-- </div>end of 2-2-1 -->
 </div><!-- end of 2-2 -->
 
-<%@ include file="main_bottom.jsp"%> 
+<%@ include file="bottom.jsp"%> 

@@ -55,24 +55,7 @@ public class LikeVideoMapper {
 		return res;
 	}
 
-	public static int unlike_insert(LikeVideoDTO dto) {
-		SqlSession session = sqlMapper.openSession();
-		int res = session.insert("unlike_insert", dto);
-		session.commit();
-		session.close();
-		return res;
-	}
-
-	public static int unlike_delete(int member, int no) {
-		SqlSession session = sqlMapper.openSession();
-		java.util.HashMap map = new java.util.HashMap();
-		map.put("member_no", member);
-		map.put("video_no", no);
-		int res = session.delete("unlike_delete", map);
-		session.commit();
-		session.close();
-		return res;
-	}
+	
 
 	/*
 	 * public static int likecount_member(int member_no,int video_no){
@@ -103,13 +86,7 @@ public class LikeVideoMapper {
 		return count;
 	}
 
-	public static int unlikecount(int video_no) {
-
-		SqlSession session = sqlMapper.openSession();		
-		int count = session.selectOne("unlikecount", video_no);
-		session.close();
-		return count;
-	}
+	
 	
 	public static List<VideoDTO> like_member_list(int member_no){
 		SqlSession session=sqlMapper.openSession();
@@ -118,21 +95,29 @@ public class LikeVideoMapper {
 		return list;		
 	}
 	
+	/*public static int likevideo_list_status(int member_no,int video_no){
+		SqlSession session=sqlMapper.openSession();
+		java.util.HashMap map = new java.util.HashMap();
+		map.put("member_no", member_no);
+		map.put("video_no", video_no);
+		String list_status = session.selectOne("likevideo_list_status",map);
+		return list_status;		
+	}*/
+	
 	public static int likevideo_list_status(int member_no,int video_no){
 		SqlSession session=sqlMapper.openSession();
 		java.util.HashMap map = new java.util.HashMap();
 		map.put("member_no", member_no);
 		map.put("video_no", video_no);
-		int list_status = session.selectOne("likevideo_list_status",map);
+		Object list_status_string=session.selectOne("likevideo_list_status",map);
+		int list_status=0; 
+		if(list_status_string!=null){	
+			System.out.println(list_status);
+			list_status=session.selectOne("likevideo_list_status",map);
+		}
+		
 		return list_status;		
 	}
 	
-	public static int likevideo_list_ustatus(int member_no,int video_no){
-		SqlSession session=sqlMapper.openSession();
-		java.util.HashMap map = new java.util.HashMap();
-		map.put("member_no", member_no);
-		map.put("video_no", video_no);
-		int list_status = session.selectOne("likevideo_list_ustatus",map);
-		return list_status;		
-	}
+	
 }

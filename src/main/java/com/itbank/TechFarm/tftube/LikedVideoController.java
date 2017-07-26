@@ -21,7 +21,8 @@ import com.itbank.TechFarm.tftube.dto.VideoDTO;
 @Controller
 public class LikedVideoController {
 	@Autowired
-	private LikeVideoDAO likevideoDAO;	
+	private LikeVideoDAO likevideoDAO;		
+	
 	@Autowired
 	private VideoDAO videoDAO;
 	@Autowired

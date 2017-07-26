@@ -14,11 +14,9 @@
 	<bean id="videoDAO" class="com.itbank.TechFarm.tftube.dao.VideoDAOImpl"/>
 	<bean id="recentvideoDAO" class="com.itbank.TechFarm.tftube.dao.RecentVideoDAOImpl"/>
 	<bean id="mychannelDAO" class="com.itbank.TechFarm.tftube.dao.MyChannelDAOImpl"/>
-	<bean id="subingDAO" class="com.itbank.TechFarm.tftube.dao.SubingDAOImpl"/>
-	
+	<bean id="subingDAO" class="com.itbank.TechFarm.tftube.dao.SubingDAOImpl"/>	
 	<bean id="likevideoDAO" class="com.itbank.TechFarm.tftube.dao.LikeVideoDAOImpl"/>
-	
-	    
-	
+	<bean id="unlikevideoDAO" class="com.itbank.TechFarm.tftube.dao.UnlikeVideoDAOImpl"/>    
+	<bean id="searchDAO" class="com.itbank.TechFarm.tftube.dao.SearchDAOImpl"/>
 		
 </beans>

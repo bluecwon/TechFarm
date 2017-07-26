@@ -26,16 +26,15 @@ public class MyChannelMapper {
 		}
 	}
 	
-	
-	
-	public static int insertChannel(MemberDTO dto){
+	public static int createChannel(MyChannelDTO dto){
 		SqlSession session=sqlMapper.openSession();
-		int res=session.insert("insertChannel",dto);
+		int res=session.insert("createChannel",dto);
 		session.commit();
 		session.close();
 		return res;
 		
 	}
+
 	
 	public static MyChannelDTO getChannel(int member_no){
 		SqlSession session=sqlMapper.openSession();
@@ -43,6 +42,5 @@ public class MyChannelMapper {
 		session.close();
 		return list;
 	}
-	
 
 }

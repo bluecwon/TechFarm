@@ -28,8 +28,6 @@ public class LoginController {
 	@Autowired
 	private MemberDAO memberDAO;
 	
-	@Autowired
-	private MyChannelDAO mychannelDAO;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
@@ -93,7 +91,7 @@ public class LoginController {
 		if(res==1){
 			MemberDTO getdto=memberDAO.getMember(dto.getId());
 			dto.setNo(getdto.getNo());
-			mychannelDAO.insertChannel(dto);
+			
 			mav.setViewName("redirect:login");
 		}else{
 			mav.setViewName("redirect:createAccount");

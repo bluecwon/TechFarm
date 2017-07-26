@@ -57,7 +57,7 @@ public class RecentVideoController {
 		mv.setViewName("tftube/recentVideo");		
 		return mv;
 	}
-	//왜 만들었는지 이해 불가능한 코드
+	/*//왜 만들었는지 이해 불가능한 코드
 	@RequestMapping(value="/tftube_recentvideo_insert", method=RequestMethod.GET)
 	public ModelAndView tftube_recentvideo_insert(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {		
@@ -85,9 +85,9 @@ public class RecentVideoController {
 		recentvideoDAO.insertRecent(recent_dto);
 		}
 				//end of RecentVideo insert 
-		mv.addObject("tftubevideoView");
+		mv.addObject("tftubevideoView");//이건 뭐니?
 		return mv;
-	}
+	}*/
 	
 	@RequestMapping(value="/tftube_recentvideo_delete_all", method=RequestMethod.GET)
 	public ModelAndView tftube_recent_delall(HttpServletRequest arg0, 

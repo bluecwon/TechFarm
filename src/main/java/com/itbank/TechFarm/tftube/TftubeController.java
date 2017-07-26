@@ -14,15 +14,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.TechFarm.login.member.MemberDTO;
-
+import com.itbank.TechFarm.tftube.dao.MyChannelDAO;
 import com.itbank.TechFarm.tftube.dao.VideoDAO;
+import com.itbank.TechFarm.tftube.dto.MyChannelDTO;
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
 
 @Controller
 public class TftubeController {
 	
 	@Autowired
-	private VideoDAO videoDAO;		
+	private VideoDAO videoDAO;	
+	@Autowired
+	private MyChannelDAO mychannelDAO;
 	
 	
 	@RequestMapping(value = "/tftube_main", method = RequestMethod.GET)
@@ -36,7 +39,15 @@ public class TftubeController {
 		
 		List<VideoDTO> list=videoDAO.listVideo();		
 		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
-		System.out.println("member:"+member);
+		if(member!=null){
+		MyChannelDTO mychan=mychannelDAO.getChannel(member.getNo());
+		if(mychan==null){			
+		mav.setViewName("tftube/createChannel");
+		return mav;
+		}		
+		}
+		
+		
 		
 		List<VideoDTO> list_music=videoDAO.listVideo_category("music");
 		List<VideoDTO> list_sport=videoDAO.listVideo_category("sport");

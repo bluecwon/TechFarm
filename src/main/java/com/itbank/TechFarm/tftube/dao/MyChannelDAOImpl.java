@@ -8,9 +8,11 @@ import com.itbank.TechFarm.tftube.mybatis.MyChannelMapper;
 
 public class MyChannelDAOImpl implements MyChannelDAO{
 
+	
+
 	@Override
-	public int insertChannel(MemberDTO dto) {
-		return MyChannelMapper.insertChannel(dto);
+	public int createChannel(MyChannelDTO dto) {
+		return MyChannelMapper.createChannel(dto);
 	}
 
 	@Override

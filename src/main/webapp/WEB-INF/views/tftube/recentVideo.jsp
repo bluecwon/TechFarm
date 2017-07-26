@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
- <%-- <select id="listRecent_inf" parameterType="int" resultType="video_recentvideoDTO">
- select a.*,b.recent_no from tftube_video a join tftube_recentvideo b on a.video_name=b.video_name and b.member_no=#{member_no} order by b.recent_no desc limit 40;
- </select> 
- 정확한 이유는파악하지 못했다. 그러나 아직 video_name이 unique가 아니기 때문에 오류가 발생한다.
-  --%>	
 <%@ include file="top.jsp"%> 
 <meta charset="UTF-8">
-
 <script type="text/javascript">
 function delete_recent(){
 	location.href="tftube_recentvideo_delete";
@@ -16,18 +9,20 @@ function delete_recent(){
 </script>
 </head>
 <div> <!-- start of 2-2 -->
+<h2>최근 본 동영상</h2>
+<c:choose>
+<c:when test="${recent_list.size()==0}">
+시청한 동영상이 없습니다.
+</c:when>
+<c:otherwise>
 <a href="tftube_recentvideo_delete_all"><button>모두지우기</button></a>
 <table>
 <c:forEach var="recentVideo" items="${recent_list}">
 <tr>
 <td>
 <div style="float:left">
-
-<c:if test="${recent_list.size()==0}">
-시청한 동영상이 없습니다.
-</c:if>
 <a href="tftube_videoView?no=${recentVideo.no}">
-<img src="resources/tftube/uploadImage/${recentVideo.image}" 
+<img src="resources/tftube/Image/${recentVideo.image}" 
 width="300" height="200"></a>
 </div>
 
@@ -47,6 +42,8 @@ ${recentVideo.description}
 </tr>
 </c:forEach>
 </table>
+</c:otherwise>
+</c:choose>
 </div>
 <%@ include file="bottom.jsp"%> 
 

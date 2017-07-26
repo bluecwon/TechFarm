@@ -3,14 +3,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<c:set var="like_status" value="${like_status}"/><!-- 컨트롤러에서받아옴 -->
-<c:set var="unlike_status" value="${unlike_status}"/>
-
 <script src="resources/js/jquery-1.9.0.js"></script>
 <script type="text/javascript">
+var no=${vdto.no}; 
 var like_status=${like_status};
 var unlike_status=${unlike_status};
-var no=${vdto.no};
 
 $(function(){	
 	if(like_status==0){
@@ -25,24 +22,24 @@ $(function(){
 	$("#unlike").hide();
 	$("#unlike_disabled").show();	
 	}
-	else if(unlike_status==1) {	
+	else if(like_status==1){	
 	$("#unlike_disabled").hide();
 	$("#unlike").show();
 	}
 });
 
 	function likes()
-	{like_status--;	
+	{like_status=0;	
 	//1.값은 계속 올라감, 2. 이사이트로 이동자체를 안하느 것일수도. 
 	location.href="tftube_videoView?no="+no+"&like_status="+like_status;}
 	function likes_disabled()
-	{like_status++;	
+	{like_status=1;	
 	location.href="tftube_videoView?no="+no+"&like_status="+like_status;}
 
 	function unlikes()
-	{unlike_status--;location.href="tftube_videoView?no="+no+"&unlike_status="+unlike_status;}
+	{unlike_status=0;location.href="tftube_videoView?no="+no+"&unlike_status="+unlike_status;}
 	function unlikes_disabled()
-	{unlike_status++;location.href="tftube_videoView?no="+no+"&unlike_status="+unlike_status;}
+	{unlike_status=1;location.href="tftube_videoView?no="+no+"&unlike_status="+unlike_status;} 
 </script>
 
 <c:choose>

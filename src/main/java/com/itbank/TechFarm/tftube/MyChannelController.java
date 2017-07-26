@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.TechFarm.login.member.MemberDTO;
-
+import com.itbank.TechFarm.tftube.dao.MyChannelDAO;
 import com.itbank.TechFarm.tftube.dao.SubingDAO;
 import com.itbank.TechFarm.tftube.dao.VideoDAO;
-
+import com.itbank.TechFarm.tftube.dto.MyChannelDTO;
 import com.itbank.TechFarm.tftube.dto.SubingDTO;
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
 
@@ -29,8 +29,30 @@ public class MyChannelController {
 	private VideoDAO videoDAO;
 	@Autowired
 	private SubingDAO subingDAO;
-	
+	@Autowired
+	private MyChannelDAO mychannelDAO;
 	String msg=null,url=null;
+	
+	
+	@RequestMapping(value="/createChannel")
+	public ModelAndView createMychannel(HttpServletRequest arg0, 
+			HttpServletResponse arg1) throws Exception {
+		ModelAndView mv=new ModelAndView();	
+		HttpSession session=arg0.getSession();
+		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
+		String channel=arg0.getParameter("channelname");
+		MyChannelDTO dto=new MyChannelDTO();
+		dto.setChannel(channel);
+		dto.setMember_no(member.getNo());
+		int res=mychannelDAO.createChannel(dto);
+		if(res>0){
+		mv.setViewName("redirect:tftube_main");
+		}
+		else{
+		mv.setViewName("redirect:/");	
+		}
+		return mv;
+	}
 	
 	
 	@RequestMapping(value="/tftube_mychannel", method=RequestMethod.GET)

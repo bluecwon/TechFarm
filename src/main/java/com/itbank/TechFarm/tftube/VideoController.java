@@ -1,36 +1,17 @@
 package com.itbank.TechFarm.tftube;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.security.DigestInputStream;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
-import java.text.DateFormat;
+
 import java.text.DecimalFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.bouncycastle.jcajce.provider.digest.Keccak.DigestKeccak;
-import org.bouncycastle.jcajce.provider.digest.SHA3;
-import org.bouncycastle.jcajce.provider.digest.SHA3.DigestSHA3;
-import org.bouncycastle.util.encoders.Hex;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -46,18 +27,19 @@ import com.itbank.TechFarm.tftube.dao.LikeVideoDAO;
 import com.itbank.TechFarm.tftube.dao.MyChannelDAO;
 import com.itbank.TechFarm.tftube.dao.RecentVideoDAO;
 import com.itbank.TechFarm.tftube.dao.ReplyDAO;
-
 import com.itbank.TechFarm.tftube.dao.SubingDAO;
+import com.itbank.TechFarm.tftube.dao.UnlikeVideoDAO;
 import com.itbank.TechFarm.tftube.dao.VideoDAO;
 import com.itbank.TechFarm.tftube.dto.LikeVideoDTO;
 import com.itbank.TechFarm.tftube.dto.RecentVideoDTO;
-import com.itbank.TechFarm.tftube.dto.ReplyDTO;
+
 import com.itbank.TechFarm.tftube.dto.ReplyFormat;
 
 import com.itbank.TechFarm.tftube.dto.SubingDTO;
+import com.itbank.TechFarm.tftube.dto.UnlikeVideoDTO;
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
 import com.itbank.TechFarm.tftube.java.Sha3;
-import com.mysql.jdbc.log.Log;
+
 
 
  
@@ -75,7 +57,9 @@ public class VideoController {
 	@Autowired
 	private SubingDAO subingDAO;	
 	@Autowired
-	private LikeVideoDAO likevideoDAO;	
+	private LikeVideoDAO likevideoDAO;
+	@Autowired
+	private UnlikeVideoDAO unlikevideoDAO;
 	
 	private String upPath_video=null;
 	private String upPath_image=null;
@@ -112,6 +96,7 @@ public class VideoController {
 		
 		String upPath_image=session.getServletContext().getRealPath("/resources/tftube/uploadImage");
 		String upPath_video=session.getServletContext().getRealPath("/resources/tftube/uploadVideo");
+		System.out.println("upPath_video:"+upPath_video);
 		System.out.println("upPath_img:"+upPath_image);
 		
 		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
@@ -169,14 +154,58 @@ public class VideoController {
 		mf2.transferTo(original_image);
 		
 		String image_sha3=sha3.Digest_Sha3(original_image);				
+		//지워졌을때 문제가 발생한다. 사실은 그냥 영상 썸네일을 추출하는게 가장 좋음
 		
+		//db에서 목록 추출,그리고 그 목록들과 비교 
+		
+		List<VideoDTO> shaList=videoDAO.listVideo();
+		for(VideoDTO shadto: shaList){
+			if(video_sha3.equals(shadto.getVideo_name())){
+				msg="업로드된 다른 동영상과 중복됩니다.";
+				url="tftube_video_insert";
+				mv.addObject("msg",msg);
+				mv.addObject("url",url);
+				mv.setViewName("tftube/message");
+				original_video.delete();
+				original_image.delete();
+				return mv;
+			}
+		}		
+		
+		//게시
+		String file_ex_video=original_video_name.substring(original_video_name.length()-4,original_video_name.length());
+		String video_name=video_sha3+file_ex_video;
+		//여기 string과 특정폴더에 있는 파일들의 이름 비교.
+		String upPath_video_real=session.getServletContext().getRealPath("/resources/tftube/Video");
+		System.out.println("upPath_video_real:"+upPath_video_real);
+		File video_real=new File(upPath_video_real);
+		if(!video_real.exists()){
+			video_real.mkdirs();
+		}
+		File file=new File(upPath_video_real,video_name);
+		original_video.renameTo(file);	
+		
+		String file_ex_image=original_image_name.substring(original_image_name.length()-4,original_image_name.length());	
+		
+		String image_name=image_sha3+file_ex_image;
+		
+		String upPath_image_real=session.getServletContext().getRealPath("/resources/tftube/Image");
+		File image_real=new File(upPath_image_real);
+		if(!image_real.exists()){
+			image_real.mkdirs();
+		}
+		File image=new File(upPath_image_real,image_name);
+		original_image.renameTo(image);
+		 
+		 
+		 
 		
 		
 			
 		//sha3 까지 구하는 것만 여기서, 비교결과를 전송 insertform에 
 		//컨트롤러를 거쳐도 다시 원래 정보가 남아 있게 하려면 어찌해야함?
 		//문제 없으면 게시 mapping , 문제 있으면 messsage로 넘김
-		/*
+		
 		MemberDTO memberdto=(MemberDTO)session.getAttribute("memberDTO");
 		dto.setDescription(ServletRequestUtils.getStringParameter(arg0, "description"));
 		dto.setMember_no(memberdto.getNo());
@@ -202,24 +231,10 @@ public class VideoController {
 			mv.setViewName("message");
 			mv.addObject("msg",msg);
 			mv.addObject("url",url);				
-		}		*/
+		}		
 		return mv;
 		
-		/*String file_ex_video=original_video_name.substring(original_video_name.length()-4,original_video_name.length());
-		String video_name=video_sha3+file_ex_video;
-		//여기 string과 특정폴더에 있는 파일들의 이름 비교.
 		
-		File file=new File(upPath_video,video_name);
-		original_video.renameTo(file);	
-		
-		String file_ex_image=original_image_name.substring(original_image_name.length()-4,original_image_name.length());	
-		
-		String image_name=image_sha3+file_ex_image;
-		File image=new File(upPath_image,image_name);
-		original_image.renameTo(image);
-		 
-		 
-		 */
 	}	
 	
 	
@@ -246,17 +261,95 @@ public class VideoController {
 		if(no_raw!=null){no=Integer.parseInt(no_raw);}
 		else{
 			return new ModelAndView("redirect:tftube_main");}
+		VideoDTO vdto=videoDAO.getVideo(no);//a video's total information		
+		mv.addObject("vdto",vdto);
+		String video_name=vdto.getVideo_name();//video_name at present
+		
+		/*//like
+		String like_status=arg0.getParameter("like_status");
+		String unlike_status=arg0.getParameter("unlike_status");		
+
+		
+		String like_status_db=likevideoDAO.likevideo_list_status(member_no, no);
+		String unlike_status_db=unlikevideoDAO.likevideo_list_ustatus(member_no, no);
+		
+		if(like_status_db==null){
+			like_status_db="off";
+		}
+		if(unlike_status_db==null){
+			unlike_status_db="off";
+		}
 		
 		
-		/**like**/
+		
+		if(like_status==null){like_status=like_status_db;}
+		else{
+			if(like_status.equals("on")&&like_status_db.equals("off")){
+				LikeVideoDTO lvd=new LikeVideoDTO();
+				lvd.setMember_no(member_no);//내가
+				lvd.setVideo_no(no);//이 비디오를				
+				likevideoDAO.like_insert(lvd);
+				//video의 좋아요 ++ 
+			}
+			if(like_status.equals("off")&&like_status_db.equals("on")){
+				LikeVideoDTO lvd=new LikeVideoDTO();
+				lvd.setMember_no(member_no);
+				lvd.setVideo_no(no);			
+				likevideoDAO.like_delete(member_no,no);
+				//video의 좋아요 -- 
+			}			
+			like_status_db=likevideoDAO.likevideo_list_status(member_no, no);
+		}
+		if(unlike_status==null){unlike_status=unlike_status_db;}
+		else{
+			if(unlike_status.equals("on")&&unlike_status_db.equals("off")){
+				UnlikeVideoDTO uvd=new UnlikeVideoDTO();
+				uvd.setMember_no(member_no);
+				uvd.setVideo_no(no);
+				unlikevideoDAO.unlike_insert(uvd);
+				
+				//video의 좋아요 ++  db on 저장
+			}
+			if(unlike_status.equals("off")&&unlike_status_db.equals("on")){
+				//video의 좋아요 -- df off 저장
+				UnlikeVideoDTO uvd=new UnlikeVideoDTO();
+				uvd.setMember_no(member_no);
+				uvd.setVideo_no(no);
+				unlikevideoDAO.unlike_delete(member_no,no);
+			}
+			unlike_status_db=unlikevideoDAO.likevideo_list_ustatus(member_no, no);			
+		}
+		//좋아요 값 갱신
+		VideoDTO likedto=new VideoDTO();
+		int likep=likevideoDAO.likecount(no);
+		likedto.setLikep(likep);
+		likedto.setNo(no);
+		videoDAO.updateLike(likedto);
+		//싫어요 값 갱신
+		VideoDTO unlikedto=new VideoDTO();
+		int unlikep=unlikevideoDAO.unlikecount(no);
+		unlikedto.setLikep(unlikep);
+		unlikedto.setNo(no);
+		videoDAO.updateLike(unlikedto);
+		//좋아요 숫자 내보내기
+		mv.addObject("likep",likep);
+		mv.addObject("unlikep",unlikep);		
+		mv.addObject("like_status",like_status_db);
+		mv.addObject("unlike_status",unlike_status_db);
+		mv.addObject("a",3);
+		mv.addObject("b","헤헹");*/
+		
+	//**like**
 		//두 값들이 혹시나 0이 들어 오진 않는가?
-		
+		/*String like_status=null;
+		String unlike_status=null;*/
 		String like_status_req_raw=arg0.getParameter("like_status");//like unlike 둘중 하나만 들어온다.
 		String unlike_status_req_raw=arg0.getParameter("unlike_status");
 		//새로 고침 했을때, 주소직접접근, main에서 넘어올때(except like button)
 		//기존에 있던 like_status 값 들고오기.
-		int like_status_req=0;
-		int unlike_status_req=0;
+
+		int like_status_req=2;
+		int unlike_status_req=2;
 	
 		/*if(like_status==null)*/
 		//기존 계정이 가지고 있던 like_status 값.
@@ -268,15 +361,16 @@ public class VideoController {
 		if(unlike_status_req_raw!=null){
 		unlike_status_req=Integer.parseInt(unlike_status_req_raw);}
 	
-		
+		System.out.println("member_no:"+member_no);
+		System.out.println("no:"+no);
 		int like_db=likevideoDAO.likevideo_list_status(member_no, no);
 		//결과가 뭐가 나올질 모르겠네(내생각 db 에있는값추출. 다만 1짜리 갯수
-		int unlike_db=likevideoDAO.likevideo_list_ustatus(member_no, no);
+		int unlike_db=unlikevideoDAO.likevideo_list_ustatus(member_no, no);
 	
 		//tftube_video
-		VideoDTO vdto=videoDAO.getVideo(no);//a video's total information		
-		mv.addObject("vdto",vdto);
-		String video_name=vdto.getVideo_name();//video_name at present
+	//	VideoDTO vdto=videoDAO.getVideo(no);//a video's total information		
+	//	mv.addObject("vdto",vdto);
+	//	String video_name=vdto.getVideo_name();//video_name at present
 		
 		//지금 이 비디오에 이 아이디에 좋아요
 		//no member_no video_name like status unlike	
@@ -287,9 +381,13 @@ public class VideoController {
 		  
 		//insert준비
 
-		LikeVideoDTO lvdto_insert=new LikeVideoDTO();		
+		
+		LikeVideoDTO lvdto_insert=new LikeVideoDTO();	
+		UnlikeVideoDTO ulvdto_insert=new UnlikeVideoDTO();
 		lvdto_insert.setMember_no(member_no);
 		lvdto_insert.setVideo_no(no); 
+		ulvdto_insert.setMember_no(member_no);
+		ulvdto_insert.setVideo_no(no);
 		int res=0;
 		//like_db=0;
 		if(like_status_req!=like_db){
@@ -302,13 +400,13 @@ public class VideoController {
 		 
 		if(unlike_status_req!=unlike_db){
 		if(unlike_status_req==1){			
-		res=likevideoDAO.unlike_insert(lvdto_insert);}
+		res=unlikevideoDAO.unlike_insert(ulvdto_insert);}
 		else if(unlike_status_req==0){//when like			
-		res=likevideoDAO.unlike_delete(member_no,no);}	
+		res=unlikevideoDAO.unlike_delete(member_no,no);}	
 		}
 		//좋아요 갯수 세기-제대로 한거 맞니?
 		int count_like=likevideoDAO.likecount(no);
-		int count_unlike=likevideoDAO.unlikecount(no);		
+		int count_unlike=unlikevideoDAO.unlikecount(no);		
 		
 		//좋아요,싫어요 갯수 업데이트 dto.get
 		VideoDTO vdto_blike=new VideoDTO();
@@ -316,13 +414,13 @@ public class VideoController {
 		vdto_blike.setUnlikep(count_unlike);
 		vdto_blike.setNo(no);
 		int res_update_like=videoDAO.updateLike(vdto_blike);
-		
+		int like_db_out=likevideoDAO.likevideo_list_status(member_no, no);
+		int unlike_db_out=unlikevideoDAO.likevideo_list_ustatus(member_no, no);
 		if(res_update_like>0){
 		mv.addObject("likep",count_like);
-		mv.addObject("unlikep",count_unlike);
-		
-		mv.addObject("like_status",like_status_req);
-		mv.addObject("unlike_status",unlike_status_req);
+		mv.addObject("unlikep",count_unlike);		
+		mv.addObject("like_status",like_db_out);
+		mv.addObject("unlike_status",unlike_db_out);
 		mv.setViewName("tftube/videoView");
 		}else{
 			msg="좋아요 갱신에 실패하였습니다.";
@@ -331,11 +429,11 @@ public class VideoController {
 			mv.addObject("url",url);
 			mv.setViewName("tftube/message");			
 		}		
-		/**end of like**/
+		//end of like*/
 		
 		
-		
-		
+		/*like_db=likevideoDAO.likevideo_list_status(member_no, no);
+		unlike_db=unlikevideoDAO.likevideo_list_ustatus(member_no, no);*/
 		
 		
 		
