@@ -10,13 +10,11 @@
 		select count(*) from tftube_reply where re_level = 0 and video_name=#{video_name} 
 	</select>
 		
-	<select id="replyList_by_video" parameterType="String" resultType="replyDTO">
-		select * from tftube_reply where video_name=#{video_name} order by re_step asc
+	<select id="replyList_by_video" parameterType="String" resultType="replyformat">
+		select b.channel,a.* from tftube_reply a join tftube_mychannel b on a.member_no=b.member_no where video_name=#{video_name} order by re_step asc
 	</select>		
 
-	<select id="getName_by_video" parameterType="String" resultType="replyformat">
-	select a.name,b.* from tfmember.member a join tftube_reply b on a.no = b.member_no and b.video_name=#{video_name} order by re_step asc
-	</select>
+	
 	
 	<delete id="deletereply" parameterType="int">
 		delete from tftube_reply where no = #{no}
@@ -41,10 +39,5 @@
 	</update>
 	
 	
-	<!-- <select id="listreply" parameterType="java.util.HashMap" resultType="replyDTO">
- 	select * from 
- 	(select rownum rn,A.* from(select * from tftube_reply order by re_step asc)A)
-	where rn between ${start} and ${end}
-	</select>	 -->
 
 </mapper>

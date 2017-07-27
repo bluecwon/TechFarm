@@ -3,13 +3,13 @@
 
 <!DOCTYPE html>
 <%@ include file="top.jsp"%> 
-<div> <!-- start of 2-2 -->
+<div style="float:right"> <!-- start of 2-2 -->
 
 <table>
 <c:forEach var="searchVideo" items="${search_result}">
 <tr>
 <td>
-<div style="float:left">
+<div class="rdiv">
 <c:if test="${search_result.size()==0}">
 해당 검색 결과가 존재 하지 않습니다.
 </c:if>

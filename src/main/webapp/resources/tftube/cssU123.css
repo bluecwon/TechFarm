@@ -20,13 +20,31 @@ div.white{
 	background-color:white;
 	
 }
-div.righting{
-	margin-right:300px;
-}
 
 p.comment{
 	color:#D5D5D5;
 	
+}
+#menu_window{
+	
+	position:fixed;
+	margin:auto;
+	overflow:hidden;
+	
+}
+.ldiv {float: left; width: 10%; height: 100%; overflow-y: scroll;}
+#ldiv {float: left; width: 10%; height: 100%; overflow-y: scroll;}
+
+
+.rdiv {float: right; width: 90%; height: 100%;}
+#rdiv {float: right; width: 90%; height: 100%;}
+
+
+button{	
+	border:0;
+	outline:0;
+	background-color:#F6F6F6;
+	cursor: pointer;
 }
 
 #header1, #content, #comments, #sidebar, #footer { 
@@ -49,8 +67,8 @@ p.comment{
 	padding:0px;
 }
 #header1 { 
-	/* width:900px; */ 
-	margin:0px auto;
+width:100%; 
+margin:0px;
 }
 
 #main1 {
@@ -150,7 +168,7 @@ em {
 
 
 table{	
-	border-spacing:15px;
+	border-spacing:4px;
 }
 
 

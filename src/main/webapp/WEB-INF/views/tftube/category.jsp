@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <%@include file="top.jsp"%>
 
-<div class="spacing">
+<div class="rdiv">
 <h2>${category}</h2>
 <table>
 <tr>

@@ -120,4 +120,13 @@ public class VideoMapper {
 		session.close();
 		return list;		
 	}
+	
+	public static int updateVideo(VideoDTO dto){
+	SqlSession session=sqlMapper.openSession();
+	int res=session.update("updateVideo",dto);
+	session.commit();
+	session.close();
+	return res;
+	
+	}
 }

@@ -11,45 +11,46 @@
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
 <script type="text/javascript">
+
 	$(function() {
-		$("#but").click(function() {
-			$(".top").slideToggle('fast');
+		
+		$("#folder").click(function() {
+			$("#menu_window").slideToggle('fast');
 		});
 		$("#wideView").click(function() {
 			$("#content").toggleClass("wide");
 			$(this).toggleClass("wide");
 		});		
+		
 	});
 </script>
 
 
 	<div id="header1">
-		<div class="imaj"><input type="button" id="but" src="resources/tftube/imgs/fold.JPG">
+		<div class="imaj"><button><img id="folder" src="resources/tftube/imgs/fold.JPG" width="30" height="30"></button>		
 		<a href="tftube_main"><font size=6>TF</font><img src="resources/tftube/imgs/tube.jpg"></a></div>	
-		<div class="titl"><form action="tftube_search" method="post">
-	<input type="text" name="search_text" size="70" maxlength="70" alt="음메">  
-	<select name="search">
+		<div class="imaj"><form action="tftube_search" method="post">
+	<input type="text" name="search_text" size="70" maxlength="70">  
+<select name="search">
 <option value="channel">작성자</option>
 <option value="description">내용</option>
 <option value="title" selected>제목</option>
 </select>	 
-	<input type="submit" value="검색" width="900">
-	
+<input type="submit" value="검색" width="900">
+</form></div>		
 			<c:choose>
 				<c:when test="${memberDTO==null}">
-					<a href="login">업로드</a>
-					<a href="login">로그인</a>
+		<div class="titl"><pre><a href="login"><img src="resources/tftube/imgs/upload2.JPG" width="30" height="30"></a> <a href="login">로그인</a></pre></div>					
 				</c:when>
 				<c:otherwise>
-					<a href="tftube_video_insert">업로드</a>
+		<div class="titl"><pre><a href="tftube_video_insert"><img src="resources/tftube/imgs/upload2.JPG"  width="30" height="30"></a></pre></div>
 				</c:otherwise>
-			</c:choose>	
-		</form>	
-	</span>
-
-
-	</div><!-- end of header1 -->
-	<div id="2-1" class="top" style="float: left;">
+			</c:choose>				
+					
+	
+</div><!-- end of header1 -->
+	
+	<div id="menu_window" class="ldiv">	
 		<table>
 			<tr>
 				<td><a href="tftube_main">홈</a><br> 인기<br> <c:if
@@ -68,7 +69,7 @@
 						<a href="tftube_category?category=comedy">코미디</a><br>
 						<a href="tftube_category?category=news/politics">뉴스</a><br> 
 						<a href="tftube_category?category=animation">애니메이션</a><br></td>
-		</table>
+		</table>		
 	</div>	
 	<!-- end of 2 -1-->
 	<div id="main">

@@ -32,7 +32,7 @@ public class SearchTftubeController {
 		String search_text=arg0.getParameter("search_text");
 		
 		List<VideoDTO> search_result=searchDAO.search_single(search, search_text);
-		
+		 
 		mv.addObject("search_result",search_result);		
 		mv.setViewName("tftube/searchResult");
 		

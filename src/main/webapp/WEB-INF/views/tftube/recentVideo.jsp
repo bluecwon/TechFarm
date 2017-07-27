@@ -8,7 +8,7 @@ function delete_recent(){
 };
 </script>
 </head>
-<div> <!-- start of 2-2 -->
+<div class="rdiv"> <!-- start of 2-2 -->
 <h2>최근 본 동영상</h2>
 <c:choose>
 <c:when test="${recent_list.size()==0}">
@@ -33,7 +33,7 @@ ${recentVideo.title}<br>
 ${recentVideo.description}
 </div>
 
-<div class="titl">
+<div style="float:right">
 
 <a href="tftube_recentvideo_delete?recent_no=${recentVideo.recent_no}">삭제</a>
 

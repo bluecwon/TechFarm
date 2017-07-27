@@ -9,6 +9,7 @@ var no=${vdto.no};
 var like_status=${like_status};
 var unlike_status=${unlike_status};
 
+
 $(function(){	
 	if(like_status==0){
 	$("#like").hide();
@@ -30,7 +31,6 @@ $(function(){
 
 	function likes()
 	{like_status=0;	
-	//1.값은 계속 올라감, 2. 이사이트로 이동자체를 안하느 것일수도. 
 	location.href="tftube_videoView?no="+no+"&like_status="+like_status;}
 	function likes_disabled()
 	{like_status=1;	
@@ -39,7 +39,7 @@ $(function(){
 	function unlikes()
 	{unlike_status=0;location.href="tftube_videoView?no="+no+"&unlike_status="+unlike_status;}
 	function unlikes_disabled()
-	{unlike_status=1;location.href="tftube_videoView?no="+no+"&unlike_status="+unlike_status;} 
+	{unlike_status=1;location.href="tftube_videoView?no="+no+"&unlike_status="+unlike_status;}
 </script>
 
 <c:choose>

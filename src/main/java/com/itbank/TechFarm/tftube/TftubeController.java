@@ -39,13 +39,20 @@ public class TftubeController {
 		
 		List<VideoDTO> list=videoDAO.listVideo();		
 		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
+		
+		
+		
 		if(member!=null){
 		MyChannelDTO mychan=mychannelDAO.getChannel(member.getNo());
-		if(mychan==null){			
-		mav.setViewName("tftube/createChannel");
-		return mav;
-		}		
+		if(mychan==null){
+			MyChannelDTO mydto=new MyChannelDTO();
+			mydto.setMember_no(member.getNo());
+			mydto.setChannel(member.getId());
+			mychannelDAO.createChannel(mydto);
 		}
+		}			
+		
+	
 		
 		
 		
@@ -55,12 +62,8 @@ public class TftubeController {
 		List<VideoDTO> list_comedy=videoDAO.listVideo_category("comedy");
 		List<VideoDTO> list_movie=videoDAO.listVideo_category("movie");
 		List<VideoDTO> list_news=videoDAO.listVideo_category("news/politics");
-		List<VideoDTO> list_ani=videoDAO.listVideo_category("animation");
-		
-		String upPath_video=session.getServletContext().getRealPath("/resources/tftube/uploadVideo");
-		
-		
-		System.out.println(upPath_video);		
+		List<VideoDTO> list_ani=videoDAO.listVideo_category("animation");	
+				
 		
 		session.setAttribute("list",list);	
 		session.setAttribute("list_music", list_music);
