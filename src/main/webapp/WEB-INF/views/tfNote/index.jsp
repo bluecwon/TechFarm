@@ -4,7 +4,7 @@
 <%@include file="header.jsp"%>
 <!-- 상단 부분 -->
 <!--content -->
-	<div id="content">
+<!-- 	<div id="content"> -->
 		
 <script type="text/javascript">
 	function chkTitle() {
@@ -55,6 +55,9 @@
 		}
 	}	
 </script>
+	<div id="wrap" style="text-align:center;">
+
+	
 	<div align="center">
 	<h1>메모작성</h1>
 	<form name="frm" method="post" action="note_insert" onsubmit="return chkTitle();">		
@@ -79,14 +82,11 @@
 					<!-- 히든으로 넘어갈 정보들 -->
 				    <!-- <input type="button" value="취소" onclick="chkCancel()">
 					<input type="submit" value="입력">		 -->
-					<c:if test="${noteList.size() == 5}">
-						5개 이상은 만들수 없습니다.
-					</c:if>
-					<c:if test="${noteList.size() != 5}">
+
 						<a href="#" onclick="javascript:insert();">
 							<img src="resources/tfNote/plus.jpg" style="width:15px; height:15px;">
 						</a>
-					</c:if>					
+		
 				</td>
 			</tr>
 		</table>
@@ -96,27 +96,48 @@
 	<c:if test="${noteList.size()==0}">
 		<h2>작성된 메모가 없습니다.</h2>
 	</c:if>
-	<div style="display:flex;">
+	<c:set var="count" value="0"/>
+
+
+	<div style="display:flex;margin:0 auto;">
 		<c:forEach var="dto" items="${noteList}">
-		<form name="f" method="post" action="note_update" onsubmit="return chkTitle();">
-			<div style="border:1px solid; padding:10px; width:220px;  word-break:break-all;flex:1;margin-left:5px; margin-right:5px; margin-bottom:20px; background:#ffffac;">
-				<div align="right">
-					<a href="#" onclick="javascript:update();">수정</a>
-					<a href="note_delete?num=${dto.num}&id=${dto.id}">
-						<img src="resources/tfNote/close.JPG" style="width:15px; height:15px; margin-left:10px;">
-					</a>
-				</div>
-				<p>제목 : <input type="text" name="title" value="${dto.title}"></p><br>
-				<p><textarea name="content" onKeyUp="chkContent(this, 4000)" rows="5" style="width:100%; height:100%;">${dto.content}</textarea></p>
-				<%-- <input type="text" name="cbyte" class=byte value="${dto.cbyte}" size="3" readOnly>/4,000Byte --%>
-				<input type="hidden" name="id" value="${dto.id}"/>
-				<input type="hidden" name="num" value="${dto.num}"/>
-			</div>
-		</form>
-		</c:forEach>
-	</div>
 		
-	</div>
+			<c:if test="${count == 4}">
+				</div>
+				<div style="display:flex;margin:0 auto;">
+				<c:set var="count" value="${count = 0}"/>
+			</c:if>
+		
+			<form name="f" method="post" action="note_update" onsubmit="return chkTitle();">
+				<table class="jjm494" style="background:#ffff80;">	
+					<tr>
+						<td align="right">
+							<a href="#" onclick="javascript:update();">수정</a>
+							<a href="note_delete?num=${dto.num}&id=${dto.id}">
+								<img src="resources/tfNote/close.JPG" style="width:15px; height:15px; margin-left:10px;">
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<p>제목 : <input type="text" name="title" value="${dto.title}"></p><br>
+						</th>
+					</tr>
+					<tr>
+						<td>
+							<p><textarea name="content" onKeyUp="chkContent(this, 4000)" rows="5" style="width:100%; height:100%;">${dto.content}</textarea></p>
+							<input type="hidden" name="id" value="${dto.id}"/>
+							<input type="hidden" name="num" value="${dto.num}"/>
+						</td>
+					</tr>
+				</table>
+				<c:set var="count" value="${count = count + 1}"/>
+			</form>
+		</c:forEach>
+		
+		</div>
+
+	<!-- </div> -->
 <!--//content -->
 <!-- 하단 부분 -->
 <%@include file="footer.jsp"%>

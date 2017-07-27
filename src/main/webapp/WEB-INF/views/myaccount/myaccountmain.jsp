@@ -31,28 +31,35 @@
 					</table>
 				</div>
 				<div id="menu2">tftube 정보
-					<table align="center">
+				</div>
+				<div id="menu3">tblog 정보</div>
+				<div id="menu4" align="center">tplus 정보
+					<table>
 						<c:if test="${tfPlusSize == 0}">
 							<tr>
 								<td>작성된 프로필이 없습니다.</td>
 							</tr>
 						</c:if>
-						<tr>
-							<td>총 작성프로필 : ${tfPlusSize}</td>
-						</tr>
-						<tr>
-							<td>
-								최근 작성프로필 제목 : ${tfPlusNews.profileName}</br>
-								작성날짜 : ${tfPlusNews.profileDate}</br>
-								<a href="tfPlusNewsProfileBoardList?profileName=${tfPlusNews.profileName}&id=${tfPlusNews.profileId}&num=${tfPlusNews.profileNum}&my=true&myId=${sessionScope.memberDTO.id}"/>
-									<img src="resources/tfPlus/images/contents/profile/${tfPlusNews.photo}" style="width:200px; height:150px;">
-								</a>
-							</td>
-						</tr>
+						<c:if test="${tfPlusSize != 0}">
+							<tr>
+								<td>총 작성프로필 : ${tfPlusSize}</td>
+							</tr>
+							<tr>
+								<td>
+									최근 작성프로필 제목 : ${tfPlusNews.profileName}</br>
+									작성날짜 : ${tfPlusNews.profileDate}</br>
+								</td>
+							</tr>
+							<tr>
+								<td align="center">
+									<a href="tfPlusNewsProfileBoardList?profileName=${tfPlusNews.profileName}&id=${tfPlusNews.profileId}&num=${tfPlusNews.profileNum}&my=true&myId=${sessionScope.memberDTO.id}"/>
+										<img src="resources/tfPlus/images/contents/profile/${tfPlusNews.photo}" style="width:200px; height:150px;">
+									</a>
+								</td>
+							</tr>
+						</c:if>
 					</table>
 				</div>
-				<div id="menu3">tblog 정보</div>
-				<div id="menu4">tplus 정보</div>
 </div>
 </div>
 </body>
