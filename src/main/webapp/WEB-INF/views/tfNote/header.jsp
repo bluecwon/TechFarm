@@ -6,9 +6,9 @@
 		<meta charset="utf-8"/>
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 		<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-		<link rel="stylesheet" type="text/css" href="resources/tfNote/Notecss.css" > 
+		<link rel="stylesheet" type="text/css" href="resources/tfNote/Notecss5.css" > 
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
-		<script type="text/javascript">
+		<script type="text/javascript">  
 			$(document).ready(function(){
 				$("#menu").click(function() { 
 					$("#header").find(".header_menu").slideDown('normal').show();
@@ -95,24 +95,22 @@
 	
 	
 
-<div id="wrap">
+<!-- <div id="wrap"> -->
 	
 
 
 	<!--container -->
-	<div id="container">
-		<p>${sessionScope.memberDTO.name}님의 노트</p>
+<%-- 	<div id="container">
+		<p>${sessionScope.memberDTO.name}님의 노트</p> --%>
 		
 
-		<!--aside -->
 
-		<div class="aside">
+<%-- 		<div class="aside">
 
 			사용자 ID : ${sessionScope.memberDTO.id} <br>
 
 			사용자 이름 : ${sessionScope.memberDTO.name} <br>
 
-		</div>
+		</div> --%>
 
-		<!--//aside -->
 
