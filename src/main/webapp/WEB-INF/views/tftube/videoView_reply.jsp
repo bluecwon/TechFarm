@@ -13,7 +13,8 @@ $(function(){
 	location.href="login";
 	});
 	
-	 $("a.reply_button").click(function(){		
+	 $("a.reply_button").click(function(){	
+	/* $("a").siblings().children().hide(); */
 	 $(this).siblings().show('fast');	
 	});	
 	
@@ -44,7 +45,7 @@ $(function(){
 </table>
 
 
-<div class="white">
+<div>
 <!-- Reply list -->
 <table>
 <c:forEach var="rdto" items="${r_list}">
@@ -53,7 +54,7 @@ $(function(){
 <!-- empty space in front of reply_reply -->
 <c:if test="${rdto.re_level==1}">
 <div class = "imaj"><!-- float -->
-<img src="resources/tftube/imgs/vaccum.jpg" width="60" height="60" style="border-style: none;">
+<img src="resources/tftube/imgs/vaccum.JPG" width="60" height="60" style="border-style: none;">
 </div>
 </c:if>
 
@@ -62,7 +63,7 @@ $(function(){
 <!-- reply contents with reply information -->
 
 <div class = "titl"><!--empty space securement-->
-<a href="tftube_mychannel?mem_no=${rdto.member_no}">${rdto.name}</a>  ${rdto.reg_date}<br> 
+<a href="tftube_mychannel?mem_no=${rdto.member_no}">${rdto.channel}</a>  ${rdto.reg_date}<br> 
 
 ${rdto.content}<br>
 
@@ -73,9 +74,9 @@ ${rdto.content}<br>
 <a class="not_login" onmouseover="" style="cursor: pointer;">답글</a><br>
 </c:when>
 <c:otherwise>
-<a class="reply_button" onmouseover="" style="cursor: pointer;">답글</a>
+<a class="reply_button" onmouseover="답글" style="cursor: pointer;">답글</a>
 
-<c:if test="${rdto.member_no eq memberDTO.no}"> 				수정 |<a href="tftube_reply_delete?no=${vdto.no}">${paramScope.rdto}삭제</a> <br></c:if><br>
+<c:if test="${rdto.member_no eq memberDTO.no}"> 				<a href="tftube_reply_delete?no=${vdto.no}">${paramScope.rdto}삭제</a> <br></c:if><br>
 
 <c:if test="${re_reply_size>2}">
 답글 ${re_reply_size}개 모두 보기	

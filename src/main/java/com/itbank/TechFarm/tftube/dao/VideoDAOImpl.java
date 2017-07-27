@@ -65,6 +65,13 @@ public class VideoDAOImpl implements VideoDAO {
 	public List<VideoDTO> listVideo_category(String category) {
 		return VideoMapper.listVideo_category(category);
 	}
+
+	@Override
+	public int updateVideo(VideoDTO dto) {
+		return VideoMapper.updateVideo(dto);
+	}
+	
+	
 	
 
 	

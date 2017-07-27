@@ -11,20 +11,6 @@
 select * from tftube_like where member_no=#{member_no} and video_no=#{video_no}
 </select>
 
-<!-- 
-<insert id="like_insert" parameterType="likevideoDTO">
-insert into tftube_like(member_no,video_no,like_status)values(#{member_no},#{video_no},'on')
-</insert>
-
-Supposed to pratice. there is a need to implements by the other method 
-<delete id="like_delete" parameterType="java.util.HashMap">
-delete from tftube_like where member_no=#{member_no} and video_no=#{video_no}
-</delete>
-
-<select id="likecount" parameterType="int" resultType="int">
-select count(*) from tftube_like where video_no=#{video_no}
-</select> -->
-
 <insert id="like_insert" parameterType="likevideoDTO">
 insert into tftube_like(member_no,video_no,like_status)values(#{member_no},#{video_no},1)
 </insert>

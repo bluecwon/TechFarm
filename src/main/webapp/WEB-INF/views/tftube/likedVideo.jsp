@@ -5,14 +5,16 @@
 
 <link rel="stylesheet" type="text/css" href="resources/tftube/style.css">
 
-<div> <!-- start of 2-2-1 -->
+<div class="rdiv"> <!-- start of 2-2-1 -->
 <h2>관심 동영상</h2>
 <c:choose>
 <c:when test="${like_all_list.size()==0}">
 관심 목록이 없습니다.
 </c:when>
 <c:otherwise>
+<table>
 <c:forEach var="likeList" items="${like_all_list}">
+<tr><td>
 <div id="like-one-line">
 
 <div style="float:left"><!-- start of 2-2-1 -->
@@ -26,8 +28,9 @@ width="300" height="200"></a>
 <a href="tftube_mychannel">${likeList.channel}</a>
 </div><!-- end of 2-2-2 -->
 </div><!-- end of like one line -->
+</td></tr>
 </c:forEach>
-
+</table>
 </c:otherwise>
 </c:choose>
 </div>

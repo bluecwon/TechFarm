@@ -18,6 +18,7 @@ public interface VideoDAO {
 	public List<VideoDTO> listLike(int member_no);
 	public int updateLike(VideoDTO dto);
 	public List<VideoDTO> listVideo_category(String category);
+	public int updateVideo(VideoDTO dto);
 	
 	
 	

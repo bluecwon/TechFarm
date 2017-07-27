@@ -8,10 +8,11 @@
 
 <meta charset="UTF-8">
 
-<div id="2-2-1">
+<div id="2-2-1" class="rdiv">
 <form name="f" method="post" enctype="multipart/form-data" action="tftube_video_insert">
 
 <table>
+
 <tr><td>파일: <input type="file" id="video" name="filename" accept="video/*" >
 <font color="red"><p id="video_check"></p></font></td></tr>
 <tr><td>제목: <input type="text" name="title" id="title" >
@@ -113,6 +114,9 @@ var image_check=document.getElementById("image_check");
 		document.f.submit();
 	}
 };
+
+
+
 
 /* present image */
  var upload=document.getElementById('image'),  

@@ -37,19 +37,20 @@ public class ReplyController {
 		ModelAndView mv=new ModelAndView();	
 		
 		session=arg0.getSession();
-		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
-		if(member==null){
+		Object member_raw=session.getAttribute("memberDTO");
+		if(member_raw==null){
 				msg="로그인이 필요한 서비스 입니다. 로그인을 해주세요.";
 				url="login";
 				mv.addObject("msg",msg);
 				mv.addObject("url",url);
 				mv.setViewName("tftube/message");					
 		}
+		MemberDTO member=(MemberDTO)member_raw;
 		ReplyDTO dto=new ReplyDTO();//space to save reply information.	
 		
 		String re_step_raw=arg0.getParameter("re_step");//not exist reply
 		String re_level_raw=arg0.getParameter("re_level");
-		System.out.println("리스텝?니스텝깔깔:"+re_step_raw);
+		
 		int re_step=0;
 		int re_level=0;
 		if(re_step_raw!=null){
@@ -58,14 +59,10 @@ public class ReplyController {
 			re_level=Integer.parseInt(re_level_raw);
 		}
 		
-		String mode=arg0.getParameter("mode");
-		
-		System.out.println("mode:"+mode);
+		String mode=arg0.getParameter("mode");		
 		String content=null;
-		int res=0;
-		System.out.println("dto:"+dto);
-		System.out.println("member:"+member);
-		System.out.println("member_no:"+member.getNo());
+		int res=0;	
+		
 		dto.setMember_no(member.getNo());		
 		dto.setVideo_name(arg0.getParameter("video_name"));
 		
@@ -79,12 +76,7 @@ public class ReplyController {
 			replyDAO.update_re_step();
 		}else{
 			 content=arg0.getParameter("content_reply");
-			 System.out.println("대댓글일때:"+content);		 
-			/* if(re_level==0){
-				 
-			 }else{
-				 
-			 }*/
+		
 			 dto.setRe_level(1);//distinction reply and re_reply
 			 dto.setRe_step(re_step);			
 			 dto.setContent(content);			 
@@ -121,7 +113,7 @@ public class ReplyController {
 		}*/
 		int r_no=0;
 		ReplyDTO rdto=(ReplyDTO)arg0.getAttribute("rdto");
-		System.out.println(rdto);
+		
 		//re_step, re_level
 		String no_raw=arg0.getParameter("no");//video number
 		if(no_raw!=null){

@@ -115,7 +115,7 @@ public class LikeVideoMapper {
 			System.out.println(list_status);
 			list_status=session.selectOne("likevideo_list_status",map);
 		}
-		
+		session.close();
 		return list_status;		
 	}
 	

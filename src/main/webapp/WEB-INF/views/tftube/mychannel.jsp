@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <%@include file="top.jsp"%>
 
-<div class="spacing" id="2-2-1" ><!-- start of 2-2-1 -->
+<div class="rdiv" id="2-2-1"><!-- start of 2-2-1 -->
 <h2>내 채널</h2><p>
 <font size="4">업로드한 동영상</font><p>
 
@@ -17,7 +17,7 @@
 <table>
 <tr>
 <c:forEach var="videoList" items="${video_by_member}"> 
-<td bgcolor="white">
+<td bgcolor="">
 <a href="tftube_videoView?no=${videoList.no}">
 <img src="resources/tftube/Image/${videoList.image}" width="196" height="100"><br>
 ${videoList.title}</a><br>
@@ -43,7 +43,7 @@ ${videoList.readcount}회  ＊ ${videoList.uploaddate}
 <c:choose>
 <c:when test="${subing_list.size()==0}">
 <tr><td>
-구독 하시는 채널이 없습니다.
+<p class="comment">구독 하는 채널이 없습니다.</p>
 </td></tr>
 </c:when>
 
@@ -66,7 +66,7 @@ ${videoList.readcount}회  ＊ ${videoList.uploaddate}
 <c:choose>
 <c:when test="${subed_list.size()==0}">
 <tr><td>
-관심 동영상이 없습니다.
+<p class="comment">구독자가 없습니다.</p>
 </td></tr>
 </c:when>
 

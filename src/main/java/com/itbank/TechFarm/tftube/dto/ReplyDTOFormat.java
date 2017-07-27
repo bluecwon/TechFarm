@@ -3,7 +3,7 @@ package com.itbank.TechFarm.tftube.dto;
 public class ReplyDTOFormat {
 	
 
-		private String name;
+		private String channel;
 		private int no;
 		private int member_no;	
 		private String reg_date;
@@ -12,11 +12,13 @@ public class ReplyDTOFormat {
 		private int re_step;
 		private int re_level;		
 		
-		public String getName() {
-			return name;
+		
+		
+		public String getChannel() {
+			return channel;
 		}
-		public void setName(String name) {
-			this.name = name;
+		public void setChannel(String channel) {
+			this.channel = channel;
 		}
 		public int getNo() {
 			return no;

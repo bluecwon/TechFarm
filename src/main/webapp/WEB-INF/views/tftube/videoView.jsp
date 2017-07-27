@@ -3,7 +3,7 @@
 <%@ include file="top.jsp"%>
 <!DOCTYPE html>
 <!-- video -->
-<div id="2-2" style="overflow:auto;"> <!-- start of 2-2 -->
+<div id="2-2" class="rdiv" style="overflow:auto;"> <!-- start of 2-2 -->
 
 <table>
 <tr><td colspan="2"><video src="resources/tftube/Video/${vdto.video_name}" autoplay  
@@ -21,7 +21,7 @@ controls="controls" width="700" height="450"></video>
 </tr>
 <tr><td align="left">
 <c:if test="${vdto.member_no eq memberDTO.no}">
-<a href="tftube_video_edit">정보수정</a> <a href="tftube_video_delete?no=${vdto.no}">삭제</a>
+<a href="tftube_video_edit?no=${vdto.no}">정보수정</a> <a href="tftube_video_delete?no=${vdto.no}">삭제</a>
 </c:if></td>
 <td align="right"><%@include file="videoView_like.jsp" %> </td>
 </table>

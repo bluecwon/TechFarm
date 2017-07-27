@@ -40,9 +40,9 @@ public class MyChannelController {
 		ModelAndView mv=new ModelAndView();	
 		HttpSession session=arg0.getSession();
 		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
-		String channel=arg0.getParameter("channelname");
+		
 		MyChannelDTO dto=new MyChannelDTO();
-		dto.setChannel(channel);
+		dto.setChannel(member.getId());
 		dto.setMember_no(member.getNo());
 		int res=mychannelDAO.createChannel(dto);
 		if(res>0){
@@ -95,7 +95,7 @@ public class MyChannelController {
 		//구독자
 		List<SubingDTO> subed_list=subingDAO.get_subed_member(member_no);
 		
-		/*mv.addObject("like_list",like_list);*/
+		
 		mv.addObject("subing_list",subing_list);
 		mv.addObject("subed_list",subed_list);
 		

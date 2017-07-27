@@ -105,6 +105,8 @@ public class RecentVideoController {
 			mv.addObject("url",url);			
 			mv.setViewName("tftube/message");			
 		}		
+		
+		
 		return mv;		
 	}
 	
@@ -112,7 +114,8 @@ public class RecentVideoController {
 	public ModelAndView tftube_recent_del(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
-		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
+		Object member_raw=session.getAttribute("memberDTO");
+		//MemberDTO member=(MemberDTO)member_raw;
 		String recent_no_raw=arg0.getParameter("recent_no");
 		int no=0;
 		if(recent_no_raw!=null){
@@ -125,11 +128,12 @@ public class RecentVideoController {
 			mv.setViewName("tftube/message");
 		}
 		System.out.println("내생각엔 recent_no:"+no);
-		if(member!=null){
-		recentvideoDAO.recent_delete(no);
-		mv.setViewName("tftube/recentVideo");
-		List<Video_RecentVideoDTO> recent_list=videoDAO.listRecent_inf(member.getNo());
-		mv.addObject("recent_list",recent_list);
+		if(member_raw!=null){
+			MemberDTO member=(MemberDTO)member_raw;
+		recentvideoDAO.recent_delete(no);		
+		List<Video_RecentVideoDTO> recent_list=recentvideoDAO.listVideo_recent(member.getNo());
+		mv.addObject("recent_list",recent_list);		
+		mv.setViewName("tftube/recentVideo");	
 		}else{
 			msg="로그인이 필요한 서비스 입니다. 로그인을 해주세요.";
 			url="login";
