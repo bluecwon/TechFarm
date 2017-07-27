@@ -34,6 +34,13 @@ public class tfNoteController {
 		dto.setCbyte(Integer.parseInt(arg0.getParameter("cbyte")));
 		return dto;
 	}
+	private NoteDTO getNoteDTO2(HttpServletRequest arg0) throws Exception{
+		NoteDTO dto = new NoteDTO();
+		dto.setTitle(arg0.getParameter("title"));
+		dto.setContent(arg0.getParameter("content"));
+		dto.setId(arg0.getParameter("id"));
+		return dto;
+	}
 	/* ******************************************************************************** */
 	
 	@RequestMapping(value="/tfNoteIndex")
@@ -102,9 +109,9 @@ public class tfNoteController {
 	
 	@RequestMapping(value="/note_update", method=RequestMethod.POST)
 	public ModelAndView updateProNote(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
-		NoteDTO dto = getNoteDTO(arg0);
+		NoteDTO dto = getNoteDTO2(arg0);
 		dto.setNum(Integer.parseInt(arg0.getParameter("num")));
-		int res = noteDAO.updateNote(dto);
+		int res = noteDAO.updateNote(dto); 
 		String id = dto.getId();
 		return new ModelAndView("redirect:tfNoteIndex?id="+id);		
 	}

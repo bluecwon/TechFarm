@@ -6,7 +6,7 @@
 		<meta charset="utf-8"/>
 		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 		<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-		<link rel="stylesheet" type="text/css" href="resources/tfNote/Notecss5.css" > 
+		<link rel="stylesheet" type="text/css" href="resources/tfNote/Notecss6.css" > 
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script type="text/javascript">  
 			$(document).ready(function(){
@@ -31,9 +31,21 @@
 				}
 			};
 			function insert(){
+			    var tmp = document.frm.title.value.replace(/\s|　/gi, '');	
+
+				if(!document.frm.title.value || tmp==''){     
+
+					alert("제목을 입력하세요.");
+
+					document.frm.title.focus();
+
+					return false;
+
+				}
 				document.frm.submit();
 			};
 			function update(){
+				alert("qwdqwd");
 				document.f.submit();
 			};
 		</script>
@@ -95,12 +107,12 @@
 	
 	
 
-<!-- <div id="wrap"> -->
+<%-- <div id="wrap">
 	
 
 
 	<!--container -->
-<%-- 	<div id="container">
+	<div id="container">
 		<p>${sessionScope.memberDTO.name}님의 노트</p> --%>
 		
 

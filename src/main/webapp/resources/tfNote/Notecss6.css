@@ -53,7 +53,9 @@ table.jjm494 td {
 }
 
 
-
+html {
+	width:100%;
+}
 body, div, ul, li, table, tr, td, th{margin:0px; padding:0px;}
 #viewtitle{
 	position: absolute;
@@ -185,7 +187,7 @@ body, div, ul, li, table, tr, td, th{margin:0px; padding:0px;}
 	*display:inline-block;
 	_float:left;
 	_width:100%;
-	padding-right:200px;
+/* 	padding-right:200px; */
 }
 #container:after{
 	display:block;
