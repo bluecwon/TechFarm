@@ -23,7 +23,7 @@ public class JamesController {
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
 		JamesDTO dto = new JamesDTO();
 		dto.setId(memberDTO.getId());
-		dto.setPassword(memberDTO.getPasswd());
+		dto.setPassword(memberDTO.getRawPassword());
 		String folder="INBOX";
 		if(request.getParameter("folder")!=null){
 			folder=request.getParameter("folder");
@@ -52,7 +52,7 @@ public class JamesController {
 	public String sendJamesPro(Model model, JamesDTO dto, HttpServletRequest request, HttpSession session){
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
 		dto.setId(memberDTO.getId());
-		dto.setPassword(memberDTO.getPasswd());
+		dto.setPassword(memberDTO.getRawPassword());
 		int res = jamesDAO.sendJames(dto);
 		return "redirect:listJames";
 	}
@@ -60,7 +60,7 @@ public class JamesController {
 	public String getJames(Model model, JamesDTO dto, HttpServletRequest request, HttpSession session){
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
 		dto.setId(memberDTO.getId());
-		dto.setPassword(memberDTO.getPasswd());
+		dto.setPassword(memberDTO.getRawPassword());
 		dto.setFolder("INBOX");
 		dto.setNum(Integer.parseInt(request.getParameter("num")));
 		JamesDTO jamesDTO = jamesDAO.getJames(dto);
@@ -72,7 +72,7 @@ public class JamesController {
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
 		JamesDTO dto = new JamesDTO();
 		dto.setId(memberDTO.getId());
-		dto.setPassword(memberDTO.getPasswd());
+		dto.setPassword(memberDTO.getRawPassword());
 		dto.setFolder("INBOX");
 		dto.setNum(Integer.parseInt(request.getParameter("num")));
 		jamesDAO.deleteJames(dto);

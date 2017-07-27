@@ -13,8 +13,8 @@
 						<c:otherwise>
 							<c:forEach var = "dto" items="${listContacts }">
 								<tr>
-									<td><input type="checkbox" name="chk_contact" value="${dto.no }"></td>
-									<td><a href="getContact?no=${dto.no }">
+									<th><input type="checkbox" name="chk_contact" value="${dto.no }"></td>
+									<th><a href="getContact?no=${dto.no }">
 										<c:if test="${!empty dto.photo }">
 											<img src="resources/contacts/upload/${dto.photo }" style="max-width: 30px; height: auto;">
 										</c:if>
@@ -22,12 +22,12 @@
 											<img src="resources/contacts/images/account.png" style="max-width: 30px; height: auto;">
 										</c:if>
 										</a>
-									</td>
-									<td><a href="getContact?no=${dto.no }">${dto.name }</a></td>
-									<td><a href="sendJames?to=${dto.email }">${dto.email }</a></td>
-									<td>${dto.phone }</td>
-									<td><span data-tooltip-text="연락처 수정"><a href="editContact?no=${dto.no }"><img src="resources/contacts/images/edit.png" style="max-width: 20px; height: auto;"></a></span></td>
-									<td><span data-tooltip-text="연락처 삭제"><a href="javascript:onClick=confirmDel('${dto.no }')"><img src="resources/contacts/images/delete.png" style="max-width: 20px; height: auto;"></a></span></td>
+									</th>
+									<td align="center"><a href="getContact?no=${dto.no }">${dto.name }</a></td>
+									<td align="center"><a href="sendJames?to=${dto.email }">${dto.email }</a></td>
+									<td align="center">${dto.phone }</td>
+									<th><span data-tooltip-text="연락처 수정"><a href="editContact?no=${dto.no }"><img src="resources/contacts/images/edit.png" style="max-width: 20px; height: auto;"></a></span></td>
+									<th><span data-tooltip-text="연락처 삭제"><a href="javascript:onClick=confirmDel('${dto.no }')"><img src="resources/contacts/images/delete.png" style="max-width: 20px; height: auto;"></a></span></td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>

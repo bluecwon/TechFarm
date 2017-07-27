@@ -18,9 +18,9 @@ public class SendIdentify {
 	private MailConfig mailConfig;
 	
 	public int sendId(String name, String id, String email){
-		MemberDTO dto=memberDAO.getLogin(id);
+		//MemberDTO dto=memberDAO.getLogin(id);
 		String sender="admin@52.79.140.54";
-		String passwd=dto.getPasswd();
+		String passwd="admin!";
 		String subject=name+"님, TechFarm ID를 요청한 결과입니다.";
 		String text=name+"님이 요청하신 TechFarm ID는 "+id+" 입니다.";
 		
@@ -43,9 +43,9 @@ public class SendIdentify {
 	}
 	
 	public int sendPasswd(String name, String id, String email, String tmp_pw){
-		MemberDTO dto=memberDAO.getLogin(id);
+		//MemberDTO dto=memberDAO.getLogin(id);
 		String sender="admin@52.79.140.54";
-		String passwd=dto.getPasswd();
+		String passwd="admin!";
 		String subject=name+"님, TechFarm Password를 요청한 결과입니다.";
 		String text=name+"님이 요청하신 TechFarm 임시 비밀번호는 "+tmp_pw+" 입니다."
 				+ "\n<<바로 비밀번호를 바꿔주시기 바랍니다.>>";

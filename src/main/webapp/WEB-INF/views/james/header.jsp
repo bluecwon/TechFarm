@@ -97,10 +97,24 @@
 		</div> -->
 		
 		<div id="container">
-		<div id="header1" align="center">
+			
+		<div id="header1">
 			<br>
+		<table>
+			<tr>
+				<td>
+					<div align="left">
+						<a href="sendJames">메일 쓰기</a>
+					</div>
+				</td>
+				<td>
+					<h1 style="color:#a3a4d5;">메일함</h1>
+				</td>
+			</tr>
+		</table>	
 		</div>
 		<div class="menu">
+			
 		</div>
 		
 

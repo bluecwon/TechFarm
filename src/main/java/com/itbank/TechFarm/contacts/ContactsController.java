@@ -116,10 +116,13 @@ public class ContactsController {
 		int res = contactsDAO.deleteContact(no);
 		if (res>0){
 			String upPath = session.getServletContext().getRealPath("/resources/contacts/upload");
-			File file = new File(upPath, dto.getPhoto());
-			if(file.exists()){
-				file.delete();
+			if(dto.getPhoto()!=null) {
+				File file = new File(upPath, dto.getPhoto());
+				if(file.exists()){
+					file.delete();
+				}
 			}
+			
 		}
 		return "redirect:listContacts";
 	}

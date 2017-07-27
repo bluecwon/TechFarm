@@ -12,7 +12,7 @@
 		function checkPasswd(){ // 비밀번호 형식 및 일치여부 확인 메소드
 			var pass = document.getElementById('pwd');
 	    	var message = document.getElementById('sid');
-		     if(pass.value!=("${sessionScope.memberDTO.passwd}")){
+		     if(pass.value!=("${sessionScope.memberDTO.rawPassword}")){
 		    	 message.style.color = badColor;
 		    	 message.innerHTML = "비밀번호를 확인해 주세요."
 		    	 return false;
@@ -118,7 +118,7 @@
 				<td>이름<br><input type="text" name="name" value="${sessionScope.memberDTO.name}"></td>
 			</tr>
 			<tr>
-				<td>E-mail<br><input type="text" name="email" value="${sessionScope.memberDTO.email}" readonly="readonly"></td>
+				<td>E-mail<br><input type="text" name="email" value="${sessionScope.memberDTO.email}" ></td>
 			</tr>
 				<td><span>인증 및 비밀번호 찾기 서비스에 사용될 e-mail을 입력해주세요.</span></td>
 			<tr>

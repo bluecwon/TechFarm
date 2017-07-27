@@ -5,41 +5,35 @@
 	<div class="left">
 		<div class="left_content1">
 			<div align="center">
-
-
-		<h1 align="center" style="color:#ff8080;">메일함</h1>
-
-		<br>
-
-		<a href="sendJames">메일 쓰기</a>
-		<a href="listJames?folder=INBOX">받은편지함</a>
-		<a href="listJames?folder=Sent">보낸편지함</a>
-		<a href="listJames?folder=Trash">휴지통</a>
-
-
-		<div align="center">
-			<table class="jjm494">
-				<c:choose>
-					<c:when test="${listJames.size()==0 }">
-						<tr>
-							<th>받은 메일이 없습니다.</th>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<c:forEach var = "dto" items="${listJames }">
-							<tr>
-								<th><input type="checkbox" name="chk_mail" value="${dto.num	}"></th>
-								<td><a href="sendJames?to=${dto.from}">${dto.from }</a></td>
-								<td><a href="getJames?num=${dto.num }">${dto.subject }</a></td>
-								<td>${dto.sentDate }</td>
-								<th><a href="javascript:onClick=confirmDel('${dto.num }')">삭제</a></th>			
-							</tr>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-			</table>
-		</div>
-		
+				<br>
+				<!-- 
+				<a href="listJames?folder=INBOX">받은편지함</a>
+				<a href="listJames?folder=Sent">보낸편지함</a>
+				<a href="listJames?folder=Trash">휴지통</a>  
+				-->
+				<div align="center">
+					<table class="jjm494">
+						<c:choose>
+							<c:when test="${listJames.size()==0 }">
+								<tr>
+									<th>받은 메일이 없습니다.</th>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var = "dto" items="${listJames }">
+									<tr>
+										<th><input type="checkbox" name="chk_mail" value="${dto.num	}"></th>
+										<td><a href="sendJames?to=${dto.from}">${dto.from }</a></td>
+										<td><a href="getJames?num=${dto.num }">${dto.subject }</a></td>
+										<td>${dto.sentDate }</td>
+										<th><a href="javascript:onClick=confirmDel('${dto.num }')">삭제</a></th>			
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</table>
+				</div>
+				
 		<ul class="pageUL"> 
 			<c:if test="${pageMaker.prev}"> 
 				<li><a href='listJames?page=${pageMaker.start -1}'>이전</a></li> 

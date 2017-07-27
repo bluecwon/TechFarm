@@ -97,14 +97,17 @@
 		</div>
 
 	<div id="wrap">
+		<!-- 
 		<div class="gnb">
 			<div class="gnb_center">
-			
 			</div>
-		</div>
+		</div>  
+		-->
 		<div id="container">
-		</div>
-		<div id="header1">
+		
+		
+		<br>
+		<div id="header1" >
 		<table>
 			<tr>
 				<td>
@@ -119,8 +122,6 @@
 				</td>
 			</tr>
 		</table>
-
-
 		</div>
 		<div class="menu">
 		</div>

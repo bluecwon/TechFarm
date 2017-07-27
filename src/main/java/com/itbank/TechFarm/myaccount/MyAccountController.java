@@ -77,7 +77,12 @@ public class MyAccountController {
 			MemberDTO dto=(MemberDTO)session.getAttribute("memberDTO");
 			dto.setPasswd(passwordSecurity.createPassword(passwd));
 			int res=memberDAO.editPw(dto);
-			jamesUser.setPassword(dto.getId(), passwordSecurity.createPassword(passwd));
+			jamesUser.setPassword(dto.getId(), passwd);
+			
+			dto.setRawPassword(passwd);
+			session.removeAttribute("memberDTO");
+			session.setAttribute("memberDTO", dto);
+			
 		}else{
 			model.addAttribute("cid", 1);
 			return "myaccount/editPw";

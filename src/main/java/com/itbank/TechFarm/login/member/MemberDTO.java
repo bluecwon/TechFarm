@@ -38,6 +38,14 @@ public class MemberDTO {
 	private int birthday_day;
 	private int sex;
 	private String joindate;
+	private String rawPassword;
+	
+	public String getRawPassword() {
+		return rawPassword;
+	}
+	public void setRawPassword(String rawPassword) {
+		this.rawPassword = rawPassword;
+	}
 	public int getNo() {
 		return no;
 	}

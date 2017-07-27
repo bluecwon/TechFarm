@@ -60,6 +60,7 @@ public class LoginController {
 		MemberDTO dto=(MemberDTO)session.getAttribute("loginDTO");
 		if(passwordSecurity.passwordConfirm(passwd, dto.getPasswd())){
 			MemberDTO info=memberDAO.getMember(dto.getId());
+			info.setRawPassword(passwd);
 			session.removeAttribute("loginDTO");
 			session.setAttribute("memberDTO", info);			
 			return "redirect:/";
@@ -91,7 +92,7 @@ public class LoginController {
 		dto.setPasswd(encodedPassword);
 		int res=memberDAO.insertMember(dto);
 		if(res==1){
-			jamesUser.addUser(dto.getId(), encodedPassword);
+			jamesUser.addUser(dto.getId(), rawPassword);
 			MemberDTO getdto=memberDAO.getMember(dto.getId());
 			dto.setNo(getdto.getNo());
 
@@ -122,7 +123,7 @@ public class LoginController {
 				if(res.getEmail().equals(email)){
 					UUID uuid=UUID.randomUUID();
 					String tmp_pw=uuid.toString().substring(24);
-					res.setPasswd(tmp_pw);
+					res.setPasswd(passwordSecurity.createPassword(tmp_pw));
 					int pwres=memberDAO.editPw(res);
 					if(pwres==1){
 						sendIdentify.sendPasswd(name, id, email, tmp_pw);

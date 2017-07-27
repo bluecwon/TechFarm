@@ -11,16 +11,16 @@ table.jjm494 th {
     width: 50px;
     padding: 10px;
     font-weight: bold;
-    vertical-align: top;
+    vertical-align: middle;
     color: #153d73;
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
-
+	text-align: center;
 }
 table.jjm494 td {
     width: 349px;
     padding: 10px;
-    vertical-align: top;
+    vertical-align: middle;
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
@@ -45,6 +45,7 @@ table.jjm494 td {
 
 
 body, div, ul, li, table, tr, td, th{margin:0px; padding:0px;}
+
 #viewtitle{
 	position: absolute;
 	left: 0%; 
@@ -59,7 +60,7 @@ body, div, ul, li, table, tr, td, th{margin:0px; padding:0px;}
 	height:50px;
 	width:100%;
 	position: relative;
-	background:#c8c8ff;
+	background: #c8c8ff;   
 	border: 1px solid #c8c8ff;
 }
 #tooltip{
@@ -200,14 +201,15 @@ a:hover,a:active,a:focus{
 	_border:1px solid blue;
 }
 #header1 h1{
-	color:#ff8080;
+	margin-left:400px;
+	color:#b0b0e2;
 	font-size:40px;
 }
 .menu{
 	float:left;
 	width:1000px;
 	height:40px;
-	background:#ff8080;
+	background:#b0b0e2;
 }
 .left{
 	float:left;

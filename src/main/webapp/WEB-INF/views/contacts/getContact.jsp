@@ -9,29 +9,29 @@
 			<span data-tooltip-text="연락처 삭제"><a href="deleteContact?no=${dto.no }"><img src="resources/contacts/images/delete.png" style="max-width: 30px; height: auto;"></a></span>
 		<table class="jjm494">
 				<tr>
-					<td>
+					<th>
 						<c:if test="${!empty dto.photo }">
 							<img src="resources/contacts/upload/${dto.photo }" style="max-width: 60px; height: auto;">
 						</c:if>
 						<c:if test="${empty dto.photo }" >
 							<img src="resources/contacts/images/account.png" style="max-width: 60px; height: auto;">
 						</c:if>	
-					</td>
+					</th>
 					<td><h2>${dto.name }</h2>
 				</tr>
 				<tr>
-					<td colspan="2" align="center"><h3>Contact details</h3></td>
+					<td colspan="2" align="left"><h3>연락처 세부정보</h3></td>
 				</tr>
 				<tr>
-					<td><img src="resources/contacts/images/email.png" style="max-width: 30px; height: auto;"></td>
+					<th><img src="resources/contacts/images/email.png" style="max-width: 30px; height: auto;"></th>
 					<td><a href="sendJames?to=${dto.email }">${dto.email }</a></td>
 				</tr>
 				<tr>
-					<td><img src="resources/contacts/images/phone.png" style="max-width: 30px; height: auto;"></td>
+					<th><img src="resources/contacts/images/phone.png" style="max-width: 30px; height: auto;"></th>
 					<td>${dto.phone }</td>
 				</tr>
 				<tr>
-					<td><img src="resources/contacts/images/notes.png" style="max-width: 30px; height: auto;"></td>
+					<th><img src="resources/contacts/images/notes.png" style="max-width: 30px; height: auto;"></th>
 					<td>${dto.notes }</td>
 				</tr>
 		</table>
