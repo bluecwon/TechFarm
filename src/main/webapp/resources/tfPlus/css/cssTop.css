@@ -1,10 +1,21 @@
 body, div, ul, li, table, tr, td, th{margin:0px; padding:0px;}
 #viewtitle{
 	position: absolute;
-	left: 0%; 
+	left: 130px; 
 	padding: 10px;
 	font-size:25px;
-	width:200px;
+	color:white;
+	width:350px;
+	height:50px;
+	z-index:5;
+}
+
+#homebutton{
+	position: absolute;
+	left: 5px; 
+	padding: 10px;
+	font-size:25px;
+	width:350px;
 	height:50px;
 	z-index:5;
 }
@@ -62,7 +73,7 @@ body, div, ul, li, table, tr, td, th{margin:0px; padding:0px;}
 	width:200px;
 	height:150px;
 	font-size:12px;
-	font-color:white;
+	color:white;
 	z-index:500;
 	box-shadow: 5px 5px 15px 5px gray;
 }
@@ -70,7 +81,7 @@ body, div, ul, li, table, tr, td, th{margin:0px; padding:0px;}
 	position: absolute;
 	right: 15px; top: 45px;
 	background: #000000;
-	font-color:white;
+	color:white;
 	font-size:15px;
 	display: none;
 	padding: 10px;

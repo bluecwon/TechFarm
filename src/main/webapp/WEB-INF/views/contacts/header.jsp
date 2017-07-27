@@ -44,7 +44,8 @@
 	</script>
 </head>
 <body>
-			<div id="viewtitle">TF Contacts</div>
+			<div id="homebutton"><a href="home"><img src="resources/home/imgs/name.png" width="125px" height="40px"></a></div>
+			<div id="viewtitle">Contacts</div>
 			<div id="header" align="right">
 			<div class="topnav">
 	  			<a rel="tooltip" title="메뉴"><img id="menubutton" src="resources/home/imgs/menu.png" width="25" height="25"></a>&nbsp&nbsp&nbsp&nbsp

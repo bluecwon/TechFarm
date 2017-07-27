@@ -16,10 +16,20 @@ body {
 
 #viewtitle{
 	position: absolute;
-	left: 0%; 
+	left: 130px; 
 	padding: 10px;
 	font-size:25px;
-	width:200px;
+	width:350px;
+	height:50px;
+	z-index:5;
+}
+
+#homebutton{
+	position: absolute;
+	left: 5px; 
+	padding: 10px;
+	font-size:25px;
+	width:350px;
 	height:50px;
 	z-index:5;
 }

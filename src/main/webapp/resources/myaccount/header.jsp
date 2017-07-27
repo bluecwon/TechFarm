@@ -35,6 +35,7 @@
 		</script>
 	<head>
 	<body>
+		<div id="homebutton"><a href="home"><img src="resources/home/imgs/name.png" width="125px" height="40px"></a></div>
 		<div id="viewtitle">My Account</div>
 		<div id="header" align="right">
 			<div class="topnav">

@@ -3,6 +3,7 @@ package com.itbank.TechFarm.login;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.UUID;
+import java.util.zip.DataFormatException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +26,7 @@ import com.itbank.TechFarm.login.member.MemberDAO;
 import com.itbank.TechFarm.login.member.MemberDTO;
 import com.itbank.TechFarm.login.security.PasswordSecurity;
 import com.itbank.TechFarm.tftube.dao.MyChannelDAO;
+import com.mysql.jdbc.exceptions.MySQLSyntaxErrorException;
 
 
 
@@ -184,5 +187,20 @@ public class LoginController {
 		}
 		return "login/createAccount";
 	}
+	
+	
+	@ExceptionHandler(DataFormatException.class)
+	public String handleDataFormatException(){
+		return "error/DataFormatException";
+	}
+	@ExceptionHandler(NullPointerException.class)
+	public String handleNullPointerException(){
+		return "error/NullPointerException";
+	}
+	@ExceptionHandler(MySQLSyntaxErrorException.class)
+	public String handleMySQLSyntaxErrorException(){
+		return "error/MySQLSyntaxErrorException";
+	}
+	
 	
 }

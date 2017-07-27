@@ -144,8 +144,8 @@
 		
 	</head>
 	<body lang="en" onContextmenu="return false">
-	
-<div id="viewtitle">TF Plus</div>
+<div id="homebutton"><a href="home"><img src="resources/home/imgs/name2.png" width="125px" height="40px"></a></div>
+<div id="viewtitle">SNS</div>
 <div id="header1" align="right">
 			<div class="topnav">
 	  			<a rel="tooltip" title="메뉴"><img id="menu1" src="resources/home/imgs/menu_white.png" width="25" height="25"></a>&nbsp&nbsp&nbsp&nbsp
