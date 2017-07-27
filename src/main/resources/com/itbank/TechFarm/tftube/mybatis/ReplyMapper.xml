@@ -12,9 +12,7 @@
 		
 	<select id="replyList_by_video" parameterType="String" resultType="replyformat">
 		select b.channel,a.* from tftube_reply a join tftube_mychannel b on a.member_no=b.member_no where video_name=#{video_name} order by re_step asc
-	</select>		
-
-	
+	</select>			
 	
 	<delete id="deletereply" parameterType="int">
 		delete from tftube_reply where no = #{no}
