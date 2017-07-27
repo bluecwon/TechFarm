@@ -157,12 +157,9 @@
                     // 현재 접속 아이디 받아오기
                     socket.on('currentId', function(data) {
                         console.log(JSON.stringify(data));
-
-                        println('<p>접속자 이벤트 : ' + data.command + '</p>');
-                        println('<p>접속자 리스트를 받았습니다.</p>');
                         if (data.command == 'list') { // 방 리스트
                         	var idCount = data.ids.length;
-                        	$("#idList").html('<p>접속자 리스트 ' + idCount + '명</p>');
+                        	$("#idList").html('<h3>접속자 리스트 ' + idCount + '명</h3>');
                         	for (var i = 0; i < idCount; i++) {
                         		$("#idList").append('<input type="checkbox" name="chkId" value='+ data.ids[i]+'><font size="5">'+data.ids[i]+'</font><br>');
                         		/* $("#idList").append('<p>접속자 #' + i + ' : ' + data.ids[i]+'</p>'); */
@@ -244,7 +241,6 @@
         </script>
 	</head>
 <body onunload="disconnect();">
-	<h3>현재 접속인원</h3>
 	<input type="hidden" id="idInput" value="${sessionScope.memberDTO.id}" />
 	<input type="hidden" id="roomIdInput" value="${sessionScope.memberDTO.id}" />
 	<input type="hidden" id="roomNameInput" value="${sessionScope.memberDTO.id}" />
@@ -252,6 +248,7 @@
 	<input type="hidden" id="chattype" value="groupchat">
 	<input type="hidden" id="recepientInput"/>
 	<div id="idresult">
+	<h2>현재 접속인원</h2>
     <div id="idList">
 	</div>
 		<input type="button" id="inviteButton" style="width:200px; height:50px; background:#ffffff URL('resources/tfchat/img/invite.jpg'); background-size:cover"/>
