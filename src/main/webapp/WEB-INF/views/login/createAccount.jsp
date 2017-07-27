@@ -10,7 +10,8 @@
 <title>Welcome to TF</title>
 	<script type="text/javascript">
 		var sysmsg='${msg}';
-		var ckid=document.getElementById('id');
+		var checkduple='true';
+		var checkduple2='${dupleid}'
 		if(sysmsg != ''){
 			alert('${msg}');
 		}
@@ -85,6 +86,10 @@
 		};
 		
 		function checkForm(){
+			if(checkduple!=checkduple2){
+				alert("아이디 중복체크가 필요합니다.")
+				return false;
+			}
 			if(member.id.value==""){
 				alert("아이디를 입력하세요")
 				member.id.focus()

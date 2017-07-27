@@ -176,11 +176,11 @@ public class LoginController {
 			MemberDTO inputInfo=new MemberDTO();
 			inputInfo.setId(id);
 			model.addAttribute("inputInfo", inputInfo);
+			model.addAttribute("dupleid", "true");
 			model.addAttribute("msg","사용할수 있는 아이디입니다.");
-			model.addAttribute("check", "true");
 		} else if(res!=null){
+			model.addAttribute("dupleid", "false");
 			model.addAttribute("msg","중복이 되는 아이디입니다.");
-			model.addAttribute("check", "false");
 		}
 		return "login/createAccount";
 	}
