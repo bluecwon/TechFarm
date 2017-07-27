@@ -160,8 +160,34 @@ public class JamesDAOImpl implements JamesDAO{
 			Message[] messages = emailFolder.getMessages();
 
 			Message message = messages[dto.getNum()];
-            jamesDTO = jamesContent.writePart(message);
-			
+            /*
+			if(message.isMimeType("multipart/*")){
+            	Multipart mp = (Multipart) message.getContent();
+      	        int count = mp.getCount();
+      	        for (int i = 0; i < count; i++){
+      	           System.out.println(mp.getBodyPart(i).getContentType());
+      	           if(mp.getBodyPart(i).isMimeType("text/html")){
+      	        	 jamesDTO.setContent(String.valueOf((mp.getBodyPart(i).getContent())));
+      	           }
+      	        	if (mp.getContentType().contains("image/")) {
+      	  	        System.out.println("content type" + mp.getContentType());
+      	  	        File f = new File("image" + new Date().getTime() + ".jpg");
+      	  	        DataOutputStream output = new DataOutputStream(
+      	  	            new BufferedOutputStream(new FileOutputStream(f)));
+      	  	            com.sun.mail.util.BASE64DecoderStream test = 
+      	  	                 (com.sun.mail.util.BASE64DecoderStream) mp.getBodyPart(i).getContent();
+      	  	         byte[] buffer = new byte[1024];
+      	  	         int bytesRead;
+      	  	         while ((bytesRead = test.read(buffer)) != -1) {
+      	  	            output.write(buffer, 0, bytesRead);
+      	  	         }
+      	  	         output.close();
+      	  	      }
+      	        }
+            }
+			*/
+			jamesDTO = jamesContent.writePart(message);
+            
 		    emailFolder.close(false);
 		    store.close();
 		    return jamesDTO;

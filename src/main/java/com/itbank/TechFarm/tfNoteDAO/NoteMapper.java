@@ -26,9 +26,9 @@ public class NoteMapper {
     }
   }
 
-  public static List listNote(String id){
+  public static List<NoteDTO> listNote(String id){
 	  SqlSession session = sqlMapper.openSession();
-	  List noteList = session.selectList("listNote",id);
+	  List<NoteDTO> noteList = session.selectList("listNote",id);
 	  session.close();
 	  return noteList;
   }

@@ -7,7 +7,7 @@ import com.itbank.TechFarm.tfNoteDTO.NoteDTO;
 public class NoteDAOImpl implements NoteDAO {
 	
 	@Override
-	public List listNote(String id) {
+	public List<NoteDTO> listNote(String id) {
 		return NoteMapper.listNote(id);
 	}
 

@@ -73,24 +73,21 @@ public class JamesContent {
 	            output.write(buffer, 0, bytesRead);
 	         }
 	         output.close();
-	      } 
-	      else {
+	      }else {
 	         Object object = part.getContent();
 	         if (object instanceof String) {
 	            System.out.println("This is a string");
 	            System.out.println("---------------------------");
 	            System.out.println((String) object);
-	         } 
-	         else if (object instanceof InputStream) {
+	         }else if (object instanceof InputStream) {
 	            System.out.println("This is just an input stream");
 	            System.out.println("---------------------------");
 	            InputStream is = (InputStream) object;
-	            is = (InputStream) object;
+	            //is = (InputStream) object;
 	            int c;
 	            while ((c = is.read()) != -1)
 	               System.out.write(c);
-	         } 
-	         else {
+	         }else {
 	            System.out.println("This is an unknown type");
 	            System.out.println("---------------------------");
 	            System.out.println(object.toString());
