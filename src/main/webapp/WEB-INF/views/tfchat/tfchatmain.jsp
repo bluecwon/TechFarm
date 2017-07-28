@@ -5,7 +5,6 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>TF chat</title>
 		<script src="resources/js/jquery-3.1.1.min.js"></script>     
 		<script src="resources/js/socket.io.js"></script>
         
@@ -17,7 +16,7 @@
          	// 문서 로딩 후 실행됨
             $(function() {
 			
-                 host = '192.168.52.35';//52.79.140.54
+                 host = '52.79.140.54';//192.168.52.35
                  port = '3000';
                  connectToServer();
                  
@@ -44,8 +43,12 @@
                     var roomName = $('#roomNameInput').val();
                     var id = $('#idInput').val();
                     var inviteId=[];
-                    if($('input[type="checkbox"]').is(':checked')){
-                    	inviteId.push($('input[type="checkbox"]:checked').val());
+                    var chk_id=document.getElementsByName("chkId");
+                    var chk_id_leng=chk_id.length;
+                    for(i=0;i<chk_id_leng;i++){
+                    	if(chk_id[i].checked==true){
+                    		inviteId.push(chk_id[i].value);
+                    	}
                     }
                     var inviteRoom=$('#roomIdInput').val();
                     var inviteRoomOwner=$('#idInput').val();

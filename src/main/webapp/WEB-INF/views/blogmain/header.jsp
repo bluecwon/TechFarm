@@ -120,8 +120,9 @@
 </script>
 </head>
 <body onContextmenu="return false">
-    <div id="viewtitle">TF Blog</div>
-<div id="headertop" align="right">
+    <div id="homebutton"><a href="home"><img src="resources/home/imgs/name.png" width="125px" height="40px"></a></div>
+	<div id="viewtitle">Contacts</div>
+	<div id="headertop" align="right">
 			<div class="topnav">
 	  			<a rel="tooltip" title="메뉴"><img id="menu1" src="resources/home/imgs/menu_white.png" width="25" height="25"></a>&nbsp&nbsp&nbsp&nbsp
 	  			<c:if test="${sessionScope.memberDTO eq null}">

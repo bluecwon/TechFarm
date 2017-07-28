@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta charset="utf-8"/>
-		<title>My Account</title>
+		<title>TF Chat</title>
 		<link type="text/css" href="resources/tfchat/style_chat.css" rel="stylesheet" />
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script type="text/javascript">
