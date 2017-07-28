@@ -9,7 +9,7 @@
 				<br>
 				<br>
 				<div id="menu1" align="center">TechFarm 정보
-					<table>
+					<table id="menu_table">
 						<tr>
 							<td>[${sessionScope.memberDTO.name}]님</td>
 						</tr>
