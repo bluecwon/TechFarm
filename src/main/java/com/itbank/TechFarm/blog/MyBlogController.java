@@ -156,6 +156,8 @@ public class MyBlogController {
 			pforiginFile.close();
 			hdcopyFile.close();
 			hdoriginFile.close();
+			
+			Thread.sleep(5000);
 			}
 		}else if(mode.equals("blog")){//headerword
 			String headerword = request.getParameter("headerword");

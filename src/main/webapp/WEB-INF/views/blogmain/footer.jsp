@@ -6,22 +6,22 @@
 			<div width="100%" >
 				<table align="center">
 					<tr>
-						<th  class="areamenu" width="300px">
-						<a href="areasearch?bigarea=1&areamode=엔터테인먼트.예술" class="deconone"><font size="4">엔터테인먼트<br>예술</font></a>
+						<th  class="areamenu" width="300px" height="69px">
+						<a href="areasearch?bigarea=1&areamode=엔터테인먼트.예술" class="deconone"><font size="4">엔터테인먼트 ·예술</font></a>
 						</th>
 						
 						<th  class="areamenu" width="300px">
-						<a href="areasearch?bigarea=2&areamode=생활.노하우.쇼핑" class="deconone"><font size="4">생활<br>노하우<br>쇼핑</font></a>
+						<a href="areasearch?bigarea=2&areamode=생활.노하우.쇼핑" class="deconone"><font size="4">생활·노하우·쇼핑</font></a>
 						</th>
 						
 						
 						<th  class="areamenu" width="300px">
-						<a href="areasearch?bigarea=3&areamode=취미.여가.여행" class="deconone"><font size="4">취미<br>여가<br>여행</font></a>
+						<a href="areasearch?bigarea=3&areamode=취미.여가.여행" class="deconone"><font size="4">취미·여가·여행</font></a>
 						</th>
 						
 							
 						<th width="300px">
-						<a href="areasearch?bigarea=4&areamode=지식.동향" class="deconone"><font size="4">지식<br>동향</font></a>
+						<a href="areasearch?bigarea=4&areamode=지식.동향" class="deconone"><font size="4">지식·동향</font></a>
 						</th>
 					</tr>
 				</table> 

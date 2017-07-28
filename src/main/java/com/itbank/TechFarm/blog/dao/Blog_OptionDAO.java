@@ -22,10 +22,6 @@ public interface Blog_OptionDAO {
 	public List listAreaBoard2(int startRow,int endRow);
 	public List listAreaBoard3(int startRow,int endRow);
 	public List listAreaBoard4(int startRow,int endRow);
-	public List listAreaProfile1();
-	public List listAreaProfile2();
-	public List listAreaProfile3();
-	public List listAreaProfile4();
 	public int areaboardNumber1();
 	public int areaboardNumber2();
 	public int areaboardNumber3();

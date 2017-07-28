@@ -338,31 +338,6 @@ public class BlogMapper {
 	  return list;
   }
   
-  public static List<String> listAreaProfile1(){
-	  SqlSession session = sqlMapper.openSession();
-	  List<String> list = (List)session.selectList("listAreaProfile1");
-	  session.close();
-	  return list;
-  }
-  public static List<String> listAreaProfile2(){
-	  SqlSession session = sqlMapper.openSession();
-	  List<String> list = (List)session.selectList("listAreaProfile2");
-	  session.close();
-	  return list;
-  }
-  public static List<String> listAreaProfile3(){
-	  SqlSession session = sqlMapper.openSession();
-	  List<String> list = (List)session.selectList("listAreaProfile3");
-	  session.close();
-	  return list;
-  }
-  public static List<String> listAreaProfile4(){
-	  SqlSession session = sqlMapper.openSession();
-	  List<String> list = (List)session.selectList("listAreaProfile4");
-	  session.close();
-	  return list;
-  }
-  
   public static List<Blog_OptionDTO> listSearchBlog(String search_option,String search_text){
 	  SqlSession session = sqlMapper.openSession();
 	  Map<String, Object> parameters = new HashMap<String, Object>();

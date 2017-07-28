@@ -151,8 +151,9 @@ public class BlogBoardController {
 	      sb = new StringBuffer();
 	      sb.append("&bNewLine=true")
 	        .append("&sFileName=").append(oldName)
-	        .append("&sFileURL=").append("http://localhost:8081/TechFarm/resources/upload/")
-	       // .append("&sFileURL=").append(filePath)
+	        .append("&sFileURL=").append("52.79.140.54/TechFarm/resources/upload/")
+	        //.append("&sFileURL=").append("http://localhost:8081/TechFarm/resources/upload/")
+	       //.append("&sFileURL=").append(filePath)
 	        .append(saveName);
 	    } catch (Exception e) {
 	      e.printStackTrace();

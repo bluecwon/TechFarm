@@ -15,27 +15,26 @@
 				<c:choose>
 				<c:when test="${arealist.size()==0}">
 					<tr>
-						<th class="top" height="70px" colspan="5"><h2>등록된 게시글이 없습니다. 지금 등록 해보세요.</h2></th>
+						<th class="top" height="70px" colspan="4"><h2>등록된 게시글이 없습니다. 지금 등록 해보세요.</h2></th>
 					</tr>
 				</c:when>
 				<c:otherwise>
 					<tr>
-					<th class="top" height="70px" colspan="2"><h2>작성자</h2></th>
+					<th class="top" height="70px"><h2>작성자</h2></th>
 					<th class="top" ><h2>글제목</h2></th>
 					<th class="top" ><h2>게시판</h2></th>
 					<th class="top" ><h2>작성일</h2></th>
 					</tr>	
 					<c:forEach var="arealist" items="${arealist}" varStatus="status">
 					<tr>
-					<th class="top2" align="right"><img src="resources/upload/${arealist.id}/${areaprofile[status.index]}" width="60" height="60" class="homemenu"/></th>
-					<th class="top2" align="left"><font size="5 ">${arealist.id}</font></th>
+					<th class="top2"><font size="4 ">${arealist.id}</font></th>
 					<th class="top2"><a href="viewBoard?no=${arealist.no}&joinmode=arealist" class="deconone"><font size="4 ">${arealist.subject}</font></a></th>
 					<th class="top2">(${arealist.title})</th>
 					<td class="top2" align="center">${arealist.reg_date}</td>
 					</tr>
 					</c:forEach>
 					<tr>
-							<td align="center" colspan="5">
+							<td align="center" colspan="4">
 							<c:if test="${startPage > pageBlock}">
 							[<a href="areasearch?pageNum=${startPage-pageBlock}&bigarea=${bigarea}&areamode=${areamode}">이전</a>]
 							</c:if>

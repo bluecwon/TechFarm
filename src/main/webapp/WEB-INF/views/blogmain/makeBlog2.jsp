@@ -11,7 +11,7 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 <c:set var = "hd" value="<%=hdPath%>"/>
 <section>
 	<article>
-		<h1>블로그 만들기<img src="resources/images/2step.jpg" align="right" width="200" height="80"></h1>
+		<h1>블로그 만들기<img src="resources/images/2step.jpg" align="right" width="250" height="100"></h1>
 		<h2>2단계:레이아웃 선택</h2>
 		<form action="blogMake3" method="post" enctype="multipart/form-data" name="f">
 		<input type="hidden" name="blogname" value="${blogname}">

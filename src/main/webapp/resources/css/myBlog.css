@@ -32,7 +32,7 @@ body{
 #profile{width:300px; height:100%; border:2px solid #ccc; border-radius: 12px;}
 #pf{display:none;}
 #pfimg{border-radius: 12px;}
-#header{padding-left: 30px;}
+#header{padding-left: 30px; background-color: #e8e8e3 }
 .boardlist{border-bottom: 2px solid #e8e8e3; padding-bottom: 36px; padding-top: 12px;}
 .gray{background-color:#DCDCDC;}
 a{text-decoration:none; color:black;}
@@ -48,7 +48,9 @@ a.black{color:black;}
 .layoutedit5{margin: auto; background-color:#fffcdf;}
 .layoutedit6{margin: auto; background-color:#fffcdf;}
 
-
+.skinpf{
+	border-radius: 48px;
+}
 
 table.listReply {
 	display: none;
@@ -112,4 +114,5 @@ table.jjm494_subAdd td {
 	z-index:499;
 	box-shadow: 5px 5px 15px 5px gray;
 }
+
 

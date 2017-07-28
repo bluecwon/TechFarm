@@ -116,30 +116,6 @@ public class Blog_OptionDAOImpl implements Blog_OptionDAO {
 	}
 
 	@Override
-	public List listAreaProfile1() {
-		// TODO Auto-generated method stub
-		return BlogMapper.listAreaProfile1();
-	}
-
-	@Override
-	public List listAreaProfile2() {
-		// TODO Auto-generated method stub
-		return BlogMapper.listAreaProfile2();
-	}
-
-	@Override
-	public List listAreaProfile3() {
-		// TODO Auto-generated method stub
-		return BlogMapper.listAreaProfile3();
-	}
-
-	@Override
-	public List listAreaProfile4() {
-		// TODO Auto-generated method stub
-		return BlogMapper.listAreaProfile4();
-	}
-
-	@Override
 	public int areaboardNumber1() {
 		// TODO Auto-generated method stub
 		return BlogMapper.areaboardNumber1();
