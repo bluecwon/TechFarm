@@ -42,7 +42,7 @@ public class ContactsController {
 		return "contacts/addContact";
 	}
 	@RequestMapping(value = "/addContact", method = RequestMethod.POST)
-	public String addContactPro(ContactsDTO dto, HttpServletRequest request, HttpServletResponse response, HttpSession session){
+	public String addContactPro(ContactsDTO dto, HttpSession session, HttpServletRequest request, HttpServletResponse response){
 		MemberDTO memberDTO = (MemberDTO)request.getSession().getAttribute("memberDTO"); 
 		dto.setId(memberDTO.getId());
 		String filename = dto.getPhotoMultipart().getOriginalFilename();
