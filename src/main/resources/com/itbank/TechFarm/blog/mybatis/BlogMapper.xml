@@ -78,7 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   
   <select resultType="BlogBoardDTO" id="listMyBoard" parameterType="String">
-  select * from blog_board where id=#{id} order by no desc limit 5
+  select * from blog_board where id=#{id} and 1 > open order by no desc limit 5
   </select>
   
   <update id="updateReadcount" parameterType="int">	
@@ -128,79 +128,63 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   
   <select resultType="BlogBoardDTO" id="listNewBoard">  
-  select * from blog_board order by no desc limit 10
+  select * from blog_board where 1 > open order by no desc limit 10
   </select>
   
   <select resultType="String" id="listNewProfile">
-  select profile from blog_option c join (select a.* from (select id from blog_board order by no desc limit 10)a)b on c.id=b.id;
+  select profile from blog_option c join (select a.* from (select id from blog_board where 1 > open order by no desc limit 10)a)b on c.id=b.id;
   </select>
   
   <select resultType="BlogBoardDTO" id="listHotBoard">  
-  select * from blog_board order by readcount desc limit 10
+  select * from blog_board where 1 > open order by readcount desc limit 10
   </select>
   
   <select resultType="String" id="listHotProfile">
-  select profile from blog_option c join (select a.* from (select id from blog_board order by readcount desc limit 10)a)b on c.id=b.id;
+  select profile from blog_option c join (select a.* from (select id from blog_board where 1 > open order by readcount desc limit 10)a)b on c.id=b.id;
   </select>
 
   <select resultType="BlogOptionDTO" id="listHotBlog">  
-  select * from blog_option order by visitornum desc limit 5
+  select * from blog_option order by visitornum desc limit 3
   </select>
 
   <select resultType="BlogBoardDTO" id="listAreaBoard1" parameterType="hashMap">  
   <!-- select * from blog_board where 8 >= area and  area >=0  -->
-  SELECT * FROM (SELECT @NO:=@NO+1 AS ROWNUM, a.* FROM (select * from blog_board where 8 >= area and  area >=0 order by no desc)a,
+  SELECT * FROM (SELECT @NO:=@NO+1 AS ROWNUM, a.* FROM (select * from blog_board where 8 >= area and  area >=0 and 1 > open order by no desc)a,
   (SELECT @NO:=0)b)c WHERE c.ROWNUM BETWEEN #{startRow} AND #{endRow} 
   </select>
   
   <select resultType="int" id="areaboardNumber1"> 
-  select count(*) from blog_board where 8 >= area and  area >=0
+  select count(*) from blog_board where 8 >= area and  area >=0 and 1 > open
   </select>
   
   <select resultType="BlogBoardDTO" id="listAreaBoard2" parameterType="hashMap">   
   <!-- select * from blog_board where 16 >= area and  area >=9 -->
-   SELECT * FROM (SELECT @NO:=@NO+1 AS ROWNUM, a.* FROM (select * from blog_board where 16 >= area and  area >=9 order by no desc)a,
+   SELECT * FROM (SELECT @NO:=@NO+1 AS ROWNUM, a.* FROM (select * from blog_board where 16 >= area and area >=9 and 1 > open order by no desc)a,
   (SELECT @NO:=0)b)c WHERE c.ROWNUM BETWEEN #{startRow} AND #{endRow} 
   </select>
   
   <select resultType="int" id="areaboardNumber2"> 
-  select count(*) from blog_board where 16 >= area and  area >=9
+  select count(*) from blog_board where 16 >= area and  area >=9 and 1 > open
   </select>
   
   <select resultType="BlogBoardDTO" id="listAreaBoard3" parameterType="hashMap">  
   <!-- select * from blog_board where 24 >= area and  area >=17 -->
-  SELECT * FROM (SELECT @NO:=@NO+1 AS ROWNUM, a.* FROM (select * from blog_board where 24 >= area and  area >=17 order by no desc)a,
+  SELECT * FROM (SELECT @NO:=@NO+1 AS ROWNUM, a.* FROM (select * from blog_board where 24 >= area and area >=17 and 1 > open order by no desc)a,
   (SELECT @NO:=0)b)c WHERE c.ROWNUM BETWEEN #{startRow} AND #{endRow}  
   </select>
   
   <select resultType="int" id="areaboardNumber3"> 
-  select count(*) from blog_board where 24 >= area and  area >=17
+  select count(*) from blog_board where 24 >= area and area >=17 and 1 > open
   </select>
   
   <select resultType="BlogBoardDTO" id="listAreaBoard4" parameterType="hashMap">  
   <!-- select * from blog_board where 30 >= area and  area >=25 -->
-  SELECT * FROM (SELECT @NO:=@NO+1 AS ROWNUM, a.* FROM (select * from blog_board where 30 >= area and  area >=25 order by no desc)a,
+  SELECT * FROM (SELECT @NO:=@NO+1 AS ROWNUM, a.* FROM (select * from blog_board where 30 >= area and area >=25 and 1 > open order by no desc)a,
   (SELECT @NO:=0)b)c WHERE c.ROWNUM BETWEEN #{startRow} AND #{endRow}  
   </select>
   
   <select resultType="int" id="areaboardNumber4"> 
-  select count(*) from blog_board where 30 >= area and  area >=25
-  </select>
-  
-  <select resultType="String" id="listAreaProfile1" >
-  select profile from blog_option c join (select a.* from (select id from blog_board where 8 >= area and  area >=0)a)b on c.id=b.id;
-  </select>
-  
-  <select resultType="String" id="listAreaProfile2">
-  select profile from blog_option c join (select a.* from (select id from blog_board where 16 >= area and  area >=9 )a)b on c.id=b.id;
-  </select>
-  
-  <select resultType="String" id="listAreaProfile3">
-  select profile from blog_option c join (select a.* from (select id from blog_board where 24 >= area and  area >=17)a)b on c.id=b.id;
-  </select>
-  
-  <select resultType="String" id="listAreaProfile4">
-  select profile from blog_option c join (select a.* from (select id from blog_board where 30 >= area and  area >=25)a)b on c.id=b.id;
+  select count(*) from blog_board where 30 >= area and area >=25 and 1 > open
   </select>
 
   <select resultType="BlogOptionDTO" id="searchBlog" parameterType="hashMap">
@@ -208,7 +192,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   
   <select resultType="BlogBoardDTO" id="searchBoard" parameterType="hashMap">
-  select * from blog_board where ${search_option} like CONCAT('%',#{search_text},'%');
+  select * from blog_board where ${search_option} like CONCAT('%',#{search_text},'%') and 1 > open;
   </select>
   
   <select parameterType="String" resultType="BlogBoardDTO" id="imsiboard"> 

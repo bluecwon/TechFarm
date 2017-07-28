@@ -77,7 +77,7 @@
 						<c:otherwise>
 						<tr>
 							<th>
-							<img src="resources/images/skin/${blogoptionDTO.profile}" style="width:150px; height:100px;"><br>
+							<img src="resources/upload/${blogoptionDTO.id}/${blogoptionDTO.profile}" style="width:150px; height:100px;"><br>
 							<a href="myBlog?id=${blogoptionDTO.id}">(${blogoptionDTO.blogname})</a>
 							</th>
 						</tr>

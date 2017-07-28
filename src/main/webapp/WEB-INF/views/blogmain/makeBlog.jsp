@@ -8,8 +8,8 @@
 
 <section>
 	<article>
-		<h1>블로그 만들기<img src="resources/images/1step.jpg" align="right" width="200" height="80"></h2>
-		<h2>1단계:블로그 기본설정</h3>
+		<h1>블로그 만들기</h1><img src="resources/images/1step.jpg" align="right" width="250" height="100">
+		<h2>1단계:블로그 기본설정</h2>
 		
 		<form action="blogMake2" method="post" enctype="multipart/form-data" name="f">
 		

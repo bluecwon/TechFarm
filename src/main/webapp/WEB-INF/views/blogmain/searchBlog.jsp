@@ -51,4 +51,5 @@
 	</article>  
 </section>
 <%@ include file="aside.jsp"%>
-<%@ include file="footer.jsp"%>
+</body>
+</html>

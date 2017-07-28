@@ -217,6 +217,8 @@ public class BlogMainController {
 		hdcopyFile.close();
 		hdoriginFile.close();
 		
+		Thread.sleep(5000);
+		
 		String alertmode="addblog";
 		msg = "블로그가 성공적으로 생성되었습니다. 이제 나만의 블로그를 꾸며 보세요.";
 		url = "blogmain";
@@ -305,12 +307,10 @@ public class BlogMainController {
 		if(bigarea_str!=""){
 			bigarea = Integer.parseInt(bigarea_str);
 		}
-		System.out.println(bigarea);
 		String areamode = request.getParameter("areamode");
 		List<Blog_BoardDTO> arealist = null;
-		List<String> areaprofile = null;
 		
-		int pageSize = 5; 
+		int pageSize = 7; 
 		String pageNum = request.getParameter("pageNum");
 		if (pageNum == null){
 			pageNum = "1";
@@ -350,22 +350,17 @@ public class BlogMainController {
 		
 		if(bigarea==1){
 			arealist = optionDAO.listAreaBoard1(startRow,endRow);
-			areaprofile = optionDAO.listAreaProfile1();
 		}else if(bigarea==2){
 			arealist = optionDAO.listAreaBoard2(startRow,endRow);
-			areaprofile = optionDAO.listAreaProfile2();
 		}else if(bigarea==3){
 			arealist = optionDAO.listAreaBoard3(startRow,endRow);
-			areaprofile = optionDAO.listAreaProfile3();
 		}else if(bigarea==4){
 			arealist = optionDAO.listAreaBoard4(startRow,endRow);
-			areaprofile = optionDAO.listAreaProfile4();
 		}
 		
 		mav.addObject("bigarea",bigarea);
 		mav.addObject("arealist",arealist);
 		session.setAttribute("areamode", areamode);
-		session.setAttribute("areaprofile", areaprofile);
 		return mav;
 	}
 	
