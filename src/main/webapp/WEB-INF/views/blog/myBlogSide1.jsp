@@ -13,13 +13,13 @@
 				<img src="resources/upload/${optionDTO.id}/${optionDTO.profile}" width="300px" height="300px"><br>
 				<b>${optionDTO.nickname}</b>(${optionDTO.id})<br>
 				${optionDTO.introduce}<br><br><br><br>
-				</div><br><br><br>
-				<hr>
-				<div id="neighbor">
-				이웃
-				
-				<hr>
+				</div><br><br><br><hr>
+				<c:if test="${optionDTO.id.equals(sessionScope.memberDTO.id)}">
+				<div align="center">
+				<a href="imsiboard?id=${optionDTO.id}"><h2>임시보관함</h2></a>
 				</div>
+				</c:if>
+				<hr>
 				<div id="board">
 					<div align="right">
 					<c:if test="${optionDTO.id.equals(sessionScope.memberDTO.id)}">

@@ -13,7 +13,8 @@ public interface Blog_BoardDAO {
 	public List listBoardTitle(String id);
 	public Blog_MakeBoardDTO getBoardTitle(int boardno);
 	public int editBoardTitle(Blog_MakeBoardDTO dto);
-	public List listBoard(int boardno);
+	public List listBoard(int boardno,int startRow,int endRow);
+	public int boardNumber(int boardno);
 	public int insertboard(Blog_BoardDTO dto);
 	public Blog_BoardDTO getBoard(int no);
 	public List listMyBoard(String id);
@@ -29,6 +30,8 @@ public interface Blog_BoardDAO {
 	public List listReply(int no,int startRow,int endRow);
 	public int deleteReply(int replyno);
 	public int replyNumber(int no);
+	public List listSearchBoard(String search_option,String search_text);
+	public List imsiBoard(String id);
 	
 	/*
 	public int deleteFile(int num);*/

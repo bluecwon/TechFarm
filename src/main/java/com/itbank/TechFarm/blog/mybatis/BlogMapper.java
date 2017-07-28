@@ -124,11 +124,22 @@ public class BlogMapper {
 	  return res;
   }
   
-  public static List<Blog_BoardDTO> listBoard(int boardno){
+  public static List<Blog_BoardDTO> listBoard(int boardno,int startRow,int endRow){
 	  SqlSession session = sqlMapper.openSession();
-	  List<Blog_BoardDTO> list = (List)session.selectList("listBoard",boardno);
+	  Map<String, Object> parameters = new HashMap<String, Object>();
+	  parameters.put("boardno", boardno);
+	  parameters.put("startRow", startRow);
+	  parameters.put("endRow", endRow);
+	  List<Blog_BoardDTO> list = (List)session.selectList("listBoard",parameters);
 	  session.close();
 	  return list;
+  }
+  
+  public static int boardNumber(int boardno){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.selectOne("boardNumber", boardno);
+	  session.close();
+	  return res;
   }
   
   public static int insertBoard(Blog_BoardDTO dto){
@@ -287,16 +298,67 @@ public class BlogMapper {
 	  return list;
   }
   
-  public static List<Blog_BoardDTO> listAreaBoard(int area){
+  public static List<Blog_BoardDTO> listAreaBoard1(int startRow,int endRow){
 	  SqlSession session = sqlMapper.openSession();
-	  List<Blog_BoardDTO> list = (List)session.selectList("listAreaBoard",area);
+	  Map<String, Object> parameters = new HashMap<String, Object>();
+	  parameters.put("startRow", startRow);
+	  parameters.put("endRow", endRow);
+	  List<Blog_BoardDTO> list = (List)session.selectList("listAreaBoard1",parameters);
 	  session.close();
 	  return list;
   }
   
-  public static List<String> listAreaProfile(int area){
+  public static List<Blog_BoardDTO> listAreaBoard2(int startRow,int endRow){
 	  SqlSession session = sqlMapper.openSession();
-	  List<String> list = (List)session.selectList("listAreaProfile",area);
+	  Map<String, Object> parameters = new HashMap<String, Object>();
+	  parameters.put("startRow", startRow);
+	  parameters.put("endRow", endRow);
+	  List<Blog_BoardDTO> list = (List)session.selectList("listAreaBoard2",parameters);
+	  session.close();
+	  return list;
+  }
+  
+  public static List<Blog_BoardDTO> listAreaBoard3(int startRow,int endRow){
+	  SqlSession session = sqlMapper.openSession();
+	  Map<String, Object> parameters = new HashMap<String, Object>();
+	  parameters.put("startRow", startRow);
+	  parameters.put("endRow", endRow);
+	  List<Blog_BoardDTO> list = (List)session.selectList("listAreaBoard3",parameters);
+	  session.close();
+	  return list;
+  }
+  
+  public static List<Blog_BoardDTO> listAreaBoard4(int startRow,int endRow){
+	  SqlSession session = sqlMapper.openSession();
+	  Map<String, Object> parameters = new HashMap<String, Object>();
+	  parameters.put("startRow", startRow);
+	  parameters.put("endRow", endRow);
+	  List<Blog_BoardDTO> list = (List)session.selectList("listAreaBoard4",parameters);
+	  session.close();
+	  return list;
+  }
+  
+  public static List<String> listAreaProfile1(){
+	  SqlSession session = sqlMapper.openSession();
+	  List<String> list = (List)session.selectList("listAreaProfile1");
+	  session.close();
+	  return list;
+  }
+  public static List<String> listAreaProfile2(){
+	  SqlSession session = sqlMapper.openSession();
+	  List<String> list = (List)session.selectList("listAreaProfile2");
+	  session.close();
+	  return list;
+  }
+  public static List<String> listAreaProfile3(){
+	  SqlSession session = sqlMapper.openSession();
+	  List<String> list = (List)session.selectList("listAreaProfile3");
+	  session.close();
+	  return list;
+  }
+  public static List<String> listAreaProfile4(){
+	  SqlSession session = sqlMapper.openSession();
+	  List<String> list = (List)session.selectList("listAreaProfile4");
 	  session.close();
 	  return list;
   }
@@ -307,6 +369,51 @@ public class BlogMapper {
 	  parameters.put("search_option", search_option);
 	  parameters.put("search_text", search_text);
 	  List<Blog_OptionDTO> list = (List)session.selectList("searchBlog",parameters);
+	  session.close();
+	  return list;
+  }
+  
+  public static List<Blog_BoardDTO> listSearchBoard(String search_option,String search_text){
+	  SqlSession session = sqlMapper.openSession();
+	  Map<String, Object> parameters = new HashMap<String, Object>();
+	  parameters.put("search_option", search_option);
+	  parameters.put("search_text", search_text);
+	  List<Blog_BoardDTO> list = (List)session.selectList("searchBoard",parameters);
+	  session.close();
+	  return list;
+  }
+  
+  public static int areaboardNumber1(){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.selectOne("areaboardNumber1");
+	  session.close();
+	  return res;
+  }
+  
+  public static int areaboardNumber2(){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.selectOne("areaboardNumber2");
+	  session.close();
+	  return res;
+  }
+  
+  public static int areaboardNumber3(){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.selectOne("areaboardNumber3");
+	  session.close();
+	  return res;
+  }
+  
+  public static int areaboardNumber4(){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.selectOne("areaboardNumber4");
+	  session.close();
+	  return res;
+  }
+  
+  public static List<Blog_BoardDTO> imsiBoard(String id){
+	  SqlSession session = sqlMapper.openSession();
+	  List<Blog_BoardDTO> list = (List)session.selectList("imsiboard",id);
 	  session.close();
 	  return list;
   }

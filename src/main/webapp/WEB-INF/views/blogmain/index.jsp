@@ -19,8 +19,8 @@
 			<c:forEach var="newlist" items="${newlist}" varStatus="status">
 			<tr align="center">
 			<td class="menu"><a href="viewBoard?no=${newlist.no}&joinmode=newlist" class="deconone">${newlist.subject}</a></td>
-			<td class="menu" valign="middle" align="left">
-			<img src="resources/upload/${newlist.id}/${newprofile[status.index]}"  width="25" height="25" class="homemenu" align="left"/><font size="4">${newlist.id}</font>
+			<td class="menu" valign="middle" align="center">
+			<img src="resources/upload/${newlist.id}/${newprofile[status.index]}"  width="25" height="25" class="homemenu" align="center"/><font size="4">${newlist.id}</font>
 			</td>
 			<td class="menu">${newlist.reg_date}</td>
 			</tr>
@@ -36,8 +36,8 @@
 			<c:forEach var="hotlist" items="${hotlist}" varStatus="status">
 			<tr align="center">
 			<td class="menu"><a href="viewBoard?no=${hotlist.no}&joinmode=hotlist" class="deconone">${hotlist.subject}</a></td>
-			<td class="menu">
-			<img src="resources/upload/${hotlist.id}/${hotprofile[status.index]}"  width="25" height="25" class="homemenu" align="left"/><font size="4">${hotlist.id}</font>
+			<td class="menu" valign="middle" align="center">
+			<img src="resources/upload/${hotlist.id}/${hotprofile[status.index]}"  width="25" height="25" class="homemenu" align="center"/><font size="4">${hotlist.id}</font>
 			</td>
 			<td class="menu">${hotlist.readcount}</td>
 			</tr>
@@ -59,7 +59,7 @@
 			</tr>
 			<tr>
 				<td align="right">
-				<img src="resources/upload/${hotblog.id}/${hotblog.profile}"  width="25" height="25" class="homemenu"/>
+				<img src="resources/upload/${hotblog.id}/${hotblog.profile}"  width="45" height="45" class="homemenu"/>
 				</td>
 				<td align="left"><font size="5">${hotblog.id}</font><font size="3" color="gray"> (${hotblog.blogname})</font></td>
 			</tr>

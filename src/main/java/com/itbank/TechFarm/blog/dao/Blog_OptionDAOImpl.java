@@ -80,18 +80,6 @@ public class Blog_OptionDAOImpl implements Blog_OptionDAO {
 	}
 
 	@Override
-	public List listAreaBoard(int area) {
-		// TODO Auto-generated method stub
-		return BlogMapper.listAreaBoard(area);
-	}
-
-	@Override
-	public List listAreaProfile(int area) {
-		// TODO Auto-generated method stub
-		return BlogMapper.listAreaProfile(area);
-	}
-
-	@Override
 	public int updateVisitornum(String id) {
 		// TODO Auto-generated method stub
 		return BlogMapper.updateVisitornum(id);
@@ -101,6 +89,78 @@ public class Blog_OptionDAOImpl implements Blog_OptionDAO {
 	public List listSearchBlog(String search_option, String search_text) {
 		// TODO Auto-generated method stub
 		return BlogMapper.listSearchBlog(search_option, search_text);
+	}
+
+	@Override
+	public List listAreaBoard1(int startRow,int endRow) {
+		// TODO Auto-generated method stub
+		return BlogMapper.listAreaBoard1(startRow, endRow);
+	}
+
+	@Override
+	public List listAreaBoard2(int startRow,int endRow) {
+		// TODO Auto-generated method stub
+		return BlogMapper.listAreaBoard2(startRow, endRow);
+	}
+
+	@Override
+	public List listAreaBoard3(int startRow,int endRow) {
+		// TODO Auto-generated method stub
+		return BlogMapper.listAreaBoard3(startRow, endRow);
+	}
+
+	@Override
+	public List listAreaBoard4(int startRow,int endRow) {
+		// TODO Auto-generated method stub
+		return BlogMapper.listAreaBoard4(startRow, endRow);
+	}
+
+	@Override
+	public List listAreaProfile1() {
+		// TODO Auto-generated method stub
+		return BlogMapper.listAreaProfile1();
+	}
+
+	@Override
+	public List listAreaProfile2() {
+		// TODO Auto-generated method stub
+		return BlogMapper.listAreaProfile2();
+	}
+
+	@Override
+	public List listAreaProfile3() {
+		// TODO Auto-generated method stub
+		return BlogMapper.listAreaProfile3();
+	}
+
+	@Override
+	public List listAreaProfile4() {
+		// TODO Auto-generated method stub
+		return BlogMapper.listAreaProfile4();
+	}
+
+	@Override
+	public int areaboardNumber1() {
+		// TODO Auto-generated method stub
+		return BlogMapper.areaboardNumber1();
+	}
+
+	@Override
+	public int areaboardNumber2() {
+		// TODO Auto-generated method stub
+		return BlogMapper.areaboardNumber2();
+	}
+
+	@Override
+	public int areaboardNumber3() {
+		// TODO Auto-generated method stub
+		return BlogMapper.areaboardNumber3();
+	}
+
+	@Override
+	public int areaboardNumber4() {
+		// TODO Auto-generated method stub
+		return BlogMapper.areaboardNumber4();
 	}
 
 }

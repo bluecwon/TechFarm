@@ -13,14 +13,14 @@
 	<h1>프로필 사진 변경</h1><br>
 	<input type="hidden" name="id" value="${optionDTO.id}">
 	<input type="hidden" name="mode" value="${mode}">
-	<img src="resources/upload/${optionDTO.id}/${optionDTO.profile}" width="200px" height="200px" id="pfimg"><br>
-	<input type="file" name="profile" id="pf">
-	<input type="button" value="등록" onclick="document.getElementById('pf').click();">
-	<br>
+	<img src="resources/upload/${optionDTO.id}/${optionDTO.profile}" width="300px" height="300px" id="pfimg"><br>
+	<input type="file" name="profile" id="pf"><br>
+	<input type="button" value="사진변경" onclick="document.getElementById('pf').click();">
+	<br><br>
 	이미지 파일은 jpg,png,gif 파일만 등록 가능합니다.
 	<br><br>
 	<h1>소개 글 변경</h1><br>
-	<textarea rows="10" cols="20" maxlength="200" name="introduce">${optionDTO.introduce}</textarea>
+	<textarea rows="10" cols="30" maxlength="200" name="introduce">${optionDTO.introduce}</textarea>
 	</div>
 </c:if>
 
@@ -42,9 +42,9 @@
 		<input type="radio" name="layout" value="6" id="layout6" style="display:none;">&nbsp;
 		<img src="resources/images/layout/layout6.jpg" onclick='layoutChoice(6)' style="cursor:pointer;" class="layout6">
 	</div><br><br>
-	<div class="layoutedit1" align="center" style="border: 5px double #ccc; ">
-		레이아웃 설정
-		<table width="50%" height="100%" align="center">
+	<div class="layoutedit1" align="center" style="border: 5px double #ccc; width:500px;" >
+		레이아웃1
+		<table width="300px" height="200px" align="center">
 			<tr>
 				<td align="left" rowspan="2" valign="top">
 					<div class="aside" height="100%" align="right">
@@ -52,18 +52,18 @@
 					</div>
 				</td>
 				<td>
-					<div class="title" width="100%">
+					<div class="title" width="100%" align="center">
 						<img src="resources/images/layout/title.jpg">
 					</div>
 				</td>
-				<td align="right" rowspan="2" valign="top">
-					<div class="aside2" height="100%" align="left">
+				<td align="left" rowspan="2" valign="top">
+					<div class="aside2" align="left">
 						<img src="resources/images/layout/empty.jpg">
 					</div>
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td align="center">
 					<div>
 						<img src="resources/images/layout/main.jpg">
 					</div>
@@ -71,26 +71,26 @@
 			</tr>
 		</table>
 			</div>
-			<div class="layoutedit2" align="center" style="border: 5px double #ccc;display:none; ">
-				레이아웃 설정
-		<table width="50%" height="100%" align="center">
+			<div class="layoutedit2" align="center" style="border: 5px double #ccc; width:500px; display:none;">
+				레이아웃2
+		<table width="300px" height="200px" align="center">
 			<tr>
 				<td align="right" rowspan="2" valign="top">
 					<img src="resources/images/layout/empty.jpg">
 				</td>
-				<td>
+				<td align="center">
 					<div class="title" width="100%">
 						<img src="resources/images/layout/title.jpg">
 					</div>
 				</td>
-				<td align="right" rowspan="2" valign="top">
+				<td align="left" rowspan="2" valign="top">
 					<div class="aside2" height="100%" align="left">
 						<img src="resources/images/layout/sidebar2.jpg">
 					</div>
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td align="center">
 					<div>
 						<img src="resources/images/layout/main.jpg">
 					</div>
@@ -98,28 +98,28 @@
 			</tr>
 		</table>
 			</div>
-			<div class="layoutedit3" align="center" style="border: 5px double #ccc;display:none; ">
-				레이아웃 설정
-				<table width="50%" height="100%" align="center">
+			<div class="layoutedit3" align="center" style="border: 5px double #ccc; width:500px; display:none; ">
+				레이아웃3
+				<table width="300px" height="200px" align="center">
 					<tr>
-						<td align="left" rowspan="2" valign="top">
+						<td align="right" rowspan="2" valign="top">
 							<div class="aside" height="100%" align="right">
 								<img src="resources/images/layout/sidebar.jpg">
 							</div>
 						</td>
-						<td>
+						<td align="center">
 							<div class="title" width="100%">
 								<img src="resources/images/layout/main.jpg">
 							</div>
 						</td>
-						<td align="right" rowspan="2" valign="top">
+						<td align="left" rowspan="2" valign="top">
 							<div class="aside2" height="100%" align="left">
 								<img src="resources/images/layout/empty.jpg">
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td>
+						<td align="center">
 							<div>
 								<img src="resources/images/layout/title.jpg">
 							</div>
@@ -127,26 +127,26 @@
 					</tr>
 				</table>
 					</div>
-					<div class="layoutedit4" align="center" style="border: 5px double #ccc;display:none; ">
-						레이아웃 설정
-						<table width="50%" height="100%" align="center">
+					<div class="layoutedit4" align="center" style="border: 5px double #ccc;width:500px;display:none; ">
+						레이아웃4
+						<table width="300px" height="200px" align="center">
 							<tr>
-								<td align="left" rowspan="2" valign="top">
+								<td align="right" rowspan="2" valign="top">
 								<img src="resources/images/layout/empty.jpg">
 								</td>
-								<td>
+								<td align="center">
 									<div class="title" width="100%">
 									<img src="resources/images/layout/main.jpg">
 									</div>
 								</td>
-								<td align="right" rowspan="2" valign="top">
+								<td align="left" rowspan="2" valign="top">
 									<div class="aside2" height="100%" align="left">
 									<img src="resources/images/layout/sidebar2.jpg">
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<td>
+								<td align="center">
 									<div>
 									<img src="resources/images/layout/title.jpg">
 									</div>
@@ -154,28 +154,28 @@
 							</tr>
 						</table>
 					</div>
-					<div class="layoutedit5" align="center" style="border: 5px double #ccc;display:none; ">
-						레이아웃 설정
-						<table width="50%" height="100%" align="center">
+					<div class="layoutedit5" align="center" style="border: 5px double #ccc;width:500px;display:none; ">
+						레이아웃5
+						<table width="300px" height="200px" align="center">
 							<tr>
-								<td align="left" rowspan="2" valign="top">
+								<td align="right" rowspan="2" valign="top">
 									<div class="aside" height="100%" align="right">
 									<img src="resources/images/layout/sidebar.jpg">
 									</div>
 								</td>
-								<td>
+								<td align="center">
 									<div class="title" width="100%">
 									<img src="resources/images/layout/title.jpg">
 									</div>
 								</td>
-								<td align="right" rowspan="2" valign="top">
+								<td align="left" rowspan="2" valign="top">
 									<div class="aside2" height="100%" align="left">
 									<img src="resources/images/layout/sidebar2.jpg">
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<td>
+								<td align="center">
 									<div>
 									<img src="resources/images/layout/main.jpg">
 									</div>
@@ -183,26 +183,26 @@
 							</tr>
 						</table>
 					</div>
-					<div class="layoutedit6" align="center" style="border: 5px double #ccc;display:none; ">
-						레이아웃 설정
-						<table width="50%" height="100%" align="center">
+					<div class="layoutedit6" align="center" style="border: 5px double #ccc;width:500px;display:none; ">
+						레이아웃6
+						<table width="300px" height="200px" align="center">
 							<tr>
-								<td align="left" rowspan="2" valign="top">
+								<td align="right" rowspan="2" valign="top">
 								<img src="resources/images/layout/sidebar.jpg">
 								</td>
-								<td>
+								<td align="center">
 									<div class="title" width="100%">
 									<img src="resources/images/layout/main.jpg">
 									</div>
 								</td>
-								<td align="right" rowspan="2" valign="top">
+								<td align="left" rowspan="2" valign="top">
 									<div class="aside2" height="100%" align="left">
 									<img src="resources/images/layout/sidebar2.jpg">
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<td>
+								<td align="center">
 									<div>
 									<img src="resources/images/layout/title.jpg">
 									</div>
@@ -217,7 +217,7 @@
 					<h1>스킨 변경</h1><input type="button" value="미리보기"><br>
 					<input type="hidden" name="id" value="${optionDTO.id}">
 					<input type="hidden" name="mode" value="${mode}">
-					<table width="100%">
+					<table width="1000px">
 						<tr>
 							<td>고양이</td>
 							<td width="20%"><input type="radio" name="skin" value="skin1"></td>
@@ -280,12 +280,16 @@
 
 <c:if test="${mode=='blog'}">
 <div align="center">
+<div class="edittitle">
 <h1>블로그 타이틀 변경</h1><br>
 <input type="hidden" name="id" value="${optionDTO.id}">
 <textarea rows="3" cols="20" maxlength="30" name="headerword">${optionDTO.headerword}</textarea><br><br><br><br>
 <input type="hidden" name="mode" value="${mode}">
+</div>
+<div class="edittitle">
 <h1>블로그 탈퇴</h1><br>
 <input type="button" value="탈퇴하기" onclick="javascript:checkDel('${optionDTO.id}');">
+</div>
 </div>
 </c:if>
 

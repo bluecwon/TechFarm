@@ -40,9 +40,9 @@ public class Blog_BoardDAOImpl implements Blog_BoardDAO {
 	}
 
 	@Override
-	public List listBoard(int boardno) {
+	public List listBoard(int boardno,int startRow,int endRow) {
 		// TODO Auto-generated method stub
-		return BlogMapper.listBoard(boardno);
+		return BlogMapper.listBoard(boardno,startRow,endRow);
 	}
 
 	@Override
@@ -121,6 +121,24 @@ public class Blog_BoardDAOImpl implements Blog_BoardDAO {
 	public List listMyBoard(String id) {
 		// TODO Auto-generated method stub
 		return BlogMapper.listMyBoard(id);
+	}
+
+	@Override
+	public int boardNumber(int boardno) {
+		// TODO Auto-generated method stub
+		return BlogMapper.boardNumber(boardno);
+	}
+
+	@Override
+	public List listSearchBoard(String search_option, String search_text) {
+		// TODO Auto-generated method stub
+		return BlogMapper.listSearchBoard(search_option, search_text);
+	}
+
+	@Override
+	public List imsiBoard(String id) {
+		// TODO Auto-generated method stub
+		return BlogMapper.imsiBoard(id);
 	}
 
 	

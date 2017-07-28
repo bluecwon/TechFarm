@@ -29,12 +29,52 @@
 	      });
 	      //전송버튼
 	      $("#insertBoard").click(function(){
+	    	  
+	    	  if(insertboard.area.value=="none"){
+	    		  	alert("카테고리를 등록해주세요")
+	    		  	return
+	    	  }else if(insertboard.subject.value==""){
+		    		alert("글제목을 입력해주세요")
+		    		insertboard.subject.focus()
+		    		return
+		    	}
+	    	  
 	          //id가 smarteditor인 textarea에 에디터에서 대입
 	          obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
 	          //폼 submit
 	          $("#insertBoardFrm").submit();
 	      });
 	  });
+	 
+	 function check(href){
+			if(${sessionScope.memberDTO == null}){
+				alert("먼저 로그인해주세요");
+			} else {
+				location.href=href;
+			}
+		};
+		function insert(){
+			document.frm.submit();
+		};
+		function update(){
+			document.f.submit();
+		};
+
+		$(document).ready(function(){
+			$("#menu1").click(function() { 
+				$("#headertop").find(".header_menu").slideDown('normal').show();
+			});
+			$("#close").click(function() {
+				$("#headertop").find(".header_menu").slideUp('fast').show();  
+			});
+			$("#myinfo").click(function() { 
+				$("#headertop").find(".header_info").slideDown('normal').show();
+			});
+			$("#close2").click(function() {
+				$("#headertop").find(".header_info").slideUp('fast').show();  
+			});
+		});
+	 
 	 function changeArea(){
  		var area1 = ['문학·책','영화','미술·디자인','공연·전시','음악','드라마','스타·연예인','만화·애니','방송']; //9개
  		var area2 = ['일상·생각','육아·결혼','애완·반려동물','좋은글·이미지','패션·미용','인테리어·DIY','상품리뷰','원예·재배']; //8개
@@ -76,6 +116,57 @@
 	</script>
 </head>
 <body>
+<div id="viewtitle" >TF Blog</div>
+<div id="headertop" align="right">
+			<div class="topnav">
+	  			<a rel="tooltip" title="메뉴"><img id="menu1" src="resources/home/imgs/menu_white.png" width="25" height="25"></a>&nbsp&nbsp&nbsp&nbsp
+	  			<c:if test="${sessionScope.memberDTO eq null}">
+	  			<a rel="tooltip" title="로그인" href="login">
+	  				<img src="resources/home/imgs/login.png" width="25" height="25">
+	  			</a>
+	  			</c:if>
+	  			<c:if test="${sessionScope.memberDTO ne null}">
+	  				<abbr title="정보보기">
+	  				<img id="myinfo" src="resources/home/imgs/profile.png" width="30" height="30">
+	  				</abbr>
+	  			</c:if>
+	  			&nbsp&nbsp&nbsp&nbsp&nbsp 
+			</div>
+			<div class="header_menu" align="center">
+			<table>
+				<tr height="70px">
+					<td align="center" width="80px"><a href="#" onclick="check('myAccount');"><img id="img_handle" src="resources/home/imgs/account.png" width="50px" height="50px"></a><br>내계정</td>
+					<td align="center" width="80px"><a href="home"><img id="img_handle" src="resources/home/imgs/search.png" width="50px" height="50px"></a><br>검색</td>
+					<td align="center" width="80px"><a href="#" onclick="check('listJames');"><img id="img_handle" src="resources/home/imgs/mail.png" width="50px" height="50px"></a><br>메일</td>
+				</tr>
+				<tr height="70px">
+					<td align="center" width="80px"><a href="#" onclick="check('tfPlusIndex');"><img id="img_handle" src="resources/home/imgs/social.png" width="50px" height="50px"></a><br>SNS</td>
+					<td align="center" width="80px"><a href="tftube_main"><img id="img_handle" src="resources/home/imgs/utube.png" width="50px" height="50px"></a><br>영상</td>
+					<td align="center" width="80px"><a href="blogmain"><img id="img_handle" src="resources/home/imgs/document.png" width="50px" height="50px"></a><br>블로그</td>
+				</tr>
+				<tr height="70px">
+					<td align="center" width="80px"><a href="#" onclick="check('tfNoteIndex?id=${sessionScope.memberDTO.id}');"><img id="img_handle" src="resources/home/imgs/memo.png" width="50px" height="50px"></a><br>메모</td>
+					<td align="center" width="80px"><a href="#" onclick="check('tfchat_main');"><img id="img_handle" src="resources/home/imgs/chatting.png" width="50px" height="50px"></a><br>채팅</td>
+					<td align="center" width="80px"><a href="#" onclick="check('listContacts');"><img id="img_handle" src="resources/home/imgs/calendar.png" width="50px" height="50px"></a><br>연락처</td>
+				</tr>
+			</table>
+			<hr>
+			<input type="button" id="close" value="Close"/>		
+			</div>
+			<div class="header_info" align="center">
+				<div>
+					<img src="resources/home/imgs/account.png" width="50px" height="50px">
+				</div>
+				<div>
+				${sessionScope.memberDTO.name}님 환영합니다.<br>
+				${sessionScope.memberDTO.id}<br>
+				${sessionScope.memberDTO.email}<br>
+				<a href="logout">로그아웃</a><br>
+				</div>
+				<hr>
+				<input type="button" id="close2" value="Close"/>
+			</div>
+	</div>
 &nbsp;&nbsp;<h2>${title}</h2>
 <form action="updateBoard" method="post" id="insertBoardFrm" name="insertboard" enctype="multipart/form-data">
 <input type="hidden" name="no" value="${boardDTO.no}">
@@ -118,8 +209,7 @@
 			<td>공개여부</td>
 			<td colspan="3">
 			<input type="radio" name="open" value="0" checked>공개
-			<input type="radio" name="open" value="1">비공개
-			<input type="radio" name="open" value="2">임시보관
+			<input type="radio" name="open" value="1">임시보관
 			</td>
 		</tr>
 	</table>

@@ -11,33 +11,33 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 <c:set var = "hd" value="<%=hdPath%>"/>
 <section>
 	<article>
-		<h1>블로그 만들기<img src="resources/images/2step.jpg" align="right" width="150" height="50"></h1>
+		<h1>블로그 만들기<img src="resources/images/2step.jpg" align="right" width="200" height="80"></h1>
 		<h2>2단계:레이아웃 선택</h2>
-		<form action="blogMake3" method="post" enctype="multipart/form-data">
+		<form action="blogMake3" method="post" enctype="multipart/form-data" name="f">
 		<input type="hidden" name="blogname" value="${blogname}">
 		<input type="hidden" name="nickname" value="${nickname}">
 		<input type="hidden" name="introduce" value="${introduce}">
 		<input type="hidden" name="headerword" value="${headerword}">	
-			<table>
+			<table width="800px" height="500px" align="center" class="makeblog">
 				<tr>
-					<td width="8%">레이<br>아웃</td>
+					<th width="8%">레이<br>아웃</th>
 					<td width="73%">
 					<div align="center">
 						<input type="radio" name="layout" value="1" id="layout1" checked style="display:none;">
-						<img src="resources/images/layout/layout1on.jpg" onclick='layoutChoice(1)' style="cursor:pointer;" class="layout1">
-						<input type="radio" name="layout" value="2" id="layout2" style="display:none;">&nbsp;
-						<img src="resources/images/layout/layout2.jpg" onclick='layoutChoice(2)' style="cursor:pointer;" class="layout2">
-						<input type="radio" name="layout" value="3" id="layout3" style="display:none;">&nbsp;
-						<img src="resources/images/layout/layout3.jpg" onclick='layoutChoice(3)' style="cursor:pointer;" class="layout3">
-						<input type="radio" name="layout" value="4" id="layout4" style="display:none;">&nbsp;
-						<img src="resources/images/layout/layout4.jpg" onclick='layoutChoice(4)' style="cursor:pointer;" class="layout4">
-						<input type="radio" name="layout" value="5" id="layout5" style="display:none;">&nbsp;
-						<img src="resources/images/layout/layout5.jpg" onclick='layoutChoice(5)' style="cursor:pointer;" class="layout5">
-						<input type="radio" name="layout" value="6" id="layout6" style="display:none;">&nbsp;
-						<img src="resources/images/layout/layout6.jpg" onclick='layoutChoice(6)' style="cursor:pointer;" class="layout6">
+		<img src="resources/images/layout/layout1on.jpg" onclick='layoutChoice(1)' style="cursor:pointer;" class="layout1">
+		<input type="radio" name="layout" value="2" id="layout2" style="display:none;">&nbsp;
+		<img src="resources/images/layout/layout2.jpg" onclick='layoutChoice(2)' style="cursor:pointer;" class="layout2">
+		<input type="radio" name="layout" value="3" id="layout3" style="display:none;">&nbsp;
+		<img src="resources/images/layout/layout3.jpg" onclick='layoutChoice(3)' style="cursor:pointer;" class="layout3">
+		<input type="radio" name="layout" value="4" id="layout4" style="display:none;">&nbsp;
+		<img src="resources/images/layout/layout4.jpg" onclick='layoutChoice(4)' style="cursor:pointer;" class="layout4">
+		<input type="radio" name="layout" value="5" id="layout5" style="display:none;">&nbsp;
+		<img src="resources/images/layout/layout5.jpg" onclick='layoutChoice(5)' style="cursor:pointer;" class="layout5">
+		<input type="radio" name="layout" value="6" id="layout6" style="display:none;">&nbsp;
+		<img src="resources/images/layout/layout6.jpg" onclick='layoutChoice(6)' style="cursor:pointer;" class="layout6">
 					</div><br><br>
 					<div class="layoutedit1" align="center" style="border: 5px double #ccc; ">
-						레이아웃 설정
+						레이아웃1
 						<table width="70%" height="100%" align="center">
 							<tr>
 								<td align="left" rowspan="2" valign="top">
@@ -64,8 +64,8 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 								</td>
 							</tr>
 						</table>
-					</div><div class="layoutedit2" align="center" style="border: 5px double #ccc;display:none; ">
-						레이아웃 설정
+					</div><div class="layoutedit2" align="center" style="border: 5px double #ccc; display:none; ">
+						레이아웃2
 						<table width="70%" height="100%" align="center">
 							<tr>
 								<td align="left" rowspan="2" valign="top">
@@ -92,7 +92,7 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 						</table>
 					</div>
 					<div class="layoutedit3" align="center" style="border: 5px double #ccc;display:none; ">
-						레이아웃 설정
+						레이아웃3
 						<table width="70%" height="100%" align="center">
 							<tr>
 								<td align="left" rowspan="2" valign="top">
@@ -121,7 +121,7 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 						</table>
 					</div>
 					<div class="layoutedit4" align="center" style="border: 5px double #ccc;display:none; ">
-						레이아웃 설정
+						레이아웃4
 						<table width="70%" height="100%" align="center">
 							<tr>
 								<td align="left" rowspan="2" valign="top">
@@ -148,7 +148,7 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 						</table>
 					</div>
 					<div class="layoutedit5" align="center" style="border: 5px double #ccc;display:none; ">
-						레이아웃 설정
+						레이아웃5
 						<table width="70%" height="100%" align="center">
 							<tr>
 								<td align="left" rowspan="2" valign="top">
@@ -177,7 +177,7 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 						</table>
 					</div>
 					<div class="layoutedit6" align="center" style="border: 5px double #ccc;display:none; ">
-						레이아웃 설정
+						레이아웃6
 						<table width="70%" height="100%" align="center">
 							<tr>
 								<td align="left" rowspan="2" valign="top">
@@ -219,4 +219,5 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 	</article>  
 </section>
 <%@ include file="aside.jsp"%>
-<%@ include file="footer.jsp"%>
+</body>
+</html>

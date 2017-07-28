@@ -41,7 +41,14 @@
 			<hr width="95%">
 			<div id="boardList">
 			<div align="left">
+				<c:choose>
+				<c:when test="${boardDTO.open==0}">
 				<h2>${title}</h2><br>
+				</c:when>
+				<c:otherwise>
+				<h2>임시보관함</h2><br>
+				</c:otherwise>
+				</c:choose>
 			</div>
 					<table class="viewBoard"  width="100%">
 						<tr>
@@ -65,7 +72,14 @@
 						</tr>
 						<tr>
 							<td colspan="3" align="right" id="view"> 
+							<c:choose>
+							<c:when test="${boardDTO.open==0}">
 							<a href="listBoard?title=${title}&boardno=${boardDTO.boardno}">목록</a>&nbsp;&nbsp;
+							</c:when>
+							<c:otherwise>
+							<a href="imsiboard?id=${boardDTO.id}">목록</a>&nbsp;&nbsp;
+							</c:otherwise>
+							</c:choose>
 							<a href="updateBoard?title=${title}&no=${boardDTO.no}">수정</a>&nbsp;&nbsp;
 							<c:if test="${boardDTO.id==sessionScope.memberDTO.id }">
 							<a href="javascript:checkDelBoard('${boardDTO.no}');">삭제</a>&nbsp;&nbsp;
@@ -145,8 +159,10 @@
 									<input type="hidden" name="no" value="${listReply.no}">
 									<input type="hidden" name="id" value="${sessionScope.memberDTO.id}">
 									<input type="hidden" name="mode" value="rereply">
+									<c:if test="${!membermode=='guest'}">
 									<input type="text" name="repcontent" maxlength="100">
 									<input type="submit" value="등록">
+									</c:if>
 									</form>
 									</span>
 									</td>	
