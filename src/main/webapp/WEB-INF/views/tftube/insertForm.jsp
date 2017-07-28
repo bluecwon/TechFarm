@@ -17,7 +17,9 @@
 <font color="red"><p id="video_check"></p></font></td></tr>
 <tr><td>제목: <input type="text" name="title" id="title" >
 <font color="red"><p id="title_check"></p></font></td></tr>
-<tr><td>설명: <input type="text" name="description" id="description">
+<tr><td>설명: <textarea name="description" 
+id="description" maxlength="400" style="width:200; height:100;">
+</textarea>
 <font color="red"><p id="description_check"></p></font></td></tr>
 <tr><td>카테고리 
 <select name="category">

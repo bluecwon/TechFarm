@@ -31,11 +31,22 @@
 					</table>
 				</div>
 				<div id="menu2">tftube 정보
+					<table align="center">	
+						<tr>
+							<td>업로드 영상 수:<a href="tftube_mychannel">${tfTubeMyVideo}</a></td>
+						</tr>
+						<tr>
+							<td>구독정보  :<a href="tftube_mychannel"> ${tfTubeSubing}</a></td>
+						</tr>
+						<tr>
+							<td>구독자수 : <a href="tftube_mychannel">${tfTubeSubed}</a></td>
+						</tr>
+					</table>
 				</div>
-				<div id="menu3">tblog 정보</div>
-				<div id="menu4" align="center">tplus 정보
+				<div id="menu3">tfblog 정보</div>
+				<div id="menu4" align="center">tfplus 정보
 					<table>
-						<c:if test="${tfPlusSize == 0}">
+						<c:if test="${tfPlusSize == 0}">									
 							<tr>
 								<td>작성된 프로필이 없습니다.</td>
 							</tr>

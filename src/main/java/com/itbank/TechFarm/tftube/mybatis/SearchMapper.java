@@ -29,7 +29,7 @@ public class SearchMapper {
 		SqlSession session=sqlMapper.openSession();
 		HashMap map=new HashMap();		
 		map.put("sql","select * from tftube_video where "+search+" like "+"'%"+search_text.trim()+"%'");
-		List<VideoDTO> list=session.selectList("search_single",map);
+		List<VideoDTO> list=session.selectList("search_single",map);		
 		session.close();
 		return list;		
 	}
