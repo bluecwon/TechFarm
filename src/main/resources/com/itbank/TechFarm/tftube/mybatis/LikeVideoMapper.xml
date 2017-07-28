@@ -36,6 +36,8 @@ select like_status from tftube_like where member_no=#{member_no} and video_no=#{
 select like_status from tftube_like where member_no=#{member_no} and video_no=#{video_no}
 </select>
 
+
+
  
  
 

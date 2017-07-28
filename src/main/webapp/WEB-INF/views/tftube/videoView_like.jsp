@@ -23,7 +23,7 @@ $(function(){
 	$("#unlike").hide();
 	$("#unlike_disabled").show();	
 	}
-	else if(like_status==1){	
+	else if(unlike_status==1){	
 	$("#unlike_disabled").hide();
 	$("#unlike").show();
 	}
@@ -31,10 +31,14 @@ $(function(){
 
 	function likes()
 	{like_status=0;	
-	location.href="tftube_videoView?no="+no+"&like_status="+like_status;}
+	location.href="tftube_videoView?no="+no+"&like_status="+like_status;
+	alert("관심 목록에서 제거되었습니다.");
+	}
 	function likes_disabled()
 	{like_status=1;	
-	location.href="tftube_videoView?no="+no+"&like_status="+like_status;}
+	location.href="tftube_videoView?no="+no+"&like_status="+like_status;
+	alert("관심 목록에 추가 되었습니다.");
+	}
 
 	function unlikes()
 	{unlike_status=0;location.href="tftube_videoView?no="+no+"&unlike_status="+unlike_status;}

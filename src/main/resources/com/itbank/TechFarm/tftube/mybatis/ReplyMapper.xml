@@ -11,11 +11,15 @@
 	</select>
 		
 	<select id="replyList_by_video" parameterType="String" resultType="replyformat">
-		select b.channel,a.* from tftube_reply a join tftube_mychannel b on a.member_no=b.member_no where video_name=#{video_name} order by re_step asc
+		select b.channel,a.* from tftube_reply a join tftube_mychannel b on a.member_no=b.member_no where video_name=#{video_name} order by re_step asc,no asc
 	</select>			
 	
 	<delete id="deletereply" parameterType="int">
 		delete from tftube_reply where no = #{no}
+	</delete>
+	
+	<delete id="deletereply_re_step" parameterType="int">
+		delete from tftube_reply where re_step = #{re_step}
 	</delete>
 	
 	<delete id="delete_reply_video_name" parameterType="String">

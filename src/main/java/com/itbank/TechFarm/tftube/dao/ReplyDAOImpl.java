@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.itbank.TechFarm.tftube.dto.ReplyDTO;
 import com.itbank.TechFarm.tftube.dto.ReplyDTOFormat;
-import com.itbank.TechFarm.tftube.dto.ReplyFormat;
+
 import com.itbank.TechFarm.tftube.mybatis.ReplyMapper;
 
 public class ReplyDAOImpl implements ReplyDAO {	
@@ -49,6 +49,13 @@ public class ReplyDAOImpl implements ReplyDAO {
 	public int delete_reply_video_name(String video_name) {
 		return ReplyMapper.delete_reply_video_name(video_name);
 	}
+
+	@Override
+	public int delete_reply_re_step(int re_step) {
+		return ReplyMapper.delete_reply_re_step(re_step);
+	}
+	
+	
 	
 	
 

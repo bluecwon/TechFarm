@@ -1,6 +1,6 @@
 package com.itbank.TechFarm.tftube.dao;
 
-import java.util.HashMap;
+
 import java.util.List;
 
 import com.itbank.TechFarm.tftube.dto.LikeVideoDTO;
@@ -13,9 +13,5 @@ public interface LikeVideoDAO {
 	public int likecount(int member_no);	
 	public List<VideoDTO> like_member_list(int member_no);
 	/*public String likevideo_list_status(int member_no,int video_no);*/
-	public int likevideo_list_status(int member_no,int video_no);
-	
-	
-	
-	
+	public int likevideo_list_status(int member_no,int video_no);	
 }

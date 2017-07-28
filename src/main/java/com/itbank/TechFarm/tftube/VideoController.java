@@ -32,9 +32,8 @@ import com.itbank.TechFarm.tftube.dao.UnlikeVideoDAO;
 import com.itbank.TechFarm.tftube.dao.VideoDAO;
 import com.itbank.TechFarm.tftube.dto.LikeVideoDTO;
 import com.itbank.TechFarm.tftube.dto.RecentVideoDTO;
-import com.itbank.TechFarm.tftube.dto.ReplyDTO;
 import com.itbank.TechFarm.tftube.dto.ReplyDTOFormat;
-import com.itbank.TechFarm.tftube.dto.ReplyFormat;
+
 
 import com.itbank.TechFarm.tftube.dto.SubingDTO;
 import com.itbank.TechFarm.tftube.dto.UnlikeVideoDTO;

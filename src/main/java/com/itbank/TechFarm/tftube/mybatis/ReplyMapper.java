@@ -105,6 +105,14 @@ public class ReplyMapper {
 
   	}
   	
+  	public static int delete_reply_re_step(int re_step){
+  		SqlSession session=sqlMapper.openSession();
+  		int res=session.delete("deletereply_re_step",re_step);
+  		session.commit();
+  		session.close();
+  		return res;
+  	}
+  	
   	
 
 

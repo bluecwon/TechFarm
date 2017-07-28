@@ -76,11 +76,8 @@ ${rdto.content}<br>
 <c:otherwise>
 <a class="reply_button" onmouseover="답글" style="cursor: pointer;">답글</a>
 
-<c:if test="${rdto.member_no eq memberDTO.no}"> 				<a href="tftube_reply_delete?no=${vdto.no}">${paramScope.rdto}삭제</a> <br></c:if><br>
+<c:if test="${rdto.member_no eq memberDTO.no}"> 				<a href="tftube_reply_delete?no=${vdto.no}&re_step=${rdto.re_step}&re_level=${rdto.re_level}"><%-- ${paramScope.rdto} --%>삭제</a> <br></c:if><br>
 
-<c:if test="${re_reply_size>2}">
-답글 ${re_reply_size}개 모두 보기	
-</c:if>				
 
 <a id="reply" class="reply_area">
 
