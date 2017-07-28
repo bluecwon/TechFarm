@@ -25,43 +25,30 @@ body{
 .footer { clear:both; width:900px; height:100px; border:1px solid #ccc; border-radius:5px;} */
 
 .sidebar1{border-right: 2px solid gray; border-left: 2px solid gray;}
+.editsidebar{border-right: 2px solid gray; background-color:#fffcdf;}
 #sidebar1{padding-right: 12px;}
 .sidebar2{border-left: 2px solid gray;}
 #sidebar2{padding-left: 12px;}
 #profile{width:300px; height:100%; border:2px solid #ccc; border-radius: 12px;}
 #pf{display:none;}
+#pfimg{border-radius: 12px;}
 #header{padding-left: 30px;}
 .boardlist{border-bottom: 2px solid #e8e8e3; padding-bottom: 36px; padding-top: 12px;}
 .gray{background-color:#DCDCDC;}
 a{text-decoration:none; color:black;}
+a.black{color:black;}
 #view{border-bottom: 2px solid #e8e8e3; padding-bottom: 12px;}
 #replyname{padding-left: 36px; padding-top: 12px;}
 #insertreply{padding-right: 36px; padding-bottom: 12px;}
 #span{color:#DCDCDC;}
+.layoutedit1{margin: auto; background-color:#fffcdf;}
+.layoutedit2{margin: auto; background-color:#fffcdf;}
+.layoutedit3{margin: auto; background-color:#fffcdf;}
+.layoutedit4{margin: auto; background-color:#fffcdf;}
+.layoutedit5{margin: auto; background-color:#fffcdf;}
+.layoutedit6{margin: auto; background-color:#fffcdf;}
 
 
-table.jjm494_add {
-	display: none;
-    border-collapse: separate;
-    border-spacing: 1px;
-    text-align: left;
-    line-height: 1.5;
-    border-top: 1px solid #ccc;
-  margin : 20px 10px;
-}
-table.jjm494_add th {
-    width: 150px;
-    padding: 10px;
-    font-weight: bold;
-    vertical-align: top;
-    border-bottom: 1px solid #ccc;
-}
-table.jjm494_add td {
-    width: 350px;
-    padding: 10px;
-    vertical-align: top;
-    border-bottom: 1px solid #ccc;
-}
 
 table.listReply {
 	display: none;

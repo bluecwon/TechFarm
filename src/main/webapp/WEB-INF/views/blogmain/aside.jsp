@@ -27,16 +27,25 @@ String pfPath = config.getServletContext().getRealPath("/WEB-INF/blog/profile/")
 	<br><br><br>
 	<div class="blogsearch" align="center">
 		<h3>블로그 검색</h3>
-		<form action="searchblog">
+		<form action="searchblog" name="search">
 		<select name="search_option">
 			<option value="blogname">블로그이름</option>
 			<option value="id">아이디</option>
 			<option value="nickname">닉네임</option>
 		</select>
 		<input type="text" name="search_text">
-		<input type="submit" value="검색">
+		<input type="button" value="검색" onclick="javascript:checksearch();">
 		</form>
 	</div>
-	
 	</div>
+	<script>
+		function checksearch(){
+	    	if(search.search_text.value==""){
+	    		alert("검색어를 입력해주세요")
+	    		search.search_text.focus()
+	    		return
+	    	}
+	    	document.search.submit()
+		}     
+</script>	
 </aside> 

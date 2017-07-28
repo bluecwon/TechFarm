@@ -30,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.itbank.TechFarm.blog.dao.Blog_BoardDAO;
 import com.itbank.TechFarm.blog.dao.Blog_OptionDAO;
 import com.itbank.TechFarm.blog.dto.Blog_BoardDTO;
+import com.itbank.TechFarm.blog.dto.Blog_BoardReplyDTO;
 import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
 import com.itbank.TechFarm.login.member.MemberDTO;
 
@@ -50,6 +51,8 @@ public class BlogMainController {
 	@Autowired
 	private Blog_BoardDAO boardDAO;
 	
+	String msg=null;
+	String url=null;
 	
 	@RequestMapping(value = "/blogmain", method = RequestMethod.GET)
 	public  ModelAndView home(Locale locale, Model model,HttpServletRequest request) {
@@ -62,27 +65,28 @@ public class BlogMainController {
 			Blog_OptionDTO optionDTO =  optionDAO.getBlog(memberDTO.getId());
 			if(optionDTO != null){
 				 mode = "member";
-				 mav.setViewName("blogmain/index");
-				 List<Blog_BoardDTO> newlist = optionDAO.listNewBoard();
-				 List<Blog_BoardDTO> hotlist = optionDAO.listHotBoard();
-				 List<String> hotprofile = optionDAO.listHotProfile();
-				 List<String> newprofile = optionDAO.listNewProfile();
-				 List<Blog_OptionDTO> hotblog = optionDAO.listHotBlog();
-				 session.setAttribute("newlist", newlist);
-				 session.setAttribute("hotlist", hotlist);
 				 session.setAttribute("optionDTO", optionDTO);
-				 session.setAttribute("hotprofile", hotprofile);
-				 session.setAttribute("newprofile", newprofile);
-				 session.setAttribute("hotblog", hotblog);
 			}else{
 				 mode = "membernoblog";
-				 mav.setViewName("blogmain/bloghome");
 			}
 		}else{
 			mode = "guest";
-			mav.setViewName("blogmain/bloghome");
 		}
+		
+		 mav.setViewName("blogmain/index");
+		 List<Blog_BoardDTO> newlist = optionDAO.listNewBoard();
+		 List<Blog_BoardDTO> hotlist = optionDAO.listHotBoard();
+		 List<String> hotprofile = optionDAO.listHotProfile();
+		 List<String> newprofile = optionDAO.listNewProfile();
+		 List<Blog_OptionDTO> hotblog = optionDAO.listHotBlog();
+		 session.setAttribute("newlist", newlist);
+		 session.setAttribute("hotlist", hotlist);
+		 
+		 session.setAttribute("hotprofile", hotprofile);
+		 session.setAttribute("newprofile", newprofile);
+		 session.setAttribute("hotblog", hotblog);
 		session.setAttribute("membermode", mode);
+		
 		return mav;
 	}
 	
@@ -179,13 +183,16 @@ public class BlogMainController {
 	@RequestMapping(value="/blogMakePro")
 	public ModelAndView blogMakePro(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("blogmain/makeBlogSuccess");
+		mav.setViewName("blogmain");
 		Blog_OptionDTO dto = getBlogOption(request);
 		int res = optionDAO.makeBlog(dto);
+		
+		if(res>0){
 		HttpSession session = request.getSession();
 		String basicPath = session.getServletContext().getRealPath("/resources/upload");
 		String upPath = session.getServletContext().getRealPath("/resources/upload/"+dto.getId());
 		File basicfolder = new File(basicPath);
+		
 		if(!basicfolder.exists()){
 			basicfolder.mkdirs();
 		}
@@ -210,7 +217,15 @@ public class BlogMainController {
 		hdcopyFile.close();
 		hdoriginFile.close();
 		
-		mav.addObject("id",dto.getId());
+		String alertmode="addblog";
+		msg = "블로그가 성공적으로 생성되었습니다. 이제 나만의 블로그를 꾸며 보세요.";
+		url = "blogmain";
+		mav.addObject("msg",msg);
+		mav.addObject("url",url);
+		mav.addObject("alertmode",alertmode);
+		mav.setViewName("blog/message");
+		}
+		
 		return mav;
 	}
 	
@@ -274,26 +289,80 @@ public class BlogMainController {
 		return dto;
 	}
 	
-	@RequestMapping(value="/blogMake4.blog")
-	public ModelAndView blogMakeSuccess(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		return new ModelAndView("blogmain/makeBlogSuccess");
-	}
-	
 	@RequestMapping(value="/areasearch")
 	public ModelAndView areaSearch(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("blogmain/areaBoard");
 		HttpSession session = request.getSession();
-		String[] areaArr = {"문학·책","영화","미술·디자인","공연·전시","음악","드라마","스타·연예인","만화·애니","방송",
-				"일상·생각","육아·결혼","애완·반려동물","좋은글·이미지","패션·미용","인테리어·DIY","상품리뷰","원예·재배",
-				"게임","스포츠","사진","자동차","취미","국내여행","세계여행","맛집",
-				"IT·컴퓨터","사회·정치","건강·의학","비즈니스·경제","어학·외국어","교육·학문"}; 
- 	
-		int area = ServletRequestUtils.getIntParameter(request, "area");
-		String areamode = areaArr[area];
-		List<Blog_BoardDTO> arealist = optionDAO.listAreaBoard(area);
-		List<String> areaprofile = optionDAO.listAreaProfile(area);
-	
+		String[] areaArr1 = {"문학·책","영화","미술·디자인","공연·전시","음악","드라마","스타·연예인","만화·애니","방송"};
+		String[] areaArr2 =	{"일상·생각","육아·결혼","애완·반려동물","좋은글·이미지","패션·미용","인테리어·DIY","상품리뷰","원예·재배"};
+		String[] areaArr3 =	{"게임","스포츠","사진","자동차","취미","국내여행","세계여행","맛집"};
+		String[] areaArr4 =	{"IT·컴퓨터","사회·정치","건강·의학","비즈니스·경제","어학·외국어","교육·학문"}; 
+		int bigarea=0;
+		
+		String bigarea_str = request.getParameter("bigarea");
+		
+		if(bigarea_str!=""){
+			bigarea = Integer.parseInt(bigarea_str);
+		}
+		System.out.println(bigarea);
+		String areamode = request.getParameter("areamode");
+		List<Blog_BoardDTO> arealist = null;
+		List<String> areaprofile = null;
+		
+		int pageSize = 5; 
+		String pageNum = request.getParameter("pageNum");
+		if (pageNum == null){
+			pageNum = "1";
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = currentPage * pageSize - (pageSize - 1);
+		int endRow = startRow + pageSize - 1;
+		int countRow = 0;
+		
+		if(bigarea==1){
+			countRow = optionDAO.areaboardNumber1(); 
+		}else if(bigarea==2){
+			countRow = optionDAO.areaboardNumber2();
+		}else if(bigarea==3){
+			countRow = optionDAO.areaboardNumber3();
+		}else if(bigarea==4){
+			countRow = optionDAO.areaboardNumber4();
+		}
+		 
+		
+		if (endRow>countRow) endRow = countRow;
+		int number = countRow - (currentPage-1) * pageSize;
+				
+		
+		if (countRow>0) {
+			int pageCount = countRow/pageSize + (countRow%pageSize==0 ? 0 : 1);
+			int pageBlock = 3;
+			int startPage = (currentPage-1)/pageBlock * pageBlock + 1;
+			int endPage = startPage + pageBlock - 1;
+			if (endPage>pageCount) endPage = pageCount;			
+			mav.addObject("startPage", startPage);
+			mav.addObject("endPage", endPage);
+			mav.addObject("pageBlock", pageBlock);
+			mav.addObject("pageCount", pageCount);			
+		}
+		
+		if(bigarea==1){
+			arealist = optionDAO.listAreaBoard1(startRow,endRow);
+			areaprofile = optionDAO.listAreaProfile1();
+		}else if(bigarea==2){
+			arealist = optionDAO.listAreaBoard2(startRow,endRow);
+			areaprofile = optionDAO.listAreaProfile2();
+		}else if(bigarea==3){
+			arealist = optionDAO.listAreaBoard3(startRow,endRow);
+			areaprofile = optionDAO.listAreaProfile3();
+		}else if(bigarea==4){
+			arealist = optionDAO.listAreaBoard4(startRow,endRow);
+			areaprofile = optionDAO.listAreaProfile4();
+		}
+		
+		mav.addObject("bigarea",bigarea);
 		mav.addObject("arealist",arealist);
 		session.setAttribute("areamode", areamode);
 		session.setAttribute("areaprofile", areaprofile);

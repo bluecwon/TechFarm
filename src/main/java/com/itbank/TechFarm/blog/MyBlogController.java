@@ -41,6 +41,9 @@ public class MyBlogController {
 	@Autowired
 	private Blog_BoardDAO boardDAO;
 	
+	String msg=null;
+	String url=null;
+	
 	@RequestMapping(value="/myBlog")
 	public ModelAndView blogMake(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
@@ -68,6 +71,14 @@ public class MyBlogController {
 		mav.setViewName("blog/editBlogMain");
 		String mode = request.getParameter("mode");
 		
+		if(mode.equals("board")){
+			HttpSession session = request.getSession();
+			MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
+			String id = memberDTO.getId();
+			List<Blog_MakeBoardDTO> list = boardDAO.listBoardTitle(id);
+			mav.addObject("list",list);
+		}
+		
 		mav.addObject("mode",mode);
 		return mav;
 	}
@@ -81,6 +92,7 @@ public class MyBlogController {
 		/*String id = request.getParameter("id");
 		Blog_OptionDTO dto = optionDAO.getBlog(id);*/
 		Blog_OptionDTO dto = (Blog_OptionDTO) session.getAttribute("optionDTO");
+		int res=0;
 		
 		if(mode.equals("profile")){//profile , introduce
 			MultipartHttpServletRequest mr = (MultipartHttpServletRequest)request;
@@ -99,12 +111,12 @@ public class MyBlogController {
 				dto.setProfile(profile);
 			}
 			dto.setIntroduce(introduce);
-			int res = optionDAO.editBlog_pf_int(dto);
+			res = optionDAO.editBlog_pf_int(dto);
 			
 		}else if(mode.equals("layout")){//layout
 			int layout = ServletRequestUtils.getIntParameter(request, "layout");
 			dto.setLayout(layout);
-			int res = optionDAO.editBlog_layout(dto);
+			res = optionDAO.editBlog_layout(dto);
 			
 		}else if(mode.equals("skin")){//skin, background, header
 			MultipartHttpServletRequest mr = (MultipartHttpServletRequest)request;
@@ -118,7 +130,7 @@ public class MyBlogController {
 			dto.setProfile(profile);
 			dto.setHeader(header);
 			
-			int res = optionDAO.editBlog_skin(dto);
+			res = optionDAO.editBlog_skin(dto);
 			
 			if(res>0){
 			String delpfPath = session.getServletContext().getRealPath("/resources/upload/"+dto.getId()+originpf);
@@ -145,16 +157,23 @@ public class MyBlogController {
 			hdcopyFile.close();
 			hdoriginFile.close();
 			}
-		}else if(mode.equals("neighbor")){//neighbor
-			
 		}else if(mode.equals("blog")){//headerword
 			String headerword = request.getParameter("headerword");
 			if(headerword.trim().equals("")){
 				headerword="Welcome To "+dto.getId()+" BLOG";
 			}
-			System.out.println(headerword);
 			dto.setHeaderword(headerword);
-			int res = optionDAO.editBlog_headerword(dto);
+			res = optionDAO.editBlog_headerword(dto);
+		}
+		
+		if(res>0){
+			String alertmode="editblog";
+			msg = "성공적으로 수정되었습니다.";
+			url = "editBlog";
+			mav.addObject("msg",msg);
+			mav.addObject("url",url);
+			mav.addObject("alertmode",alertmode);
+			mav.setViewName("blog/message");
 		}
 		
 		mav.addObject("mode",mode);
@@ -240,6 +259,15 @@ private Blog_OptionDTO getBlogOption(HttpServletRequest arg0) throws Exception{
 		mbdto.setTitle(title);
 		mbdto.setSideno(sideno);
 		int res = boardDAO.makeBoard(mbdto);
+		if(res>0){
+			String alertmode="addboardt";
+			msg = "게시판이 성공적으로 생성되었습니다.";
+			url = "editBlog";
+			mav.addObject("msg",msg);
+			mav.addObject("url",url);
+			mav.addObject("alertmode",alertmode);
+			mav.setViewName("blog/message");
+		}
 		mav.addObject("mode",mode);
 		
 		return mav;
@@ -268,6 +296,15 @@ private Blog_OptionDTO getBlogOption(HttpServletRequest arg0) throws Exception{
 		makeBoardDTO.setSideno(sideno);
 		makeBoardDTO.setTitle(title);
 		int res = boardDAO.editBoardTitle(makeBoardDTO);
+		if(res>0){
+			String alertmode="editblog";
+			msg = "성공적으로 수정되었습니다.";
+			url = "editBlog";
+			mav.addObject("msg",msg);
+			mav.addObject("url",url);
+			mav.addObject("alertmode",alertmode);
+			mav.setViewName("blog/message");
+		}
 		mav.addObject("mode",mode);
 		return mav;
 	}

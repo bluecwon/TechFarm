@@ -11,6 +11,12 @@
 <c:when test="${mode=='view'}">
 <jsp:include page="viewBoard.jsp"/>
 </c:when>
+<c:when test="${mode=='search'}">
+<jsp:include page="searchBoard.jsp"/>
+</c:when>
+<c:when test="${mode=='imsi'}">
+<jsp:include page="imsiBoard.jsp"/>
+</c:when>
 <c:otherwise>
 <jsp:include page="listBoard.jsp"/>
 </c:otherwise>
@@ -24,6 +30,12 @@
 <c:when test="${mode=='view'}">
 <jsp:include page="viewBoard.jsp"/>
 </c:when>
+<c:when test="${mode=='search'}">
+<jsp:include page="searchBoard.jsp"/>
+</c:when>
+<c:when test="${mode=='imsi'}">
+<jsp:include page="imsiBoard.jsp"/>
+</c:when>
 <c:otherwise>
 <jsp:include page="listBoard.jsp"/>
 </c:otherwise>
@@ -35,6 +47,12 @@
 <c:choose>
 <c:when test="${mode=='view'}">
 <jsp:include page="viewBoard.jsp"/>
+</c:when>
+<c:when test="${mode=='search'}">
+<jsp:include page="searchBoard.jsp"/>
+</c:when>
+<c:when test="${mode=='imsi'}">
+<jsp:include page="imsiBoard.jsp"/>
 </c:when>
 <c:otherwise>
 <jsp:include page="listBoard.jsp"/>
@@ -48,6 +66,12 @@
 <c:choose>
 <c:when test="${mode=='view'}">
 <jsp:include page="viewBoard.jsp"/>
+</c:when>
+<c:when test="${mode=='search'}">
+<jsp:include page="searchBoard.jsp"/>
+</c:when>
+<c:when test="${mode=='imsi'}">
+<jsp:include page="imsiBoard.jsp"/>
 </c:when>
 <c:otherwise>
 <jsp:include page="listBoard.jsp"/>
@@ -65,6 +89,12 @@
 <c:when test="${mode=='view'}">
 <jsp:include page="viewBoard.jsp"/>
 </c:when>
+<c:when test="${mode=='search'}">
+<jsp:include page="searchBoard.jsp"/>
+</c:when>
+<c:when test="${mode=='imsi'}">
+<jsp:include page="imsiBoard.jsp"/>
+</c:when>
 <c:otherwise>
 <jsp:include page="listBoard.jsp"/>
 </c:otherwise>
@@ -76,6 +106,12 @@
 <c:choose>
 <c:when test="${mode=='view'}">
 <jsp:include page="viewBoard.jsp"/>
+</c:when>
+<c:when test="${mode=='search'}">
+<jsp:include page="searchBoard.jsp"/>
+</c:when>
+<c:when test="${mode=='imsi'}">
+<jsp:include page="imsiBoard.jsp"/>
 </c:when>
 <c:otherwise>
 <jsp:include page="listBoard.jsp"/>

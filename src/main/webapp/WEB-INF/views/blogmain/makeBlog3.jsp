@@ -3,33 +3,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ include file="header.jsp"%>
-<%
-String bgPath = config.getServletContext().getRealPath("/WEB-INF/blog/background/"); //백그라운드 이미지 경로
-String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/"); //헤더 이미지 경로
-%>	
-<c:set var = "bg" value="<%=bgPath%>"/>
-<c:set var = "hd" value="<%=hdPath%>"/>
 <section>
 	<article>
 		<h1>블로그 만들기<img src="resources/images/2step.jpg" align="right" width="150" height="50"></h1>
 		<h2>3단계:블로그 꾸미기</h2>
-		<form action="blogMakePro" method="post" enctype="multipart/form-data">
+		<form action="blogMakePro" method="post" enctype="multipart/form-data" name="f">
 		<input type="hidden" name="blogname" value="${blogname}">
 		<input type="hidden" name="nickname" value="${nickname}">
 		<input type="hidden" name="introduce" value="${introduce}">
 		<input type="hidden" name="layout" value="${layout}">
 		<input type="hidden" name="id" value="${sessionScope.memberDTO.id}">
 		<input type="hidden" name="headerword" value="${headerword}">
-			<table>
+			<table width="1000px" height="500px" align="center" class="makeblog">
 				<tr>
-					<td>스킨</td>
+					<th>스킨</th>
 					<td width="75%">
 					<input type="button" value="미리보기"><br>
 					<div align="center">
 					<table width="100%">
 						<tr>
 							<td>고양이</td>
-							<td width="20%"><input type="radio" name="skin" value="skin1"></td>
+							<td width="20%"><input type="radio" name="skin" value="skin1" checked></td>
 							<td width="20%"><input type="radio" name="skin" value="skin2"></td>
 							<td width="20%"><input type="radio" name="skin" value="skin3"></td>
 							<td width="20%"><input type="radio" name="skin" value="skin4"></td>
@@ -82,24 +76,6 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 					<td>마음에 드는<br> 스킨으로<br> 블로그를<br> 꾸며보세요</td>
 				</tr>
 				<tr>
-					<td>배경<br> 이미지</td>
-					<td></td>
-					<td>
-					<!-- <input type="file" id="bg" name="background" value="ssd">
-					<input type="button" value="등록" onclick="document.getElementById('bg').click();">
-					<input type="button" value="삭제"> -->
-					</td>
-				</tr>
-				<tr>
-					<td>타이틀<br> 이미지</td>
-					<td></td>
-					<td>
-					<!-- <input type="file" id="hd" name="header">
-					<input type="button" value="등록" onclick="document.getElementById('hd').click();">
-					<input type="button" value="삭제"> -->
-					</td>
-				</tr>
-				<tr>
 					<td colspan="3" align="center"><hr size="1">
 					<input type="submit" value="만들기">&nbsp;&nbsp;&nbsp;
 					<input type="reset" value="취소">
@@ -110,4 +86,5 @@ String hdPath = config.getServletContext().getRealPath("/WEB-INF/blog/header/");
 	</article>  
 </section>
 <%@ include file="aside.jsp"%>
-<%@ include file="footer.jsp"%>
+</body>
+</html>

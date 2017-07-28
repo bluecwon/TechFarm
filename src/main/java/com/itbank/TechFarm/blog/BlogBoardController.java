@@ -63,6 +63,8 @@ public class BlogBoardController {
 	private Blog_OptionDAO optionDAO;
 	
 	HttpSession session = null;
+	String msg = null;
+	String url = null;
 	
 	@RequestMapping(value="/listBoard")
 	public ModelAndView listBoard(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -70,10 +72,37 @@ public class BlogBoardController {
 		mav.setViewName("blog/listBoardMain");
 		session = request.getSession();
 		String title = request.getParameter("title");
+
 		int boardno = ServletRequestUtils.getIntParameter(request, "boardno");
-		List<Blog_BoardDTO> listBoard = boardDAO.listBoard(boardno);
-		session.setAttribute("listBoard", listBoard);
 		
+		int pageSize = 9; 
+		String pageNum = request.getParameter("pageNum");
+		if (pageNum == null){
+			pageNum = "1";
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = currentPage * pageSize - (pageSize - 1);
+		int endRow = startRow + pageSize - 1;
+		int countRow = boardDAO.boardNumber(boardno);  
+		
+		if (endRow>countRow) endRow = countRow;
+		int number = countRow - (currentPage-1) * pageSize;
+		
+		List<Blog_BoardReplyDTO> listBoard = boardDAO.listBoard(boardno,startRow,endRow);		
+		
+		if (countRow>0) {
+			int pageCount = countRow/pageSize + (countRow%pageSize==0 ? 0 : 1);
+			int pageBlock = 3;
+			int startPage = (currentPage-1)/pageBlock * pageBlock + 1;
+			int endPage = startPage + pageBlock - 1;
+			if (endPage>pageCount) endPage = pageCount;			
+			mav.addObject("startPage", startPage);
+			mav.addObject("endPage", endPage);
+			mav.addObject("pageBlock", pageBlock);
+			mav.addObject("pageCount", pageCount);			
+		}
+		session.setAttribute("listBoard", listBoard);
 		mav.addObject("title",title);
 		mav.addObject("boardno",boardno);
 		return mav;
@@ -178,6 +207,7 @@ public class BlogBoardController {
 	public ModelAndView blogMake(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		String mode = "view";
+		
 		int no = ServletRequestUtils.getIntParameter(request, "no");
 		session = request.getSession();
 		String upPath = session.getServletContext().getRealPath("/resources/upload");
@@ -272,6 +302,18 @@ public class BlogBoardController {
 		}
 		
 		int res = boardDAO.updateBoard(dto);
+		if(res>0){
+			
+			String alertmode="updateboard";
+			msg = "글이 수정되었습니다.";
+			url = "listBoard";
+			mav.addObject("msg",msg);
+			mav.addObject("url",url);
+			mav.addObject("alertmode",alertmode);
+			mav.setViewName("blog/message");
+		}
+		
+		
 		mav.addObject("boardno",dto.getBoardno());
 		mav.addObject("title",dto.getTitle());
 		return mav;
@@ -314,6 +356,13 @@ public class BlogBoardController {
 			String delpfPath = session.getServletContext().getRealPath("/resources/upload/"+file1);
 			File delfile = new File(delpfPath);
 			delfile.delete();
+			String alertmode="delboard";
+			msg = "글이 삭제되었습니다.";
+			url = "listBoard";
+			mav.addObject("msg",msg);
+			mav.addObject("url",url);
+			mav.addObject("alertmode",alertmode);
+			mav.setViewName("blog/message");
 		}
 		
 		mav.addObject("title",dto.getTitle());
@@ -376,8 +425,50 @@ public class BlogBoardController {
 		int replyno = ServletRequestUtils.getIntParameter(request, "replyno");
 		int no = ServletRequestUtils.getIntParameter(request, "no");
 		int res = boardDAO.deleteReply(replyno);
+		if(res>0){
+			String alertmode="delreply";
+			msg = "댓글이 삭제되었습니다.";
+			url = "viewBoard";
+			mav.addObject("msg",msg);
+			mav.addObject("url",url);
+			mav.addObject("alertmode",alertmode);
+			mav.setViewName("blog/message");
+		}
 		boardDAO.minusReplyNumber(no);
 		mav.addObject("no",no);
+		return mav;
+	}
+	
+	@RequestMapping(value="/searchboard")
+	public ModelAndView searchblog(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("blog/listBoardMain");
+		
+		String mode = "search";
+		String search_option = request.getParameter("search_option");
+		String search_text = request.getParameter("search_text");
+		
+		List<Blog_BoardDTO> searchlist = boardDAO.listSearchBoard(search_option, search_text);
+		
+		mav.addObject("mode",mode);
+		mav.addObject("searchlist",searchlist);
+		mav.addObject("search_option",search_option);
+		mav.addObject("search_text",search_text);
+		return mav;
+	}
+	
+	@RequestMapping(value="/imsiboard")
+	public ModelAndView imsiboard(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("blog/listBoardMain");
+		
+		String mode = "imsi";
+		String id = request.getParameter("id");
+		
+		List<Blog_BoardDTO> imsilist = boardDAO.imsiBoard(id);
+		
+		mav.addObject("mode",mode);
+		mav.addObject("imsilist",imsilist);
 		return mav;
 	}
 }

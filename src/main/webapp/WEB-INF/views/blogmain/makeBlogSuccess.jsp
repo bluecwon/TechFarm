@@ -5,9 +5,15 @@
 <%@ include file="header.jsp"%>
 <section>
 	<article>
-		<h2>블로그 만들기 성공!<img src="resources/images/1step.jpg" align="right" width="150" height="50"></h2>
-		<input type="button" value="내 블로그 보러가기" onclick="location.href='myBlog?id=${id}'">
-		<input type="button" value="블로그 홈" onclick="location.href='blogStart'">
+	<table width="700px" height="400px" align="center" class="makeblog">
+		<tr>
+		<td><h2>블로그 만들기 성공!<img src="resources/images/1step.jpg" align="right" width="150" height="50"></h2></td>
+		</tr>
+		<tr>
+		<td><input type="button" value="내 블로그 보러가기" onclick="location.href='myBlog?id=${id}'"></td>
+		<td><input type="button" value="블로그 홈" onclick="location.href='blogStart'"></td>
+		</tr>
+	</table>	
 	</article>  
 </section>
 <%@ include file="aside.jsp"%>
