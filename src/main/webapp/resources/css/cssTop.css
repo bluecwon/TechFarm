@@ -1,10 +1,20 @@
  div, ul, li, table, tr, td, th{margin:0px; padding:0px;}
 #viewtitle{
 	position: absolute;
+	left: 130px; 
 	padding: 10px;
 	font-size:25px;
-	color:#fbd144;
-	width:200px;
+	width:350px;
+	height:50px;
+	z-index:5;
+}
+
+#homebutton{
+	position: absolute;
+	left: 5px; 
+	padding: 10px;
+	font-size:25px;
+	width:350px;
 	height:50px;
 	z-index:5;
 }
@@ -13,8 +23,8 @@
 	height:50px;
 	width:100%;
 	position: relative;
-	background:#000080;
-	border: 1px solid #000080;
+	background:#dafdae;
+	border: 1px solid #dafdae;
 }
 #tooltip{
 	position:absolute;
@@ -56,21 +66,19 @@
 .header_info {
 	position: absolute;
 	right: 15px; top: 45px;
-	background: #000080;
+	background: #d0fd99;
 	display: none;
 	padding: 10px;
 	width:200px;
 	height:150px;
 	font-size:12px;
-	color:#fbd144;
 	z-index:500;
 	box-shadow: 5px 5px 15px 5px gray;
 }
 .header_menu {
 	position: absolute;
 	right: 15px; top: 45px;
-	background: #000080;
-	color:#fbd144;
+	background: #d0fd99;
 	font-size:15px;
 	display: none;
 	padding: 10px;

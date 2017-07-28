@@ -119,7 +119,7 @@ table.jjm494 td {
 	padding: 10px;
 	font-size:12px;
 	width:200px;
-	height:180px;
+	height:150px;
 	z-index:500;
 	box-shadow: 5px 5px 15px 5px gray;
 }
@@ -132,7 +132,7 @@ table.jjm494 td {
 	display: none;
 	padding: 10px;
 	width:250px;
-	height:280px;
+	height:265px;
 	z-index:499;
 	box-shadow: 5px 5px 15px 5px gray;
 }
