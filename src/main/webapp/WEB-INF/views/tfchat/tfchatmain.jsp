@@ -47,6 +47,7 @@
                     var chk_id_leng=chk_id.length;
                     for(i=0;i<chk_id_leng;i++){
                     	if(chk_id[i].checked==true){
+                    		alert(chk_id[i].value);
                     		inviteId.push(chk_id[i].value);
                     	}
                     }
@@ -178,8 +179,9 @@
 			
             function addToDiscussion(writer, sender, msg) {
     			println("addToDiscussion 호출됨 : " + writer + ", " + msg);
+    			var msg2=makeMsg(msg);
     			if(sender=='system'){
-    				var contents = "<div align='center'><p>-------"+msg+"-------<p></div>";
+    				var contents = "<div align='center'><p>-------"+msg2+"-------<p></div>";
     				println("추가할 HTML : " + contents);
        			    $(".discussion").append(contents);
     			}else{
@@ -187,7 +189,7 @@
     				var contents = "<li class='" + writer + "'>"
         			 + "  <div class='messages'>"
         			 +      sender + ": <br>"
-          		 	 + "    <p>" + msg + "</p>"
+          		 	 + "    <p>" + msg2 + "</p>"
         			 + "  </div>"
         			 + "  <div class='time'>"
         			 + "    <time datetime=''>"+time+"</time>"
@@ -238,6 +240,20 @@
                     return;
                 }
                 socket.emit('disconnect');
+			}
+			function makeMsg(msg){
+				var msg2='';
+    			var count;
+    			if(msg.length/42>1){
+    				for(var i=0;i<(msg.length/42)-1;i++){
+    					count=(i+1)*42;
+    					msg2=msg2+msg.substring((42*i),count)+"<br>";
+    				}
+    				msg2=msg2+msg.substring(count,msg.length);
+    			}else{
+    				msg2=msg;
+    			}
+    			return msg2;
 			}
         </script>
 	</head>
