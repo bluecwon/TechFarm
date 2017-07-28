@@ -97,7 +97,7 @@
 							<tr>
 								<td align="center">
 									<a href="tfPlusNewsProfileBoardList?profileName=${tfPlusNews.profileName}&id=${tfPlusNews.profileId}&num=${tfPlusNews.profileNum}&my=true&myId=${sessionScope.memberDTO.id}"/>
-										<img src="resources/tfPlus/images/contents/profile/${tfPlusNews.photo}" style="width:100px; height:150px;">
+										<img src="resources/tfPlus/images/contents/profile/${tfPlusNews.photo}" style="width:100px; height:100px;">
 									</a>
 								</td>
 							</tr>
