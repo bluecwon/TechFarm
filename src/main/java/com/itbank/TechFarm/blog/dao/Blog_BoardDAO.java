@@ -32,6 +32,8 @@ public interface Blog_BoardDAO {
 	public int replyNumber(int no);
 	public List listSearchBoard(String search_option,String search_text);
 	public List imsiBoard(String id);
+	public int myBoardNumber(String id);
+	public int myReplyNumber(String id);
 	
 	/*
 	public int deleteFile(int num);*/

@@ -141,6 +141,18 @@ public class Blog_BoardDAOImpl implements Blog_BoardDAO {
 		return BlogMapper.imsiBoard(id);
 	}
 
+	@Override
+	public int myBoardNumber(String id) {
+		// TODO Auto-generated method stub
+		return BlogMapper.myBoardNumber(id);
+	}
+
+	@Override
+	public int myReplyNumber(String id) {
+		// TODO Auto-generated method stub
+		return BlogMapper.myReplyNumber(id);
+	}
+
 	
 
 }

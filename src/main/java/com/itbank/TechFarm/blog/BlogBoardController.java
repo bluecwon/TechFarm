@@ -256,7 +256,6 @@ public class BlogBoardController {
 			mav.addObject("pageBlock", pageBlock);
 			mav.addObject("pageCount", pageCount);			
 		}
-		
 		mav.addObject("no",no);
 		mav.addObject("listReply",listReply);
 		mav.addObject("boardDTO",dto);
@@ -286,7 +285,12 @@ public class BlogBoardController {
 	@RequestMapping(value="/updateBoard" , method = RequestMethod.POST)
 	public ModelAndView updateBoardPro(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView("redirect:listBoard");
-		int fileuse = ServletRequestUtils.getIntParameter(request, "fileuse");
+		String fileuse2 = request.getParameter("fileuse");
+		int fileuse = 3;
+		if(fileuse2 != null){
+			fileuse = Integer.parseInt(fileuse2);
+		}
+		
 		int no = ServletRequestUtils.getIntParameter(request, "no");
 		Blog_BoardDTO dto = boardDAO.getBoard(no);
 		String originfile1 = dto.getFile1();
@@ -297,8 +301,10 @@ public class BlogBoardController {
 			String delpfPath = session.getServletContext().getRealPath("/resources/upload/"+originfile1);
 			File delfile = new File(delpfPath);
 			delfile.delete();
-		}else{
+		}else if(fileuse==0){
 			dto.setFile1(originfile1);
+		}else{
+			
 		}
 		
 		int res = boardDAO.updateBoard(dto);

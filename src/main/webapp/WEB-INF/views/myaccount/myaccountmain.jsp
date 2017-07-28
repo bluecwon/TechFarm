@@ -9,7 +9,7 @@
 				<br>
 				<br>
 				<div id="menu1" align="center">TechFarm 정보
-					<table id="menu_table">
+					<table>
 						<tr>
 							<td>[${sessionScope.memberDTO.name}]님</td>
 						</tr>
@@ -30,8 +30,8 @@
 						</tr>
 					</table>
 				</div>
-				<div id="menu2">tftube 정보
-					<table align="center">	
+				<div id="menu2" align="center">TFtube 정보
+					<table>	
 						<tr>
 							<td>업로드 영상 수:<a href="tftube_mychannel">${tfTubeMyVideo}</a></td>
 						</tr>
@@ -43,8 +43,41 @@
 						</tr>
 					</table>
 				</div>
-				<div id="menu3">tfblog 정보</div>
-				<div id="menu4" align="center">tfplus 정보
+				<div id="menu3" align="center">TFblog 정보
+					<table>
+						<tr>
+							<th>총 내가 작성한 글</th>
+						</tr>
+						<tr>
+							<td align="center">${myBoardNumber}</td>
+						</tr>
+						<tr>
+							<th>총 내가 작성한 댓글</th>
+						</tr>
+						<tr>
+							<td align="center">${myReplyNumber}</td>
+						</tr>
+						<tr>
+							<th>내 블로그</th>
+						</tr>
+						<c:choose>
+						<c:when test="${blogoptionDTO == null}">
+						<tr>
+						<th><br>생성한 블로그가 없습니다.<br><a href="blogStart">지금 만들어보세요.</a></th>
+						<tr>
+						</c:when>
+						<c:otherwise>
+						<tr>
+							<th>
+							<img src="resources/images/skin/${blogoptionDTO.profile}" style="width:150px; height:100px;"><br>
+							<a href="myBlog?id=${blogoptionDTO.id}">(${blogoptionDTO.blogname})</a>
+							</th>
+						</tr>
+						</c:otherwise>
+						</c:choose>
+					</table>
+				</div>
+				<div id="menu4" align="center">TFplus 정보
 					<table>
 						<c:if test="${tfPlusSize == 0}">									
 							<tr>
@@ -64,7 +97,7 @@
 							<tr>
 								<td align="center">
 									<a href="tfPlusNewsProfileBoardList?profileName=${tfPlusNews.profileName}&id=${tfPlusNews.profileId}&num=${tfPlusNews.profileNum}&my=true&myId=${sessionScope.memberDTO.id}"/>
-										<img src="resources/tfPlus/images/contents/profile/${tfPlusNews.photo}" style="width:200px; height:150px;">
+										<img src="resources/tfPlus/images/contents/profile/${tfPlusNews.photo}" style="width:100px; height:150px;">
 									</a>
 								</td>
 							</tr>

@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.itbank.TechFarm.blog.dao.Blog_BoardDAO;
+import com.itbank.TechFarm.blog.dao.Blog_OptionDAO;
+import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
 import com.itbank.TechFarm.james.JamesUser;
 import com.itbank.TechFarm.login.member.MemberDAO;
 import com.itbank.TechFarm.login.member.MemberDTO;
@@ -46,12 +49,21 @@ public class MyAccountController {
 	@Autowired
 	private PasswordSecurity passwordSecurity;
 	
+	@Autowired
+	private Blog_BoardDAO boardDAO;
+	
+	@Autowired
+	private Blog_OptionDAO optionDAO;
+	
 	@RequestMapping(value = "/myAccount", method = RequestMethod.GET)
 	public String myAccount(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
 		MemberDTO memberDTO=(MemberDTO)session.getAttribute("memberDTO");
 		String profileId = memberDTO.getId();
 		int member_no=memberDTO.getNo();
 		List list = newsProfileDAO.tfPlusList(profileId);
+		int myBoardNumber = boardDAO.myBoardNumber(profileId);
+		int myReplyNumber = boardDAO.myReplyNumber(profileId);
+		Blog_OptionDTO optionDTO = optionDAO.getBlog(profileId);
 		NewsProfileDTO newsProfileDTO = newsProfileDAO.tfPlusNews(profileId);
 		
 		int myvideo=videoDAO.listVideo_member_no(member_no).size();		
@@ -66,6 +78,9 @@ public class MyAccountController {
 		model.addAttribute("tfTubeMyVideo",myvideo);
 		model.addAttribute("tfTubeSubing", subing_number);
 		model.addAttribute("tfTubeSubed",subed_number);
+		model.addAttribute("myBoardNumber",myBoardNumber);
+		model.addAttribute("myReplyNumber",myReplyNumber);
+		model.addAttribute("blogoptionDTO",optionDTO);
 		return "myaccount/myaccountmain";
 	}
 	

@@ -86,7 +86,8 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/inputmember", method = RequestMethod.POST)
-	public String inputMember(@Valid @ModelAttribute("inputInfo") MemberDTO dto, Errors errors, Model model) {
+	public String inputMember(@Valid @ModelAttribute("inputInfo") 
+							MemberDTO dto, Errors errors, Model model) {
 		if(errors.hasErrors()){
 			return "login/createAccount";
 		}
