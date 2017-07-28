@@ -20,7 +20,13 @@
 		$("#wideView").click(function() {
 			$("#content").toggleClass("wide");
 			$(this).toggleClass("wide");
-		});		
+		});	
+		$("#more_menu").hide();
+		$("#more").click(function(){
+			$("#more_menu").slideToggle('fast');
+		
+		});
+		
 		
 	});
 </script>
@@ -68,7 +74,25 @@
 						<a href="tftube_category?category=movie">영화</a><br> 
 						<a href="tftube_category?category=comedy">코미디</a><br>
 						<a href="tftube_category?category=news/politics">뉴스</a><br> 
-						<a href="tftube_category?category=animation">애니메이션</a><br></td>
+						<a href="tftube_category?category=animation">애니메이션</a><br>
+						<button id="more">더보기</button>
+						
+<div id="more_menu">
+<a href="tftube_category?category=car">자동차</a><br>
+
+<a href="tftube_category?category=animal">동물</a><br>
+
+<a href="tftube_category?category=travel/event">여행/이벤트</a><br>
+
+<a href="tftube_category?category=blog/person">블로그/인물</a><br>
+
+<a href="tftube_category?category=entertainment">엔터테인먼트</a><br>
+
+<a href="tftube_category?category=nohow/style">노하우/스타일</a><br>
+<a href="tftube_category?category=education">교육</a><br>
+<a href="tftube_category?category=technology">과학기술</a><br>
+<a href="tftube_category?category=none_profit/social_movement">비영리/사회운동</a><br>
+</div>						</td>
 		</table>		
 	</div>	
 	<!-- end of 2 -1-->

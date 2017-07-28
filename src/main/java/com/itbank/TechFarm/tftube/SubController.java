@@ -20,11 +20,7 @@ import com.itbank.TechFarm.tftube.dao.VideoDAO;
 import com.itbank.TechFarm.tftube.dto.SubingDTO;
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
 
-public class SubController {
-	
-	@Autowired
-	private MyChannelDAO mychannelDAO;
-	
+public class SubController {	
 	@Autowired
 	private SubingDAO subingDAO;
 	

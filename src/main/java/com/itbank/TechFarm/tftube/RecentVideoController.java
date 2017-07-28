@@ -14,9 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.TechFarm.login.member.MemberDTO;
 import com.itbank.TechFarm.tftube.dao.RecentVideoDAO;
-import com.itbank.TechFarm.tftube.dao.VideoDAO;
-import com.itbank.TechFarm.tftube.dto.RecentVideoDTO;
-import com.itbank.TechFarm.tftube.dto.VideoDTO;
 import com.itbank.TechFarm.tftube.dto.Video_RecentVideoDTO;
 
 
@@ -24,10 +21,7 @@ import com.itbank.TechFarm.tftube.dto.Video_RecentVideoDTO;
 public class RecentVideoController {
 	@Autowired
 	private RecentVideoDAO recentvideoDAO;
-	
-	@Autowired
-	private VideoDAO videoDAO;
-	
+		
 	private HttpSession session=null;
 	String msg=null, url=null;	
 	
@@ -48,9 +42,7 @@ public class RecentVideoController {
 			return mv;
 		}else{
 			member=(MemberDTO)memberDTO_raw;
-		}
-		
-		String ip=arg0.getRemoteAddr();				
+		}			
 		
 		List<Video_RecentVideoDTO> recent_list=recentvideoDAO.listVideo_recent(member.getNo());
 		mv.addObject("recent_list",recent_list);		

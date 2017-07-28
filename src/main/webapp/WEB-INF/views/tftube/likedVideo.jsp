@@ -25,7 +25,9 @@ width="300" height="200"></a>
 
 <div style="overflow:hidden"><!-- start of 2-2-2 -->
 <a href="tftube_videoView?no=${likeList.no}">${likeList.title}</a><br>
-<a href="tftube_mychannel">${likeList.channel}</a>
+<a href="tftube_mychannel">${likeList.channel}</a><br>
+${likeList.description}				<a href="likedVideo_delete?no=${likeList.no}">삭제</a>
+
 </div><!-- end of 2-2-2 -->
 </div><!-- end of like one line -->
 </td></tr>

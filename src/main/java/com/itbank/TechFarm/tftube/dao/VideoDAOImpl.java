@@ -2,11 +2,10 @@ package com.itbank.TechFarm.tftube.dao;
 
 import java.util.List;
 
-import com.itbank.TechFarm.tftube.dto.LikeVideoDTO;
+
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
 import com.itbank.TechFarm.tftube.dto.Video_RecentVideoDTO;
-import com.itbank.TechFarm.tftube.mybatis.LikeVideoMapper;
-import com.itbank.TechFarm.tftube.mybatis.ReplyMapper;
+
 import com.itbank.TechFarm.tftube.mybatis.VideoMapper;
 
 public class VideoDAOImpl implements VideoDAO {
