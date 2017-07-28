@@ -117,7 +117,7 @@
 						<tr>
 							<td colspan="3">
 							<div align="left" class="showReply">
-							&nbsp;&nbsp;&nbsp;&nbsp;댓글보기(댓글수)
+							&nbsp;&nbsp;&nbsp;&nbsp;댓글보기(${boardDTO.reply})
 							</div>
 							<table class="listReply">
 							<c:choose>
@@ -159,7 +159,7 @@
 									<input type="hidden" name="no" value="${listReply.no}">
 									<input type="hidden" name="id" value="${sessionScope.memberDTO.id}">
 									<input type="hidden" name="mode" value="rereply">
-									<c:if test="${!membermode=='guest'}">
+									<c:if test="${membermode!='guest'}">
 									<input type="text" name="repcontent" maxlength="100">
 									<input type="submit" value="등록">
 									</c:if>

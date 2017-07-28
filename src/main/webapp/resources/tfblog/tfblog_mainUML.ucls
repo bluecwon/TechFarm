@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="com.itbank.TechFarm.blog.BlogMainController" project="techfarm" 
     file="/techfarm/src/main/java/com/itbank/TechFarm/blog/BlogMainController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="128" y="-70"/>    
+    <position height="-1" width="-1" x="114" y="-261"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -13,7 +13,7 @@
   <class id="2" language="java" name="com.itbank.TechFarm.blog.BlogBoardController" project="techfarm" 
     file="/techfarm/src/main/java/com/itbank/TechFarm/blog/BlogBoardController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="108" y="428"/>    
+    <position height="-1" width="-1" x="135" y="303"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -51,7 +51,7 @@
   <class id="6" language="java" name="com.itbank.TechFarm.blog.dao.Blog_OptionDAOImpl" project="techfarm" 
     file="/techfarm/src/main/java/com/itbank/TechFarm/blog/dao/Blog_OptionDAOImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="974" y="332"/>    
+    <position height="-1" width="-1" x="975" y="326"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
