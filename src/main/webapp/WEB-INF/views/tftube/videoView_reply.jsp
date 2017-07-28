@@ -81,7 +81,7 @@ ${rdto.content}<br>
 
 <a id="reply" class="reply_area">
 
-<textArea name="content_reply"><c:if test="${rdto.re_level==1&&rdto.member_no!=memberDTO.no}">+${rdto.name}</c:if></textArea>
+<textArea name="content_reply"><c:if test="${rdto.re_level==1&&rdto.member_no!=memberDTO.no}">+${rdto.channel}</c:if></textArea>
 
 <input type="hidden" name="video_name" value="${vdto.video_name}">
 <input type="hidden" name="mode" value="deep">
