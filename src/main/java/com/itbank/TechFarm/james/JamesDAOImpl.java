@@ -1,13 +1,9 @@
 package com.itbank.TechFarm.james;
 
-import java.io.BufferedOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -15,7 +11,6 @@ import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.Multipart;
-import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.MimeMessage;
@@ -160,7 +155,22 @@ public class JamesDAOImpl implements JamesDAO{
 			Message[] messages = emailFolder.getMessages();
 
 			Message message = messages[dto.getNum()];
-            jamesDTO = jamesContent.writePart(message);
+            
+			jamesDTO=jamesContent.writePart(message);
+			/*
+			Object object = jamesContent.writePart(message);
+			if(object instanceof String){
+				jamesDTO.setContent(String.valueOf(object));
+			}
+            */
+			String addr=message.getFrom()[0].toString();
+        	if(addr.toString().substring(0, 2).equals("=?")){
+        		addr = message.getFrom()[0].toString().split("<")[1].split(">")[0];
+        	}
+        	jamesDTO.setFrom(addr);
+			jamesDTO.setSubject(message.getSubject());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 hh:mm");
+	    	jamesDTO.setSentDate(sdf.format(message.getSentDate()));
 			
 		    emailFolder.close(false);
 		    store.close();

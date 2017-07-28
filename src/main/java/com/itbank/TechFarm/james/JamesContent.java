@@ -13,10 +13,12 @@ import javax.mail.Part;
 public class JamesContent {
 	
 	public JamesDTO writePart(Part part) throws Exception {
-		  JamesDTO jamesDTO = new JamesDTO();
-	      System.out.println("----------------------------");
-	      System.out.println("CONTENT-TYPE: " + part.getContentType());
-
+		  //Object object = null;
+		  
+		JamesDTO jamesDTO = new JamesDTO();
+	    System.out.println("----------------------------");
+	    System.out.println("CONTENT-TYPE: " + part.getContentType());
+	      
 	      //check if the content is plain text
 	      if (part.isMimeType("text/plain")) {
 	         System.out.println("This is plain text");
@@ -30,6 +32,7 @@ public class JamesContent {
 	         Multipart mp = (Multipart) part.getContent();
 	         int count = mp.getCount();
 	         for (int i = 0; i < count; i++){
+	        	 if(mp.getBodyPart(i).isMimeType("image/*")) break;
 	            jamesDTO = writePart(mp.getBodyPart(i));
 	         }
 	         return jamesDTO;
@@ -73,32 +76,33 @@ public class JamesContent {
 	            output.write(buffer, 0, bytesRead);
 	         }
 	         output.close();
-	      } 
-	      else {
+	      }else {
 	         Object object = part.getContent();
 	         if (object instanceof String) {
 	            System.out.println("This is a string");
 	            System.out.println("---------------------------");
 	            System.out.println((String) object);
-	         } 
-	         else if (object instanceof InputStream) {
+	            
+	            jamesDTO.setContent((String)object);
+	            return jamesDTO;
+	         
+	         }else if (object instanceof InputStream) {
 	            System.out.println("This is just an input stream");
 	            System.out.println("---------------------------");
 	            InputStream is = (InputStream) object;
+	            /*
 	            is = (InputStream) object;
 	            int c;
 	            while ((c = is.read()) != -1)
 	               System.out.write(c);
-	         } 
-	         else {
+	            */
+	         }else {
 	            System.out.println("This is an unknown type");
 	            System.out.println("---------------------------");
 	            System.out.println(object.toString());
 	         }
-	         jamesDTO.setContent((String)object);
-	         return jamesDTO;
+	         
 	      }
-	      jamesDTO.setContent(part.getContent().toString());
 	      return jamesDTO;
 
 	   }

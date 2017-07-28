@@ -16,6 +16,7 @@ public class JamesDTO {
 	private String content;
 	
 	private MultipartFile sendFile;
+	private MultipartFile receiveFile;
 	
 	public int getNum() {
 		return num;
@@ -82,6 +83,12 @@ public class JamesDTO {
 	}
 	public void setSendFile(MultipartFile sendFile) {
 		this.sendFile = sendFile;
+	}
+	public MultipartFile getReceiveFile() {
+		return receiveFile;
+	}
+	public void setReceiveFile(MultipartFile receiveFile) {
+		this.receiveFile = receiveFile;
 	}
 	
 }

@@ -6,8 +6,9 @@
 		<div class="left_content1">
 			<div align="center">
 				<br>
-				<!-- 
+				
 				<a href="listJames?folder=INBOX">받은편지함</a>
+				<!-- 
 				<a href="listJames?folder=Sent">보낸편지함</a>
 				<a href="listJames?folder=Trash">휴지통</a>  
 				-->
