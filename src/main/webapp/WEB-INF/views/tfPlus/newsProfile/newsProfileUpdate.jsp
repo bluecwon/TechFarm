@@ -21,7 +21,6 @@
 		<title>소식 프로필 수정</title>
 	</head>
 	<body>
-		
 		<form name="f" id="contactForm" action="tfPlusNewsProfileUpdatePro" method="post" enctype="multipart/form-data">
 			<fieldset>
 				<table class="jjm494">

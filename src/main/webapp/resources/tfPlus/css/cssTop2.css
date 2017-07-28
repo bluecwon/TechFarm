@@ -1,4 +1,9 @@
 body, div, ul, li, table, tr, td, th{margin:0px; padding:0px;}
+hr.tw {
+	width:500px;
+	border-bottom:0px;
+	color:red;
+}
 #viewtitle{
 	position: absolute;
 	left: 130px; 

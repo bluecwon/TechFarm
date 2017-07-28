@@ -8,7 +8,7 @@
 		<title>tfPlus</title>
 		<link rel="stylesheet" media="all" href="resources/tfPlus/css/style.css"/>
 		<link rel="stylesheet" href="resources/tfPlus/css/add.css"/>
-		<link rel="stylesheet" href="resources/tfPlus/css/cssTop.css"/>
+		<link rel="stylesheet" href="resources/tfPlus/css/cssTop2.css"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		
 		<!-- jstl -->
@@ -179,7 +179,7 @@
 					<td align="center" width="80px"><a href="#" onclick="check('listContacts');"><img id="img_handle" src="resources/home/imgs/calendar.png" width="50px" height="50px"></a><br>연락처</td>
 				</tr>
 			</table>
-			<hr>
+			<hr><br>
 			<input type="button" id="close" value="Close"/>		
 			</div>
 			<div class="header_info" align="center">
@@ -192,7 +192,7 @@
 				${sessionScope.memberDTO.email}<br>
 				<a href="logout">로그아웃</a><br>
 				</div>
-				<hr>
+				<br>
 				<input type="button" id="close2" value="Close"/>
 			</div>
 		</div>
@@ -291,7 +291,7 @@
 			<!-- 네비 메뉴 시작 -->
 			<div class="wrapper clearfix">
 				<a href="#" id="logo">
-					<h2><span style="color:white">tfPlus${sessionScope.memberDTO.name}</span></h2>
+					<h2><span style="color:white">tfPlus${sessionScope.memberDTO.name}</span></h2><hr>
 				</a>
 				<nav>
 					<ul id="nav" class="sf-menu">

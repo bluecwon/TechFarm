@@ -10,43 +10,21 @@
 					<li class="first-col">
 						<div class="widget-block">
 							<div class="recent-post">
-								<a href="#" class="thumb"><img src="resources/tfPlus/images/default/account.png" style="width:50px; height:50px;"></a>
+								<a href="#" onclick="check('myAccount');" class="thumb"><img src="resources/home/imgs/account.png" style="width:50px; height:50px;"></a>
 								<div class="post-head">
-									<a href="#">내계정</a><span>내계정 정보</span>
+									<a href="#">내계정</a><span>내계정</span>
 								</div>
 							</div>
 							<div class="recent-post">
-								<a href="#" class="thumb"><img src="resources/tfPlus/images/default/search.png" style="width:50px; height:50px;"></a>
+								<a href="home" class="thumb"><img src="resources/home/imgs/search.png" style="width:50px; height:50px;"></a>
 								<div class="post-head">
-									<a href="#">검색</a><span>검색 사이트</span>
+									<a href="#">검색</a><span>검색</span>
 								</div>
 							</div>
 							<div class="recent-post">
-								<a href="#" class="thumb"><img src="resources/tfPlus/images/default/mail.png" style="width:50px; height:50px;"></a>
+								<a href="#" onclick="check('listJames');" class="thumb"><img src="resources/home/imgs/mail.png" style="width:50px; height:50px;"></a>
 								<div class="post-head">
-									<a href="#">메일</a><span>메일 보내기</span>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="first-col">
-						<div class="widget-block">
-							<div class="recent-post">
-								<a href="#" class="thumb"><img src="resources/tfPlus/images/default/social.png" style="width:50px; height:50px;"></a>
-								<div class="post-head">
-									<a href="#">SNS</a><span>소식 커뮤니티</span>
-								</div>
-							</div>
-							<div class="recent-post">
-								<a href="#" class="thumb"><img src="resources/tfPlus/images/default/utube.png" style="width:50px; height:50px;"></a>
-								<div class="post-head">
-									<a href="#">영상</a><span>유튜브</span>
-								</div>
-							</div>
-							<div class="recent-post">
-								<a href="#" class="thumb"><img src="resources/tfPlus/images/default/drive.png" style="width:50px; height:50px;"></a>
-								<div class="post-head">
-									<a href="#">클라우드</a><span>자료 저장</span>
+									<a href="#">메일</a><span>메일</span>
 								</div>
 							</div>
 						</div>
@@ -54,21 +32,43 @@
 					<li class="first-col">
 						<div class="widget-block">
 							<div class="recent-post">
-								<a href="#" class="thumb"><img src="resources/tfPlus/images/default/memo.png" style="width:50px; height:50px;"></a>
+								<a href="#" class="thumb" onclick="check('tfPlusIndex');"><img src="resources/home/imgs/social.png" style="width:50px; height:50px;"></a>
 								<div class="post-head">
-									<a href="#">메모</a><span>메모기능</span>
+									<a href="#" onclick="check('tfPlusIndex');">SNS</a><span>SNS</span>
 								</div>
 							</div>
 							<div class="recent-post">
-								<a href="#" class="thumb"><img src="resources/tfPlus/images/default/chatting.png" style="width:50px; height:50px;"></a>
+								<a href="tftube_main" class="thumb"><img src="resources/home/imgs/utube.png" style="width:50px; height:50px;"></a>
 								<div class="post-head">
-									<a href="#">채팅</a><span>채팅 구현</span>
+									<a href="tftube_main">영상</a><span>영상</span>
 								</div>
 							</div>
 							<div class="recent-post">
-								<a href="#" class="thumb"><img src="resources/tfPlus/images/default/document.png" style="width:50px; height:50px;"></a>
+								<a href="blogmain" class="thumb"><img src="resources/home/imgs/document.png" style="width:50px; height:50px;"></a>
 								<div class="post-head">
-									<a href="#">문서</a><span>문서 작성</span>
+									<a href="blogmain">블로그</a><span>블로그</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="first-col">
+						<div class="widget-block">
+							<div class="recent-post">
+								<a href="#" onclick="check('tfNoteIndex?id=${sessionScope.memberDTO.id}');" class="thumb"><img src="resources/home/imgs/memo.png" style="width:50px; height:50px;"></a>
+								<div class="post-head">
+									<a href="#" onclick="check('tfNoteIndex?id=${sessionScope.memberDTO.id}');">메모</a><span>메모</span>
+								</div>
+							</div>
+							<div class="recent-post">
+								<a href="#"  onclick="check('tfchat_main');" class="thumb"><img src="resources/home/imgs/chatting.png" style="width:50px; height:50px;"></a>
+								<div class="post-head">
+									<a href="#" onclick="check('tfchat_main');">채팅</a><span>채팅</span>
+								</div>
+							</div>
+							<div class="recent-post">
+								<a href="#" onclick="check('listContacts');" class="thumb"><img src="resources/home/imgs/calendar.png" style="width:50px; height:50px;"></a>
+								<div class="post-head">
+									<a href="#" onclick="check('listContacts');">연락처</a><span>연락처</span>
 								</div>
 							</div>
 						</div>
