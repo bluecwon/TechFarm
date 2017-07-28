@@ -418,4 +418,17 @@ public class BlogMapper {
 	  return list;
   }
   
+  public static int myBoardNumber(String id){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.selectOne("myBoardNumber",id);
+	  session.close();
+	  return res;
+  }
+  
+  public static int myReplyNumber(String id){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.selectOne("myReplyNumber",id);
+	  session.close();
+	  return res;
+  }
 }

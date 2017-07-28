@@ -215,4 +215,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   select * from blog_board where id=#{id} and open>0;
   </select>
   
+  <select parameterType="String" resultType="int" id="myBoardNumber"> 
+  select count(*) from blog_board where id=#{id}
+  </select>
+  
+  <select parameterType="String" resultType="int" id="myReplyNumber"> 
+  select count(*) from blog_boardreply where id=#{id}
+  </select>
+  
 </mapper>

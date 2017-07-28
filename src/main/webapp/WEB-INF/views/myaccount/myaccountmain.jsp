@@ -51,7 +51,40 @@
 						</tr>
 					</table>
 				</div>
-				<div id="menu3">tblog 정보</div>
+				<div id="menu3">tblog 정보
+					<table align="center">
+						<tr>
+							<th>총 내가 작성한 글</th>
+						</tr>
+						<tr>
+							<td>${myBoardNumber}</td>
+						</tr>
+						<tr>
+							<th>총 내가 작성한 댓글</th>
+						</tr>
+						<tr>
+							<td>${myReplyNumber}</td>
+						</tr>
+						<tr>
+							<th>내 블로그</th>
+						</tr>
+						<c:choose>
+						<c:when test="${blogoptionDTO == null}">
+						<tr>
+						<th><br>생성한 블로그가 없습니다.<br><a href="blogStart">지금 만들어보세요.</a></th>
+						<tr>
+						</c:when>
+						<c:otherwise>
+						<tr>
+							<th>
+							<img src="resources/images/skin/${blogoptionDTO.profile}" style="width:150px; height:100px;"><br>
+							<a href="myBlog?id=${blogoptionDTO.id}">(${blogoptionDTO.blogname})</a>
+							</th>
+						</tr>
+						</c:otherwise>
+						</c:choose>
+					</table>
+				</div>
 				<div id="menu4">tplus 정보</div>
 </div>
 </div>
