@@ -31,23 +31,16 @@
 					</table>
 				</div>
 				<div id="menu2">tftube 정보
-					<table align="center">
-						<c:if test="${tfPlusSize == 0}">
+					<table align="center">										
 							<tr>
-								<td>작성된 프로필이 없습니다.</td>
+								<td>업로드 영상 수:<a href="tftube_mychannel">${tfTubeMyVideo}</a></td>
 							</tr>
-						</c:if>
+						
 						<tr>
-							<td>총 작성프로필 : ${tfPlusSize}</td>
+							<td>구독정보  :<a href="tftube_mychannel"> ${tfTubeSubing}</a></td>
 						</tr>
 						<tr>
-							<td>
-								최근 작성프로필 제목 : ${tfPlusNews.profileName}</br>
-								작성날짜 : ${tfPlusNews.profileDate}</br>
-								<a href="tfPlusNewsProfileBoardList?profileName=${tfPlusNews.profileName}&id=${tfPlusNews.profileId}&num=${tfPlusNews.profileNum}&my=true&myId=${sessionScope.memberDTO.id}"/>
-									<img src="resources/tfPlus/images/contents/profile/${tfPlusNews.photo}" style="width:200px; height:150px;">
-								</a>
-							</td>
+							<td>구독자수 : <a href="tftube_mychannel">${tfTubeSubed}</a></td>
 						</tr>
 					</table>
 				</div>

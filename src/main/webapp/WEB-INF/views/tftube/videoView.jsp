@@ -34,6 +34,8 @@ controls="controls" width="700" height="450"></video>
  ${vdto.description}<p> 
 </div>
  <%@include file="videoView_reply.jsp"%>
+ 
+ 
  </div><!-- end of 2-2-->
  
  </div> <!-- end of 2 -->

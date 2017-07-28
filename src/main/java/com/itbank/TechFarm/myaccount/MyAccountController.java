@@ -21,11 +21,21 @@ import com.itbank.TechFarm.login.member.MemberDTO;
 import com.itbank.TechFarm.login.security.PasswordSecurity;
 import com.itbank.TechFarm.tfPlusDAO.NewsProfileDAO;
 import com.itbank.TechFarm.tfPlusDTO.NewsProfileDTO;
+import com.itbank.TechFarm.tftube.dao.SubingDAO;
+import com.itbank.TechFarm.tftube.dao.VideoDAO;
+import com.itbank.TechFarm.tftube.dto.SubingDTO;
+import com.itbank.TechFarm.tftube.dto.VideoDTO;
 
 @Controller
 public class MyAccountController {
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	@Autowired
+	private VideoDAO videoDAO;
+	
+	@Autowired
+	private SubingDAO subingDAO;
 	
 	@Autowired
 	private JamesUser jamesUser;
@@ -40,10 +50,22 @@ public class MyAccountController {
 	public String myAccount(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {
 		MemberDTO memberDTO=(MemberDTO)session.getAttribute("memberDTO");
 		String profileId = memberDTO.getId();
+		int member_no=memberDTO.getNo();
 		List list = newsProfileDAO.tfPlusList(profileId);
 		NewsProfileDTO newsProfileDTO = newsProfileDAO.tfPlusNews(profileId);
+		
+		int myvideo=videoDAO.listVideo_member_no(member_no).size();		
+		//구독정보		
+		int subing_number=subingDAO.get_subing_member(member_no).size();	
+		//구독자
+		int subed_number=subingDAO.get_subed_member(member_no).size();
+		
+		
 		model.addAttribute("tfPlusSize", list.size());
 		model.addAttribute("tfPlusNews",newsProfileDTO);
+		model.addAttribute("tfTubeMyVideo",myvideo);
+		model.addAttribute("tfTubeSubing", subing_number);
+		model.addAttribute("tfTubeSubed",subed_number);
 		return "myaccount/myaccountmain";
 	}
 	

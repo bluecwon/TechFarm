@@ -61,7 +61,7 @@ ${videoList.readcount}회  ＊ ${videoList.uploaddate}
 
 
 <p>
-구독자 <p>
+<font size="4">구독자</font><p>
 <table>
 <c:choose>
 <c:when test="${subed_list.size()==0}">
