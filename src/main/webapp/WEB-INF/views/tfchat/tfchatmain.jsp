@@ -17,7 +17,7 @@
          	// 문서 로딩 후 실행됨
             $(function() {
 			
-                 host = '52.79.140.54';//192.168.52.35
+                 host = '192.168.52.35';//52.79.140.54
                  port = '3000';
                  connectToServer();
                  
@@ -49,16 +49,14 @@
                     }
                     var inviteRoom=$('#roomIdInput').val();
                     var inviteRoomOwner=$('#idInput').val();
-                    
                     var output = {command:'create', roomId:roomId, roomName:roomName, roomOwner:id};
                     console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
-                    var inviteinfo={inviteId:inviteId, inviteRoom:inviteRoom, inviteRoomOwner:inviteRoomOwner};
-                    console.log('서버로 보낼 데이터 : ' + JSON.stringify(inviteinfo));
+	                var inviteinfo={inviteId:inviteId, inviteRoom:inviteRoom, inviteRoomOwner:inviteRoomOwner};
+	                console.log('서버로 보낼 데이터 : ' + JSON.stringify(inviteinfo));
                     if (socket == undefined) {
                         alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
                         return;
                     }
-
                     socket.emit('room', output);
                     socket.emit('invite', inviteinfo);
                     $('#recepientInput').val(roomId);
