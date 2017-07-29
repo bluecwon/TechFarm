@@ -27,6 +27,7 @@ import com.itbank.TechFarm.blog.dao.Blog_BoardDAO;
 import com.itbank.TechFarm.blog.dao.Blog_NeighborDAO;
 import com.itbank.TechFarm.blog.dao.Blog_OptionDAO;
 import com.itbank.TechFarm.blog.dto.Blog_BoardDTO;
+import com.itbank.TechFarm.blog.dto.Blog_BoardReplyDTO;
 import com.itbank.TechFarm.blog.dto.Blog_MakeBoardDTO;
 import com.itbank.TechFarm.blog.dto.Blog_NeighborDTO;
 import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
@@ -130,6 +131,10 @@ public class MyBlogController {
 			}
 			dto.setIntroduce(introduce);
 			res = optionDAO.editBlog_pf_int(dto);
+			Blog_BoardReplyDTO replydto = new Blog_BoardReplyDTO();
+			replydto.setId(dto.getId());
+			replydto.setProfile(dto.getProfile());
+			int res2 = boardDAO.editReply_pf(replydto);
 			
 		}else if(mode.equals("layout")){//layout
 			int layout = ServletRequestUtils.getIntParameter(request, "layout");
@@ -147,7 +152,7 @@ public class MyBlogController {
 			
 			dto.setProfile(profile);
 			dto.setHeader(header);
-			
+
 			res = optionDAO.editBlog_skin(dto);
 			
 			if(res>0){
@@ -174,6 +179,11 @@ public class MyBlogController {
 			pforiginFile.close();
 			hdcopyFile.close();
 			hdoriginFile.close();
+			
+			Blog_BoardReplyDTO replydto = new Blog_BoardReplyDTO();
+			replydto.setId(dto.getId());
+			replydto.setProfile(dto.getProfile());
+			int res2 = boardDAO.editReply_pf(replydto);
 			
 			Thread.sleep(5000);
 			}
@@ -238,8 +248,11 @@ private Blog_OptionDTO getBlogOption(HttpServletRequest arg0) throws Exception{
 	@RequestMapping(value="/deleteBlog")
 	public ModelAndView blogDelete(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String id = request.getParameter("id");
-		int res = optionDAO.deleteBlog(id);	
+		
+		int res = optionDAO.deleteBlog(id);
 		if(res>0){
+			int res2 = boardDAO.deleteAllmyBoard(id);
+			
 			HttpSession session = request.getSession();
 			String delpfPath = session.getServletContext().getRealPath("/resources/upload/"+id);
 			File delfile = new File(delpfPath);

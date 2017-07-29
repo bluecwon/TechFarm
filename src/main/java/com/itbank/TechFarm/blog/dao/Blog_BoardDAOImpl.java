@@ -153,6 +153,18 @@ public class Blog_BoardDAOImpl implements Blog_BoardDAO {
 		return BlogMapper.myReplyNumber(id);
 	}
 
+	@Override
+	public int deleteAllmyBoard(String id) {
+		// TODO Auto-generated method stub
+		return BlogMapper.deleteAllmyBoard(id);
+	}
+
+	@Override
+	public int editReply_pf(Blog_BoardReplyDTO dto) {
+		// TODO Auto-generated method stub
+		return BlogMapper.editReply_pf(dto);
+	}
+
 	
 
 }

@@ -52,8 +52,15 @@ public class BlogMapper {
 	  int res = session.delete("deleteBlog",id);
 	  session.commit();
 	  session.close();
-	return res;
-	  
+	return res;  
+  }
+  
+  public static int deleteAllmyBoard(String id){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.delete("deleteAllmyBoard",id);
+	  session.commit();
+	  session.close();
+	return res;  
   }
   
   public static int makeBoard(Blog_MakeBoardDTO dto){
@@ -437,4 +444,13 @@ public class BlogMapper {
 	  session.close();
 	  return res;
   }
+  
+  public static int editReply_pf(Blog_BoardReplyDTO dto){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.update("editReply_pf", dto);
+	  session.commit();
+	  session.close();
+	  return res;
+  }
+  
 }
