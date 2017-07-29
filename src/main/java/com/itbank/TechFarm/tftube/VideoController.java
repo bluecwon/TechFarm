@@ -458,10 +458,12 @@ public class VideoController {
 		
 	//RecentVideo insert 		
 		RecentVideoDTO recent_dto=new RecentVideoDTO();
-		
-		if(member_object!=null){
+		String a=recentvideoDAO.listVideo_last();
+		System.out.println("DB:"+a);
+		System.out.println("video_name:"+video_name);
+		if(member_object!=null&&!(recentvideoDAO.listVideo_last().equals(video_name))){
 		recent_dto.setMember_no(member.getNo());
-		recent_dto.setVideo_name(video_name);		
+		recent_dto.setVideo_name(video_name);			
 		recentvideoDAO.insertRecent(recent_dto);
 		}
 		//end of RecentVideo insert 		

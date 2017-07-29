@@ -1,7 +1,6 @@
 package com.itbank.TechFarm.tftube.dao;
 
 import com.itbank.TechFarm.tftube.dto.UnlikeVideoDTO;
-import com.itbank.TechFarm.tftube.mybatis.LikeVideoMapper;
 import com.itbank.TechFarm.tftube.mybatis.UnlikeVideoMapper;
 
 public class UnlikeVideoDAOImpl implements UnlikeVideoDAO{

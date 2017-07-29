@@ -44,7 +44,9 @@ public class RecentVideoController {
 			member=(MemberDTO)memberDTO_raw;
 		}			
 		
-		List<Video_RecentVideoDTO> recent_list=recentvideoDAO.listVideo_recent(member.getNo());
+		List<Video_RecentVideoDTO> recent_list=recentvideoDAO.listVideo_recent(member.getNo());		
+		
+		
 		mv.addObject("recent_list",recent_list);		
 		mv.setViewName("tftube/recentVideo");		
 		return mv;
@@ -85,9 +87,12 @@ public class RecentVideoController {
 	public ModelAndView tftube_recent_delall(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
-		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
+		Object member_raw=session.getAttribute("memberDTO");
+		MemberDTO member=null;
+		if(member_raw!=null){
+		member=(MemberDTO)member_raw;}
 		
-		if(member!=null){
+		if(member_raw!=null){
 		recentvideoDAO.recent_delete_all(member.getNo());
 		mv.setViewName("tftube/recentVideo");
 		}else{

@@ -67,11 +67,19 @@ public class RecentVideoMapper {
 	
 	public static List<Video_RecentVideoDTO> listVideo_recent(int member_no){
 		SqlSession session=sqlMapper.openSession();
-		List<Video_RecentVideoDTO> res=session.selectList("listVideo_recent",member_no);		
+		List<Video_RecentVideoDTO> res=session.selectList("listVideo_recent",member_no);
+		
 		session.close();
 		return res;
 		
 		
+	}
+	
+	public static String listVideo_last(){
+		SqlSession session=sqlMapper.openSession();
+		String video_name=session.selectOne("listVideo_last");
+		session.close();
+		return video_name;
 	}
 
 }

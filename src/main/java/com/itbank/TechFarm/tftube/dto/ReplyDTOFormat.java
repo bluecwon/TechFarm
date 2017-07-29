@@ -1,8 +1,6 @@
 package com.itbank.TechFarm.tftube.dto;
 
 public class ReplyDTOFormat {
-	
-
 		private String channel;
 		private int no;
 		private int member_no;	
