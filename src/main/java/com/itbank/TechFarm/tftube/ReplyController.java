@@ -1,10 +1,5 @@
 package com.itbank.TechFarm.tftube;
 
-
-
-import java.util.Date;
-import java.util.HashMap;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -30,7 +25,7 @@ public class ReplyController {
 
 	private HttpSession session=null;
 	private String msg=null, url=null;	
-	private static HashMap<String, HashMap<String, Date>> map=new HashMap<String,HashMap<String,Date>>();
+	
 	@RequestMapping(value="/tftube_reply_insert")
 	public ModelAndView tftube_reply_insert(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {

@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.0" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="com.itbank.TechFarm.tftube.CategoryController" project="techfarm" 
-    file="/techfarm/src/main/java/com/itbank/TechFarm/tftube/CategoryController.java" binary="false" 
+  <class id="1" language="java" name="com.itbank.TechFarm.tftube.RecentVideoController" project="techfarm" 
+    file="/techfarm/src/main/java/com/itbank/TechFarm/tftube/RecentVideoController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="216" y="113"/>    
+    <position height="-1" width="-1" x="296" y="154"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="2" language="java" name="com.itbank.TechFarm.tftube.dao.VideoDAO" project="techfarm" 
-    file="/techfarm/src/main/java/com/itbank/TechFarm/tftube/dao/VideoDAO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="619" y="130"/>    
+  <interface id="2" language="java" name="com.itbank.TechFarm.tftube.dao.RecentVideoDAO" project="techfarm" 
+    file="/techfarm/src/main/java/com/itbank/TechFarm/tftube/dao/RecentVideoDAO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="791" y="147"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="3" language="java" name="com.itbank.TechFarm.tftube.dao.VideoDAOImpl" project="techfarm" 
-    file="/techfarm/src/main/java/com/itbank/TechFarm/tftube/dao/VideoDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="615" y="429"/>    
+  <class id="3" language="java" name="com.itbank.TechFarm.tftube.dao.RecentVideoDAOImpl" project="techfarm" 
+    file="/techfarm/src/main/java/com/itbank/TechFarm/tftube/dao/RecentVideoDAOImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="272" x="638" y="294"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -35,12 +37,8 @@
   </realization>  
   <association id="5">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="6" name="videoDAO">        
-        <position height="0" width="0" x="55" y="-44"/>      
-      </attribute>      
-      <multiplicity id="7" minimum="0" maximum="1">        
-        <position height="0" width="0" x="55" y="-44"/>      
-      </multiplicity>    
+      <attribute id="6" name="recentvideoDAO"/>      
+      <multiplicity id="7" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  

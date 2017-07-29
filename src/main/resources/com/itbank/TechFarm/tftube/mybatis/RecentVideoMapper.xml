@@ -29,4 +29,8 @@ delete from tftube_recentvideo where member_no=#{member_no}
 delete from tftube_recentvideo where recent_no=#{recent_no}
 </delete>
 
+<select id="listVideo_last" resultType="String">
+select video_name from tftube_recentvideo order by recent_no desc limit 1 
+</select>
+
 </mapper>
