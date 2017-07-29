@@ -10,6 +10,7 @@
   	 <typeAlias alias="BlogOptionDTO" type="com.itbank.TechFarm.blog.dto.Blog_OptionDTO"/>
   	 <typeAlias alias="BlogMakeBoardDTO" type="com.itbank.TechFarm.blog.dto.Blog_MakeBoardDTO"/>
   	 <typeAlias alias="BlogReplyDTO" type="com.itbank.TechFarm.blog.dto.Blog_BoardReplyDTO"/>
+  	 <typeAlias alias="BlogNeighborDTO" type="com.itbank.TechFarm.blog.dto.Blog_NeighborDTO"/>
   </typeAliases>
   <environments default="development"> 
       <environment id="development"> 

@@ -8,9 +8,10 @@
 			<div align="left">
 				<h2>${title}</h2><br>
 			</div>
+			<c:if test="${optionDTO.id.equals(sessionScope.memberDTO.id)}">
 			<div align="right">	
 				<img src="resources/images/write.jpg" onclick="location.href='insertBoard?boardno=${boardno}&id=${optionDTO.id}&title=${title}'" style="cursor:pointer;">&nbsp;&nbsp;<br>
-			</div><br>
+			</div></c:if><br>
 				<div>
 					<table class="listBoard">
 						<c:choose>

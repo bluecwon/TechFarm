@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.itbank.TechFarm.blog.dto.Blog_BoardDTO;
 import com.itbank.TechFarm.blog.dto.Blog_BoardReplyDTO;
 import com.itbank.TechFarm.blog.dto.Blog_MakeBoardDTO;
+import com.itbank.TechFarm.blog.dto.Blog_NeighborDTO;
 import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
 
 public class BlogMapper {
@@ -403,6 +404,36 @@ public class BlogMapper {
   public static int myReplyNumber(String id){
 	  SqlSession session = sqlMapper.openSession();
 	  int res = session.selectOne("myReplyNumber",id);
+	  session.close();
+	  return res;
+  }
+  
+  public static int addNeighbor(Blog_NeighborDTO neighborDTO){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.insert("addNeighbor", neighborDTO);
+	  session.commit();
+	  session.close();
+	  return res;
+  }
+  
+  public static List<Blog_NeighborDTO> neighborList(String id){
+	  SqlSession session = sqlMapper.openSession();
+	  List<Blog_NeighborDTO> list = (List)session.selectList("neighborList",id);
+	  session.close();
+	  return list;
+  }
+  
+  public static List<String> listNeighborProfile(String id){
+	  SqlSession session = sqlMapper.openSession();
+	  List<String> list = (List)session.selectList("listNeighborProfile",id);
+	  session.close();
+	  return list;
+  }
+  
+  public static int deleteNeighbor(int neighborno){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.delete("deleteNeighbor", neighborno);
+	  session.commit();
 	  session.close();
 	  return res;
   }

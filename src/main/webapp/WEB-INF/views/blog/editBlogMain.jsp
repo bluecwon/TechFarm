@@ -5,7 +5,12 @@
 <%@ include file="editBlogTop.jsp"%>
 		<td valign="top">
 <form action="editBlog" method="post" enctype="multipart/form-data">
-<br>&nbsp;&nbsp;&nbsp;<input type="submit" value="저장"><br><br>
+<c:choose>
+<c:when test="${mode=='board'}"></c:when>
+<c:when test="${mode=='neighbor'}"></c:when>
+<c:otherwise><br>&nbsp;&nbsp;&nbsp;<input type="submit" value="저장"></c:otherwise>
+</c:choose>
+<br><br>
 <input type="hidden" value="${mode}">	
 
 <c:if test="${mode=='profile'}">
@@ -271,13 +276,6 @@
 					</div>
 </c:if>
 
-<c:if test="${mode=='neighbor'}">
-<div align="center">
-<h1>이웃 관리</h1><br>
-<input type="hidden" name="mode" value="${mode}">
-</div>
-</c:if>
-
 <c:if test="${mode=='blog'}">
 <div align="center">
 <div class="edittitle">
@@ -292,6 +290,34 @@
 </div>
 </div>
 </c:if>
+
+<c:if test="${mode=='neighbor'}">
+<div align="center">
+<div class="edittitle">
+<h1>이웃관리</h1><br>
+<input type="hidden" name="id" value="${optionDTO.id}">
+<input type="hidden" name="mode" value="${mode}">
+<c:choose>
+<c:when test="${neighborlist.size()==0}">
+<div align="center">
+<h2>등록된 이웃이 없습니다.</h2>
+</div>
+</c:when>
+<c:otherwise>
+<c:forEach var="neighborlist" items="${neighborlist}">
+<div align="center">
+<img src="resources/upload/${neighborlist.neighborid}/${neighborprofile[status.index]}" width="60" height="60" align="center">
+${neighborlist.neighborid} &nbsp;&nbsp;&nbsp;<a href="javascript:checkdelNeighbor(${neighborlist.neighborid},${neighborlist.neighborno})">삭제</a>
+</div>
+</c:forEach>
+</c:otherwise>
+</c:choose>
+<br>
+
+</div>
+</div>
+</c:if>
+
 
 <c:if test="${mode=='board'}">
 <div align="center">
@@ -341,3 +367,11 @@
 </table>
 </body>
 </html>
+<script type="text/javascript" charset="utf-8">
+function checkdelNeighbor(id,neighborno){
+	 var isAdd = window.confirm(id+"님을 이웃에서 삭제하시겠습니끼?")
+	 if(isAdd){
+		 location.href="deleteNeighbor?neighborno="+neighborno
+	 }
+}
+</script>
