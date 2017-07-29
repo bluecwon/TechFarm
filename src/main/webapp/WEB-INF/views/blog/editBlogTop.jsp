@@ -104,10 +104,11 @@ function update(){
 </script>
 </head>
 <body>
-    <div id="viewtitle">TF Blog</div>
+    <div id="homebutton"><a href="home"><img src="resources/home/imgs/name.png" width="125px" height="40px"></a></div>
+<div id="viewtitle">Blog</div>
 <div id="headertop" align="right">
 			<div class="topnav">
-	  			<a rel="tooltip" title="메뉴"><img id="menu1" src="resources/home/imgs/menu_white.png" width="25" height="25"></a>&nbsp&nbsp&nbsp&nbsp
+	  			<a rel="tooltip" title="메뉴"><img id="menu1" src="resources/home/imgs/menu.png" width="25" height="25"></a>&nbsp&nbsp&nbsp&nbsp
 	  			<c:if test="${sessionScope.memberDTO eq null}">
 	  			<a rel="tooltip" title="로그인" href="login">
 	  				<img src="resources/home/imgs/login.png" width="25" height="25">
