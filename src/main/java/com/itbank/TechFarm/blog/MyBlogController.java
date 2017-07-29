@@ -105,7 +105,7 @@ public class MyBlogController {
 	@RequestMapping(value="/editBlog", method=RequestMethod.POST)
 	public ModelAndView blogEditPro(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("blog/editBlogMain");
+		mav.setViewName("blog/	");
 		String mode = request.getParameter("mode");
 		HttpSession session = request.getSession();
 		/*String id = request.getParameter("id");

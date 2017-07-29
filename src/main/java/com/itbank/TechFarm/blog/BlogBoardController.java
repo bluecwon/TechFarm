@@ -151,10 +151,14 @@ public class BlogBoardController {
 	      sb = new StringBuffer();
 	      sb.append("&bNewLine=true")
 	        .append("&sFileName=").append(oldName)
-	        .append("&sFileURL=").append("52.79.140.54/TechFarm/resources/upload/")
-	        //.append("&sFileURL=").append("http://localhost:8081/TechFarm/resources/upload/")
+	      //.append("&sFileURL=").append("/TechFarm/resources/upload/")
+	        //.append("&sFileURL=").append("http://52.79.140.54/TechFarm/resources/upload/")
+	        .append("&sFileURL=").append(session.getServletContext().getContextPath()+"/resources"+File.separator+"upload"+File.separator)
 	       //.append("&sFileURL=").append(filePath)
 	        .append(saveName);
+	      System.out.println("파일 존재 확인 : "+new File(filePath, saveName).exists());
+	      System.out.println(session.getServletContext().getContextPath());
+
 	    } catch (Exception e) {
 	      e.printStackTrace();
 	    }
