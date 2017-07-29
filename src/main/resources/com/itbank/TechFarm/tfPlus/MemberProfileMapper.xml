@@ -166,7 +166,7 @@
 				WHERE mProfileBoardPK = #{mProfileBoardPK}
 	</update>
 	
-	<update id="memberAddUpdateSub" parameterType="String">
+	<update id="memberAddUpdateSub" parameterType="int">
 		UPDATE memberprofileaddcomment SET 
 			mRe_step = mRe_step+1 WHERE mRe_step > #{re_step}
 	</update>
