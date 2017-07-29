@@ -24,9 +24,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.TechFarm.blog.dao.Blog_BoardDAO;
+import com.itbank.TechFarm.blog.dao.Blog_NeighborDAO;
 import com.itbank.TechFarm.blog.dao.Blog_OptionDAO;
 import com.itbank.TechFarm.blog.dto.Blog_BoardDTO;
 import com.itbank.TechFarm.blog.dto.Blog_MakeBoardDTO;
+import com.itbank.TechFarm.blog.dto.Blog_NeighborDTO;
 import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
 import com.itbank.TechFarm.login.member.MemberDTO;
 
@@ -40,6 +42,8 @@ public class MyBlogController {
 	private Blog_OptionDAO optionDAO;
 	@Autowired
 	private Blog_BoardDAO boardDAO;
+	@Autowired
+	private Blog_NeighborDAO neighborDAO;
 	
 	String msg=null;
 	String url=null;
@@ -59,6 +63,11 @@ public class MyBlogController {
 		}
 		List<Blog_BoardDTO> myboardlist = boardDAO.listMyBoard(id);
 		List<Blog_MakeBoardDTO> list = boardDAO.listBoardTitle(id);
+		List<Blog_NeighborDTO> neighborlist = neighborDAO.neighborList(id);
+		List<String> neighborprofile = neighborDAO.listNeighborProfile(id);
+		
+		session.setAttribute("neighborlist", neighborlist);
+		session.setAttribute("neighborprofile", neighborprofile);
 		session.setAttribute("myboardlist", myboardlist);
 		session.setAttribute("list", list);
 		session.setAttribute("optionDTO", dto);
@@ -77,6 +86,15 @@ public class MyBlogController {
 			String id = memberDTO.getId();
 			List<Blog_MakeBoardDTO> list = boardDAO.listBoardTitle(id);
 			mav.addObject("list",list);
+			
+		}else if(mode.equals("neighbor")){
+			HttpSession session = request.getSession();
+			MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
+			String id = memberDTO.getId();
+			List<Blog_NeighborDTO> neighborlist = neighborDAO.neighborList(id);
+			List<String> neighborprofile = neighborDAO.listNeighborProfile(id);
+			session.setAttribute("neighborlist", neighborlist);
+			session.setAttribute("neighborprofile", neighborprofile);
 		}
 		
 		mav.addObject("mode",mode);

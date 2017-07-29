@@ -207,4 +207,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   select count(*) from blog_boardreply where id=#{id}
   </select>
   
+  <insert id="addNeighbor" parameterType="BlogNeighborDTO" useGeneratedKeys="true">
+  insert into blog_neighbor (id,neighborid) values(#{id},#{neighborid})
+  </insert>
+  
+  <select resultType="BlogNeighborDTO" id="neighborList" parameterType="String">
+  select * from blog_neighbor where id=#{id}
+  </select>
+  
+  <select resultType="String" id="listNeighborProfile" parameterType="String">
+  select profile from blog_option c join (select a.* from (select * from blog_neighbor where id=#{id})a)b on c.id=b.id;
+  </select>
+  
+  <delete parameterType="int" id="deleteNeighbor">
+  delete from blog_neighbor where neighborno=#{neighborno}
+  </delete>
 </mapper>

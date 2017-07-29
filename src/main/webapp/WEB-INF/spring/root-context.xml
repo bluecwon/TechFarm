@@ -21,6 +21,7 @@
 	<!-- tfblog DAO-->
 	<bean class="com.itbank.TechFarm.blog.dao.Blog_OptionDAOImpl" id="Blog_OptionDAO"/>
 	<bean class="com.itbank.TechFarm.blog.dao.Blog_BoardDAOImpl" id="Blog_BoardDAO"/>
+	<bean class="com.itbank.TechFarm.blog.dao.Blog_NeighborDAOImpl" id="Blog_NeighborDAO"/>
 	
 	<!-- tftube -->
 	<bean id="replyDAO" class="com.itbank.TechFarm.tftube.dao.ReplyDAOImpl"/>

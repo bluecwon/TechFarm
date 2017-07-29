@@ -1,83 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.0" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="com.itbank.TechFarm.blog.BlogMainController" project="techfarm" 
-    file="/techfarm/src/main/java/com/itbank/TechFarm/blog/BlogMainController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="171" y="-541"/>    
+  <class id="1" language="java" name="com.itbank.TechFarm.blog.dto.Blog_BoardDTO" project="techfarm" 
+    file="/techfarm/src/main/java/com/itbank/TechFarm/blog/dto/Blog_BoardDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="957" y="1007"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="2" language="java" name="com.itbank.TechFarm.blog.dao.Blog_OptionDAO" project="techfarm" 
-    file="/techfarm/src/main/java/com/itbank/TechFarm/blog/dao/Blog_OptionDAO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="779" y="-546"/>    
+  <interface id="2" language="java" name="com.itbank.TechFarm.blog.dao.Blog_BoardDAO" project="techfarm" 
+    file="/techfarm/src/main/java/com/itbank/TechFarm/blog/dao/Blog_BoardDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="502" width="256" x="670" y="-8"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="3" language="java" name="com.itbank.TechFarm.blog.dao.Blog_OptionDAOImpl" project="techfarm" 
-    file="/techfarm/src/main/java/com/itbank/TechFarm/blog/dao/Blog_OptionDAOImpl.java" binary="false" 
+  <class id="3" language="java" name="com.itbank.TechFarm.blog.dao.Blog_BoardDAOImpl" project="techfarm" 
+    file="/techfarm/src/main/java/com/itbank/TechFarm/blog/dao/Blog_BoardDAOImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1154" y="-543"/>    
+    <position height="-1" width="-1" x="1121" y="240"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="com.itbank.TechFarm.blog.dto.Blog_OptionDTO" project="techfarm" 
-    file="/techfarm/src/main/java/com/itbank/TechFarm/blog/dto/Blog_OptionDTO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="783" y="51"/>    
+  <class id="4" language="java" name="com.itbank.TechFarm.blog.BlogBoardController" project="techfarm" 
+    file="/techfarm/src/main/java/com/itbank/TechFarm/blog/BlogBoardController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="207" y="448"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="com.itbank.TechFarm.blog.dto.Blog_BoardDTO" project="techfarm" 
-    file="/techfarm/src/main/java/com/itbank/TechFarm/blog/dto/Blog_BoardDTO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="733" y="-1222"/>    
+  <class id="5" language="java" name="com.itbank.TechFarm.blog.DownloadController" project="techfarm" 
+    file="/techfarm/src/main/java/com/itbank/TechFarm/blog/DownloadController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="193" y="951"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <dependency id="6">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="5"/>  
-  </dependency>  
-  <dependency id="7">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
-  </dependency>  
-  <dependency id="8">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="4"/>  
-  </dependency>  
-  <realization id="9">    
+  <class id="6" language="java" name="com.itbank.TechFarm.blog.DownloadView" project="techfarm" 
+    file="/techfarm/src/main/java/com/itbank/TechFarm/blog/DownloadView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="256" y="775"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="7">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="2"/>  
   </realization>  
+  <dependency id="8">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="9">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
   <association id="10">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="11" name="optionDAO">        
-        <position height="0" width="0" x="157" y="-864"/>      
-      </attribute>      
-      <multiplicity id="12" minimum="0" maximum="1">        
-        <position height="0" width="0" x="157" y="-864"/>      
-      </multiplicity>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="11" name="boardDAO"/>      
+      <multiplicity id="12" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <dependency id="13">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="4"/>  
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
   </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    

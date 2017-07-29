@@ -27,7 +27,7 @@
 					</tr>	
 					<c:forEach var="arealist" items="${arealist}" varStatus="status">
 					<tr>
-					<th class="top2"><font size="4 ">${arealist.id}</font></th>
+					<th class="top2" height="70px"><font size="4 ">${arealist.id}</font></th>
 					<th class="top2"><a href="viewBoard?no=${arealist.no}&joinmode=arealist" class="deconone"><font size="4 ">${arealist.subject}</font></a></th>
 					<th class="top2">(${arealist.title})</th>
 					<td class="top2" align="center">${arealist.reg_date}</td>

@@ -47,7 +47,6 @@
                     var chk_id_leng=chk_id.length;
                     for(i=0;i<chk_id_leng;i++){
                     	if(chk_id[i].checked==true){
-                    		alert(chk_id[i].value);
                     		inviteId.push(chk_id[i].value);
                     	}
                     }
