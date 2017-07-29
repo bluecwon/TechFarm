@@ -161,6 +161,7 @@ function update(){
 				<h2>
 				<a href="myBlog?id=${optionDTO.id}" class="editmenu">내 블로그</a><hr>
 				<a href="editBlog?mode=profile&id=${optionDTO.id}">프로필</a><hr>
+				<a href="editBlog?mode=neighbor&id=${optionDTO.id}">이웃</a><hr>
 				<a href="editBlog?mode=layout&id=${optionDTO.id}">레이아웃</a><hr>
 				<a href="editBlog?mode=skin&id=${optionDTO.id}">스킨</a><hr>
 				<a href="editBlog?mode=board&id=${optionDTO.id}">게시판</a><hr>
