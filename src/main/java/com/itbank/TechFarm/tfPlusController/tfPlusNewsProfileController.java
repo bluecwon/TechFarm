@@ -1007,7 +1007,7 @@ public class tfPlusNewsProfileController {
 	@RequestMapping(value="/tfPlusMemberJoinDelect")
 	public ModelAndView tfPlusMemberJoinDelect(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		int memberJoinPK = Integer.parseInt(request.getParameter("memberJoinPK"));
+		int memberJoinPK = Integer.parseInt(request.getParameter("newsJoinPK"));
 		int profileNum = Integer.parseInt(request.getParameter("profileNum"));
 		int res = memberProfileDAO.memberJoinDelete(memberJoinPK);
 		mav.setViewName("redirect:tfPlusMemberProfileList");
