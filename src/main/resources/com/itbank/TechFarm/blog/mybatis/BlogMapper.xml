@@ -222,4 +222,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <delete parameterType="int" id="deleteNeighbor">
   delete from blog_neighbor where neighborno=#{neighborno}
   </delete>
+  
+  <delete parameterType="String" id="deleteAllmyBoard">
+  delete from blog_board where id=#{id}
+  </delete>
+  
+  <update id="editReply_pf" parameterType="BlogReplyDTO">
+  update blog_boardreply set profile=#{profile} where id=#{id}
+  </update>
+  
 </mapper>
