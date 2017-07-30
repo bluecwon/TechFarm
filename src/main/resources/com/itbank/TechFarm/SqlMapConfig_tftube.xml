@@ -16,6 +16,7 @@
   	<typeAlias alias = "video_recentvideoDTO" type="com.itbank.TechFarm.tftube.dto.Video_RecentVideoDTO"/>
   	<typeAlias alias = "likevideoDTO" type="com.itbank.TechFarm.tftube.dto.LikeVideoDTO"/>
   	<typeAlias alias = "unlikevideoDTO" type="com.itbank.TechFarm.tftube.dto.UnlikeVideoDTO"/>
+  	<typeAlias alias = "subing_channelDTO" type="com.itbank.TechFarm.tftube.dto.Subing_ChannelDTO"/>
   	
   	
   </typeAliases>

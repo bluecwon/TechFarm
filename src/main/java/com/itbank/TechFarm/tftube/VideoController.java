@@ -458,10 +458,8 @@ public class VideoController {
 		
 	//RecentVideo insert 		
 		RecentVideoDTO recent_dto=new RecentVideoDTO();
-		String a=recentvideoDAO.listVideo_last();
-		System.out.println("DB:"+a);
-		System.out.println("video_name:"+video_name);
-		if(member_object!=null&&!(recentvideoDAO.listVideo_last().equals(video_name))){
+		String last_video=recentvideoDAO.listVideo_last();		
+		if(member_object!=null&&!(last_video.equals(video_name))){
 		recent_dto.setMember_no(member.getNo());
 		recent_dto.setVideo_name(video_name);			
 		recentvideoDAO.insertRecent(recent_dto);
@@ -516,6 +514,7 @@ public class VideoController {
 			//delete file
 					
 			File deletefile=new File(upPath_video,video_name);
+			
 			File deleteimage=new File(upPath_image,vdto.getImage());
 			deletefile.delete();
 			deleteimage.delete();

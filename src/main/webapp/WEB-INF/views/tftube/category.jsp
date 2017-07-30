@@ -13,7 +13,7 @@
 </c:when>
 <c:otherwise>
 <c:forEach var="cdto" items="${clist}"> 
-<td>
+<td width="196" height="200">
 <a href="tftube_videoView?no=${cdto.no}">
 <img src="resources/tftube/Image/${cdto.image}" width="196" height="100"><br>
 ${cdto.title}</a><br>

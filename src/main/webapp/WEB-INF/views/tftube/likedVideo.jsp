@@ -14,21 +14,25 @@
 <c:otherwise>
 <table>
 <c:forEach var="likeList" items="${like_all_list}">
-<tr><td>
+<tr><td width="300" height="200">
 <div id="like-one-line">
 
-<div style="float:left"><!-- start of 2-2-1 -->
+<!-- <div style="float:left">start of 2-2-1 -->
 <a href="tftube_videoView?no=${likeList.no}">
 <img src="resources/tftube/Image/${likeList.image}" 
 width="300" height="200"></a>
-</div>
+<!-- </div> --></td>
 
+<td width="300" height="200">
 <div style="overflow:hidden"><!-- start of 2-2-2 -->
 <a href="tftube_videoView?no=${likeList.no}">${likeList.title}</a><br>
 <a href="tftube_mychannel">${likeList.channel}</a><br>
-${likeList.description}				<a href="likedVideo_delete?no=${likeList.no}">삭제</a>
+${likeList.description}				
+<div style="float:right">
+<a href="likedVideo_delete?no=${likeList.no}">삭제</a>
+</div>
 
-</div><!-- end of 2-2-2 -->
+
 </div><!-- end of like one line -->
 </td></tr>
 </c:forEach>
