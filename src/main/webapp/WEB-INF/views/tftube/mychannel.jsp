@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <%@include file="top.jsp"%>
 
+
 <div class="rdiv" id="2-2-1"><!-- start of 2-2-1 -->
 <h2>내 채널</h2><p>
 <font size="4">업로드한 동영상</font><p>
@@ -17,7 +18,7 @@
 <table>
 <tr>
 <c:forEach var="videoList" items="${video_by_member}"> 
-<td bgcolor="">
+<td width="210" bgcolor="">
 <a href="tftube_videoView?no=${videoList.no}">
 <img src="resources/tftube/Image/${videoList.image}" width="196" height="100"><br>
 ${videoList.title}</a><br>
@@ -48,14 +49,36 @@ ${videoList.readcount}회  ＊ ${videoList.uploaddate}
 </c:when>
 
 <c:otherwise>
+<tr>
+<td>
 <c:forEach var="subingList" items="${subing_list}">
-<a href="mychannel?mem_no=${subingList.member_no}">${subingList.channel}</a>
+
+
+<!-- 
+<script src="resources/js/jquery-1.9.0.js"></script>
+<script type="text/javascript">
+subing_List가 받는 값은 member_no subing_member_no
+var subing_status=${subing_status};
+$(function(){
+	switch(subing_status){	
+	case 0:$("#sub").hide();$("#sub_disabled").show();break;	
+	}
+	function subing(){
+		location.href="tftube_mychannel?no="+${subingList.subing_member_no};
+		
+	}
+
+	
+});
+</script> -->
+<a href="tftube_mychannel?mem_no=${subingList.subing_member_no}">${subingList.channel}</a>
+<!-- <button id="sub" onclick="subing()">구독중</button>  -->
 <br>
 
 </c:forEach>
+</td></tr>
 </c:otherwise>
 </c:choose>
-</td></tr>
 </table>
 
 
@@ -73,7 +96,7 @@ ${videoList.readcount}회  ＊ ${videoList.uploaddate}
 <c:otherwise>
 
 <c:forEach var="subedList" items="${subed_list}">
-<a href="mychannel?mem_no=${subedList.member_no}">${subedList.channel}</a>
+<a href="tftube_mychannel?mem_no=${subedList.member_no}">${subedList.channel}</a>
 <br>
 </td></tr>
 </c:forEach>

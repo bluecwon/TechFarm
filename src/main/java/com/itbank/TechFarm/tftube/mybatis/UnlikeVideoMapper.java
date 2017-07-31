@@ -72,7 +72,7 @@ public class UnlikeVideoMapper {
 		if(list_status_object!=null){		
 			list_status=session.selectOne("likevideo_list_ustatus",map);
 		}
-		System.out.println("list_status:"+list_status);
+		
 		session.close();
 		return list_status;		
 	}

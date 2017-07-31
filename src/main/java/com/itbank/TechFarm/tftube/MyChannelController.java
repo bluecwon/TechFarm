@@ -18,6 +18,7 @@ import com.itbank.TechFarm.tftube.dao.SubingDAO;
 import com.itbank.TechFarm.tftube.dao.VideoDAO;
 import com.itbank.TechFarm.tftube.dto.MyChannelDTO;
 import com.itbank.TechFarm.tftube.dto.SubingDTO;
+import com.itbank.TechFarm.tftube.dto.Subing_ChannelDTO;
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
 
 
@@ -90,10 +91,10 @@ public class MyChannelController {
 		/*List<VideoDTO> like_list=videoDAO.listLike(member_no);*/
 		
 		//구독정보		
-		List<SubingDTO> subing_list=subingDAO.get_subing_member(member_no);
+		List<Subing_ChannelDTO> subing_list=subingDAO.get_subing_member(member_no);
 	
 		//구독자
-		List<SubingDTO> subed_list=subingDAO.get_subed_member(member_no);
+		List<Subing_ChannelDTO> subed_list=subingDAO.get_subed_member(member_no);
 		
 		
 		mv.addObject("subing_list",subing_list);

@@ -18,6 +18,7 @@ import com.itbank.TechFarm.tftube.dao.SubingDAO;
 import com.itbank.TechFarm.tftube.dao.VideoDAO;
 
 import com.itbank.TechFarm.tftube.dto.SubingDTO;
+import com.itbank.TechFarm.tftube.dto.Subing_ChannelDTO;
 import com.itbank.TechFarm.tftube.dto.VideoDTO;
 
 public class SubController {	
@@ -44,18 +45,18 @@ public class SubController {
 		//현재 로그인한 회원 정보
 		MemberDTO cu_member=(MemberDTO)session.getAttribute("memberDTO");
 				
-		List<SubingDTO> saved_subing_member=null;
+		List<Subing_ChannelDTO> saved_subing_member=null;
 		//현재 로그인한 회원의 구독 목록
 		if(cu_member!=null){//로그인 된 상태라면
 		saved_subing_member=subingDAO.get_subing_member(cu_member.getNo());
 				 
-		 //													현재 로그인회원의 구독목록
+		 //현재 로그인회원의 구독목록
 		 }
-		System.out.print("내가 구독 누른 인간:");
-		System.out.print(saved_subing_member);
+		
+		
 		
 		if(saved_subing_member!=null){//구독 목록이 있다면
-		for(SubingDTO dto:saved_subing_member){			
+		for(Subing_ChannelDTO dto:saved_subing_member){			
 		if(vdto.getMember_no()==dto.getMember_no()){	//게시판 작성자의 이름과 목록중에 같은 것 		
 		mv.addObject("subing_status",1);//목록에 현재 비디오를 등록한 사람이 포함 되어 있다면 1 아니면 0
 		break;
@@ -65,17 +66,7 @@ public class SubController {
 		}
 		}else{
 					mv.addObject("subing_status",0);			
-		}
-				
-			/*	if(saved_subing_member_raw.size()==0){
-					saved_subing_member=saved_subing_member_raw.getSubing_member_no();//0일 가능성 잇다.				
-				};
-				
-				if(saved_subing_member!=0){//구독했다.
-					mv.addObject("subing_status",1);
-				}else{//구독하지 않았다.
-					mv.addObject("subing_status",0);
-				*/
+		}		
 				
 				//end of response
 				
@@ -103,7 +94,7 @@ public class SubController {
 				//sddto.setSubed_member_no(cu_member.getNo());
 				
 				subingDAO.insertSubing(sidto);//db에 넣기
-				//subedDAO.insertSubed(sddto);//db에 넣기		
+
 				}else if(subing_member_no_raw!=null&&mode.equals("cancel")){			
 					/*subingDAO.deleteSubing(vdto.getMember_no());
 					subedDAO.deleteSubed(vdto.getMember_no());*/

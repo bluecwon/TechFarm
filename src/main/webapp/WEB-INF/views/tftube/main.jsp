@@ -23,7 +23,7 @@
 <table>
 <tr>
 <c:forEach var="dto" items="${list}" begin="0" end="4"> 
-<td>
+<td width="210">
 <a href="tftube_videoView?no=${dto.no}">
 <img src="resources/tftube/Image/${dto.image}" width="196" height="100"><br>
 ${dto.title}</a><br>
@@ -33,7 +33,7 @@ ${dto.readcount}회  ＊ ${dto.uploaddate}
 <c:set var="count" value="${count=count+1}"/>
 </c:forEach>
 <c:if test="${count>=5}">
-<c:set var="count" value="0"/><td><a href="tftube_category?category=music">더보기</a></td>
+<c:set var="count" value="0"/><td><button class="not_realize">더보기</button></td>
 </c:if>
 </tr>
 </table>
@@ -47,7 +47,7 @@ ${dto.readcount}회  ＊ ${dto.uploaddate}
 <table>
 <tr>
 <c:forEach var="dto" items="${list_music}"  begin="0" end="4"> 
-<td>
+<td width="210">
 <a href="tftube_videoView?no=${dto.no}">
 <img src="resources/tftube/Image/${dto.image}" width="196" height="100"><br>
 ${dto.title}</a><br>
@@ -71,7 +71,7 @@ ${dto.readcount}회  ＊ ${dto.uploaddate}
 <table>
 <tr>
 <c:forEach var="sport_dto" items="${list_sport}"  begin="0" end="4"> 
-<td>
+<td width="210">
 <a href="tftube_videoView?no=${sport_dto.no}">
 <img src="resources/tftube/Image/${sport_dto.image}" width="196" height="100"><br>
 ${sport_dto.title}</a><br>
@@ -95,7 +95,7 @@ ${sport_dto.readcount}회  ＊ ${sport_dto.uploaddate}
 <table>
 <tr>
 <c:forEach var="game_dto" items="${list_game}"  begin="0" end="4"> 
-<td>
+<td width="210">
 <a href="tftube_videoView?no=${game_dto.no}">
 <img src="resources/tftube/Image/${game_dto.image}" width="196" height="100"><br>
 ${game_dto.title}</a><br>
@@ -118,7 +118,7 @@ ${game_dto.readcount}회  ＊ ${game_dto.uploaddate}
 <table>
 <tr>
 <c:forEach var="comedy_dto" items="${list_comedy}"  begin="0" end="4"> 
-<td>
+<td width="210">
 <a href="tftube_videoView?no=${comedy_dto.no}">
 <img src="resources/tftube/Image/${comedy_dto.image}" width="196" height="100"><br>
 ${comedy_dto.title}</a><br>
@@ -141,7 +141,7 @@ ${comedy_dto.readcount}회  ＊ ${comedy_dto.uploaddate}
 <table>
 <tr>
 <c:forEach var="movie_dto" items="${list_movie}"  begin="0" end="4"> 
-<td>
+<td width="210">
 <a href="tftube_videoView?no=${movie_dto.no}">
 <img src="resources/tftube/Image/${movie_dto.image}" width="196" height="100"><br>
 ${movie_dto.title}</a><br>
@@ -164,7 +164,7 @@ ${movie_dto.readcount}회  ＊ ${movie_dto.uploaddate}
 <table>
 <tr>
 <c:forEach var="news_dto" items="${list_news}"  begin="0" end="4"> 
-<td>
+<td width="210">
 <a href="tftube_videoView?no=${news_dto.no}">
 <img src="resources/tftube/Image/${news_dto.image}" width="196" height="100"><br>
 ${news_dto.title}</a><br>
@@ -187,7 +187,7 @@ ${news_dto.readcount}회  ＊ ${news_dto.uploaddate}
 <table>
 <tr>
 <c:forEach var="ani_dto" items="${list_ani}"  begin="0" end="4"> 
-<td>
+<td width="210">
 <a href="tftube_videoView?no=${ani_dto.no}">
 <img src="resources/tftube/Image/${ani_dto.image}" width="196" height="100"><br>
 ${ani_dto.title}</a><br>

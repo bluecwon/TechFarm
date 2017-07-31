@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.itbank.TechFarm.tftube.dto.SubingDTO;
+import com.itbank.TechFarm.tftube.dto.Subing_ChannelDTO;
 
 public class SubingMapper {
 	
@@ -31,9 +32,9 @@ public class SubingMapper {
 		return res;		
 	}
 	    
-	    public static List<SubingDTO> get_subing_member(int member_no){
+	    public static List<Subing_ChannelDTO> get_subing_member(int member_no){
 			SqlSession session=sqlMapper.openSession();
-			List<SubingDTO> subingdto=session.selectList("get_subing_member",member_no);
+			List<Subing_ChannelDTO> subingdto=session.selectList("get_subing_member",member_no);
 			session.close();
 			return subingdto;			
 		}
@@ -49,17 +50,16 @@ public class SubingMapper {
 	    
 	    public static SubingDTO select_subing(SubingDTO dto){
 	    	SqlSession session=sqlMapper.openSession();
-	    	SubingDTO res=session.selectOne("select_subing",dto);
-	    	session.commit();
+	    	SubingDTO res=session.selectOne("select_subing",dto);	    	
 	    	session.close();
 	    	return res;
 	    	
 	    	
 	    }
 	    
-	    public static List<SubingDTO> get_subed_member(int subing_member_no){
+	    public static List<Subing_ChannelDTO> get_subed_member(int subing_member_no){
 	    	SqlSession session=sqlMapper.openSession();
-	    	List<SubingDTO> subingdto=session.selectList("get_subed_member",subing_member_no);
+	    	List<Subing_ChannelDTO> subingdto=session.selectList("get_subed_member",subing_member_no);
 			session.close();
 			return subingdto;	
 	    	
