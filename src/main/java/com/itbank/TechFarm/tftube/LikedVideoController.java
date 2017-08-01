@@ -79,7 +79,8 @@ public class LikedVideoController {
 		
 		int member_no=member.getNo();
 		int res=likevideoDAO.like_delete(member_no, no);
-		
+		List<VideoDTO> like_all_list=likevideoDAO.like_member_list(member_no);		
+		mv.addObject("like_all_list",like_all_list);		
 		mv.setViewName("tftube/likedVideo");		
 		
 		return mv;

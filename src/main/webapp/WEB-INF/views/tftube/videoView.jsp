@@ -14,7 +14,7 @@ controls="controls" width="700" height="450"></video>
 <table>
 
 <tr><td width="550"><font size="10" style="font-weight: bold;">${vdto.title}</font><br></td></tr>
-<tr><td>작성자:<a href="tftube_mychannel">${vdto.channel}</a> </td></tr>
+<tr><td>작성자:<a href="tftube_mychannel?mem_no=${vdto.member_no}">${vdto.channel}</a> </td></tr>
 <tr>
 <td align="left"><%@include file="videoView_subscribe.jsp" %>
 <td align="right">조회수:${readcount}회

@@ -15,5 +15,5 @@ public interface RecentVideoDAO {
 	public int recent_delete_all(int member_no);
 	public int recent_delete(int recent_no);
 	public List<Video_RecentVideoDTO> listVideo_recent(int member_no);
-	public String listVideo_last();
+	public String listVideo_last(int member_no);
 }

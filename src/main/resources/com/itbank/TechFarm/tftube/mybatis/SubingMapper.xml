@@ -6,8 +6,8 @@
 
 <mapper namespace="com.itbank.TechFarm.tftube.mybatis.SubingMapper">
 
-<insert id="insertSubing" parameterType="subingDTO">
-insert into tftube_subing(channel,member_no,subing_member_no) values(#{channel},#{member_no},#{subing_member_no})  
+<insert id="insertSubing" parameterType="subingDTO" useGeneratedKeys="true">
+insert into tftube_subing(member_no,subing_member_no) values(#{member_no},#{subing_member_no})  
 </insert>
 
 <select id="select_subing" parameterType="subingDTO" resultType="subingDTO">

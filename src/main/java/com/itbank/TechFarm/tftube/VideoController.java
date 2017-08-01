@@ -237,8 +237,13 @@ public class VideoController {
 	public ModelAndView tftube_videoView(HttpServletRequest arg0, 
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
-		HttpSession session=arg0.getSession();		
-		MemberDTO member=(MemberDTO)session.getAttribute("memberDTO");
+		HttpSession session=arg0.getSession();	
+		Object member_object=session.getAttribute("memberDTO");
+		MemberDTO member=null;
+		if(member_object!=null){
+		member=(MemberDTO)member_object;
+		}
+		
 		
 		/*if(member==null){			
 			msg="로그인이 필요한 서비스 입니다. 로그인을 해주세요.";
@@ -415,23 +420,23 @@ public class VideoController {
 		
 		/*Date date=map.get(vdto.getVideo_hash());//video's date clicked information*/		
 
-		String ip=arg0.getRemoteAddr();	
+		String ip=arg0.getRemoteAddr();
+		System.out.println("ip:"+ip);
 		
 		//?
 		//MemberDTO member=new MemberDTO();
 		
 		//start of hits' validity
-		
+		//private static HashMap<String, HashMap<String, Date>> map=new HashMap<String,HashMap<String,Date>>();
 		Date date=null;
 		HashMap<String,Date> log=map.get(vdto.getVideo_name());//object null		
 		//map.values()->array []
-		System.out.println("log:"+log);//not [](empty space)
-		if(log!=null){
-		date=log.get(ip);}
+		System.out.println("log:"+log);//not [](empty space)		
 		
 		if(log==null){
 			videoDAO.hitUp(no);
 		}else{
+			date=log.get(ip);
 			if(today_day-date.getTime()>1){
 			videoDAO.hitUp(no);					
 			}				
@@ -451,18 +456,25 @@ public class VideoController {
 		//end of hits' format 
 		
 		// logged in member information at present
-		Object member_object=session.getAttribute("memberDTO");
-		if(member_object!=null){
-		member=(MemberDTO)member_object;
-		}
+		
 		
 	//RecentVideo insert 		
+		if(member!=null){
 		RecentVideoDTO recent_dto=new RecentVideoDTO();
-		String last_video=recentvideoDAO.listVideo_last();		
-		if(member_object!=null&&!(last_video.equals(video_name))){
-		recent_dto.setMember_no(member.getNo());
+		int member_no=member.getNo();
+		String last_video=recentvideoDAO.listVideo_last(member_no);	
+		if(last_video==null){
+			recent_dto.setMember_no(member_no);
+			recent_dto.setVideo_name(video_name);			
+			recentvideoDAO.insertRecent(recent_dto);			
+		}else{
+		if(!(last_video.equals(video_name))){
+		recent_dto.setMember_no(member_no);
 		recent_dto.setVideo_name(video_name);			
 		recentvideoDAO.insertRecent(recent_dto);
+		}
+		}
+		
 		}
 		//end of RecentVideo insert 		
 
@@ -503,7 +515,7 @@ public class VideoController {
 								HttpServletResponse arg1) throws Exception {
 		ModelAndView mv=new ModelAndView();
 		int no=Integer.parseInt(arg0.getParameter("no"));
-		
+		System.out.println("video_delete_no:"+no);
 		VideoDTO vdto=videoDAO.getVideo(no);
 		String video_name=vdto.getVideo_name();
 		//delete from tftube_video

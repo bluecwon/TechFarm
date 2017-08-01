@@ -75,9 +75,9 @@ public class RecentVideoMapper {
 		
 	}
 	
-	public static String listVideo_last(){
+	public static String listVideo_last(int member_no){
 		SqlSession session=sqlMapper.openSession();
-		String video_name=session.selectOne("listVideo_last");
+		String video_name=session.selectOne("listVideo_last",member_no);
 		session.close();
 		return video_name;
 	}

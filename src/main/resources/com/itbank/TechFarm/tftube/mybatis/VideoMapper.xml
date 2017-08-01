@@ -42,7 +42,7 @@ select * from tftube_video where member_no=#{member_no} order by no desc
  
 <!-- update -->
 <update id="updateVideo" parameterType="videoDTO">
-update tftube_video set description=#{description},open=#{open},title=#{title},image=#{image},category=#{category} where no=#{no} 
+update tftube_video set description=#{description},open=#{open},title=#{title},category=#{category} where no=#{no} 
 </update>
 
 <update id="updateLike" parameterType="videoDTO">

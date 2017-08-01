@@ -31,7 +31,7 @@ $(function(){
 
 
 </script>
-<c:if test="${vdto.member_no ne memberDTO.no}">
+<c:if test="${vdto.member_no ne memberDTO.no}"> 
 <button id="sub_disabled" onclick="subing_disabled()">구독</button>
 <button id="sub" onclick="subing()">구독중</button>
 </c:if>

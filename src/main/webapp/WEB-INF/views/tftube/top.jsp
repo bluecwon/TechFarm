@@ -94,6 +94,11 @@
 <a href="tftube_category?category=education">교육</a><br>
 <a href="tftube_category?category=technology">과학기술</a><br>
 <a href="tftube_category?category=none_profit/social_movement">비영리/사회운동</a><br>
+<p>
+<p>
+<p>
+<p>
+
 </div>						</td>
 		</table>		
 	</div>	
