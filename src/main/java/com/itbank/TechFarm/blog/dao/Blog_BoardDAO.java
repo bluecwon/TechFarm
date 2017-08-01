@@ -13,6 +13,7 @@ public interface Blog_BoardDAO {
 	public List listBoardTitle(String id);
 	public Blog_MakeBoardDTO getBoardTitle(int boardno);
 	public int editBoardTitle(Blog_MakeBoardDTO dto);
+	public int deleteBoardTitle(int boardno);
 	public List listBoard(int boardno,int startRow,int endRow);
 	public int boardNumber(int boardno);
 	public int insertboard(Blog_BoardDTO dto);

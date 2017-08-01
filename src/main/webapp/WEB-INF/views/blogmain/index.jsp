@@ -20,7 +20,12 @@
 			<tr align="center">
 			<td class="menu"><a href="viewBoard?no=${newlist.no}&joinmode=newlist" class="deconone">${newlist.subject}</a></td>
 			<td class="menu" valign="middle" align="center">
-			<img src="resources/upload/${newlist.id}/${newprofile[status.index]}"  width="25" height="25" class="homemenu" align="center"/><font size="4">${newlist.id}</font>
+			<c:forEach var="listoption" items="${listoption}">
+			<c:if test="${newlist.id==listoption.id}">
+			<img src="resources/upload/${listoption.id}/${listoption.profile}"  width="25" height="25" class="homemenu" align="center"/>
+			</c:if>
+			</c:forEach>
+			<font size="4">${newlist.id}</font>
 			</td>
 			<td class="menu">${newlist.reg_date}</td>
 			</tr>
@@ -37,7 +42,12 @@
 			<tr align="center">
 			<td class="menu"><a href="viewBoard?no=${hotlist.no}&joinmode=hotlist" class="deconone">${hotlist.subject}</a></td>
 			<td class="menu" valign="middle" align="center">
-			<img src="resources/upload/${hotlist.id}/${hotprofile[status.index]}"  width="25" height="25" class="homemenu" align="center"/><font size="4">${hotlist.id}</font>
+			<c:forEach var="listoption" items="${listoption}">
+			<c:if test="${hotlist.id==listoption.id}">
+			<img src="resources/upload/${listoption.id}/${listoption.profile}"  width="25" height="25" class="homemenu" align="center"/>
+			</c:if>
+			</c:forEach>
+			<font size="4">${hotlist.id}</font>
 			</td>
 			<td class="menu">${hotlist.readcount}</td>
 			</tr>

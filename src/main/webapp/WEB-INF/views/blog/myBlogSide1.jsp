@@ -2,6 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<script type="text/javascript" charset="utf-8">
+function checkNeighbor(id){
+	 var isAdd = window.confirm(id+"님을 이웃으로 추가하겠습니까?")
+	 if(isAdd){
+		 location.href="addNeighbor?id="+id
+	 }
+}
+</script>
 <td rowspan="3"  height="100%" width="20%" valign="top" align="center" class="sidebar1">
 			<div id="sidebar1">
 				<div align="right">
@@ -20,7 +28,7 @@
 				<c:when test="${membermode=='membernoblog'}"></c:when>
 				<c:otherwise>
 				<div align="right">
-				<a href="javascript:checkNeighbor(${optionDTO.id});">이웃추가</a>
+				<input type="button" onclick="checkNeighbor('${optionDTO.id}');" value="이웃추가">
 				</div><br>
 				</c:otherwise>
 				</c:choose>
@@ -39,11 +47,15 @@
 				<div allign="center">등록된 이웃이 없습니다.</div>
 				</c:when>
 				<c:otherwise>
-				<c:forEach var="neighborlist" items="${neighborlist}" varStatus="status">
+				<c:forEach var="neighborlist" items="${neighborlist}">
 				<div allign="center">
-				<img src="resources/upload/${neighborlist.neighborid}/${neighborprofile[status.index]}" width="60" height="60" align="center">
-				${neighborlist.neighborid}
-				</div>
+				<c:forEach var="listoption" items="${listoption}">
+				<c:if test="${listoption.id==neighborlist.neighborid}">
+				<img src="resources/upload/${listoption.id}/${listoption.profile}" width="60" height="60" align="center">
+				<a href="myBlog?id=${listoption.id}"><font size="4">${listoption.id}(${listoption.nickname})</font></a>
+				</c:if>
+				</c:forEach>
+				</div><br>
 				</c:forEach>
 				</c:otherwise>
 				</c:choose><br>
@@ -68,11 +80,3 @@
 				</div>
 			</div>  <!-- sidebar1 div end -->
 			</td>
-<script type="text/javascript" charset="utf-8">
-function checkNeighbor(id){
-	 var isAdd = window.confirm(id+"님을 이웃으로 추가하겠습니까?")
-	 if(isAdd){
-		 location.href="addNeighbor?id="+id
-	 }
-}
-</script>

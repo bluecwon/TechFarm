@@ -34,6 +34,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   select * from blog_makeboard where id=#{id}
   </select>
   
+  <delete parameterType="int" id="deleteBoardTitle">
+  delete from blog_makeboard where boardno=#{boardno}
+  </delete>
+  
   <update id="editBlog_pf_int" parameterType="BlogOptionDTO">
   update blog_option set profile=#{profile},introduce=#{introduce} where id=#{id}
   </update>
@@ -132,7 +136,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   
   <select resultType="String" id="listNewProfile">
-  select profile from blog_option c join (select a.* from (select id from blog_board where 1 > open order by no desc limit 10)a)b on c.id=b.id;
+  select profile from blog_option c join (select a.* from (select id,no from blog_board where 1 > open order by no desc limit 10)a)b on c.id=b.id order by b.no desc limit 10;
   </select>
   
   <select resultType="BlogBoardDTO" id="listHotBoard">  
@@ -140,7 +144,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   
   <select resultType="String" id="listHotProfile">
-  select profile from blog_option c join (select a.* from (select id from blog_board where 1 > open order by readcount desc limit 10)a)b on c.id=b.id;
+  select profile from blog_option c join (select a.* from (select id,readcount from blog_board where 1 > open order by readcount desc limit 10)a)b on c.id=b.id order by b.readcount desc limit 10;
+  </select>
+  
+  <select resultType="BlogOptionDTO" id="listOption">
+  select * from blog_option
   </select>
 
   <select resultType="BlogOptionDTO" id="listHotBlog">  

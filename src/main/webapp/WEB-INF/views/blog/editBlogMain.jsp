@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<script type="text/javascript" charset="utf-8">
+function checkdelNeighbor(id,neighborno){
+	 var isAdd = window.confirm(id+"님을 이웃에서 삭제하시겠습니끼?")
+	 if(isAdd){
+		 location.href="deleteNeighbor?neighborno="+neighborno
+	 }
+}
+</script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>		
 <%@ include file="editBlogTop.jsp"%>
 		<td valign="top">
@@ -306,8 +314,13 @@
 <c:otherwise>
 <c:forEach var="neighborlist" items="${neighborlist}">
 <div align="center">
-<img src="resources/upload/${neighborlist.neighborid}/${neighborprofile[status.index]}" width="60" height="60" align="center">
-${neighborlist.neighborid} &nbsp;&nbsp;&nbsp;<a href="javascript:checkdelNeighbor(${neighborlist.neighborid},${neighborlist.neighborno})">삭제</a>
+<c:forEach var="listoption" items="${listoption}">
+	<c:if test="${listoption.id==neighborlist.neighborid}">
+	<img src="resources/upload/${listoption.id}/${listoption.profile}" width="60" height="60" align="center">
+	<font size="4">${listoption.id}(${listoption.nickname})</font>
+	&nbsp;&nbsp;&nbsp;<input type="button" onclick="checkdelNeighbor('${neighborlist.neighborid}','${neighborlist.neighborno}');" value="삭제">
+	</c:if>
+</c:forEach>
 </div>
 </c:forEach>
 </c:otherwise>
@@ -367,11 +380,3 @@ ${neighborlist.neighborid} &nbsp;&nbsp;&nbsp;<a href="javascript:checkdelNeighbo
 </table>
 </body>
 </html>
-<script type="text/javascript" charset="utf-8">
-function checkdelNeighbor(id,neighborno){
-	 var isAdd = window.confirm(id+"님을 이웃에서 삭제하시겠습니끼?")
-	 if(isAdd){
-		 location.href="deleteNeighbor?neighborno="+neighborno
-	 }
-}
-</script>

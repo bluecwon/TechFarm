@@ -9,6 +9,13 @@
 </script>
 </c:if>
 
+<c:if test="${alertmode=='deleteboardt'}">
+<script type="text/javascript">
+	alert("${msg}")
+	location.href="${url}?mode=${mode}"
+</script>
+</c:if>
+
 <c:if test="${alertmode=='delNeighbor'}">
 <script type="text/javascript">
 	alert("${msg}")

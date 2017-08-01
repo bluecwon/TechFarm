@@ -27,4 +27,5 @@ public interface Blog_OptionDAO {
 	public int areaboardNumber3();
 	public int areaboardNumber4();
 	public List listSearchBlog(String search_option,String search_text);
+	public List listoption();
 }

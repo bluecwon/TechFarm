@@ -76,14 +76,11 @@ public class BlogMainController {
 		 mav.setViewName("blogmain/index");
 		 List<Blog_BoardDTO> newlist = optionDAO.listNewBoard();
 		 List<Blog_BoardDTO> hotlist = optionDAO.listHotBoard();
-		 List<String> hotprofile = optionDAO.listHotProfile();
-		 List<String> newprofile = optionDAO.listNewProfile();
+		 List<Blog_OptionDTO> listoption = optionDAO.listoption();
 		 List<Blog_OptionDTO> hotblog = optionDAO.listHotBlog();
 		 session.setAttribute("newlist", newlist);
 		 session.setAttribute("hotlist", hotlist);
-		 
-		 session.setAttribute("hotprofile", hotprofile);
-		 session.setAttribute("newprofile", newprofile);
+		 session.setAttribute("listoption", listoption);
 		 session.setAttribute("hotblog", hotblog);
 		session.setAttribute("membermode", mode);
 		

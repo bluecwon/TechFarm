@@ -65,10 +65,10 @@ public class MyBlogController {
 		List<Blog_BoardDTO> myboardlist = boardDAO.listMyBoard(id);
 		List<Blog_MakeBoardDTO> list = boardDAO.listBoardTitle(id);
 		List<Blog_NeighborDTO> neighborlist = neighborDAO.neighborList(id);
-		List<String> neighborprofile = neighborDAO.listNeighborProfile(id);
+		List<Blog_OptionDTO> listoption = optionDAO.listoption();
 		
 		session.setAttribute("neighborlist", neighborlist);
-		session.setAttribute("neighborprofile", neighborprofile);
+		session.setAttribute("listoption", listoption);
 		session.setAttribute("myboardlist", myboardlist);
 		session.setAttribute("list", list);
 		session.setAttribute("optionDTO", dto);
@@ -93,9 +93,9 @@ public class MyBlogController {
 			MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
 			String id = memberDTO.getId();
 			List<Blog_NeighborDTO> neighborlist = neighborDAO.neighborList(id);
-			List<String> neighborprofile = neighborDAO.listNeighborProfile(id);
+			List<Blog_OptionDTO> listoption = optionDAO.listoption();
 			session.setAttribute("neighborlist", neighborlist);
-			session.setAttribute("neighborprofile", neighborprofile);
+			session.setAttribute("listoption", listoption);
 		}
 		
 		mav.addObject("mode",mode);
@@ -105,7 +105,7 @@ public class MyBlogController {
 	@RequestMapping(value="/editBlog", method=RequestMethod.POST)
 	public ModelAndView blogEditPro(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("blog/	");
+		mav.setViewName("blog/editBlogMain");
 		String mode = request.getParameter("mode");
 		HttpSession session = request.getSession();
 		/*String id = request.getParameter("id");
@@ -156,8 +156,8 @@ public class MyBlogController {
 			res = optionDAO.editBlog_skin(dto);
 			
 			if(res>0){
-			String delpfPath = session.getServletContext().getRealPath("/resources/upload/"+dto.getId()+originpf);
-			String delhdPath = session.getServletContext().getRealPath("/resources/upload/"+dto.getId()+originhd);
+			String delpfPath = session.getServletContext().getRealPath("/resources/upload/"+dto.getId()+"/"+originpf);
+			String delhdPath = session.getServletContext().getRealPath("/resources/upload/"+dto.getId()+"/"+originhd);
 			File delpffile = new File(delpfPath);
 			File delhdfile = new File(delpfPath);
 			
@@ -339,6 +339,27 @@ private Blog_OptionDTO getBlogOption(HttpServletRequest arg0) throws Exception{
 			mav.setViewName("blog/message");
 		}
 		mav.addObject("mode",mode);
+		return mav;
+	}
+	
+	@RequestMapping(value="/deleteBoardTitle", method=RequestMethod.GET)
+	public ModelAndView deleteBoardTform(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:editBlog");
+		String mode = "board";
+		int boardno = ServletRequestUtils.getIntParameter(request, "boardno");
+		int res = boardDAO.deleteBoardTitle(boardno);
+		if(res>0){
+			String alertmode="deleteboardt";
+			msg = "게시판이 삭제되었습니다.";
+			url = "editBlog";
+			mav.addObject("msg",msg);
+			mav.addObject("url",url);
+			mav.addObject("alertmode",alertmode);
+			mav.setViewName("blog/message");
+		}
+		mav.addObject("mode",mode);
+		
 		return mav;
 	}
 	

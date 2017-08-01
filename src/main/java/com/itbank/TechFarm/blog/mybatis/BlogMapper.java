@@ -453,4 +453,19 @@ public class BlogMapper {
 	  return res;
   }
   
+  public static List listOption(){
+	  SqlSession session = sqlMapper.openSession();
+	  List<Blog_OptionDTO> list = session.selectList("listOption");
+	  session.close();
+	  return list;
+  }
+  
+  public static int deleteBoardTitle(int boardno){
+	  SqlSession session = sqlMapper.openSession();
+	  int res = session.delete("deleteBoardTitle", boardno);
+	  session.commit();
+	  session.close();
+	  return res;
+  }
+  
 }

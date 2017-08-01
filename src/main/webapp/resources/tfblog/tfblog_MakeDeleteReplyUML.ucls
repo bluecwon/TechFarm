@@ -33,7 +33,7 @@
   <class id="4" language="java" name="com.itbank.TechFarm.blog.dto.Blog_BoardReplyDTO" project="techfarm" 
     file="/techfarm/src/main/java/com/itbank/TechFarm/blog/dto/Blog_BoardReplyDTO.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="744" y="996"/>    
+    <position height="-1" width="-1" x="758" y="912"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -44,18 +44,22 @@
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </realization>  
-  <dependency id="6">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
-  </dependency>  
-  <association id="7">    
+  <association id="6">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="8" name="boardDAO"/>      
-      <multiplicity id="9" minimum="0" maximum="1"/>    
+      <attribute id="7" name="boardDAO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="8" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <dependency id="9">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
   <dependency id="10">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="4"/>  

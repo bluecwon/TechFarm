@@ -69,12 +69,11 @@ public class BlogBoardController {
 	@RequestMapping(value="/listBoard")
 	public ModelAndView listBoard(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("blog/listBoardMain");
+		mav.setViewName("blog/listBoardMain"); 
 		session = request.getSession();
 		String title = request.getParameter("title");
 
 		int boardno = ServletRequestUtils.getIntParameter(request, "boardno");
-		
 		int pageSize = 9; 
 		String pageNum = request.getParameter("pageNum");
 		if (pageNum == null){
@@ -425,6 +424,7 @@ public class BlogBoardController {
 			res=boardDAO.insertReply(dto);
 			boardDAO.updateRere_step(re_step);
 		}
+	  
 	  boardDAO.updateReplyNumber(no);
 	  mav.addObject("no",no);
 	  return mav;

@@ -139,4 +139,10 @@ public class Blog_OptionDAOImpl implements Blog_OptionDAO {
 		return BlogMapper.areaboardNumber4();
 	}
 
+	@Override
+	public List listoption() {
+		// TODO Auto-generated method stub
+		return BlogMapper.listOption();
+	}
+
 }

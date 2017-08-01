@@ -165,6 +165,12 @@ public class Blog_BoardDAOImpl implements Blog_BoardDAO {
 		return BlogMapper.editReply_pf(dto);
 	}
 
+	@Override
+	public int deleteBoardTitle(int boardno) {
+		// TODO Auto-generated method stub
+		return BlogMapper.deleteBoardTitle(boardno);
+	}
+
 	
 
 }
