@@ -81,36 +81,52 @@ var image_check=document.getElementById("image_check");
 	var image=document.getElementById("image").value;//이것만 다르다.
 	var video=document.getElementById("video").value;//이것만 다르다.
 	var title=document.getElementById("title").value;
-	var description=document.getElementById("description").value;
+	var description=document.getElementById("description").value; 
+	var image_text= image.slice(image.indexOf(".") + 1).toLowerCase();
+
+	
 	/* alert(image); alert(video); */
 	if(title==""){		
 		title_check.innerHTML = '제목을 입력해주세요.'; 	
+		
 	}else{
 		title_check.innerHTML ="";		
 	}
 	
 	if(video==""){		
-	 	video_check.innerHTML = '업로드 하실 동영상을 선택하세요.';	 	
+	 	video_check.innerHTML = '업로드 하실 동영상을 선택하세요.';	 
+	 	
 	}else if(! /\.mp4$/.test(video)){	
 		video_check.innerHTML = 'mp4 동영상만 업로드 가능 합니다'; 	
+		
 	}else{
 		video_check.innerHTML = "";
 	} 
-
+	
 	if(description==""){			
 		description_check.innerHTML = '내용을 입력해주세요.'; 	
+		
 	}else{
 		description_check.innerHTML ="";
 		
 	}
+	
+	
 	if(image==""){		
 		image_check.innerHTML = '미리보기 이미지를 선택하세요.'; 	
-	}else{
-		image_check.innerHTML ="";
-		
+		return;
+	}else if(image_text!="jpg"&&image_text!="jpeg"&&image_text!="gif"
+			&&image_text!="png"){
+		image_check.innerHTML ="jpg,jpeg,gif,png파일만 업로드 가능합니다."
+	}
+	else{
+		image_check.innerHTML ="";		
 	}
 	
-	if(video==""||title==""||description==""||image==""){			
+	if(video==""||title==""||description==""||image==""||
+			! /\.mp4$/.test(video)||image_text!="jpg"||
+			image_text!="jpeg"||image_text!="gif"||
+		image_text!="png"){			
 		return;
 	}else{		
 		document.f.submit();

@@ -7,7 +7,7 @@
 <!-- <html lang="en"> -->
 
 <meta charset="UTF-8">
-넘버:<c:out value="${no}"/>
+
 <div id="2-2-1" class="rdiv">
 <form name="f" method="post" action="tftube_video_edit">
 

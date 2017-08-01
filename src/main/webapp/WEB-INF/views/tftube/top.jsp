@@ -13,7 +13,9 @@
 <script type="text/javascript">
 
 	$(function() {
-		
+		$("button.not_realize").click(function(){
+			alert("아직 구현되지 않은 기능입니다.");			
+		});
 		$("#folder").click(function() {
 			$("#menu_window").slideToggle('fast');
 		});
@@ -59,7 +61,7 @@
 	<div id="menu_window" class="ldiv">	
 		<table>
 			<tr>
-				<td><a href="tftube_main">홈</a><br> 인기<br> <c:if
+				<td><a href="tftube_main">홈</a><br> <button class="not_realize">인기</button><br> <c:if
 						test="${memberDTO!=null}">
 						<a href="tftube_mychannel">내 채널</a>
 						<br>
@@ -92,6 +94,11 @@
 <a href="tftube_category?category=education">교육</a><br>
 <a href="tftube_category?category=technology">과학기술</a><br>
 <a href="tftube_category?category=none_profit/social_movement">비영리/사회운동</a><br>
+<p>
+<p>
+<p>
+<p>
+
 </div>						</td>
 		</table>		
 	</div>	

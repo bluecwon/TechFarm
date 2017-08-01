@@ -20,18 +20,18 @@ function delete_recent(){
 <c:forEach var="recentVideo" items="${recent_list}">
 <tr>
 <td>
-<div style="float:left">
+<!-- <div style="float:left"> -->
 <a href="tftube_videoView?no=${recentVideo.no}">
 <img src="resources/tftube/Image/${recentVideo.image}" 
 width="300" height="200"></a>
-</div>
-
-<div style="overflow:hidden" class="wider_spacing">
+<!-- </div> -->
+<td>
+<!-- <div style="overflow:hidden" class="wider_spacing"> -->
 ${recentVideo.title}<br>
 <a href="tftube_mychannel?mem_no=${recentVideo.member_no}">${recentVideo.channel}</a><br><!-- probability of not working -->
 <fmt:formatNumber value="${recentVideo.readcount}" pattern="#,##0"/>회<br>
 ${recentVideo.description}
-</div>
+<!-- </div> -->
 
 <div style="float:right">
 

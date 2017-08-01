@@ -39,6 +39,13 @@ public class RecentVideoDAOImpl implements RecentVideoDAO{
 	public List<Video_RecentVideoDTO> listVideo_recent(int member_no) {
 		return RecentVideoMapper.listVideo_recent(member_no);
 	}
+
+	@Override
+	public String listVideo_last(int member_no) {
+		return RecentVideoMapper.listVideo_last(member_no);
+	}
+	
+	
 	
 	
 	

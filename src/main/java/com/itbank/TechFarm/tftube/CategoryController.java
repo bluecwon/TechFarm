@@ -37,7 +37,7 @@ public class CategoryController {
 				 "animation",
 				 "car",
 				 "music",
-				 "sport",
+				 "animal",
 				 "sports",
 				 "travel/event",
 				 "game",
@@ -53,16 +53,17 @@ public class CategoryController {
 		
 		List<VideoDTO> clist=null;
 
-		int count=1;
+		int count=0;
 		
 		for(int i=0;i<category_array.length;i++){
+			count++;
 			if(category_array[i].equals(category)){
 				clist=videoDAO.listVideo_category(category);break;}		
-			count++;
+			
 		}
 		
 		
-		if(count==category_array.length){
+		if(count>category_array.length+1){
 			count=0;
 			msg="존재하지 않는 카테고리 입니다.";
 			url="tftube_main";
