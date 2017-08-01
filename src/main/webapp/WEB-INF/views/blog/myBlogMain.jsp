@@ -15,14 +15,11 @@
 			<c:otherwise>
 			<c:forEach var="myboardlist" items="${myboardlist}">
 			<br><br>
-			<table border="1">
+			<table class="myblogmain">
 				<tr>
-					<th width="500px" height="30px">${myboardlist.subject}</th>
-					<th width="300px">${myboardlist.id}</th>
-					<th width="200px">${myboardlist.reg_date}</th>
-				</tr>
-				<tr>
-					<td colspan="3" width="1000px">${myboardlist.content}</td>
+					<th width="500px" height="30px" class="myblogmanintd"><font size="4"><a href="viewBoard?no=${myboardlist.no}">${myboardlist.subject}</a></font></th>
+					<th width="300px" class="myblogmanintd">${myboardlist.id}</th>
+					<th width="200px" class="myblogmanintd">${myboardlist.reg_date}</th>
 				</tr>
 			</table>
 			</c:forEach>

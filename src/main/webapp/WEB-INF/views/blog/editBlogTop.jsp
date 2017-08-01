@@ -104,10 +104,11 @@ function update(){
 </script>
 </head>
 <body>
-    <div id="viewtitle">TF Blog</div>
+    <div id="homebutton"><a href="home"><img src="resources/home/imgs/name.png" width="125px" height="40px"></a></div>
+<div id="viewtitle">Blog</div>
 <div id="headertop" align="right">
 			<div class="topnav">
-	  			<a rel="tooltip" title="메뉴"><img id="menu1" src="resources/home/imgs/menu_white.png" width="25" height="25"></a>&nbsp&nbsp&nbsp&nbsp
+	  			<a rel="tooltip" title="메뉴"><img id="menu1" src="resources/home/imgs/menu.png" width="25" height="25"></a>&nbsp&nbsp&nbsp&nbsp
 	  			<c:if test="${sessionScope.memberDTO eq null}">
 	  			<a rel="tooltip" title="로그인" href="login">
 	  				<img src="resources/home/imgs/login.png" width="25" height="25">
@@ -161,6 +162,7 @@ function update(){
 				<h2>
 				<a href="myBlog?id=${optionDTO.id}" class="editmenu">내 블로그</a><hr>
 				<a href="editBlog?mode=profile&id=${optionDTO.id}">프로필</a><hr>
+				<a href="editBlog?mode=neighbor&id=${optionDTO.id}">이웃</a><hr>
 				<a href="editBlog?mode=layout&id=${optionDTO.id}">레이아웃</a><hr>
 				<a href="editBlog?mode=skin&id=${optionDTO.id}">스킨</a><hr>
 				<a href="editBlog?mode=board&id=${optionDTO.id}">게시판</a><hr>

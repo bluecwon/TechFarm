@@ -24,9 +24,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.TechFarm.blog.dao.Blog_BoardDAO;
+import com.itbank.TechFarm.blog.dao.Blog_NeighborDAO;
 import com.itbank.TechFarm.blog.dao.Blog_OptionDAO;
 import com.itbank.TechFarm.blog.dto.Blog_BoardDTO;
+import com.itbank.TechFarm.blog.dto.Blog_BoardReplyDTO;
 import com.itbank.TechFarm.blog.dto.Blog_MakeBoardDTO;
+import com.itbank.TechFarm.blog.dto.Blog_NeighborDTO;
 import com.itbank.TechFarm.blog.dto.Blog_OptionDTO;
 import com.itbank.TechFarm.login.member.MemberDTO;
 
@@ -40,6 +43,8 @@ public class MyBlogController {
 	private Blog_OptionDAO optionDAO;
 	@Autowired
 	private Blog_BoardDAO boardDAO;
+	@Autowired
+	private Blog_NeighborDAO neighborDAO;
 	
 	String msg=null;
 	String url=null;
@@ -59,6 +64,11 @@ public class MyBlogController {
 		}
 		List<Blog_BoardDTO> myboardlist = boardDAO.listMyBoard(id);
 		List<Blog_MakeBoardDTO> list = boardDAO.listBoardTitle(id);
+		List<Blog_NeighborDTO> neighborlist = neighborDAO.neighborList(id);
+		List<String> neighborprofile = neighborDAO.listNeighborProfile(id);
+		
+		session.setAttribute("neighborlist", neighborlist);
+		session.setAttribute("neighborprofile", neighborprofile);
 		session.setAttribute("myboardlist", myboardlist);
 		session.setAttribute("list", list);
 		session.setAttribute("optionDTO", dto);
@@ -77,6 +87,15 @@ public class MyBlogController {
 			String id = memberDTO.getId();
 			List<Blog_MakeBoardDTO> list = boardDAO.listBoardTitle(id);
 			mav.addObject("list",list);
+			
+		}else if(mode.equals("neighbor")){
+			HttpSession session = request.getSession();
+			MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
+			String id = memberDTO.getId();
+			List<Blog_NeighborDTO> neighborlist = neighborDAO.neighborList(id);
+			List<String> neighborprofile = neighborDAO.listNeighborProfile(id);
+			session.setAttribute("neighborlist", neighborlist);
+			session.setAttribute("neighborprofile", neighborprofile);
 		}
 		
 		mav.addObject("mode",mode);
@@ -86,7 +105,7 @@ public class MyBlogController {
 	@RequestMapping(value="/editBlog", method=RequestMethod.POST)
 	public ModelAndView blogEditPro(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("blog/editBlogMain");
+		mav.setViewName("blog/	");
 		String mode = request.getParameter("mode");
 		HttpSession session = request.getSession();
 		/*String id = request.getParameter("id");
@@ -112,6 +131,10 @@ public class MyBlogController {
 			}
 			dto.setIntroduce(introduce);
 			res = optionDAO.editBlog_pf_int(dto);
+			Blog_BoardReplyDTO replydto = new Blog_BoardReplyDTO();
+			replydto.setId(dto.getId());
+			replydto.setProfile(dto.getProfile());
+			int res2 = boardDAO.editReply_pf(replydto);
 			
 		}else if(mode.equals("layout")){//layout
 			int layout = ServletRequestUtils.getIntParameter(request, "layout");
@@ -129,7 +152,7 @@ public class MyBlogController {
 			
 			dto.setProfile(profile);
 			dto.setHeader(header);
-			
+
 			res = optionDAO.editBlog_skin(dto);
 			
 			if(res>0){
@@ -156,6 +179,11 @@ public class MyBlogController {
 			pforiginFile.close();
 			hdcopyFile.close();
 			hdoriginFile.close();
+			
+			Blog_BoardReplyDTO replydto = new Blog_BoardReplyDTO();
+			replydto.setId(dto.getId());
+			replydto.setProfile(dto.getProfile());
+			int res2 = boardDAO.editReply_pf(replydto);
 			
 			Thread.sleep(5000);
 			}
@@ -220,8 +248,11 @@ private Blog_OptionDTO getBlogOption(HttpServletRequest arg0) throws Exception{
 	@RequestMapping(value="/deleteBlog")
 	public ModelAndView blogDelete(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String id = request.getParameter("id");
-		int res = optionDAO.deleteBlog(id);	
+		
+		int res = optionDAO.deleteBlog(id);
 		if(res>0){
+			int res2 = boardDAO.deleteAllmyBoard(id);
+			
 			HttpSession session = request.getSession();
 			String delpfPath = session.getServletContext().getRealPath("/resources/upload/"+id);
 			File delfile = new File(delpfPath);

@@ -21,6 +21,7 @@ public interface Blog_BoardDAO {
 	public int updateReadcount(int no);	
 	public int updateBoard(Blog_BoardDTO dto);
 	public int deleteBoard(int no);
+	public int deleteAllmyBoard(String id);
 	public int insertReply(Blog_BoardReplyDTO dto);
 	public int updateRe_step();	
 	public int updateRere_step(int re_step);
@@ -30,10 +31,12 @@ public interface Blog_BoardDAO {
 	public List listReply(int no,int startRow,int endRow);
 	public int deleteReply(int replyno);
 	public int replyNumber(int no);
+	public int editReply_pf(Blog_BoardReplyDTO dto);
 	public List listSearchBoard(String search_option,String search_text);
 	public List imsiBoard(String id);
 	public int myBoardNumber(String id);
 	public int myReplyNumber(String id);
+	
 	
 	/*
 	public int deleteFile(int num);*/

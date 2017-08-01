@@ -242,14 +242,17 @@ io.sockets.on('connection', function(socket) {
     	var roomId=inviteinfo.inviteRoom;
     	var roomOwner=inviteinfo.inviteRoomOwner;
     	var output={inviteRoom:roomId, inviteRoomOwner:roomOwner}
+    	var Ids='';
     	for(var i=0;i<inviteIds.length;i++){
     		var inviteId=inviteIds[i];
 	    	console.log('클라이언트로 보낼 데이터 : ' + JSON.stringify(output)+inviteId);
 	    	io.sockets.connected[login_ids[inviteId]].emit('invite', output);
-	    	var data=inviteId+'님이 입장했습니다.';
-	    	var sysmessage = {sender:'system', recepient:roomId, command:'groupchat', type:'text', data:data};
-	    	io.sockets.in(roomId).emit('message', sysmessage);
+	    	Ids=Ids+'['+inviteId+']';
     	}
+	    var data=Ids+'님이 입장했습니다.';
+	    var sysmessage = {sender:'system', recepient:roomId, command:'groupchat', type:'text', data:data};
+	    io.sockets.in(roomId).emit('message', sysmessage);
+    	
     });
     
 

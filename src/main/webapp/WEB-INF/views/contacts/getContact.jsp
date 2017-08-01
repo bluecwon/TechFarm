@@ -23,6 +23,10 @@
 					<td colspan="2" align="left"><h3>연락처 세부정보</h3></td>
 				</tr>
 				<tr>
+					<th><img src="resources/contacts/images/company.png" style="max-width: 30px; height: auto;"></th>
+					<td>${dto.company } / ${dto.jobtitle }</td>
+				</tr>
+				<tr>
 					<th><img src="resources/contacts/images/email.png" style="max-width: 30px; height: auto;"></th>
 					<td><a href="sendJames?to=${dto.email }">${dto.email }</a></td>
 				</tr>
